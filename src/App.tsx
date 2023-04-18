@@ -1,34 +1,31 @@
-import React, { useState } from 'react'
-import { apiKey } from './utils/consts';
-import Input from './components/ui/input/Input';
+import CSSReset from './styles/CSSReset.styled';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/home/Home';
+import AlbumPage from './pages/albumPage/AlbumPage';
+import AlbumList from './pages/albumList/AlbumList';
+import Error from './pages/error/Error';
+import GlobalStyle from './styles/GlobalStyle.styled';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/Theme';
 
 function App() {
-    const [input, setInput] = useState('');
-    const [albumMatches, setAlbumMatches] = useState([]);
-
-    const fetchAlbumMatches = async (): Promise<void> => {
-        const url: string = 'http://ws.audioscrobbler.com/2.0/?';
-        const params: string = new URLSearchParams({
-            method: 'album.search',
-            album: input,
-            api_key: apiKey,
-            format: 'json',
-        }).toString();
-
-        const response = await fetch(url + params);
-        const albumMatches = await response.json();
-
-        console.log(albumMatches);
-    };
-    
     return (
-        <div className="App">
-            <div style={{ margin: '100px' }}>
-                <Input />
-            </div>
-            <button onClick={fetchAlbumMatches}>Поиск</button>
-        </div>
-    )
+        <>
+            <CSSReset />
+            <GlobalStyle />
+
+            <BrowserRouter>
+                <ThemeProvider theme={theme}>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/album' element={<AlbumPage />} />
+                        <Route path='/topAlbums' element={<AlbumList />} />
+                        <Route path='*' element={<Error />} />
+                    </Routes>
+                </ThemeProvider>
+            </BrowserRouter>
+        </>
+    );
 }
 
 export default App;
