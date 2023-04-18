@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
 
-import Paddings from '../../../styles/Paddings.styled';
+import Paddings from 'styles/Paddings.styled';
 import { Content, Header, Navigation, Title } from './Navbar.styled';
-import FlexBetween from '../../../styles/FlexBetween.styled';
+import FlexBetween from 'styles/FlexBetween.styled';
 
 type Props = {};
 

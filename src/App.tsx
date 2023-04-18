@@ -6,7 +6,7 @@ import AlbumList from './pages/albumList/AlbumList';
 import Error from './pages/error/Error';
 import GlobalStyle from './styles/GlobalStyle.styled';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './styles/Theme';
+import { theme } from './styles/theme';
 
 function App() {
     return (
