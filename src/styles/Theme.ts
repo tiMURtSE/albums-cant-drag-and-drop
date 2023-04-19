@@ -1,4 +1,4 @@
-import { ITheme } from "../types/interface/index.interface";
+import { ITheme } from "../types";
 
 const theme: ITheme = {
     colors: {
@@ -14,9 +14,10 @@ const theme: ITheme = {
     },
   
     sizes: {
-        header: { height: 56 },
-        container: { width: 1200 },
+        header: { height: '64px' },
+        container: { width: '1200px' },
         footer: { height: 128 },
+        font: { small: '14px', regular: '16px', large: '24px' },
         modal: { width: 540 },
     },
   
@@ -28,6 +29,10 @@ const theme: ITheme = {
         header: 50,
         modal: 100,
     },
+
+    zIndexes: {
+        header: 10,
+    }
 };
 
 export { theme };

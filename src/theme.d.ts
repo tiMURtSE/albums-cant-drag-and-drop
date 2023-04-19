@@ -1,5 +1,5 @@
 import 'styled-components';
-import { ITheme } from './types/interface/index.interface';
+import { ITheme } from './types';
 
 declare module 'styled-components' {
   export interface DefaultTheme extends ITheme {}

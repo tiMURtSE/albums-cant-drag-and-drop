@@ -12,9 +12,10 @@ interface ITheme {
     }
   
     sizes: {
-      header: { height: number }
-      container: { width: number }
+      header: { height: string }
+      container: { width: string }
       footer: { height: number }
+      font: { small: string, regular: string, large: string }
       modal: { width: number }
     }
   
@@ -26,6 +27,10 @@ interface ITheme {
       header: number
       modal: number
     },
+
+    zIndexes: {
+        header: number
+    }
 };
 
 export type { ITheme };

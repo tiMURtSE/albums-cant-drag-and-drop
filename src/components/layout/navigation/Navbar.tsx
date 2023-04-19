@@ -1,18 +1,14 @@
 import { NavLink } from 'react-router-dom';
-
 import Paddings from 'styles/Paddings.styled';
-import { Content, Header, Navigation, Title } from './Navbar.styled';
-import FlexBetween from 'styles/FlexBetween.styled';
+import { Container, Content, Header, Navigation, Title } from './Navbar.styled';
 
-type Props = {};
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
     return (
         <Header>
             <Paddings>
-                <FlexBetween margin='0 auto' gap='2rem'>
+                <Container>
                     <Title>
-                        BORINGAHHMUSIC
+                        <NavLink to='/'>BORINGAHHMUSIC</NavLink>
                     </Title>
 
                     <Content>
@@ -21,9 +17,9 @@ const Navbar = (props: Props) => {
                             <NavLink to='/list'>Альбомы</NavLink>
                         </Navigation>
                         
-                        <span>Theme</span>
+                        <span>:V</span>
                     </Content>
-                </FlexBetween>
+                </Container>
             </Paddings>
         </Header>
     );
