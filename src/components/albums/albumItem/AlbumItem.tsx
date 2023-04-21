@@ -26,7 +26,7 @@ const AlbumItem = ({ mockAlbum }: any) => {
             </Image>
 
             <Info>
-                <Title>The Dark Side of the Moon Part Two The end</Title>
+                <Title>The Dark Side of the Moon</Title>
                 <ArtistAndYear>
                     <Artist>{artist}</Artist>
                     <Year>{year}</Year>

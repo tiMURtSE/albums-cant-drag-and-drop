@@ -42,11 +42,12 @@ const Title = styled.p`
     padding-bottom: 1rem;
     border-bottom: 3px solid #000;
 
+    font-family: 'Roboto Serif', serif;
     font-size: 48px;
     font-weight: 700;
     font-style: italic;
-    line-height: 0.8;
-    letter-spacing: -1px;
+    line-height: 1;
+    letter-spacing: -2.5px;
 `;
 
 const ArtistAndYear = styled.div`
@@ -58,6 +59,7 @@ const ArtistAndYear = styled.div`
 `;
 
 const Artist = styled.p`
+    font-family: 'Roboto Serif', serif;
     font-size: 24px;
     font-weight: 700;
 `;

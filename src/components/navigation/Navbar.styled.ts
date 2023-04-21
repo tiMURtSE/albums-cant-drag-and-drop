@@ -7,8 +7,9 @@ const Header = styled.header`
     right: 0;
     left: 0;
     z-index: ${props => props.theme.zIndexes.header};
-
     width: 100%;
+
+    backdrop-filter: saturate(180%) blur(5px);
 `;
 
 const Content = styled(FlexBetween)`
@@ -17,6 +18,7 @@ const Content = styled(FlexBetween)`
 `;
 
 const Title = styled.div`
+    font-family: 'Roboto Serif', 'Rubik', sans-serif;
     font-size: 24px;
     font-weight: 700;
     font-style: italic;
