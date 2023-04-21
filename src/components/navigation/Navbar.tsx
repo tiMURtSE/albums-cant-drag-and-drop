@@ -3,6 +3,11 @@ import Paddings from 'styles/Paddings.styled';
 import { Content, Header, Navigation, Title } from './Navbar.styled';
 import Container from 'styles/Container.styled';
 
+const navigationItems = [
+    { path: '/', label: 'Главная' },
+    { path: '/list', label: 'Альбомы' },
+];
+
 const Navbar = () => {
     return (
         <Header>
@@ -15,8 +20,9 @@ const Navbar = () => {
                         </Title>
 
                         <Navigation>
-                            <NavLink to='/'>Главная</NavLink>
-                            <NavLink to='/list'>Альбомы</NavLink>
+                            {navigationItems.map(item =>
+                                <NavLink to={item.path}>{item.label}</NavLink>
+                            )}
                         </Navigation>
                     </Content>
 

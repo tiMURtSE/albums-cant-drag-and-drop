@@ -9,6 +9,9 @@ const AlbumList = ({ mockAlbum }: any) => {
     return (
         <List>
             <AlbumItem mockAlbum={mockAlbum}/>
+            <AlbumItem mockAlbum={mockAlbum}/>
+            <AlbumItem mockAlbum={mockAlbum}/>
+            <AlbumItem mockAlbum={mockAlbum}/>
         </List>
     );
 };
