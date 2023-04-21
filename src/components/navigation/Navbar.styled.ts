@@ -11,13 +11,6 @@ const Header = styled.header`
     width: 100%;
 `;
 
-const Container = styled(FlexBetween)`
-    gap: 4rem;
-
-    max-width: ${props => props.theme.sizes.container.width};
-    margin: 0 auto;
-`;
-
 const Content = styled(FlexBetween)`
     width: 100%;
     height: ${props => props.theme.sizes.header.height};
@@ -37,7 +30,6 @@ const Navigation = styled.nav`
 
 export {
     Header,
-    Container,
     Content,
     Title,
     Navigation,

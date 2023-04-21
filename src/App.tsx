@@ -7,6 +7,7 @@ import Error from './pages/error/Error';
 import GlobalStyle from './styles/GlobalStyle.styled';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
+import SharedLayout from 'components/sharedLayout/SharedLayout';
 
 function App() {
     return (
@@ -17,10 +18,12 @@ function App() {
             <BrowserRouter>
                 <ThemeProvider theme={theme}>
                     <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/album' element={<AlbumPage />} />
-                        <Route path='/topAlbums' element={<AlbumList />} />
-                        <Route path='*' element={<Error />} />
+                        <Route path='/' element={<SharedLayout />}>
+                            <Route index element={<Home />} />
+                            <Route path='/album' element={<AlbumPage />} />
+                            <Route path='/topAlbums' element={<AlbumList />} />
+                            <Route path='*' element={<Error />} />
+                        </Route>
                     </Routes>
                 </ThemeProvider>
             </BrowserRouter>

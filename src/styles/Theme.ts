@@ -4,6 +4,11 @@ const theme: ITheme = {
     colors: {
         primary: '#212121',
         secondary: '#696969',
+        grey: {
+            light: '#f5f5f5',
+            neutral: '#d4d4d4',
+            dark: '#999',
+        }
     },
   
     media: {
@@ -15,10 +20,11 @@ const theme: ITheme = {
   
     sizes: {
         header: { height: '64px' },
-        container: { width: '1200px' },
+        container: { header: '1200px', content: '998px' },
         footer: { height: 128 },
         font: { small: '14px', regular: '16px', large: '24px' },
         modal: { width: 540 },
+        borderRadius: '12px',
     },
   
     durations: {

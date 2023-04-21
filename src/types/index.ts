@@ -2,6 +2,11 @@ interface ITheme {
     colors: {
       primary: string
       secondary: string
+      grey: {
+        light: string
+        neutral: string
+        dark: string
+      }
     }
   
     media: {
@@ -13,10 +18,11 @@ interface ITheme {
   
     sizes: {
       header: { height: string }
-      container: { width: string }
+      container: { header: string, content: string }
       footer: { height: number }
       font: { small: string, regular: string, large: string }
       modal: { width: number }
+      borderRadius: string
     }
   
     durations: {
