@@ -1,12 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import Paddings from 'styles/Paddings.styled';
+import { PagesPath } from 'types';
+import { navigationItems, pageTitle } from 'utils/consts';
 import { Content, Header, Navigation, Title } from './Navbar.styled';
+import Paddings from 'styles/Paddings.styled';
 import Container from 'styles/Container.styled';
-
-const navigationItems = [
-    { path: '/', label: 'Главная' },
-    { path: '/list', label: 'Альбомы' },
-];
 
 const Navbar = () => {
     return (
@@ -16,12 +13,17 @@ const Navbar = () => {
 
                     <Content>
                         <Title>
-                            <NavLink to='/'>BORINGAHHMUSIC</NavLink>
+                            <NavLink to={PagesPath.Home}>{pageTitle}</NavLink>
                         </Title>
 
                         <Navigation>
                             {navigationItems.map(item =>
-                                <NavLink to={item.path}>{item.label}</NavLink>
+                                <NavLink
+                                    to={item.path}
+                                    key={item.label}
+                                >
+                                    {item.label}
+                                </NavLink>
                             )}
                         </Navigation>
                     </Content>

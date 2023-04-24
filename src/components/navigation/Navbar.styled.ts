@@ -6,7 +6,7 @@ const Header = styled.header`
     top: 0;
     right: 0;
     left: 0;
-    z-index: ${props => props.theme.zIndexes.header};
+    z-index: ${props => props.theme.order.header};
     width: 100%;
 
     backdrop-filter: saturate(180%) blur(5px);
@@ -14,12 +14,12 @@ const Header = styled.header`
 
 const Content = styled(FlexBetween)`
     width: 100%;
-    height: ${props => props.theme.sizes.header.height};
+    height: ${({ theme }) => theme.sizes.header.height};
 `;
 
 const Title = styled.div`
     font-family: 'Roboto Serif', 'Rubik', sans-serif;
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.fonts.large};
     font-weight: 700;
     font-style: italic;
     letter-spacing: -3.5px;
@@ -28,6 +28,8 @@ const Title = styled.div`
 const Navigation = styled.nav`
     display: flex;
     gap: 2rem;
+
+    font-size: ${({ theme }) => theme.fonts.regular};
 `;
 
 export {

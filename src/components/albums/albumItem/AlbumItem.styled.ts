@@ -15,7 +15,7 @@ const Content = styled(FlexBetween)<{place: number}>`
         z-index: 10;
         transform: translate(-50%, -50%);
 
-        font-size: 24px;
+        font-size: ${({ theme }) => theme.fonts.large};
         font-weight: 700;
     }
 `;
@@ -43,7 +43,7 @@ const Title = styled.p`
     border-bottom: 3px solid #000;
 
     font-family: 'Roboto Serif', serif;
-    font-size: 48px;
+    font-size: ${({ theme }) => theme.fonts.extraLarge};
     font-weight: 700;
     font-style: italic;
     line-height: 1;
@@ -60,7 +60,7 @@ const ArtistAndYear = styled.div`
 
 const Artist = styled.p`
     font-family: 'Roboto Serif', serif;
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.fonts.large};
     font-weight: 700;
 `;
 

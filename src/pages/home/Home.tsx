@@ -15,7 +15,6 @@ const Home = (props: Props) => {
         const info = await response.json();
 
         setMockAlbum(info);
-        console.log(info)
     };
 
     useEffect(() => {

@@ -9,8 +9,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body { 
-        font-family: 'Rubik', sans-serif;
-        color: ${theme.colors.primary};
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
     }
 `;
 

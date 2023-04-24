@@ -1,7 +1,20 @@
+enum PagesName {
+    Home = 'Главная',
+    Albums = 'Альбомы'
+}
+
+enum PagesPath {
+    Home = '/',
+    Albums = '/list',
+}
+
+type NavigationItems = [
+    { path: PagesPath, label: PagesName },
+    { path: PagesPath, label: PagesName },
+]
+
 interface ITheme {
     colors: {
-      primary: string
-      secondary: string
       grey: {
         light: string
         neutral: string
@@ -20,9 +33,15 @@ interface ITheme {
       header: { height: string }
       container: { header: string, content: string }
       footer: { height: number }
-      font: { small: string, regular: string, large: string }
       modal: { width: number }
       borderRadius: string
+    }
+
+    fonts: { 
+        small: string
+        regular: string
+        large: string
+        extraLarge: string
     }
   
     durations: {
@@ -33,10 +52,14 @@ interface ITheme {
       header: number
       modal: number
     },
-
-    zIndexes: {
-        header: number
-    }
 };
 
-export type { ITheme };
+export {
+    PagesName,
+    PagesPath,
+};
+
+export type { 
+    ITheme,
+    NavigationItems,
+};
