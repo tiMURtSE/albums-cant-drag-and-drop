@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FlexBetween from 'styles/FlexBetween.styled';
+import FlexBetween from 'styles/components/FlexBetween.styled';
 
 const Content = styled(FlexBetween)<{place: number}>`
     position: relative;
@@ -12,7 +12,7 @@ const Content = styled(FlexBetween)<{place: number}>`
         position: absolute;
         top: 50%;
         left: 40px;
-        z-index: 10;
+        z-index: ${({ theme }) => theme.order.other};
         transform: translate(-50%, -50%);
 
         font-size: ${({ theme }) => theme.fonts.large};

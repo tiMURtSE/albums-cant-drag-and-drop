@@ -38,6 +38,7 @@ const theme: ITheme = {
     order: {
         header: 50,
         modal: 100,
+        other: 10,
     },
 };
 

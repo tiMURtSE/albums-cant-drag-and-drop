@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 import { PagesPath } from 'types';
 import { navigationItems, pageTitle } from 'utils/consts';
 import { Content, Header, Navigation, Title } from './Navbar.styled';
-import Paddings from 'styles/Paddings.styled';
-import Container from 'styles/Container.styled';
+import Paddings from 'styles/components/Paddings.styled';
+import Container from 'styles/components/Container.styled';
 
 const Navbar = () => {
     return (

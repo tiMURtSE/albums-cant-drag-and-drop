@@ -1,12 +1,12 @@
-import React from 'react';
+import Navbar from 'components/Navbar/Navbar';
 
 type Props = {};
 
 const AlbumList = (props: Props) => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <Navbar />   
+        </>
     );
 };
 

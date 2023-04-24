@@ -1,10 +1,18 @@
-import { Artist, ArtistAndYear, Content, Image, Info, Title, Year } from "./AlbumItem.styled";
+import { 
+    Artist, 
+    ArtistAndYear, 
+    Content, 
+    Image, 
+    Info, 
+    Title, 
+    Year 
+} from "./TopAlbumItem.styled";
 
 // type Props = {
 //     mockAlbum: object,
 // };
 
-const AlbumItem = ({ mockAlbum }: any) => {
+const TopAlbumItem = ({ mockAlbum }: any) => {
 
     if (!mockAlbum.album) return null;
 
@@ -36,4 +44,4 @@ const AlbumItem = ({ mockAlbum }: any) => {
     );
 };
 
-export default AlbumItem;
+export default TopAlbumItem;

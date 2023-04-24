@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FlexBetween from 'styles/FlexBetween.styled';
+import FlexBetween from 'styles/components/FlexBetween.styled';
 
 const Header = styled.header`
     position: fixed;

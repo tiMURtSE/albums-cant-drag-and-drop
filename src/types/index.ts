@@ -1,3 +1,5 @@
+import { FunctionComponent } from "react"
+
 enum PagesName {
     Home = 'Главная',
     Albums = 'Альбомы'
@@ -5,13 +7,14 @@ enum PagesName {
 
 enum PagesPath {
     Home = '/',
+    Album = '/album/:id',
     Albums = '/list',
+    Error = '*',
 }
 
-type NavigationItems = [
-    { path: PagesPath, label: PagesName },
-    { path: PagesPath, label: PagesName },
-]
+type TypeRoutes = Array<{ path: PagesPath, element: FunctionComponent }>
+
+type NavigationItems = Array<{ path: PagesPath, label: PagesName }>
 
 interface ITheme {
     colors: {
@@ -51,6 +54,7 @@ interface ITheme {
     order: {
       header: number
       modal: number
+      other: number
     },
 };
 
@@ -62,4 +66,5 @@ export {
 export type { 
     ITheme,
     NavigationItems,
+    TypeRoutes,
 };

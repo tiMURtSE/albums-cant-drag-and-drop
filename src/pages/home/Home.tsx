@@ -1,9 +1,9 @@
-import Paddings from 'styles/Paddings.styled';
-import Container from 'styles/Container.styled';
-import Wrapper from 'styles/Wrapper.styled';
 import { useEffect, useState } from 'react';
-import AlbumList from 'components/albums/albumList/AlbumList';
-import Navbar from 'components/navigation/Navbar';
+import Paddings from 'styles/components/Paddings.styled';
+import Container from 'styles/components/Container.styled';
+import Wrapper from 'styles/components/Wrapper.styled';
+import Navbar from 'components/Navbar/Navbar';
+import TopAlbumList from './components/TopAlbumList/TopAlbumList';
 
 type Props = {};
 
@@ -27,10 +27,10 @@ const Home = (props: Props) => {
             <Navbar />
 
             <Paddings>
-                <Container mt='218px'>
+                <Container>
                     <Wrapper>
 
-                        <AlbumList mockAlbum={mockAlbum} />
+                        <TopAlbumList mockAlbum={mockAlbum} />
 
                     </Wrapper>
                 </Container>
