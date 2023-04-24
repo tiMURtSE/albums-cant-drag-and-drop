@@ -3,6 +3,7 @@ import Container from 'styles/Container.styled';
 import Wrapper from 'styles/Wrapper.styled';
 import { useEffect, useState } from 'react';
 import AlbumList from 'components/albums/albumList/AlbumList';
+import Navbar from 'components/navigation/Navbar';
 
 type Props = {};
 
@@ -22,15 +23,19 @@ const Home = (props: Props) => {
     }, []);
 
     return (
-        <Paddings>
-            <Container mt='150px'>
-                <Wrapper>
+        <>
+            <Navbar />
 
-                    <AlbumList mockAlbum={mockAlbum} />
+            <Paddings>
+                <Container mt='218px'>
+                    <Wrapper>
 
-                </Wrapper>
-            </Container>
-        </Paddings>
+                        <AlbumList mockAlbum={mockAlbum} />
+
+                    </Wrapper>
+                </Container>
+            </Paddings>
+        </>
     );
 };
 
