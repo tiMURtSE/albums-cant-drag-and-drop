@@ -4,8 +4,11 @@ import { navigationItems, pageTitle } from 'utils/consts';
 import { Content, Header, Navigation, Title } from './Navbar.styled';
 import Paddings from 'styles/components/Paddings.styled';
 import Container from 'styles/components/Container.styled';
+import { useState } from 'react';
+import Search from './Search/Search';
 
 const Navbar = () => {
+
     return (
         <Header>
             <Paddings>
@@ -15,6 +18,8 @@ const Navbar = () => {
                         <Title>
                             <NavLink to={PagesPath.Home}>{pageTitle}</NavLink>
                         </Title>
+
+                        <Search />                        
 
                         <Navigation>
                             {navigationItems.map(item =>
