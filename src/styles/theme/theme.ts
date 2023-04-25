@@ -5,7 +5,7 @@ const theme: ITheme = {
         grey: {
             light: '#f5f5f5',
             neutral: '#d4d4d4',
-            dark: '#999',
+            dark: '#555',
         }
     },
   

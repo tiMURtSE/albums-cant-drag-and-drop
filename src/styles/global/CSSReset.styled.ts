@@ -9,12 +9,6 @@ const CSSReset = createGlobalStyle`
     margin: 0;
 }
 
-/* Убираем внутренние отступы */
-ul[class],
-ol[class] {
-    padding: 0;
-}
-
 html,
 body,
 #root {

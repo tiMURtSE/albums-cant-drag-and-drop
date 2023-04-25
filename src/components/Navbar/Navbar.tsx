@@ -19,8 +19,6 @@ const Navbar = () => {
                             <NavLink to={PagesPath.Home}>{pageTitle}</NavLink>
                         </Title>
 
-                        <Search />                        
-
                         <Navigation>
                             {navigationItems.map(item =>
                                 <NavLink
@@ -31,6 +29,8 @@ const Navbar = () => {
                                 </NavLink>
                             )}
                         </Navigation>
+                        
+                        <Search />
                     </Content>
 
                 </Container>

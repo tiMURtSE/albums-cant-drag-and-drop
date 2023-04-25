@@ -13,6 +13,9 @@ const Header = styled.header`
 `;
 
 const Content = styled(FlexBetween)`
+    justify-content: flex-start;
+    gap: 2rem;
+
     width: 100%;
     height: ${({ theme }) => theme.sizes.header.height};
 `;
