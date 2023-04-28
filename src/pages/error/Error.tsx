@@ -5,7 +5,9 @@ type Props = {};
 const Error = (props: Props) => {
     return (
         <>
-            <Navbar />   
+            <Navbar />  
+
+            <div style={{ fontSize: 100 }}>ERROR</div> 
         </>
     );
 };

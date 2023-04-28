@@ -20,14 +20,6 @@ const Content = styled(FlexBetween)<{place: number}>`
     }
 `;
 
-const Image = styled.div`
-
-    & img {
-        display: block;
-        max-width: none;
-    }
-`;
-
 const Info = styled.div`
     flex-grow: 1;
     display: flex;
@@ -72,7 +64,6 @@ const Year = styled.p`
 
 export {
     Content,
-    Image,
     Info,
     Title,
     ArtistAndYear,

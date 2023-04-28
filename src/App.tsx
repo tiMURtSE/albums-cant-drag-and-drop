@@ -8,11 +8,13 @@ import AlbumPage from 'pages/AlbumPage/AlbumPage';
 import Error from 'pages/Error/Error';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme/theme';
+import Search from 'pages/Search/Search';
 
 const routes: TypeRoutes = [
     { path: PagesPath.Home, element: Home },
     { path: PagesPath.Albums, element: AlbumList },
     { path: PagesPath.Album, element: AlbumPage },
+    { path: PagesPath.Search, element: Search },
     { path: PagesPath.Error, element: Error },
 ];
 

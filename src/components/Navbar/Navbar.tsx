@@ -4,8 +4,7 @@ import { navigationItems, pageTitle } from 'utils/consts';
 import { Content, Header, Navigation, Title } from './Navbar.styled';
 import Paddings from 'styles/components/Paddings.styled';
 import Container from 'styles/components/Container.styled';
-import { useState } from 'react';
-import Search from './Search/Search';
+import Search from './Searchbar/Searchbar';
 
 const Navbar = () => {
 

@@ -9,6 +9,7 @@ enum PagesPath {
     Home = '/',
     Album = '/album/:id',
     Albums = '/list',
+    Search = '/search/:query',
     Error = '*',
 }
 

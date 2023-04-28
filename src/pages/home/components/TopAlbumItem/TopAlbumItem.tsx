@@ -1,8 +1,8 @@
+import Image from "styles/components/Image.styled";
 import { 
     Artist, 
     ArtistAndYear, 
     Content, 
-    Image, 
     Info, 
     Title, 
     Year 
