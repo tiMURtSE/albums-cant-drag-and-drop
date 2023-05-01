@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Autocomplete, ClearSign, Content, Input, Item, ItemLink, List } from "./Searchbar.styled";
-import { API_KEY, API_URL } from "api";
+// import { API_KEY, API_URL } from "api";
 import { useNavigate } from "react-router-dom";
 
 type Props = {};
@@ -12,37 +12,37 @@ const Search = (props: Props) => {
     const [albums, setAlbums] = useState<Albums>([]);
     const navigate = useNavigate();
     
-    const searchAlbum: Search = async (album, limit = '5', page = '1') => {
-        const params = new URLSearchParams({
-            method: 'album.search',
-            album,
-            api_key: API_KEY,
-            format: 'json',
-            limit,
-            page,
-        }).toString();
+    // const searchAlbum: Search = async (album, limit = '5', page = '1') => {
+    //     const params = new URLSearchParams({
+    //         method: 'album.search',
+    //         album,
+    //         api_key: API_KEY,
+    //         format: 'json',
+    //         limit,
+    //         page,
+    //     }).toString();
 
-        const response = await fetch(API_URL + '?' + params);
+    //     const response = await fetch(API_URL + '?' + params);
     
-        let albums = await response.json();
+    //     let albums = await response.json();
 
-        albums = formatResponse(albums);
-        setAlbums(albums);
-    };
+    //     albums = formatResponse(albums);
+    //     setAlbums(albums);
+    // };
 
-    const formatResponse = (response: any): Array<object> => {
-        let albums = response.results.albummatches.album;
+    // const formatResponse = (response: any): Array<object> => {
+    //     let albums = response.results.albummatches.album;
 
-        albums = albums.map(({ name, artist, image }: any) => {
-            return {
-                title: name,
-                artist,
-                cover: image.at(-1)['#text'],
-            }
-        });
+    //     albums = albums.map(({ name, artist, image }: any) => {
+    //         return {
+    //             title: name,
+    //             artist,
+    //             cover: image.at(-1)['#text'],
+    //         }
+    //     });
 
-        return albums;
-    };
+    //     return albums;
+    // };
 
     return (
         <Content>
