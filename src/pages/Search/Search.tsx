@@ -1,28 +1,26 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
 import Navbar from "components/Navbar/Navbar";
-import { useEffect, useState } from "react";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import Container from "styles/components/Container.styled";
 import Paddings from "styles/components/Paddings.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import { Subtitle, Title } from "./Search.styled";
-import search from "api/services/search.api";
-import formatSearchAlbums from "utils/formatAlbum";
+import { search } from "api";
+import formatSeveralAlbums from "utils/formatSearchAlbum";
 import { Albums } from "types";
 
-type Props = {};
-type Search = (album: string, limit?: string, page?: string) => void;
-
-const Search = (props: Props) => {
+const Search = () => {
     const [albums, setAlbums] = useState<Albums>([]);
-    const { state } = useLocation();
-    const [query, setQuery] = useState(state);
+    const { state: queryValue } = useLocation();
+    const [query, _] = useState(queryValue);
     const [myAlbums, setMyAlbums] = useState<Albums>([]);
+    const isMyAlbumsFound = Boolean(myAlbums.length);
 
     const searchAlbums = async (query: string) => {
         const albums = await search(query);
 
-        setAlbums(formatSearchAlbums(albums));
+        setAlbums(formatSeveralAlbums(albums));
     };
 
     useEffect(() => {
@@ -38,12 +36,12 @@ const Search = (props: Props) => {
                     <Title>Результаты поиска для: <span>{query}</span></Title>
 
                     <Wrapper>
-                        {(myAlbums.length !== 0) && <Subtitle>Мои альбомы</Subtitle>}
+                        {(isMyAlbumsFound) && <Subtitle>Мои альбомы</Subtitle>}
 
                         <Subtitle>Результаты</Subtitle>
 
                         {albums.map(album =>
-                            <CommonAlbumView album={album} key={album.title + album.artist} />
+                            <CommonAlbumView album={album} key={album.id} />
                         )}
                     </Wrapper>
                 </Container>

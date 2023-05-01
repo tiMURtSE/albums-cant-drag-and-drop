@@ -18,6 +18,7 @@ type TypeRoutes = Array<{ path: PagesPath, element: FunctionComponent }>
 type NavigationItems = Array<{ path: PagesPath, label: PagesName }>
 
 type Album = {
+    id: string,
     title: string,
     artist: string,
     year: number,

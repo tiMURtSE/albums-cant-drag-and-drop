@@ -1,18 +1,14 @@
 import AlbumWrapper from "styles/components/AlbumWrapper.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
-import { Like, Info } from "./CommonAlbumView.styled";
 import Image from "styles/components/Image.styled";
+import { Like, Info } from "./CommonAlbumView.styled";
+import { Album } from "types";
 
 type Props = {
-    album: any,
+    album: Album,
 };
 
 const CommonAlbumView = ({ album }: Props) => {
-    // console.log(mockAlbum);
-
-    // if (!mockAlbum.album) return null;
-    console.log(album)
-    console.log(album.image)
     return (
         <AlbumWrapper>
             <FlexBetween>
@@ -22,7 +18,7 @@ const CommonAlbumView = ({ album }: Props) => {
                             <img
                                 src={album.image}
                                 width='80' height='80'
-                                // alt={`${title} by ${artist}`} 
+                                alt={`${album.title} by ${album.artist}`} 
                             />
                         </a>
                     </Image>
