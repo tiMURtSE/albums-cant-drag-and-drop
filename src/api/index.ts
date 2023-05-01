@@ -22,7 +22,24 @@ const TOKEN = 'BQDduAauM2xxLqACRlWSjsf7a_PK2PbbPS-SUNEWJQt1STQhgIU-S7knW-DQAjDLg
 //     return albums;
 // };
 
+const client_id = '70f454f65af9455a866e5de8906295e9';
+const client_secret = '568277a14ed44d8b913e102b922704c0';
+
+const authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+    //   'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+      'Authorization': 'Basic ' + window.btoa(client_id + ':' + client_secret),
+    },
+    form: {
+      grant_type: 'client_credentials'
+    },
+    json: true
+};
+
+
 export {
     SPOTIFY_URL,
     TOKEN,
+    authOptions,
 };

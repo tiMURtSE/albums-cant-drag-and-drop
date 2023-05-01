@@ -17,7 +17,14 @@ type TypeRoutes = Array<{ path: PagesPath, element: FunctionComponent }>
 
 type NavigationItems = Array<{ path: PagesPath, label: PagesName }>
 
-// type LikedAlbums =
+type Album = {
+    title: string,
+    artist: string,
+    year: number,
+    image: string,
+}
+
+type Albums = Array<Album>
 
 interface ITheme {
     colors: {
@@ -70,4 +77,6 @@ export type {
     ITheme,
     NavigationItems,
     TypeRoutes,
+    Album,
+    Albums,
 };

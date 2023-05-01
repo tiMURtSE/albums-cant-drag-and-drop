@@ -7,10 +7,11 @@ import Paddings from "styles/components/Paddings.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import { Subtitle, Title } from "./Search.styled";
 import search from "api/services/search.api";
+import formatSearchAlbums from "utils/formatAlbum";
+import { Albums } from "types";
 
 type Props = {};
 type Search = (album: string, limit?: string, page?: string) => void;
-type Albums = Array<{ title: string, artist: string, image: string }>
 
 const Search = (props: Props) => {
     const [albums, setAlbums] = useState<Albums>([]);
@@ -18,11 +19,10 @@ const Search = (props: Props) => {
     const [query, setQuery] = useState(state);
     const [myAlbums, setMyAlbums] = useState<Albums>([]);
 
-    const searchAlbums = async (query: any) => {
-        console.log(query)
+    const searchAlbums = async (query: string) => {
         const albums = await search(query);
 
-        console.log(albums);
+        setAlbums(formatSearchAlbums(albums));
     };
 
     useEffect(() => {
