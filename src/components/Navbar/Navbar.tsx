@@ -1,10 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import { PagesPath } from 'types';
-import { navigationItems, pageTitle } from 'utils/consts';
+import { NavigationItems, PagesName, PagesPath } from 'types';
 import { Content, Header, Navigation, Title } from './Navbar.styled';
 import Paddings from 'styles/components/Paddings.styled';
 import Container from 'styles/components/Container.styled';
 import Search from './Searchbar/Searchbar';
+
+const appTitle = 'BORINGAHHMUSIC';
+
+const navigationItems: NavigationItems = [
+    { path: PagesPath.Home, label: PagesName.Home },
+    { path: PagesPath.Albums, label: PagesName.Albums },
+];
 
 const Navbar = () => {
 
@@ -15,7 +21,7 @@ const Navbar = () => {
 
                     <Content>
                         <Title>
-                            <NavLink to={PagesPath.Home}>{pageTitle}</NavLink>
+                            <NavLink to={PagesPath.Home}>{appTitle}</NavLink>
                         </Title>
 
                         <Navigation>

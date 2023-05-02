@@ -1,5 +1,3 @@
-import { FunctionComponent } from "react"
-
 enum PagesName {
     Home = 'Главная',
     Albums = 'Альбомы'
@@ -13,7 +11,7 @@ enum PagesPath {
     Error = '*',
 }
 
-type TypeRoutes = Array<{ path: PagesPath, element: FunctionComponent }>
+type TypeRoutes = Array<{ path: PagesPath, element: React.FC }>
 
 type NavigationItems = Array<{ path: PagesPath, label: PagesName }>
 
