@@ -3,19 +3,18 @@ import Paddings from 'styles/components/Paddings.styled';
 import Container from 'styles/components/Container.styled';
 import Wrapper from 'styles/components/Wrapper.styled';
 import Navbar from 'components/Navbar/Navbar';
-import TopAlbumList from './components/TopAlbumList/TopAlbumList';
+import { List } from './Home.styled';
+import SpecialAlbumView from './components/SpecialAlbumView/SpecialAlbumView';
 
-type Props = {};
-
-const Home = (props: Props) => {
-    const [mockAlbum, setMockAlbum] = useState({});
+const Home = () => {
+    const [mockAlbum, setMockAlbum] = useState<any>([]);
 
     const getInfo = async () => {
         const response = await fetch('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=289c3b8ad41598ad070dfbd7046013e7&artist=Cher&album=Believe&format=json');
 
         const info = await response.json();
 
-        setMockAlbum(info);
+        setMockAlbum([info]);
     };
 
     useEffect(() => {
@@ -30,7 +29,12 @@ const Home = (props: Props) => {
                 <Container>
                     <Wrapper>
 
-                        <TopAlbumList mockAlbum={mockAlbum} />
+                        <List>
+                            {mockAlbum.map((album: any) =>
+                                <SpecialAlbumView album={album} key={album} />    
+                            )}
+                            
+                        </List>
 
                     </Wrapper>
                 </Container>

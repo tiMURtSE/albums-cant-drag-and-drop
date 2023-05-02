@@ -32,10 +32,10 @@ const Loader = styled.div`
         border: 10px dashed black;
         border-radius: 50%;
 
-        animation: loader 1.5s linear infinite;
+        animation: rotation 1.5s cubic-bezier(.86,.29,.55,.95) infinite;
     }
 
-    @keyframes loader {
+    @keyframes rotation {
         0% {
             transform: rotate(0deg);
         }

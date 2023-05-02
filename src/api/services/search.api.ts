@@ -7,7 +7,8 @@ const search = async (query: string): Promise<Record<string, any>> => {
 
     const params = new URLSearchParams({
         q: query,
-        type: 'album'
+        type: 'album',
+        limit: '5',
     }).toString();
     
     const response = await fetch(endpoint + params, {

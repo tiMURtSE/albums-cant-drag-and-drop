@@ -6,20 +6,22 @@ import {
     Info, 
     Title, 
     Year 
-} from "./TopAlbumItem.styled";
+} from "./SpecialAlbumView.styled";
+import { Album } from "types";
 
-// type Props = {
-//     mockAlbum: object,
-// };
+type Props = {
+    // album: Album,
+    album: any,
+};
 
-const TopAlbumItem = ({ mockAlbum }: any) => {
+const SpecialAlbumView = ({ album }: Props) => {
 
-    if (!mockAlbum.album) return null;
+    if (!album.album) return null;
 
-    const image = mockAlbum.album.image[4]['#text'];
-    const title = mockAlbum.album.name;
-    const artist = mockAlbum.album.artist;
-    const year = mockAlbum.album.tags.tag[3].name;
+    const image = album.album.image[4]['#text'];
+    const title = album.album.name;
+    const artist = album.album.artist;
+    const year = album.album.tags.tag[3].name;
     const place = 1;
 
     return (
@@ -35,6 +37,7 @@ const TopAlbumItem = ({ mockAlbum }: any) => {
 
             <Info>
                 <Title>The Dark Side of the Moon</Title>
+
                 <ArtistAndYear>
                     <Artist>{artist}</Artist>
                     <Year>{year}</Year>
@@ -44,4 +47,4 @@ const TopAlbumItem = ({ mockAlbum }: any) => {
     );
 };
 
-export default TopAlbumItem;
+export default SpecialAlbumView;

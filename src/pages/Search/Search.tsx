@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
 import Navbar from "components/Navbar/Navbar";
 import Container from "styles/components/Container.styled";
@@ -12,11 +12,10 @@ import formatAlbum from "utils/formatAlbum";
 
 const Search = () => {
     const [albums, setAlbums] = useState<Albums>([]);
-    const { state: queryValue } = useLocation();
-    const [query, _] = useState(queryValue);
     const [myAlbums, setMyAlbums] = useState<Albums>([]);
+
+    const [query, _] = useState(useParams().query);
     const [isLoading, setIsLoading] = useState(true);
-    
     const isMyAlbumsFound = Boolean(myAlbums.length);
 
     const searchAlbums = async (query: string) => {
@@ -33,7 +32,7 @@ const Search = () => {
 
     useEffect(() => {
         if (query && isLoading) searchAlbums(query);
-    }, [query]);
+    }, []);
 
     return (
         <>
@@ -47,8 +46,16 @@ const Search = () => {
                                 <Loader />
                             ) : (
                                 <>
-                                    {(isMyAlbumsFound) && <Subtitle>Мои альбомы</Subtitle>}
-
+                                    {isMyAlbumsFound && 
+                                        <>
+                                            <Subtitle>Мои альбомы</Subtitle>
+                                            
+                                            {myAlbums.map(album =>
+                                                <CommonAlbumView album={album} key={album.id} />
+                                            )}
+                                        </>
+                                    }
+                                    
                                     <Subtitle>Результаты</Subtitle>
 
                                     {albums.map(album =>

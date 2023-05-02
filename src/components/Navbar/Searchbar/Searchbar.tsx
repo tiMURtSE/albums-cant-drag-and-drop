@@ -1,52 +1,18 @@
 import { useState } from "react";
 import { Autocomplete, ClearSign, Content, Input, Item, ItemLink, List } from "./Searchbar.styled";
-// import { API_KEY, API_URL } from "api";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
 type Search = (album: string, limit?: string, page?: string) => void;
 type Albums = Array<{ title: string, artist: string, image: string }>
 
-const Search = (props: Props) => {
+const Search = () => {
     const [search, setSearch] = useState('');
     const [albums, setAlbums] = useState<Albums>([]);
     const navigate = useNavigate();
-    
-    // const searchAlbum: Search = async (album, limit = '5', page = '1') => {
-    //     const params = new URLSearchParams({
-    //         method: 'album.search',
-    //         album,
-    //         api_key: API_KEY,
-    //         format: 'json',
-    //         limit,
-    //         page,
-    //     }).toString();
-
-    //     const response = await fetch(API_URL + '?' + params);
-    
-    //     let albums = await response.json();
-
-    //     albums = formatResponse(albums);
-    //     setAlbums(albums);
-    // };
-
-    // const formatResponse = (response: any): Array<object> => {
-    //     let albums = response.results.albummatches.album;
-
-    //     albums = albums.map(({ name, artist, image }: any) => {
-    //         return {
-    //             title: name,
-    //             artist,
-    //             cover: image.at(-1)['#text'],
-    //         }
-    //     });
-
-    //     return albums;
-    // };
 
     return (
         <Content>
-            <form onSubmit={() => navigate(`/search/${search}`, { state: search })}>
+            <form onSubmit={(event) => { event.preventDefault(); navigate(`/search/${search}`)}}>
                 <Input
                     type='search'
                     value={search}
