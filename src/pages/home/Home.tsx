@@ -5,20 +5,27 @@ import Wrapper from 'styles/components/Wrapper.styled';
 import Navbar from 'components/Navbar/Navbar';
 import { List } from './Home.styled';
 import SpecialAlbumView from './components/SpecialAlbumView/SpecialAlbumView';
+import LocalStorage from 'utils/LocalStorage';
+import { Album, Albums } from 'types';
+import { getSeveralAlbums } from 'api';
+import formatAlbum from 'utils/formatAlbum';
 
 const Home = () => {
-    const [mockAlbum, setMockAlbum] = useState<any>([]);
+    const favoriteAlbumsId = LocalStorage.get('User').favoriteAlbumsId;
+    const [favoriteAlbums, setFavoriteAlbums] = useState<Albums>([]);
 
-    const getInfo = async () => {
-        const response = await fetch('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=289c3b8ad41598ad070dfbd7046013e7&artist=Cher&album=Believe&format=json');
+    const getFavoriteAlbums = async (favoriteAlbumsId: Array<string>) => {
+        const { albums } = await getSeveralAlbums(favoriteAlbumsId);
 
-        const info = await response.json();
+        for (let i = 0; i < albums.length; i++) {
+            albums[i] = formatAlbum(albums[i]);
+        }
 
-        setMockAlbum([info]);
+        setFavoriteAlbums(albums);
     };
 
     useEffect(() => {
-        getInfo();
+        getFavoriteAlbums(favoriteAlbumsId);
     }, []);
 
     return (
@@ -30,8 +37,8 @@ const Home = () => {
                     <Wrapper>
 
                         <List>
-                            {mockAlbum.map((album: any) =>
-                                <SpecialAlbumView album={album} key={album} />    
+                            {favoriteAlbums.map((album: Album) =>
+                                <SpecialAlbumView album={album} key={album.id} />    
                             )}
                             
                         </List>

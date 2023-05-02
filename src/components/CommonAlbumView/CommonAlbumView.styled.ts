@@ -7,7 +7,11 @@ const Info = styled.div`
 `;
 
 const Like = styled.div`
+    width: 30px;
+    height: 30px;
+    padding: 5px;
 
+    cursor: pointer;
 `;
 
 export {

@@ -10,37 +10,31 @@ import {
 import { Album } from "types";
 
 type Props = {
-    // album: Album,
-    album: any,
+    album: Album,
+    key: string,
 };
 
 const SpecialAlbumView = ({ album }: Props) => {
 
-    if (!album.album) return null;
-
-    const image = album.album.image[4]['#text'];
-    const title = album.album.name;
-    const artist = album.album.artist;
-    const year = album.album.tags.tag[3].name;
-    const place = 1;
+    if (!album.id) return null;
 
     return (
-        <Content place={place}>
+        <Content place={1}>
             
             <Image>
                 <img
-                    src={image}
+                    src={album.image}
                     width='200' height='200'
-                    alt={`${title} by ${artist}`} 
+                    alt={`${album.title} by ${album.artist}`} 
                 />
             </Image>
 
             <Info>
-                <Title>The Dark Side of the Moon</Title>
+                <Title>{album.title}</Title>
 
                 <ArtistAndYear>
-                    <Artist>{artist}</Artist>
-                    <Year>{year}</Year>
+                    <Artist>{album.artist}</Artist>
+                    <Year>{album.year}</Year>
                 </ArtistAndYear>
             </Info>
         </Content>

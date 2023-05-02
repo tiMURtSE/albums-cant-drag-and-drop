@@ -1,5 +1,6 @@
 import { CLIENT_ID, CLIENT_SECRET } from "utils/consts";
 import search from "./services/search.api";
+import getSeveralAlbums from "./services/getSeveralAlbums.api";
 
 const getAccessToken = async () => {
     const url = 'https://accounts.spotify.com/api/token';
@@ -18,4 +19,5 @@ const getAccessToken = async () => {
 export {
     getAccessToken,
     search,
+    getSeveralAlbums,
 };

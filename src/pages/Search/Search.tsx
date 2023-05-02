@@ -13,7 +13,7 @@ import formatAlbum from "utils/formatAlbum";
 const Search = () => {
     const [albums, setAlbums] = useState<Albums>([]);
     const [myAlbums, setMyAlbums] = useState<Albums>([]);
-
+    
     const [query, _] = useState(useParams().query);
     const [isLoading, setIsLoading] = useState(true);
     const isMyAlbumsFound = Boolean(myAlbums.length);
