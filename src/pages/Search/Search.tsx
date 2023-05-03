@@ -12,11 +12,9 @@ import formatAlbum from "utils/formatAlbum";
 
 const Search = () => {
     const [albums, setAlbums] = useState<Albums>([]);
-    const [myAlbums, setMyAlbums] = useState<Albums>([]);
     
     const [query, _] = useState(useParams().query);
     const [isLoading, setIsLoading] = useState(true);
-    const isMyAlbumsFound = Boolean(myAlbums.length);
 
     const searchAlbums = async (query: string) => {
         const searchResults = await search(query);
@@ -46,16 +44,6 @@ const Search = () => {
                                 <Loader />
                             ) : (
                                 <>
-                                    {isMyAlbumsFound && 
-                                        <>
-                                            <Subtitle>Мои альбомы</Subtitle>
-                                            
-                                            {myAlbums.map(album =>
-                                                <CommonAlbumView album={album} key={album.id} />
-                                            )}
-                                        </>
-                                    }
-                                    
                                     <Subtitle>Результаты</Subtitle>
 
                                     {albums.map(album =>
