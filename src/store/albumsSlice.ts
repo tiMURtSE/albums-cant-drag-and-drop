@@ -3,6 +3,7 @@ import { Albums } from "types";
 
 const initialState = {
 	albums: [] as Albums,
+    searchAlbums: [] as Albums,
 };
 
 const albumsSlice = createSlice({
@@ -20,8 +21,11 @@ const albumsSlice = createSlice({
 
 			state.albums = updatedAlbums;
 		},
+        setSearchAlbums(state, action) {
+            state.searchAlbums = action.payload.albums;
+        }
 	},
 });
 
 export default albumsSlice.reducer;
-export const { addAlbum, removeAlbum } = albumsSlice.actions;
+export const { addAlbum, removeAlbum, setSearchAlbums } = albumsSlice.actions;

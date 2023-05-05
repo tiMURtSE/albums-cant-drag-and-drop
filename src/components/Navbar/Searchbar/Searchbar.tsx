@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import {
 	Autocomplete,
 	ClearSign,
@@ -9,47 +9,61 @@ import {
 	List,
 } from "./Searchbar.styled";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { setSearch } from "store/searchSlice";
+import search from "services/api/search.api";
+import formatAlbum from "utils/formatAlbum";
+import { setSearchAlbums } from "store/albumsSlice";
 
 type Search = (album: string, limit?: string, page?: string) => void;
 type Albums = Array<{ title: string; artist: string; image: string }>;
 
 const Search = () => {
-	const [search, setSearch] = useState("");
+	const [query, setQuery] = useState("");
 	const [albums, setAlbums] = useState<Albums>([]);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+    const searchAlbums = async (event: any) => {
+        event.preventDefault();
+		const searchResults = await search(query);
+		const albums = searchResults.albums.items;
+
+		for (let i = 0; i < albums.length; i++) {
+			albums[i] = formatAlbum(albums[i]);
+		}
+        
+		dispatch(setSearchAlbums({ albums }));
+        navigate(`/search/${query}`)
+	};
 
 	return (
 		<Content>
-			<form
-				onSubmit={event => {
-					event.preventDefault();
-					navigate(`/search/${search}`);
-				}}
-			>
+			<form onSubmit={searchAlbums}>
 				<Input
-					type="search"
-					value={search}
+					type="query"
+					value={query}
 					placeholder="Поиск..."
 					onChange={event => {
-						setSearch(event.target.value);
+						setQuery(event.target.value);
 						// if (event.target.value) searchAlbum(event.target.value);
 					}}
 				/>
 			</form>
 
-			{search && (
+			{query && (
 				<Autocomplete>
 					<List>
 						{albums.filter(album =>
 							album.title
 								.toLowerCase()
-								.includes(search.toLowerCase())
+								.includes(query.toLowerCase())
 						).length ? (
 							albums
 								.filter(album =>
 									album.title
 										.toLowerCase()
-										.includes(search.toLowerCase())
+										.includes(query.toLowerCase())
 								)
 								.map(album => (
 									<Item key={album.title}>
@@ -65,7 +79,7 @@ const Search = () => {
 				</Autocomplete>
 			)}
 
-			<ClearSign search={search} onClick={() => setSearch("")}>
+			<ClearSign query={query} onClick={() => setQuery("")}>
 				&#9587;
 			</ClearSign>
 		</Content>

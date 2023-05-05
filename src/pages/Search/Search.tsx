@@ -7,31 +7,13 @@ import Paddings from "styles/components/Paddings.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import { Loader, Subtitle, Title } from "./Search.styled";
 import { Albums } from "types";
-import formatAlbum from "utils/formatAlbum";
-import search from "services/api/search.api";
+import { useSelector } from "react-redux";
 
 const Search = () => {
-	const [albums, setAlbums] = useState<Albums>([]);
-
-	const [query, _] = useState(useParams().query);
-	const [isLoading, setIsLoading] = useState(true);
-
-	const searchAlbums = async (query: string) => {
-		const searchResults = await search(query);
-		const albums = searchResults.albums.items;
-
-		for (let i = 0; i < albums.length; i++) {
-			albums[i] = formatAlbum(albums[i]);
-		}
-
-		setAlbums(albums);
-		setIsLoading(false);
-	};
-
-	useEffect(() => {
-		if (query && isLoading) searchAlbums(query);
-	}, []);
-
+    const albums: Albums = useSelector((state: any) => state.albums.searchAlbums)
+	const [isLoading, setIsLoading] = useState(false);
+    const { query } = useParams();
+    
 	return (
 		<>
 			<Navbar />
