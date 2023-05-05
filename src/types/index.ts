@@ -1,81 +1,17 @@
-enum PagesName {
-    Home = 'Главная',
-    Albums = 'Альбомы'
-}
+import { PagesName, PagesPath } from "consts/pages";
 
-enum PagesPath {
-    Home = '/',
-    Album = '/album/:id',
-    Albums = '/list',
-    Search = '/search/:query',
-    Error = '*',
-}
+type TypeRoutes = Array<{ path: PagesPath; element: React.FC }>;
 
-type TypeRoutes = Array<{ path: PagesPath, element: React.FC }>
-
-type NavigationItems = Array<{ path: PagesPath, label: PagesName }>
+type NavigationItems = Array<{ path: PagesPath; label: PagesName }>;
 
 type Album = {
-    id: string,
-    title: string,
-    artist: string,
-    year: number,
-    image: string,
-}
-
-type Albums = Array<Album>
-
-interface ITheme {
-    colors: {
-      grey: {
-        light: string
-        neutral: string
-        dark: string
-      }
-    }
-  
-    media: {
-      extraLarge: string
-      large: string
-      medium: string
-      small: string
-    }
-  
-    sizes: {
-      header: { height: string }
-      container: { header: string, content: string }
-      footer: { height: number }
-      modal: { width: number }
-      borderRadius: string
-    }
-
-    fonts: { 
-        small: string
-        regular: string
-        large: string
-        extraLarge: string
-    }
-  
-    durations: {
-      ms300: number
-    }
-  
-    order: {
-      header: number
-      modal: number
-      other: number
-    },
+	id: string;
+	title: string;
+	artist: string;
+	year: number;
+	image: string;
 };
 
-export {
-    PagesName,
-    PagesPath,
-};
+type Albums = Array<Album>;
 
-export type { 
-    ITheme,
-    NavigationItems,
-    TypeRoutes,
-    Album,
-    Albums,
-};
+export type { NavigationItems, TypeRoutes, Album, Albums };

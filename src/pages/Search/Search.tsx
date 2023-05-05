@@ -6,57 +6,61 @@ import Container from "styles/components/Container.styled";
 import Paddings from "styles/components/Paddings.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import { Loader, Subtitle, Title } from "./Search.styled";
-import { search } from "api";
 import { Albums } from "types";
 import formatAlbum from "utils/formatAlbum";
+import search from "services/api/search.api";
 
 const Search = () => {
-    const [albums, setAlbums] = useState<Albums>([]);
-    
-    const [query, _] = useState(useParams().query);
-    const [isLoading, setIsLoading] = useState(true);
+	const [albums, setAlbums] = useState<Albums>([]);
 
-    const searchAlbums = async (query: string) => {
-        const searchResults = await search(query);
-        const albums = searchResults.albums.items;
+	const [query, _] = useState(useParams().query);
+	const [isLoading, setIsLoading] = useState(true);
 
-        for (let i = 0; i < albums.length; i++) {
-            albums[i] = formatAlbum(albums[i]);
-        }
+	const searchAlbums = async (query: string) => {
+		const searchResults = await search(query);
+		const albums = searchResults.albums.items;
 
-        setAlbums(albums);
-        setIsLoading(false);
-    };
+		for (let i = 0; i < albums.length; i++) {
+			albums[i] = formatAlbum(albums[i]);
+		}
 
-    useEffect(() => {
-        if (query && isLoading) searchAlbums(query);
-    }, []);
+		setAlbums(albums);
+		setIsLoading(false);
+	};
 
-    return (
-        <>
-            <Navbar />
+	useEffect(() => {
+		if (query && isLoading) searchAlbums(query);
+	}, []);
 
-            <Paddings>
-                <Container>
-                    <Title>Результаты поиска для: <span>{query}</span></Title>
-                        <Wrapper>
-                            {isLoading ? (
-                                <Loader />
-                            ) : (
-                                <>
-                                    <Subtitle>Результаты</Subtitle>
+	return (
+		<>
+			<Navbar />
 
-                                    {albums.map(album =>
-                                        <CommonAlbumView album={album} key={album.id} />
-                                    )}
-                                </>
-                            )}
-                        </Wrapper>
-                </Container>
-            </Paddings>
+			<Paddings>
+				<Container>
+					<Title>
+						Результаты поиска для: <span>{query}</span>
+					</Title>
+					<Wrapper>
+						{isLoading ? (
+							<Loader />
+						) : (
+							<>
+								<Subtitle>Результаты</Subtitle>
 
-        </>
-    );
+								{albums.map(album => (
+									<CommonAlbumView
+										album={album}
+										key={album.id}
+									/>
+								))}
+							</>
+						)}
+					</Wrapper>
+				</Container>
+			</Paddings>
+		</>
+	);
 };
 
 export default Search;

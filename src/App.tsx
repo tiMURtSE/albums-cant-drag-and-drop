@@ -1,44 +1,34 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { PagesPath, TypeRoutes } from 'types';
-import CSSReset from 'styles/global/CSSReset.styled';
-import GlobalStyle from 'styles/global/GlobalStyle.styled';
-import Home from 'pages/Home/Home';
-import AlbumList from 'pages/AlbumList/AlbumList';
-import AlbumPage from 'pages/AlbumPage/AlbumPage';
-import Error from 'pages/Error/Error';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'styles/theme/theme';
-import Search from 'pages/Search/Search';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "pages/Home/Home";
+import AlbumList from "pages/AlbumList/AlbumList";
+import AlbumPage from "pages/AlbumPage/AlbumPage";
+import Error from "pages/Error/Error";
+import Search from "pages/Search/Search";
+import { PagesPath } from "consts/pages";
+import { TypeRoutes } from "types";
 
 const routes: TypeRoutes = [
-    { path: PagesPath.Home, element: Home },
-    { path: PagesPath.Albums, element: AlbumList },
-    { path: PagesPath.Album, element: AlbumPage },
-    { path: PagesPath.Search, element: Search },
-    { path: PagesPath.Error, element: Error },
+	{ path: PagesPath.Home, element: Home },
+	{ path: PagesPath.Albums, element: AlbumList },
+	{ path: PagesPath.Album, element: AlbumPage },
+	{ path: PagesPath.Search, element: Search },
+	{ path: PagesPath.Error, element: Error },
 ];
 
 function App() {
-    return (
-        <>
-            <CSSReset />
-            <GlobalStyle />
-
-            <BrowserRouter>
-                <ThemeProvider theme={theme}>
-                    <Routes>
-                        {routes.map(route =>
-                            <Route
-                                path={route.path}
-                                element={<route.element />}
-                                key={route.path}
-                            />
-                        )}
-                    </Routes>
-                </ThemeProvider>
-            </BrowserRouter>
-        </>
-    );
+	return (
+		<BrowserRouter>
+			<Routes>
+				{routes.map(route => (
+					<Route
+						path={route.path}
+						element={<route.element />}
+						key={route.path}
+					/>
+				))}
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
