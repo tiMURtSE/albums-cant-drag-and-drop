@@ -7,26 +7,10 @@ import { List } from "./Home.styled";
 import SpecialAlbumView from "./components/SpecialAlbumView/SpecialAlbumView";
 import LocalStorage from "utils/LocalStorage";
 import { Album, Albums } from "types";
-import formatAlbum from "utils/formatAlbum";
-import getSeveralAlbums from "services/api/getSeveralAlbums.api";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-	const favoriteAlbumsId = LocalStorage.get("User").favoriteAlbumsId;
-	const [favoriteAlbums, setFavoriteAlbums] = useState<Albums>([]);
-
-	const getFavoriteAlbums = async (favoriteAlbumsId: Array<string>) => {
-		const { albums } = await getSeveralAlbums(favoriteAlbumsId);
-
-		for (let i = 0; i < albums.length; i++) {
-			albums[i] = formatAlbum(albums[i]);
-		}
-
-		setFavoriteAlbums(albums);
-	};
-
-	useEffect(() => {
-		getFavoriteAlbums(favoriteAlbumsId);
-	}, []);
+	const favoriteAlbums = useSelector((state: any) => state.albums.albums);
 
 	return (
 		<>
