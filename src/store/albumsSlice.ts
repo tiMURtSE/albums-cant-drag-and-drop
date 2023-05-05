@@ -3,7 +3,7 @@ import { Albums } from "types";
 
 const initialState = {
 	albums: [] as Albums,
-    searchAlbums: [] as Albums,
+	foundAlbums: [] as Albums,
 };
 
 const albumsSlice = createSlice({
@@ -16,16 +16,20 @@ const albumsSlice = createSlice({
 		removeAlbum(state, action) {
 			const removedAlbumId = action.payload.album.id;
 			const updatedAlbums = state.albums.filter(
-				album => album.id !== removedAlbumId
+				(album) => album.id !== removedAlbumId
 			);
 
 			state.albums = updatedAlbums;
 		},
-        setSearchAlbums(state, action) {
-            state.searchAlbums = action.payload.albums;
-        }
+		setFoundAlbums(state, action) {
+			state.foundAlbums = action.payload.albums;
+		},
+		clearFoundAlbums(state) {
+			state.foundAlbums = [];
+		},
 	},
 });
 
 export default albumsSlice.reducer;
-export const { addAlbum, removeAlbum, setSearchAlbums } = albumsSlice.actions;
+export const { addAlbum, removeAlbum, setFoundAlbums, clearFoundAlbums } =
+	albumsSlice.actions;

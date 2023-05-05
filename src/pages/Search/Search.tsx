@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Albums } from "types";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
 import Navbar from "components/Navbar/Navbar";
 import Container from "styles/components/Container.styled";
 import Paddings from "styles/components/Paddings.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import { Loader, Subtitle, Title } from "./Search.styled";
-import { Albums } from "types";
-import { useSelector } from "react-redux";
 
 const Search = () => {
-    const albums: Albums = useSelector((state: any) => state.albums.searchAlbums)
-	const [isLoading, setIsLoading] = useState(false);
-    const { query } = useParams();
-    
+	const foundAlbums: Albums = useSelector(
+		(state: any) => state.albums.foundAlbums
+	);
+	const isLoading = !foundAlbums.length;
+	const { query } = useParams();
+
 	return (
 		<>
 			<Navbar />
@@ -28,9 +29,7 @@ const Search = () => {
 							<Loader />
 						) : (
 							<>
-								<Subtitle>Результаты</Subtitle>
-
-								{albums.map(album => (
+								{foundAlbums.map((album) => (
 									<CommonAlbumView
 										album={album}
 										key={album.id}

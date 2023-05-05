@@ -1,4 +1,10 @@
-import { FormEventHandler, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
+import formatAlbum from "utils/formatAlbum";
+import searchAlbums from "services/api/search.api";
+import { Albums } from "types";
 import {
 	Autocomplete,
 	ClearSign,
@@ -8,58 +14,53 @@ import {
 	ItemLink,
 	List,
 } from "./Searchbar.styled";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux/es/hooks/useDispatch";
-import { setSearch } from "store/searchSlice";
-import search from "services/api/search.api";
-import formatAlbum from "utils/formatAlbum";
-import { setSearchAlbums } from "store/albumsSlice";
-
-type Search = (album: string, limit?: string, page?: string) => void;
-type Albums = Array<{ title: string; artist: string; image: string }>;
 
 const Search = () => {
 	const [query, setQuery] = useState("");
-	const [albums, setAlbums] = useState<Albums>([]);
+	const foundAlbums: Albums = useSelector(
+		(state: any) => state.albums.foundAlbums
+	);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-    const searchAlbums = async (event: any) => {
-        event.preventDefault();
-		const searchResults = await search(query);
-		const albums = searchResults.albums.items;
+	const onSubmit = async (event: any) => {
+		event.preventDefault();
+		dispatch(clearFoundAlbums());
+
+		const results = await searchAlbums(query);
+		const albums = results.albums.items;
 
 		for (let i = 0; i < albums.length; i++) {
 			albums[i] = formatAlbum(albums[i]);
 		}
-        
-		dispatch(setSearchAlbums({ albums }));
-        navigate(`/search/${query}`)
+
+		dispatch(setFoundAlbums({ albums }));
+		navigate(`/search/${query}`);
 	};
 
 	return (
 		<Content>
-			<form onSubmit={searchAlbums}>
+			<form onSubmit={onSubmit}>
 				<Input
-					type="query"
-					value={query}
+					type="search"
 					placeholder="Поиск..."
-					onChange={event => {
+					value={query}
+					onChange={(event) => {
 						setQuery(event.target.value);
 						// if (event.target.value) searchAlbum(event.target.value);
 					}}
 				/>
 			</form>
 
-			{query && (
+			{/* {query && (
 				<Autocomplete>
 					<List>
-						{albums.filter(album =>
+						{foundAlbums.filter(album =>
 							album.title
 								.toLowerCase()
 								.includes(query.toLowerCase())
 						).length ? (
-							albums
+							foundAlbums
 								.filter(album =>
 									album.title
 										.toLowerCase()
@@ -77,7 +78,7 @@ const Search = () => {
 						)}
 					</List>
 				</Autocomplete>
-			)}
+			)} */}
 
 			<ClearSign query={query} onClick={() => setQuery("")}>
 				&#9587;

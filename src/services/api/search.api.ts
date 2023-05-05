@@ -1,7 +1,7 @@
 import { SPOTIFY_API } from "consts/api";
 import getAccessToken from "./getAccessToken";
 
-const search = async (query: string): Promise<Record<string, any>> => {
+const searchAlbums = async (query: string): Promise<Record<string, any>> => {
 	const { access_token } = await getAccessToken();
 	const endpoint = SPOTIFY_API + "search?";
 
@@ -21,4 +21,4 @@ const search = async (query: string): Promise<Record<string, any>> => {
 	return await response.json();
 };
 
-export default search;
+export default searchAlbums;
