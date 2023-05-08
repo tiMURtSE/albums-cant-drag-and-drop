@@ -19,7 +19,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				{routes.map(route => (
+				{routes.map((route) => (
 					<Route
 						path={route.path}
 						element={<route.element />}

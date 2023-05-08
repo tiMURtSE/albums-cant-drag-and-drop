@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const FlexBetween = styled.div<{gap?: string}>`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: ${props => props.gap};
+const FlexBetween = styled.div<{ gap?: string }>`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: ${(props) => props.gap};
 `;
 
 export default FlexBetween;

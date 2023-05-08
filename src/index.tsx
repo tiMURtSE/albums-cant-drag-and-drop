@@ -1,12 +1,12 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "store";
 import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme/theme";
 import CSSReset from "styles/global/CSSReset.styled";
 import GlobalStyle from "styles/global/GlobalStyle.styled";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "store";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<>
@@ -20,6 +20,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 				</ThemeProvider>
 			</PersistGate>
 		</Provider>
-		{/* </React.StrictMode> */},
+		{/* </React.StrictMode> */}
 	</>
 );

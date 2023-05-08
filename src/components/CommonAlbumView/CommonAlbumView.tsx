@@ -8,6 +8,7 @@ import LocalStorage from "utils/LocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAlbum } from "store/albumsSlice";
 import { addAlbum } from "store/albumsSlice";
+import { Link } from "react-router-dom";
 
 type Props = {
 	album: Album;
@@ -33,21 +34,21 @@ const CommonAlbumView = ({ album }: Props) => {
 			<FlexBetween>
 				<FlexBetween gap="2rem">
 					<Image>
-						<a href="#">
+						<Link to={`/album/${album.id}`}>
 							<img
 								src={album.image}
 								width="80"
 								height="80"
 								alt={`${album.title} by ${album.artist}`}
 							/>
-						</a>
+						</Link>
 					</Image>
 
 					<Info>
-						<a href="#">
+						<Link to={`/album/${album.id}`}>
 							<h3>{album.title}</h3>
 							<p>{album.artist}</p>
-						</a>
+						</Link>
 					</Info>
 				</FlexBetween>
 

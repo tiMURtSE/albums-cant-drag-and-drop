@@ -1,0 +1,18 @@
+import { SPOTIFY_API } from "consts/api";
+import getAccessToken from "./getAccessToken";
+
+const getSingleAlbum = async (id: string | undefined) => {
+	const { access_token } = await getAccessToken();
+	const endpoint = SPOTIFY_API + "albums/";
+
+	const response = await fetch(endpoint + id, {
+		headers: {
+			Authorization: `Bearer ${access_token}`,
+		},
+		method: "GET",
+	});
+
+	return await response.json();
+};
+
+export default getSingleAlbum;

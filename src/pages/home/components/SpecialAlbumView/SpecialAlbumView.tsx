@@ -1,44 +1,46 @@
 import Image from "styles/components/Image.styled";
-import { 
-    Artist, 
-    ArtistAndYear, 
-    Content, 
-    Info, 
-    Title, 
-    Year 
+import {
+	Artist,
+	ArtistAndYear,
+	Content,
+	Info,
+	Title,
+	Year,
 } from "./SpecialAlbumView.styled";
 import { Album } from "types";
+import { Link } from "react-router-dom";
 
 type Props = {
-    album: Album,
-    key: string,
+	album: Album;
+	key: string;
 };
 
 const SpecialAlbumView = ({ album }: Props) => {
+	if (!album.id) return null;
 
-    if (!album.id) return null;
+	return (
+		<Content place={1}>
+			<Image>
+				<img
+					src={album.image}
+					width="200"
+					height="200"
+					alt={`${album.title} by ${album.artist}`}
+				/>
+			</Image>
 
-    return (
-        <Content place={1}>
-            
-            <Image>
-                <img
-                    src={album.image}
-                    width='200' height='200'
-                    alt={`${album.title} by ${album.artist}`} 
-                />
-            </Image>
+			<Info>
+				<Link to={`/album/${album.id}`}>
+					<Title>{album.title}</Title>
+				</Link>
 
-            <Info>
-                <Title>{album.title}</Title>
-
-                <ArtistAndYear>
-                    <Artist>{album.artist}</Artist>
-                    <Year>{album.year}</Year>
-                </ArtistAndYear>
-            </Info>
-        </Content>
-    );
+				<ArtistAndYear>
+					<Artist>{album.artist}</Artist>
+					<Year>{album.year}</Year>
+				</ArtistAndYear>
+			</Info>
+		</Content>
+	);
 };
 
 export default SpecialAlbumView;

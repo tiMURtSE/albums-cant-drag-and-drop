@@ -12,6 +12,14 @@ type Album = {
 	image: string;
 };
 
+type TypeAdditionalInfo = {
+	listeners: string;
+	playcount: string;
+	tags: Array<{ url: string; name: string }>;
+	tracks: Array<{ duration: number; url: string; name: string }>;
+	description: string;
+};
+
 type Albums = Array<Album>;
 
-export type { NavigationItems, TypeRoutes, Album, Albums };
+export type { NavigationItems, TypeRoutes, Album, Albums, TypeAdditionalInfo };

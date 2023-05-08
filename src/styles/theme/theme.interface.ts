@@ -16,7 +16,7 @@ interface ITheme {
 
 	sizes: {
 		header: { height: string };
-		container: { header: string; content: string };
+		container: { header: string; list: string };
 		footer: { height: number };
 		modal: { width: number };
 		borderRadius: string;
