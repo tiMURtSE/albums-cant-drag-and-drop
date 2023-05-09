@@ -47,26 +47,24 @@ const AlbumPage = (props: Props) => {
 			<Paddings>
 				<Container
 					header
-					mt={`calc(${theme.sizes.header.height} + 2rem)`}
+					mt={`calc(${theme.sizes.header.height} + 3rem)`}
 				>
-					<Wrapper>
-						<Content>
-							<FLexColumn>
-								<Image>
-									<img
-										src={album.image}
-										width={"100%"}
-										height={"100%"}
-										alt={`${album.title} by ${album.artist}`}
-									/>
-								</Image>
-							</FLexColumn>
+					<Content>
+						<FLexColumn>
+							<Image>
+								<img
+									src={album.image}
+									width={"100%"}
+									height={"100%"}
+									alt={`${album.title} by ${album.artist}`}
+								/>
+							</Image>
+						</FLexColumn>
 
-							<FLexColumn gap="1rem">
-								<AdditionalInfo album={album} />
-							</FLexColumn>
-						</Content>
-					</Wrapper>
+						<FLexColumn gap="1rem">
+							<AdditionalInfo album={album} />
+						</FLexColumn>
+					</Content>
 				</Container>
 			</Paddings>
 		</>

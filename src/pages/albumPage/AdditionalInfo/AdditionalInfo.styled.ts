@@ -8,7 +8,7 @@ const LikeButton = styled.button`
 	width: min-content;
 	padding: 5px 10px;
 
-	border: 3px solid ${(porps) => porps.theme.colors.grey.dark};
+	border: 3px solid ${(porps) => porps.theme.colors.grey.neutral};
 	border-radius: ${(props) => props.theme.sizes.borderRadius};
 	cursor: pointer;
 
@@ -18,6 +18,7 @@ const LikeButton = styled.button`
 
 	&:hover {
 		background-color: ${(props) => props.theme.colors.yellow.light};
+		border-color: ${(porps) => porps.theme.colors.grey.dark};
 	}
 `;
 

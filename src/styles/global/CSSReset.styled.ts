@@ -52,6 +52,8 @@ button,
 textarea,
 select {
   font: inherit;
+  background-color: inherit;
+  border: 0;
 }
 
 /* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */

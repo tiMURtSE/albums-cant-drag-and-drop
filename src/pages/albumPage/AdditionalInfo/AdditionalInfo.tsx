@@ -55,12 +55,12 @@ const AdditionalInfo = ({ album }: Props) => {
 
 			<div>
 				{isAlbumLiked ? (
-					<LikeButton>
+					<LikeButton onClick={like}>
 						<SolidLike />
 						<span>Удалить</span>
 					</LikeButton>
 				) : (
-					<LikeButton>
+					<LikeButton onClick={like}>
 						<RegularLike />
 						<span>Добавить</span>
 					</LikeButton>
@@ -89,7 +89,6 @@ const AdditionalInfo = ({ album }: Props) => {
 						{splitNumber(additionalInfo.playcount)}
 					</SpecialFont>
 				</div>
-				Треки:
 				<Tracks tracks={additionalInfo.tracks} />
 			</div>
 		</>
