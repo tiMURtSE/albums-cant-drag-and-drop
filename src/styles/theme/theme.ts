@@ -7,6 +7,9 @@ const theme: ITheme = {
 			neutral: "#d4d4d4",
 			dark: "#555",
 		},
+		yellow: {
+			light: "#faffd6",
+		},
 	},
 
 	media: {

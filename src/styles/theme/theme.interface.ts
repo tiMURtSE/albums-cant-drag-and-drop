@@ -5,6 +5,9 @@ interface ITheme {
 			neutral: string;
 			dark: string;
 		};
+		yellow: {
+			light: string;
+		};
 	};
 
 	media: {

@@ -1,5 +1,26 @@
 import styled from "styled-components";
 
+const LikeButton = styled.button`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.5rem;
+	width: min-content;
+	padding: 5px 10px;
+
+	border: 3px solid ${(porps) => porps.theme.colors.grey.dark};
+	border-radius: ${(props) => props.theme.sizes.borderRadius};
+	cursor: pointer;
+
+	& span {
+		font-weight: 700;
+	}
+
+	&:hover {
+		background-color: ${(props) => props.theme.colors.yellow.light};
+	}
+`;
+
 const Title = styled.p`
 	margin-bottom: 1rem;
 
@@ -34,4 +55,4 @@ const SpecialFont = styled.span`
 	font-weight: 700;
 `;
 
-export { Title, Artist, Tag, SpecialFont };
+export { LikeButton, Title, Artist, Tag, SpecialFont };
