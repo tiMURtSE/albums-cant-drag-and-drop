@@ -1,69 +1,49 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import AdditionalInfo from "./AlbumInfo/AlbumInfo";
 import Navbar from "components/Navbar/Navbar";
 import Container from "styles/components/Container.styled";
 import Paddings from "styles/components/Paddings.styled";
-import Wrapper from "styles/components/Wrapper.styled";
-import { Content, FLexColumn } from "./AlbumPage.styled";
-import Image from "styles/components/Image.styled";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { LASTFM_API } from "consts/api";
-import formatAdditionalInfo from "utils/formatAdditionalInfo";
-import AdditionalInfo from "./AdditionalInfo/AdditionalInfo";
-import { theme } from "styles/theme/theme";
+import { AlbumCover, Content } from "./AlbumPage.styled";
+import { Album, Albums, AlbumsState } from "types";
 import getSingleAlbum from "services/api/getSingleAlbum.api";
 import formatAlbum from "utils/formatAlbum";
+import Image from "components/Image/Image";
+import AlbumInfo from "./AlbumInfo/AlbumInfo";
 
-type Props = {};
-
-const AlbumPage = (props: Props) => {
-	const [album, setAlbum] = useState<any>({});
-	const albums = useSelector((state: any) => state.albums.albums);
-	const isAlbumLiked = albums.find((albums: any) => albums.id === album.id);
-	const { id } = useParams();
+const AlbumPage = () => {
+	const id = useParams().id;
+	const [album, setAlbum] = useState<Album | null>(null);
 
 	const getAlbum = async () => {
-		let album;
+		const album = await getSingleAlbum(id);
 
-		if (isAlbumLiked) {
-			album = albums.find((item: any) => item.id === id);
-			return setAlbum(album);
-		}
-
-		const response = await getSingleAlbum(id);
-		setAlbum(formatAlbum(response));
+		setAlbum(formatAlbum(album));
 	};
 
 	useEffect(() => {
 		getAlbum();
 	}, []);
 
-	if (!album.id) return null;
+	if (!album) return null;
 
 	return (
 		<>
 			<Navbar />
 
 			<Paddings>
-				<Container
-					header
-					mt={`calc(${theme.sizes.header.height} + 3rem)`}
-				>
+				<Container>
 					<Content>
-						<FLexColumn>
-							<Image>
-								<img
-									src={album.image}
-									width={"100%"}
-									height={"100%"}
-									alt={`${album.title} by ${album.artist}`}
-								/>
-							</Image>
-						</FLexColumn>
+						<AlbumCover>
+							<Image
+								src={album.image}
+								width="450px"
+								height="450px"
+								alt={`${album.title} by ${album.artist}`}
+							/>
+						</AlbumCover>
 
-						<FLexColumn gap="1rem">
-							<AdditionalInfo album={album} />
-						</FLexColumn>
+						<AlbumInfo album={album} />
 					</Content>
 				</Container>
 			</Paddings>

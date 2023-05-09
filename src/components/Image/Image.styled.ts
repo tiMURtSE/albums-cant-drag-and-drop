@@ -1,14 +1,10 @@
 import styled from "styled-components";
 
-const Image = styled.div`
-	& a {
-		display: block;
-	}
-
+const Wrapper = styled.div`
 	& img {
 		display: block;
 		max-width: none;
 	}
 `;
 
-export default Image;
+export { Wrapper };

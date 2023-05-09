@@ -3,14 +3,11 @@ import FlexBetween from "styles/components/FlexBetween.styled";
 
 const Content = styled(FlexBetween)`
 	align-items: flex-start;
+	margin: 100px 0;
 `;
 
-const FLexColumn = styled.div<{ gap?: string }>`
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	gap: ${(props) => props.gap};
+const AlbumCover = styled.div`
 	flex-basis: 47%;
 `;
 
-export { Content, FLexColumn };
+export { Content, AlbumCover };

@@ -3,7 +3,7 @@ import Paddings from "styles/components/Paddings.styled";
 import Container from "styles/components/Container.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import Navbar from "components/Navbar/Navbar";
-import { List } from "./Home.styled";
+import { Content, List } from "./Home.styled";
 import SpecialAlbumView from "./components/SpecialAlbumView/SpecialAlbumView";
 import LocalStorage from "utils/LocalStorage";
 import { Album, Albums } from "types";
@@ -18,7 +18,7 @@ const Home = () => {
 
 			<Paddings>
 				<Container>
-					<Wrapper>
+					<Content>
 						<List>
 							{favoriteAlbums.map((album: Album) => (
 								<SpecialAlbumView
@@ -27,7 +27,7 @@ const Home = () => {
 								/>
 							))}
 						</List>
-					</Wrapper>
+					</Content>
 				</Container>
 			</Paddings>
 		</>

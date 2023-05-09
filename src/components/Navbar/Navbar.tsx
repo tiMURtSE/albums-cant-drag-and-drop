@@ -24,7 +24,7 @@ const Navbar = () => {
 						</Title>
 
 						<Navigation>
-							{navigationItems.map(item => (
+							{navigationItems.map((item) => (
 								<NavLink to={item.path} key={item.label}>
 									{item.label}
 								</NavLink>

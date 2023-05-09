@@ -10,16 +10,23 @@ type Album = {
 	artist: string;
 	year: number;
 	image: string;
+	url: string;
 };
 
-type TypeAdditionalInfo = {
+type Albums = Array<Album>;
+
+interface AlbumsState {
+	albums: Album[];
+}
+
+interface IAdditionalInfo {
 	listeners: string;
 	playcount: string;
 	tags: Array<{ url: string; name: string }>;
 	tracks: Array<{ duration: number; url: string; name: string }>;
 	description: string;
-};
+}
 
-type Albums = Array<Album>;
+export type { AlbumsState };
 
-export type { NavigationItems, TypeRoutes, Album, Albums, TypeAdditionalInfo };
+export type { NavigationItems, TypeRoutes, Album, Albums, IAdditionalInfo };

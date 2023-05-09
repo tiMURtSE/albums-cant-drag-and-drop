@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
-const List = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+const Content = styled.div`
+	margin-top: 228px;
 `;
 
-export {
-    List,
-}
+const List = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+`;
+
+export { Content, List };

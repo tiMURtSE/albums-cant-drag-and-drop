@@ -1,6 +1,5 @@
 import AlbumWrapper from "styles/components/AlbumWrapper.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
-import Image from "styles/components/Image.styled";
 import { Like, Info } from "./CommonAlbumView.styled";
 import { Album } from "types";
 import { useState } from "react";
@@ -9,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeAlbum } from "store/albumsSlice";
 import { addAlbum } from "store/albumsSlice";
 import { Link } from "react-router-dom";
+import Image from "components/Image/Image";
 
 type Props = {
 	album: Album;
@@ -33,23 +33,21 @@ const CommonAlbumView = ({ album }: Props) => {
 		<AlbumWrapper>
 			<FlexBetween>
 				<FlexBetween gap="2rem">
-					<Image>
-						<Link to={`/album/${album.id}`}>
-							<img
-								src={album.image}
-								width="80"
-								height="80"
-								alt={`${album.title} by ${album.artist}`}
-							/>
-						</Link>
-					</Image>
+					<Link to={`/album/${album.id}`}>
+						<Image
+							src={album.image}
+							width="80"
+							height="80"
+							alt={`${album.title} by ${album.artist}`}
+						/>
+					</Link>
 
-					<Info>
-						<Link to={`/album/${album.id}`}>
+					<Link to={`/album/${album.id}`}>
+						<Info>
 							<h3>{album.title}</h3>
 							<p>{album.artist}</p>
-						</Link>
-					</Info>
+						</Info>
+					</Link>
 				</FlexBetween>
 
 				<Like onClick={like}>

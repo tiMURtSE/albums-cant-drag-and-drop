@@ -1,4 +1,3 @@
-import Image from "styles/components/Image.styled";
 import {
 	Artist,
 	ArtistAndYear,
@@ -9,6 +8,7 @@ import {
 } from "./SpecialAlbumView.styled";
 import { Album } from "types";
 import { Link } from "react-router-dom";
+import Image from "components/Image/Image";
 
 type Props = {
 	album: Album;
@@ -20,14 +20,12 @@ const SpecialAlbumView = ({ album }: Props) => {
 
 	return (
 		<Content place={1}>
-			<Image>
-				<img
-					src={album.image}
-					width="200"
-					height="200"
-					alt={`${album.title} by ${album.artist}`}
-				/>
-			</Image>
+			<Image
+				src={album.image}
+				width="200"
+				height="200"
+				alt={`${album.title} by ${album.artist}`}
+			/>
 
 			<Info>
 				<Link to={`/album/${album.id}`}>
