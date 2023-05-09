@@ -20,12 +20,14 @@ const SpecialAlbumView = ({ album }: Props) => {
 
 	return (
 		<Content place={1}>
-			<Image
-				src={album.image}
-				width="200"
-				height="200"
-				alt={`${album.title} by ${album.artist}`}
-			/>
+			<Link to={`/album/${album.id}`}>
+				<Image
+					src={album.image}
+					width="200"
+					height="200"
+					alt={`${album.title} by ${album.artist}`}
+				/>
+			</Link>
 
 			<Info>
 				<Link to={`/album/${album.id}`}>

@@ -32,7 +32,7 @@ const Title = styled.p`
 	& svg {
 		position: absolute;
 		top: 10%;
-		right: -1rem;
+		right: -2rem;
 		z-index: 10;
 		width: 15px;
 		height: 15px;

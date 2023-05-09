@@ -7,22 +7,25 @@ const Input = styled.input`
 const Wrapper = styled.div`
 	border-radius: ${(props) => props.theme.sizes.borderRadius};
 
-	& input:checked + table {
+	& input + div {
+		max-height: 44px;
+		overflow: hidden;
+
+		transition: max-height 0.2s ease;
+	}
+
+	& input:checked + div {
 		max-height: 1500px;
 	}
 
-	& input:checked + table svg {
-		transform: translate(150%, -50%) rotate(-90deg);
+	& input:checked + div svg {
+		transform: translateY(-50%) rotate(90deg);
 	}
 `;
 
 const Table = styled.table`
-	max-height: 44px;
-
+	width: 100%;
 	border-collapse: collapse;
-	overflow: hidden;
-
-	transition: max-height 0.5s ease;
 
 	& td {
 		padding: 10px 20px;
@@ -36,6 +39,9 @@ const Table = styled.table`
 
 const Caption = styled.caption`
 	position: relative;
+	text-align: start;
+	padding: 0 40px;
+
 	background-color: ${(props) => props.theme.colors.grey.neutral};
 	border-radius: ${(props) => props.theme.sizes.borderRadius};
 
@@ -50,11 +56,11 @@ const Caption = styled.caption`
 	& svg {
 		position: absolute;
 		top: 50%;
-		left: 50%;
+		left: 10px;
 		z-index: 10;
 		width: 20px;
 		height: 20px;
-		transform: translate(150%, -50%);
+		transform: translateY(-50%);
 	}
 
 	&:hover {

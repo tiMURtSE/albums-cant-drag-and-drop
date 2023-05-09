@@ -10,22 +10,25 @@ const Tracks = ({ tracks }: Props) => {
 		<Wrapper>
 			<Input type="checkbox" id="input" />
 
-			<Table>
-				<Caption>
-					<label htmlFor="input">Треки</label>
+			<div>
+				<Table>
+					<Caption>
+						<label htmlFor="input">
+							Треки
+							<DropDownTriangle />
+						</label>
+					</Caption>
 
-					<DropDownTriangle />
-				</Caption>
-
-				<tbody>
-					{tracks.map((track: any) => (
-						<Track>
-							<td>{track["@attr"].rank}</td>
-							<td>{track.name}</td>
-						</Track>
-					))}
-				</tbody>
-			</Table>
+					<tbody>
+						{tracks.map((track: any) => (
+							<Track>
+								<td>{track["@attr"].rank}</td>
+								<td>{track.name}</td>
+							</Track>
+						))}
+					</tbody>
+				</Table>
+			</div>
 		</Wrapper>
 	);
 };
