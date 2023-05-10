@@ -23,7 +23,14 @@ interface IAdditionalInfo {
 	listeners: string;
 	playcount: string;
 	tags: Array<{ url: string; name: string }>;
-	tracks: Array<{ duration: number; url: string; name: string }>;
+	tracks: Array<{
+		"@attr": { rank: number };
+		artist: string;
+		duration: number;
+		name: string;
+		streamable: object;
+		url: string;
+	}>;
 	description: string;
 }
 

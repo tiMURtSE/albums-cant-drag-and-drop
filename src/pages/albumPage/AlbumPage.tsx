@@ -28,26 +28,22 @@ const AlbumPage = () => {
 	if (!album) return null;
 
 	return (
-		<>
-			<Navbar />
+		<Paddings>
+			<Container>
+				<Content>
+					<AlbumCover>
+						<Image
+							src={album.image}
+							width="450px"
+							height="450px"
+							alt={`${album.title} by ${album.artist}`}
+						/>
+					</AlbumCover>
 
-			<Paddings>
-				<Container>
-					<Content>
-						<AlbumCover>
-							<Image
-								src={album.image}
-								width="450px"
-								height="450px"
-								alt={`${album.title} by ${album.artist}`}
-							/>
-						</AlbumCover>
-
-						<AlbumInfo album={album} />
-					</Content>
-				</Container>
-			</Paddings>
-		</>
+					<AlbumInfo album={album} />
+				</Content>
+			</Container>
+		</Paddings>
 	);
 };
 

@@ -7,7 +7,9 @@ const Content = styled(FlexBetween)`
 `;
 
 const AlbumCover = styled.div`
-	flex-basis: 47%;
+	flex-basis: 450px;
+
+	box-shadow: 5px 5px 25px 10px ${(props) => props.theme.colors.grey.neutral};
 `;
 
 export { Content, AlbumCover };

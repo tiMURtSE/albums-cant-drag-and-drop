@@ -3,13 +3,7 @@ import Navbar from "components/Navbar/Navbar";
 type Props = {};
 
 const Error = (props: Props) => {
-    return (
-        <>
-            <Navbar />  
-
-            <div style={{ fontSize: 100 }}>ERROR</div> 
-        </>
-    );
+	return <div style={{ fontSize: 100 }}>ERROR</div>;
 };
 
 export default Error;

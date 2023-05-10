@@ -13,24 +13,17 @@ const Home = () => {
 	const favoriteAlbums = useSelector((state: any) => state.albums.albums);
 
 	return (
-		<>
-			<Navbar />
-
-			<Paddings>
-				<Container>
-					<Content>
-						<List>
-							{favoriteAlbums.map((album: Album) => (
-								<SpecialAlbumView
-									album={album}
-									key={album.id}
-								/>
-							))}
-						</List>
-					</Content>
-				</Container>
-			</Paddings>
-		</>
+		<Paddings>
+			<Container>
+				<Content>
+					<List>
+						{favoriteAlbums.map((album: Album) => (
+							<SpecialAlbumView album={album} key={album.id} />
+						))}
+					</List>
+				</Content>
+			</Container>
+		</Paddings>
 	);
 };
 

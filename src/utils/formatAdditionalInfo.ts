@@ -1,8 +1,6 @@
-import { TypeAdditionalInfo } from "types";
+import { IAdditionalInfo } from "types";
 
-const formatAdditionalInfo = (
-	info: Record<string, any>
-): TypeAdditionalInfo => {
+const formatAdditionalInfo = (info: Record<string, any>): IAdditionalInfo => {
 	const {
 		listeners,
 		playcount,

@@ -2,10 +2,18 @@ import DropDownTriangle from "components/Icons/DropDownTriangle/DropDownTriangle
 import { Caption, Input, Table, Track, Wrapper } from "./Tracks.styled";
 
 type Props = {
-	tracks: Array<{ duration: number; url: string; name: string }>;
+	tracks: Array<{
+		"@attr": { rank: number };
+		artist: string;
+		duration: number;
+		name: string;
+		streamable: object;
+		url: string;
+	}>;
 };
 
 const Tracks = ({ tracks }: Props) => {
+	console.log(tracks);
 	return (
 		<Wrapper>
 			<Input type="checkbox" id="input" />
@@ -20,8 +28,8 @@ const Tracks = ({ tracks }: Props) => {
 					</Caption>
 
 					<tbody>
-						{tracks.map((track: any) => (
-							<Track>
+						{tracks.map((track) => (
+							<Track key={track["@attr"].rank + track.name}>
 								<td>{track["@attr"].rank}</td>
 								<td>{track.name}</td>
 							</Track>

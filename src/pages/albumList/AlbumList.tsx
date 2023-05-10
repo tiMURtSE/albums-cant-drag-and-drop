@@ -1,13 +1,9 @@
-import Navbar from 'components/Navbar/Navbar';
+import Navbar from "components/Navbar/Navbar";
 
 type Props = {};
 
 const AlbumList = (props: Props) => {
-    return (
-        <>
-            <Navbar />   
-        </>
-    );
+	return <></>;
 };
 
 export default AlbumList;
