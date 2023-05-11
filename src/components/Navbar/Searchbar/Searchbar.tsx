@@ -14,9 +14,10 @@ import {
 	ItemLink,
 	List,
 } from "./Searchbar.styled";
+import { Loader } from "components/Loading/Loader.styled";
 
 const Search = () => {
-	const [query, setQuery] = useState("");
+	const [query, setQuery] = useState<string>("");
 	const [autocomplete, setAutocomplete] = useState<Albums>([]);
 	const [isAutocompleteOpen, setIsAutocompleteOpen] =
 		useState<boolean>(false);
@@ -24,12 +25,12 @@ const Search = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const onSubmit = async (event: any) => {
+	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		dispatch(clearFoundAlbums());
 
 		const results = await searchAlbums(query);
-		const albums = results.albums.items;
+		const albums = results.albums.items as Albums;
 
 		for (let i = 0; i < albums.length; i++) {
 			albums[i] = formatAlbum(albums[i]);
@@ -42,7 +43,6 @@ const Search = () => {
 
 	const handleOutsideClick = async (event: MouseEvent) => {
 		const target = event.target as HTMLElement;
-		console.log(123);
 
 		if (!target.closest("#input") && !target.closest("#autocomplete")) {
 			setIsAutocompleteOpen(false);
@@ -55,16 +55,16 @@ const Search = () => {
 		const timer = setTimeout(async () => {
 			if (query) {
 				const results = await searchAlbums(query);
-				const albums = results.albums.items;
+				const albums = results.albums.items as Albums;
 
 				for (let i = 0; i < albums.length; i++) {
 					albums[i] = formatAlbum(albums[i]);
 				}
-				console.log(albums);
+
 				setAutocomplete(albums);
 				setIsLoading(false);
 			}
-		}, 2000);
+		}, 1000);
 
 		return () => {
 			clearTimeout(timer);
@@ -100,7 +100,13 @@ const Search = () => {
 			{isAutocompleteOpen && (
 				<Autocomplete id="autocomplete">
 					{isLoading ? (
-						<div>Loading...</div>
+						<Loader
+							width="100%"
+							height="100px"
+							contentWidth="25px"
+							contentHeight="25px"
+							border="3px"
+						/>
 					) : (
 						<List>
 							{autocomplete.map((album) => (

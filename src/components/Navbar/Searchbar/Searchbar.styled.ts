@@ -9,7 +9,7 @@ const Content = styled.div`
 
 const Input = styled.input`
 	position: relative;
-	padding: 5px 20px;
+	padding: 5px 35px 5px 20px;
 	border: 0;
 
 	border: 1px solid ${neutral};

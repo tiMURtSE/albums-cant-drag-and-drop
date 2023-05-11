@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Albums } from "types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Album, Albums } from "types";
 
 const initialState = {
 	albums: [] as Albums,
@@ -10,10 +10,10 @@ const albumsSlice = createSlice({
 	name: "albums",
 	initialState,
 	reducers: {
-		addAlbum(state, action) {
+		addAlbum(state, action: PayloadAction<{ album: Album }>) {
 			state.albums.push(action.payload.album);
 		},
-		removeAlbum(state, action) {
+		removeAlbum(state, action: PayloadAction<{ album: Album }>) {
 			const removedAlbumId = action.payload.album.id;
 			const updatedAlbums = state.albums.filter(
 				(album) => album.id !== removedAlbumId
@@ -21,7 +21,7 @@ const albumsSlice = createSlice({
 
 			state.albums = updatedAlbums;
 		},
-		setFoundAlbums(state, action) {
+		setFoundAlbums(state, action: PayloadAction<{ albums: Albums }>) {
 			state.foundAlbums = action.payload.albums;
 		},
 		clearFoundAlbums(state) {
