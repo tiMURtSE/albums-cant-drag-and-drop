@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
@@ -18,23 +18,34 @@ import {
 
 const Search = () => {
 	const [query, setQuery] = useState<string>("");
-	const [autocomplete, setAutocomplete] = useState<Albums>([]);
+	const [suggestions, setSuggestions] = useState<Albums>([]);
 	const [isAutocompleteOpen, setIsAutocompleteOpen] =
 		useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		dispatch(clearFoundAlbums());
-
+	const getAlbums = async (): Promise<Albums> => {
 		const results = await searchAlbums(query);
 		const albums = results.albums.items as Albums;
 
 		for (let i = 0; i < albums.length; i++) {
 			albums[i] = formatAlbum(albums[i]);
 		}
+
+		return albums;
+	};
+
+	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setQuery(event.target.value);
+		setIsAutocompleteOpen(true);
+	};
+
+	const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		dispatch(clearFoundAlbums());
+
+		const albums = await getAlbums();
 
 		dispatch(setFoundAlbums({ albums }));
 		navigate(`/search/${query}`);
@@ -54,14 +65,9 @@ const Search = () => {
 
 		const timer = setTimeout(async () => {
 			if (query) {
-				const results = await searchAlbums(query);
-				const albums = results.albums.items as Albums;
+				const albums = await getAlbums();
 
-				for (let i = 0; i < albums.length; i++) {
-					albums[i] = formatAlbum(albums[i]);
-				}
-
-				setAutocomplete(albums);
+				setSuggestions(albums);
 				setIsLoading(false);
 			}
 		}, 500);
@@ -90,10 +96,7 @@ const Search = () => {
 					placeholder="Поиск..."
 					autoComplete="off"
 					value={query}
-					onChange={(event) => {
-						setQuery(event.target.value);
-						setIsAutocompleteOpen(true);
-					}}
+					onChange={onChange}
 				/>
 			</form>
 
@@ -109,7 +112,7 @@ const Search = () => {
 						/>
 					) : (
 						<List>
-							{autocomplete.map((album) => (
+							{suggestions.map((album) => (
 								<Item
 									key={album.id}
 									onClick={() => setIsAutocompleteOpen(false)}
