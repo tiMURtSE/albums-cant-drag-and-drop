@@ -26,7 +26,7 @@ const Input = styled.input`
 `;
 
 const ClearSign = styled.div<{ query?: string }>`
-	display: ${props => (props.query ? "block" : "none")};
+	display: ${(props) => (props.query ? "block" : "none")};
 	padding: 10px;
 
 	position: absolute;
@@ -66,8 +66,7 @@ const Item = styled.li`
 	}
 `;
 
-const ItemLink = styled.a`
-	display: block;
+const ItemLink = styled.div`
 	width: 100%;
 	padding: 5px 10px;
 `;
