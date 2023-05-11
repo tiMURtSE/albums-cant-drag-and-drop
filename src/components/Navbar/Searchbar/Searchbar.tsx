@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
+import { Albums } from "types";
 import formatAlbum from "utils/formatAlbum";
 import searchAlbums from "services/api/search.api";
-import { Albums } from "types";
+import { Loader } from "styles/components/Loader.styled";
 import {
 	Autocomplete,
 	ClearSign,
@@ -14,7 +15,6 @@ import {
 	ItemLink,
 	List,
 } from "./Searchbar.styled";
-import { Loader } from "components/Loading/Loader.styled";
 
 const Search = () => {
 	const [query, setQuery] = useState<string>("");
@@ -64,7 +64,7 @@ const Search = () => {
 				setAutocomplete(albums);
 				setIsLoading(false);
 			}
-		}, 1000);
+		}, 500);
 
 		return () => {
 			clearTimeout(timer);
@@ -114,11 +114,9 @@ const Search = () => {
 									key={album.id}
 									onClick={() => setIsAutocompleteOpen(false)}
 								>
-									<ItemLink>
-										<Link to={`/album/${album.id}`}>
-											{album.title}
-										</Link>
-									</ItemLink>
+									<Link to={`/album/${album.id}`}>
+										<ItemLink>{album.title}</ItemLink>
+									</Link>
 								</Item>
 							))}
 						</List>

@@ -40,7 +40,6 @@ const Table = styled.table`
 const Caption = styled.caption`
 	position: relative;
 	text-align: start;
-	padding: 0 40px;
 
 	background-color: ${(props) => props.theme.colors.grey.neutral};
 	border-radius: ${(props) => props.theme.sizes.borderRadius};
@@ -48,7 +47,7 @@ const Caption = styled.caption`
 	& label {
 		display: block;
 		width: 100%;
-		padding: 10px 0;
+		padding: 10px 40px;
 
 		cursor: pointer;
 	}

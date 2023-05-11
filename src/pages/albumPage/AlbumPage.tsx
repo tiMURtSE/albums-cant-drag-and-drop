@@ -23,7 +23,7 @@ const AlbumPage = () => {
 
 	useEffect(() => {
 		getAlbum();
-	}, []);
+	}, [id]);
 
 	if (!album) return null;
 

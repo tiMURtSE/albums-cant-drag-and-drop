@@ -69,6 +69,7 @@ const Item = styled.li`
 const ItemLink = styled.div`
 	width: 100%;
 	padding: 5px 10px;
+	cursor: pointer;
 `;
 
 export { Content, Input, ClearSign, Autocomplete, List, Item, ItemLink };

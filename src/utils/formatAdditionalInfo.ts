@@ -8,9 +8,9 @@ const formatAdditionalInfo = (info: Record<string, any>): IAdditionalInfo => {
 		tracks: tracksObj,
 		wiki,
 	} = info.album;
-	const tags = tagsObj.tag;
-	const tracks = tracksObj.track;
-	const description = wiki.content;
+	const tags = tagsObj?.tag;
+	const tracks = tracksObj?.track;
+	const description = wiki?.content;
 
 	return {
 		listeners,

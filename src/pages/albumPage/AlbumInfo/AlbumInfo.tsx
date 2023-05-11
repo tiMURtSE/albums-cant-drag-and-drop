@@ -51,7 +51,7 @@ const AlbumInfo = ({ album }: Props) => {
 
 	useEffect(() => {
 		getAdditionalInfo();
-	}, []);
+	}, [album]);
 
 	return (
 		<Content>
@@ -88,9 +88,10 @@ const AlbumInfo = ({ album }: Props) => {
 
 						<div>
 							Теги:{" "}
-							{additionalInfo.tags.map((tag) => (
-								<Tag key={tag.name}>{tag.name}</Tag>
-							))}
+							{additionalInfo.tags &&
+								additionalInfo.tags.map((tag) => (
+									<Tag key={tag.name}>{tag.name}</Tag>
+								))}
 						</div>
 
 						<div>

@@ -13,15 +13,16 @@ type Props = {
 };
 
 const Tracks = ({ tracks }: Props) => {
-	console.log(tracks);
+	if (!tracks) return null;
+
 	return (
 		<Wrapper>
-			<Input type="checkbox" id="input" />
+			<Input type="checkbox" id="tracks" />
 
 			<div>
 				<Table>
 					<Caption>
-						<label htmlFor="input">
+						<label htmlFor="tracks">
 							Треки
 							<DropDownTriangle />
 						</label>
