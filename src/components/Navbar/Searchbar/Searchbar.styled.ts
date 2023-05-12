@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { theme } from "styles/theme/theme";
 
-const { light, neutral, dark } = theme.colors.grey;
-
 const Content = styled.div`
 	position: relative;
 `;
@@ -10,18 +8,19 @@ const Content = styled.div`
 const Input = styled.input`
 	position: relative;
 	padding: 5px 35px 5px 20px;
-	border: 0;
 
-	border: 1px solid ${neutral};
+	color: ${({ theme }) => theme.colors.contrastText};
+	border: 0;
+	border: 1px solid ${({ theme }) => theme.colors.primary.dark};
 	border-radius: 10rem;
 
 	&:focus {
 		outline: none;
-		border: 1px solid ${dark};
+		border: 1px solid ${({ theme }) => theme.colors.contrastText};
 	}
 
 	&::placeholder {
-		color: ${dark};
+		color: ${({ theme }) => theme.colors.contrastText};
 	}
 `;
 
@@ -35,7 +34,7 @@ const ClearSign = styled.div<{ query?: string }>`
 	z-index: ${theme.order.other};
 	transform: translateY(-53%);
 
-	color: ${dark};
+	color: ${({ theme }) => theme.colors.contrastText};
 	font-size: ${theme.fonts.small};
 	cursor: pointer;
 `;
@@ -46,9 +45,9 @@ const Autocomplete = styled.div`
 	left: 0;
 	width: 100%;
 
-	background-color: ${light};
+	background-color: ${(props) => props.theme.colors.primary.neutral};
 	border-radius: ${theme.sizes.borderRadius};
-	box-shadow: 0px 0px 10px 2px ${neutral};
+	box-shadow: 0px 0px 10px 2px ${({ theme }) => theme.colors.primary.light};
 `;
 
 const List = styled.ul`
@@ -61,7 +60,7 @@ const List = styled.ul`
 
 const Item = styled.li`
 	&:hover {
-		background-color: ${neutral};
+		background-color: ${({ theme }) => theme.colors.primary.dark};
 		border-radius: ${theme.sizes.borderRadius};
 	}
 `;

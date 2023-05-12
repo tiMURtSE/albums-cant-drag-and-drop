@@ -1,13 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { NavigationItems } from "types";
-import { Content, Header, Navigation, Title } from "./Navbar.styled";
+import { Content, Header, Navigation, Theme, Title } from "./Navbar.styled";
 import Paddings from "styles/components/Paddings.styled";
 import Container from "styles/components/Container.styled";
 import Search from "./Searchbar/Searchbar";
 import { PagesName, PagesPath } from "consts/pages";
 import { useDispatch } from "react-redux";
+import FlexBetween from "styles/components/FlexBetween.styled";
+import ThemeIcon from "components/Icons/ThemeIcon/ThemeIcon";
 import { setMode } from "store/themeSlice";
-import ThemeToggle from "./ThemeToggle/ThemeToggle";
 
 const appTitle = "BORINGAHHMUSIC";
 
@@ -24,21 +25,27 @@ const Navbar = () => {
 			<Paddings>
 				<Container header>
 					<Content>
-						<Title>
-							<NavLink to={PagesPath.Home}>{appTitle}</NavLink>
-						</Title>
-
-						<Navigation>
-							{navigationItems.map((item) => (
-								<NavLink to={item.path} key={item.label}>
-									{item.label}
+						<FlexBetween gap="2rem">
+							<Title>
+								<NavLink to={PagesPath.Home}>
+									{appTitle}
 								</NavLink>
-							))}
-						</Navigation>
+							</Title>
 
-						<Search />
+							<Navigation>
+								{navigationItems.map((item) => (
+									<NavLink to={item.path} key={item.label}>
+										{item.label}
+									</NavLink>
+								))}
+							</Navigation>
 
-						<ThemeToggle />
+							<Search />
+						</FlexBetween>
+
+						<Theme onClick={() => dispatch(setMode())}>
+							<ThemeIcon />
+						</Theme>
 					</Content>
 				</Container>
 			</Paddings>

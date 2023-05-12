@@ -6,15 +6,14 @@ const Header = styled.header`
 	top: 0;
 	right: 0;
 	left: 0;
-	z-index: ${(props) => props.theme.order.header};
+	z-index: ${({ theme }) => theme.order.header};
 	width: 100%;
 
 	backdrop-filter: saturate(180%) blur(5px);
 `;
 
 const Content = styled(FlexBetween)`
-	justify-content: flex-start;
-	gap: 2rem;
+	justify-content: space-between;
 
 	width: 100%;
 	height: ${({ theme }) => theme.sizes.header.height};
@@ -35,4 +34,18 @@ const Navigation = styled.nav`
 	font-size: ${({ theme }) => theme.fonts.regular};
 `;
 
-export { Header, Content, Title, Navigation };
+const Theme = styled.div`
+	width: 20px;
+	height: 20px;
+
+	cursor: pointer;
+
+	& svg {
+		width: 100%;
+		height: 100%;
+
+		fill: ${({ theme }) => theme.colors.contrastText};
+	}
+`;
+
+export { Header, Content, Title, Navigation, Theme };

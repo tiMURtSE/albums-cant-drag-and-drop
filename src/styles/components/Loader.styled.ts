@@ -16,13 +16,14 @@ const Loader = styled.div<{
 		position: absolute;
 		top: calc(50% - calc(${(props) => props.contentHeight} / 2));
 		left: calc(50% - calc(${(props) => props.contentWidth} / 2));
-		z-index: ${(props) => props.theme.order.other};
+		z-index: ${({ theme }) => theme.order.other};
 		display: block;
 
 		width: ${(props) => props.contentWidth};
 		height: ${(props) => props.contentHeight};
 
-		border: ${(props) => props.border} dashed black;
+		border: ${(props) => props.border} dashed
+			${({ theme }) => theme.colors.contrastText};
 		border-radius: 50%;
 
 		animation: rotation 1.5s cubic-bezier(0.86, 0.29, 0.55, 0.95) infinite;

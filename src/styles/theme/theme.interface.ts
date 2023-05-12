@@ -1,14 +1,31 @@
+import { themeMods } from "consts/themeMods";
+
 interface ITheme {
+	mode: themeMods;
 	colors: {
-		grey: {
-			light: string;
-			neutral: string;
+		primary: {
 			dark: string;
+			neutral: string;
+			light: string;
+		};
+		secondary: {
+			dark: string;
+			neutral: string;
+			light: string;
+		};
+		grey: {
+			dark: string;
+			neutral: string;
+			light: string;
 		};
 		yellow: {
 			light: string;
 		};
-		primary: string;
+		background: {
+			default: string;
+			alt: string;
+		};
+		contrastText: string;
 	};
 
 	media: {

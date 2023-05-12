@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { theme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
     @font-face { 
@@ -11,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
     body { 
         font-family: 'Inter', sans-serif;
         font-weight: 500;
+        background-color: ${(props) => props.theme.colors.background.default};
+        color: ${(props) => props.theme.colors.contrastText};
     }
 `;
 
