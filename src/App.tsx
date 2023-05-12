@@ -7,6 +7,13 @@ import Search from "pages/Search/Search";
 import { PagesPath } from "consts/pages";
 import { TypeRoutes } from "types";
 import Layout from "components/Layout/Layout";
+import { ThemeProvider } from "styled-components";
+import CSSReset from "styles/global/CSSReset.styled";
+import GlobalStyle from "styles/global/GlobalStyle.styled";
+import { useSelector } from "react-redux";
+import { themeMods } from "consts/themeMods";
+import { useMemo } from "react";
+import { themeSettings } from "styles/theme/theme";
 
 const routes: TypeRoutes = [
 	{ path: PagesPath.Albums, element: AlbumList },
@@ -16,21 +23,33 @@ const routes: TypeRoutes = [
 ];
 
 function App() {
+	const mode = useSelector(
+		(state: { theme: { mode: themeMods } }) => state.theme.mode
+	);
+	const theme = useMemo(() => themeSettings(mode), [mode]);
+
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path={PagesPath.Home} element={<Layout />}>
-					<Route index element={<Home />} />
-					{routes.map((route) => (
-						<Route
-							path={route.path}
-							element={<route.element />}
-							key={route.path}
-						/>
-					))}
-				</Route>
-			</Routes>
-		</BrowserRouter>
+		<div className="App">
+			<BrowserRouter>
+				<ThemeProvider theme={theme}>
+					<CSSReset />
+					<GlobalStyle />
+
+					<Routes>
+						<Route path={PagesPath.Home} element={<Layout />}>
+							<Route index element={<Home />} />
+							{routes.map((route) => (
+								<Route
+									path={route.path}
+									element={<route.element />}
+									key={route.path}
+								/>
+							))}
+						</Route>
+					</Routes>
+				</ThemeProvider>
+			</BrowserRouter>
+		</div>
 	);
 }
 

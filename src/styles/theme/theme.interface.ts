@@ -8,6 +8,7 @@ interface ITheme {
 		yellow: {
 			light: string;
 		};
+		primary: string;
 	};
 
 	media: {

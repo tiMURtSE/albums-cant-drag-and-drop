@@ -1,3 +1,4 @@
+import { themeMods } from "consts/themeMods";
 import { ITheme } from "./theme.interface";
 
 const theme: ITheme = {
@@ -10,6 +11,7 @@ const theme: ITheme = {
 		yellow: {
 			light: "#faffd6",
 		},
+		primary: "#fff",
 	},
 
 	media: {
@@ -45,4 +47,28 @@ const theme: ITheme = {
 	},
 };
 
-export { theme };
+const themeSettings = (mode: themeMods) => {
+	return {
+		mode: mode,
+		...(mode === themeMods.Light
+			? {
+					...theme,
+			  }
+			: {
+					...theme,
+					colors: {
+						grey: {
+							light: "#3a393d",
+							neutral: "#252427",
+							dark: "#121214",
+						},
+						yellow: {
+							light: "#708001",
+						},
+						primary: "#121214",
+					},
+			  }),
+	};
+};
+
+export { theme, themeSettings };

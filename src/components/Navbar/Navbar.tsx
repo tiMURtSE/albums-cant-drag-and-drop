@@ -5,6 +5,9 @@ import Paddings from "styles/components/Paddings.styled";
 import Container from "styles/components/Container.styled";
 import Search from "./Searchbar/Searchbar";
 import { PagesName, PagesPath } from "consts/pages";
+import { useDispatch } from "react-redux";
+import { setMode } from "store/themeSlice";
+import ThemeToggle from "./ThemeToggle/ThemeToggle";
 
 const appTitle = "BORINGAHHMUSIC";
 
@@ -14,6 +17,8 @@ const navigationItems: NavigationItems = [
 ];
 
 const Navbar = () => {
+	const dispatch = useDispatch();
+
 	return (
 		<Header>
 			<Paddings>
@@ -32,6 +37,8 @@ const Navbar = () => {
 						</Navigation>
 
 						<Search />
+
+						<ThemeToggle />
 					</Content>
 				</Container>
 			</Paddings>
