@@ -66,10 +66,15 @@ const Item = styled.li`
 	}
 `;
 
-const ItemLink = styled.div`
+const ItemLink = styled.div<{ isFocused: boolean }>`
 	width: 100%;
 	padding: 5px 10px;
 	cursor: pointer;
+
+	background-color: ${(props) =>
+		props.isFocused ? props.theme.colors.primary.neutral : "auto"};
+	border-radius: ${(props) =>
+		props.isFocused ? props.theme.sizes.borderRadius : "auto"};
 `;
 
 export { Content, Input, ClearSign, Autocomplete, List, Item, ItemLink };

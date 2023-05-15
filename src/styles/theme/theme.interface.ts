@@ -11,14 +11,6 @@ interface ITheme {
 		secondary: {
 			main: string;
 		};
-		grey: {
-			dark: string;
-			neutral: string;
-			light: string;
-		};
-		yellow: {
-			light: string;
-		};
 		background: {
 			default: string;
 			alt: string;

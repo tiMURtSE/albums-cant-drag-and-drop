@@ -67,14 +67,6 @@ const themeSettings = (mode: themeMods): ITheme => {
 						secondary: {
 							main: colorTokens.secondary[10],
 						},
-						grey: {
-							light: "#3a393d",
-							neutral: "#252427",
-							dark: "#121214",
-						},
-						yellow: {
-							light: "#708001",
-						},
 						background: {
 							default: colorTokens.primary[0],
 							alt: colorTokens.primary[100],
@@ -92,14 +84,6 @@ const themeSettings = (mode: themeMods): ITheme => {
 						},
 						secondary: {
 							main: colorTokens.secondary[20],
-						},
-						grey: {
-							light: "#3a393d",
-							neutral: "#252427",
-							dark: "#121214",
-						},
-						yellow: {
-							light: "#708001",
 						},
 						background: {
 							default: colorTokens.primary[900],

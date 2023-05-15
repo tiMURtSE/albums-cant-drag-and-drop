@@ -21,6 +21,7 @@ const Search = () => {
 	const [suggestions, setSuggestions] = useState<Albums>([]);
 	const [isAutocompleteOpen, setIsAutocompleteOpen] =
 		useState<boolean>(false);
+	const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -60,7 +61,43 @@ const Search = () => {
 		}
 	};
 
+	const handleNavigation = (event: KeyboardEvent) => {
+		if (
+			event.key.includes("Arrow") ||
+			event.key.includes("Enter") ||
+			event.key.includes("Tab")
+		)
+			event.preventDefault();
+
+		if (
+			event.key === "ArrowUp" ||
+			(event.key === "Tab" && event.shiftKey)
+		) {
+			setSelectedIndex(
+				selectedIndex === 0 || selectedIndex === -1
+					? suggestions.length - 1
+					: selectedIndex - 1
+			);
+		} else if (event.key === "ArrowDown" || event.key === "Tab") {
+			setSelectedIndex(
+				selectedIndex === suggestions.length - 1 ? 0 : selectedIndex + 1
+			);
+		} else if (event.key === "Enter") {
+			if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
+				const albumId = suggestions[selectedIndex].id;
+
+				navigate(`/album/${albumId}`);
+				setIsAutocompleteOpen(false);
+				setSelectedIndex(0);
+			}
+		}
+	};
+
 	useEffect(() => {
+		if (!query) {
+			return setIsAutocompleteOpen(false);
+		}
+
 		setIsLoading(true);
 
 		const timer = setTimeout(async () => {
@@ -79,11 +116,23 @@ const Search = () => {
 	}, [query]);
 
 	useEffect(() => {
-		if (isAutocompleteOpen)
+		if (isAutocompleteOpen) {
+			document.addEventListener("keydown", handleNavigation);
+		}
+
+		return () => {
+			document.removeEventListener("keydown", handleNavigation);
+		};
+	}, [isAutocompleteOpen, selectedIndex]);
+
+	useEffect(() => {
+		if (isAutocompleteOpen) {
 			document.addEventListener("click", handleOutsideClick);
+		}
 
 		return () => {
 			document.removeEventListener("click", handleOutsideClick);
+			setSelectedIndex(-1);
 		};
 	}, [isAutocompleteOpen]);
 
@@ -111,14 +160,18 @@ const Search = () => {
 							border="3px"
 						/>
 					) : (
-						<List>
-							{suggestions.map((album) => (
+						<List id="search-list">
+							{suggestions.map((album, index) => (
 								<Item
 									key={album.id}
 									onClick={() => setIsAutocompleteOpen(false)}
 								>
 									<Link to={`/album/${album.id}`}>
-										<ItemLink>{album.title}</ItemLink>
+										<ItemLink
+											isFocused={selectedIndex === index}
+										>
+											{album.title}
+										</ItemLink>
 									</Link>
 								</Item>
 							))}
