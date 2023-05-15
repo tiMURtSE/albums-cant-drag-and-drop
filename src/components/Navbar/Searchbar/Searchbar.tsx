@@ -42,8 +42,8 @@ const Search = () => {
 		setIsAutocompleteOpen(true);
 	};
 
-	const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const onSubmit = async (event?: FormEvent<HTMLFormElement>) => {
+		if (event) event.preventDefault();
 		dispatch(clearFoundAlbums());
 
 		const albums = await getAlbums();
@@ -89,6 +89,8 @@ const Search = () => {
 				navigate(`/album/${albumId}`);
 				setIsAutocompleteOpen(false);
 				setSelectedIndex(0);
+			} else {
+				onSubmit();
 			}
 		}
 	};
@@ -123,7 +125,7 @@ const Search = () => {
 		return () => {
 			document.removeEventListener("keydown", handleNavigation);
 		};
-	}, [isAutocompleteOpen, selectedIndex]);
+	}, [isAutocompleteOpen, selectedIndex, query]);
 
 	useEffect(() => {
 		if (isAutocompleteOpen) {

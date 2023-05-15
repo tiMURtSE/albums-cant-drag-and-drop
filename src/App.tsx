@@ -16,7 +16,7 @@ import { useMemo } from "react";
 import { themeSettings } from "styles/theme/theme";
 
 const routes: TypeRoutes = [
-	{ path: PagesPath.Albums, element: AlbumList },
+	{ path: PagesPath.MyAlbums, element: AlbumList },
 	{ path: PagesPath.Album, element: AlbumPage },
 	{ path: PagesPath.Search, element: Search },
 	{ path: PagesPath.Error, element: Error },

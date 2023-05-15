@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Tracks = ({ tracks }: Props) => {
-	if (!tracks) return null;
+	if (!Array.isArray(tracks)) return null;
 
 	return (
 		<Wrapper>

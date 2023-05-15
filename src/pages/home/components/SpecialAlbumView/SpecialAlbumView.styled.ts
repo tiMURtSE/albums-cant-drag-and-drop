@@ -32,7 +32,7 @@ const Info = styled.div`
 
 const Title = styled.p`
 	padding: 0 0 1rem 0.5rem;
-	border-bottom: 3px solid #000;
+	border-bottom: 3px solid ${({ theme }) => theme.colors.contrastText};
 
 	font-family: "Roboto Serif", serif;
 	font-size: ${({ theme }) => theme.fonts.extraLarge};

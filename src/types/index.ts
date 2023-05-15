@@ -4,14 +4,15 @@ type TypeRoutes = Array<{ path: PagesPath; element: React.FC }>;
 
 type NavigationItems = Array<{ path: PagesPath; label: PagesName }>;
 
-type Album = {
+interface Album {
 	id: string;
 	title: string;
 	artist: string;
 	year: number;
 	image: string;
+	createdAt: Date;
 	url: string;
-};
+}
 
 type Albums = Array<Album>;
 

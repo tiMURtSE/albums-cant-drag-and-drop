@@ -1,12 +1,12 @@
 export enum PagesName {
 	Home = "Главная",
-	Albums = "Альбомы",
+	MyAlbums = "Мои альбомы",
 }
 
 export enum PagesPath {
 	Home = "/",
 	Album = "/album/:id",
-	Albums = "/list",
+	MyAlbums = "/my_albums",
 	Search = "/search/:query",
 	Error = "*",
 }

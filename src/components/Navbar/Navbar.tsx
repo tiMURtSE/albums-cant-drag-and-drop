@@ -10,11 +10,11 @@ import FlexBetween from "styles/components/FlexBetween.styled";
 import ThemeIcon from "components/Icons/ThemeIcon/ThemeIcon";
 import { setMode } from "store/themeSlice";
 
-const appTitle = "BORINGAHHALBUMS";
+const appTitle = "SCARINGTHECUSTOMHOOKS";
 
 const navigationItems: NavigationItems = [
 	{ path: PagesPath.Home, label: PagesName.Home },
-	{ path: PagesPath.Albums, label: PagesName.Albums },
+	{ path: PagesPath.MyAlbums, label: PagesName.MyAlbums },
 ];
 
 const Navbar = () => {
