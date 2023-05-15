@@ -57,24 +57,27 @@ const Artist = styled.p`
 
 const LikeButton = styled.button`
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	gap: 0.5rem;
-	width: min-content;
+	width: 140px;
 	margin-bottom: 2rem;
 	padding: 5px 10px;
 
-	background-color: ${(props) => props.theme.colors.grey.neutral};
-	border-radius: ${(props) => props.theme.sizes.borderRadius};
+	color: ${({ theme }) => theme.colors.contrastText};
+	background-color: ${({ theme }) => theme.colors.primary.neutral};
+	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	cursor: pointer;
 
 	& span {
 		font-weight: 700;
 	}
 
+	& svg {
+		fill: ${({ theme }) => theme.colors.contrastText};
+	}
+
 	&:hover {
-		background-color: ${(props) => props.theme.colors.yellow.light};
-		border-color: ${(porps) => porps.theme.colors.grey.dark};
+		background-color: ${({ theme }) => theme.colors.secondary.main};
 	}
 `;
 
@@ -87,7 +90,7 @@ const Tag = styled.span`
 	margin: 3px 0;
 	padding: 0px 5px;
 
-	background-color: ${(props) => props.theme.colors.grey.neutral};
+	background-color: ${({ theme }) => theme.colors.primary.neutral};
 	border-radius: 5px;
 	word-break: break-all;
 

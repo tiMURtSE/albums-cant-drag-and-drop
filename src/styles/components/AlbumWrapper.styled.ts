@@ -8,7 +8,7 @@ const AlbumWrapper = styled.div`
 	transition: all 0.1s ease;
 
 	&:hover {
-		background-color: ${(props) => props.theme.colors.yellow.light};
+		background-color: ${(props) => props.theme.colors.secondary.main};
 	}
 `;
 

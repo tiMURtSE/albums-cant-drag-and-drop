@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Content = styled.div`
-	margin-top: 228px;
+	padding: 228px 0 100px;
 `;
 
 const List = styled.div`

@@ -6,7 +6,7 @@ import Navbar from "components/Navbar/Navbar";
 import Container from "styles/components/Container.styled";
 import Paddings from "styles/components/Paddings.styled";
 import Wrapper from "styles/components/Wrapper.styled";
-import { Loader, Subtitle, Title } from "./Search.styled";
+import { Content, Loader, Subtitle, Title } from "./Search.styled";
 
 const Search = () => {
 	const foundAlbums: Albums = useSelector(
@@ -18,20 +18,26 @@ const Search = () => {
 	return (
 		<Paddings>
 			<Container>
-				<Title>
-					Результаты поиска для: <span>{query}</span>
-				</Title>
-				<Wrapper>
-					{isLoading ? (
-						<Loader />
-					) : (
-						<>
-							{foundAlbums.map((album) => (
-								<CommonAlbumView album={album} key={album.id} />
-							))}
-						</>
-					)}
-				</Wrapper>
+				<Content>
+					<Title>
+						Результаты поиска для: <span>{query}</span>
+					</Title>
+
+					<Wrapper>
+						{isLoading ? (
+							<Loader />
+						) : (
+							<>
+								{foundAlbums.map((album) => (
+									<CommonAlbumView
+										album={album}
+										key={album.id}
+									/>
+								))}
+							</>
+						)}
+					</Wrapper>
+				</Content>
 			</Container>
 		</Paddings>
 	);

@@ -1,20 +1,21 @@
 import styled from "styled-components";
 
 const Info = styled.div`
-    & a {
-        display: block;
-    }
+	& a {
+		display: block;
+	}
 `;
 
 const Like = styled.div`
-    width: 30px;
-    height: 30px;
-    padding: 5px;
+	width: 30px;
+	height: 30px;
+	padding: 5px;
 
-    cursor: pointer;
+	cursor: pointer;
+
+	& svg {
+		fill: ${({ theme }) => theme.colors.contrastText};
+	}
 `;
 
-export {
-    Info, 
-    Like
-};
+export { Info, Like };

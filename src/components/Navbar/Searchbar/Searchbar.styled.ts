@@ -45,9 +45,10 @@ const Autocomplete = styled.div`
 	left: 0;
 	width: 100%;
 
-	background-color: ${(props) => props.theme.colors.primary.neutral};
+	background-color: ${(props) => props.theme.colors.primary.light};
+	border: 1px solid ${(props) => props.theme.colors.primary.neutral};
 	border-radius: ${theme.sizes.borderRadius};
-	box-shadow: 0px 0px 10px 2px ${({ theme }) => theme.colors.primary.light};
+	box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.colors.primary.neutral};
 `;
 
 const List = styled.ul`
@@ -60,7 +61,7 @@ const List = styled.ul`
 
 const Item = styled.li`
 	&:hover {
-		background-color: ${({ theme }) => theme.colors.primary.dark};
+		background-color: ${({ theme }) => theme.colors.primary.neutral};
 		border-radius: ${theme.sizes.borderRadius};
 	}
 `;

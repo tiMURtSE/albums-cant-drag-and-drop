@@ -10,7 +10,7 @@ import FlexBetween from "styles/components/FlexBetween.styled";
 import ThemeIcon from "components/Icons/ThemeIcon/ThemeIcon";
 import { setMode } from "store/themeSlice";
 
-const appTitle = "BORINGAHHMUSIC";
+const appTitle = "BORINGAHHALBUMS";
 
 const navigationItems: NavigationItems = [
 	{ path: PagesPath.Home, label: PagesName.Home },

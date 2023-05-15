@@ -5,7 +5,7 @@ const Input = styled.input`
 `;
 
 const Wrapper = styled.div`
-	border-radius: ${(props) => props.theme.sizes.borderRadius};
+	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 
 	& input + div {
 		max-height: 44px;
@@ -29,7 +29,7 @@ const Table = styled.table`
 
 	& td {
 		padding: 10px 20px;
-		border-bottom: 3px solid ${(props) => props.theme.colors.grey.neutral};
+		border-bottom: 3px solid ${({ theme }) => theme.colors.primary.neutral};
 	}
 
 	& tr:last-child td {
@@ -41,8 +41,8 @@ const Caption = styled.caption`
 	position: relative;
 	text-align: start;
 
-	background-color: ${(props) => props.theme.colors.grey.neutral};
-	border-radius: ${(props) => props.theme.sizes.borderRadius};
+	background-color: ${({ theme }) => theme.colors.primary.neutral};
+	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 
 	& label {
 		display: block;
@@ -60,10 +60,11 @@ const Caption = styled.caption`
 		width: 20px;
 		height: 20px;
 		transform: translateY(-50%);
+		fill: ${({ theme }) => theme.colors.contrastText};
 	}
 
 	&:hover {
-		background-color: ${(props) => props.theme.colors.yellow.light};
+		background-color: ${({ theme }) => theme.colors.secondary.main};
 	}
 `;
 

@@ -9,9 +9,7 @@ interface ITheme {
 			light: string;
 		};
 		secondary: {
-			dark: string;
-			neutral: string;
-			light: string;
+			main: string;
 		};
 		grey: {
 			dark: string;

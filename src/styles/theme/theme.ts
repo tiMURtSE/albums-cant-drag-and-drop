@@ -39,26 +39,16 @@ const colorTokens = {
 	primary: {
 		0: "#FFFFFF",
 		100: "#EEEEEE",
-		200: "#b3b3b3",
+		200: "#D9D9D9",
 		300: "#828282",
 		700: "#474747",
-		800: "#121214",
-		900: "#000000",
-	},
-	grey: {
-		0: "#FFFFFF",
-		10: "#F6F6F6",
-		50: "#F0F0F0",
-		100: "#E0E0E0",
-		200: "#C2C2C2",
-		300: "#A3A3A3",
-		400: "#858585",
-		500: "#666666",
-		600: "#4D4D4D",
-		700: "#333333",
-		800: "#1A1A1A",
-		900: "#0A0A0A",
+		800: "#252427",
+		900: "#121214",
 		1000: "#000000",
+	},
+	secondary: {
+		10: "#F9E9BC",
+		20: "#59563d",
 	},
 };
 
@@ -75,9 +65,7 @@ const themeSettings = (mode: themeMods): ITheme => {
 							light: colorTokens.primary[100],
 						},
 						secondary: {
-							dark: colorTokens.primary[700],
-							neutral: colorTokens.primary[700],
-							light: colorTokens.primary[100],
+							main: colorTokens.secondary[10],
 						},
 						grey: {
 							light: "#3a393d",
@@ -103,9 +91,7 @@ const themeSettings = (mode: themeMods): ITheme => {
 							light: colorTokens.primary[800],
 						},
 						secondary: {
-							dark: colorTokens.primary[100],
-							neutral: colorTokens.primary[300],
-							light: colorTokens.primary[700],
+							main: colorTokens.secondary[20],
 						},
 						grey: {
 							light: "#3a393d",
@@ -116,8 +102,8 @@ const themeSettings = (mode: themeMods): ITheme => {
 							light: "#708001",
 						},
 						background: {
-							default: colorTokens.primary[800],
-							alt: colorTokens.primary[700],
+							default: colorTokens.primary[900],
+							alt: colorTokens.primary[800],
 						},
 						contrastText: colorTokens.primary[100],
 					},
