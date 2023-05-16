@@ -1,25 +1,23 @@
 import styled from "styled-components";
 
-const Content = styled.div`
-	padding: 100px 0;
+const Settings = styled.div`
+	padding: 0 40px;
 `;
 
 const Filter = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 
-	background-color: ${({ theme }) => theme.colors.background.default};
+	background-color: ${({ theme }) => theme.colors.primary.neutral};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
-const Year = styled.div<{ isPressed: boolean }>`
+const Year = styled.div`
 	flex-basis: 25%;
 	text-align: center;
 	padding: 5px 0;
 
-	background-color: ${(props) =>
-		props.isPressed ? props.theme.colors.secondary.main : "auto"};
-	border-right: 1px solid ${({ theme }) => theme.colors.primary.neutral};
+	border-right: 1px solid ${({ theme }) => theme.colors.background.default};
 	cursor: pointer;
 
 	&:hover {
@@ -27,7 +25,8 @@ const Year = styled.div<{ isPressed: boolean }>`
 	}
 
 	&:nth-child(-n + 4) {
-		border-bottom: 1px solid ${({ theme }) => theme.colors.primary.neutral};
+		border-bottom: 1px solid
+			${({ theme }) => theme.colors.background.default};
 	}
 
 	&:nth-child(4) {
@@ -46,6 +45,14 @@ const Year = styled.div<{ isPressed: boolean }>`
 	}
 `;
 
-const SortAndSearch = styled.div``;
+const List = styled.div`
+	margin-top: 20px;
+`;
 
-export { Content, Year, SortAndSearch, Filter };
+const SortAndSearch = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+`;
+
+export { Settings, Year, SortAndSearch, Filter, List };

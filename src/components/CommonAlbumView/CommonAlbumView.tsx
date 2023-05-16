@@ -12,6 +12,7 @@ import Image from "components/Image/Image";
 
 type Props = {
 	album: Album;
+	key: string;
 };
 
 const CommonAlbumView = ({ album }: Props) => {

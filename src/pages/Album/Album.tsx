@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AdditionalInfo from "./AlbumInfo/AlbumInfo";
-import Navbar from "components/Navbar/Navbar";
-import Container from "styles/components/Container.styled";
-import Paddings from "styles/components/Paddings.styled";
-import { AlbumCover, Content } from "./AlbumPage.styled";
-import { Album, Albums, AlbumsState } from "types";
+import { IAlbum } from "types";
 import getSingleAlbum from "services/api/getSingleAlbum.api";
 import formatAlbum from "utils/formatAlbum";
+import { AlbumCover, Content } from "./Album.styled";
 import Image from "components/Image/Image";
 import AlbumInfo from "./AlbumInfo/AlbumInfo";
-import FlexBetween from "styles/components/FlexBetween.styled";
 
-const AlbumPage = () => {
+const Album = () => {
 	const id = useParams().id;
-	const [album, setAlbum] = useState<Album | null>(null);
+	const [album, setAlbum] = useState<IAlbum | null>(null);
 
 	const getAlbum = async () => {
 		const album = await getSingleAlbum(id);
@@ -44,4 +39,4 @@ const AlbumPage = () => {
 	);
 };
 
-export default AlbumPage;
+export default Album;

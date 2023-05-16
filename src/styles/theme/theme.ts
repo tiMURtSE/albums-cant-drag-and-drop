@@ -1,4 +1,4 @@
-import { themeMods } from "consts/themeMods";
+import { themeMods } from "consts";
 import { ITheme } from "./theme.interface";
 
 const theme = {

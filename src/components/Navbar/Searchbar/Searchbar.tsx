@@ -2,33 +2,24 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
-import { Albums } from "types";
+import { IAlbum } from "types";
 import formatAlbum from "utils/formatAlbum";
 import searchAlbums from "services/api/search.api";
 import { Loader } from "styles/components/Loader.styled";
-import {
-	Autocomplete,
-	ClearSign,
-	Content,
-	Input,
-	Item,
-	ItemLink,
-	List,
-} from "./Searchbar.styled";
+import { Autocomplete, ClearSign, Content, Input, Item, ItemLink, List } from "./Searchbar.styled";
 
 const Search = () => {
 	const [query, setQuery] = useState<string>("");
-	const [suggestions, setSuggestions] = useState<Albums>([]);
-	const [isAutocompleteOpen, setIsAutocompleteOpen] =
-		useState<boolean>(false);
+	const [suggestions, setSuggestions] = useState<Array<IAlbum>>([]);
+	const [isAutocompleteOpen, setIsAutocompleteOpen] = useState<boolean>(false);
 	const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const getAlbums = async (): Promise<Albums> => {
+	const getAlbums = async (): Promise<Array<IAlbum>> => {
 		const results = await searchAlbums(query);
-		const albums = results.albums.items as Albums;
+		const albums = results.albums.items as Array<IAlbum>;
 
 		for (let i = 0; i < albums.length; i++) {
 			albums[i] = formatAlbum(albums[i]);
@@ -62,26 +53,17 @@ const Search = () => {
 	};
 
 	const handleNavigation = (event: KeyboardEvent) => {
-		if (
-			event.key.includes("Arrow") ||
-			event.key.includes("Enter") ||
-			event.key.includes("Tab")
-		)
+		if (event.key.includes("Arrow") || event.key.includes("Enter") || event.key.includes("Tab"))
 			event.preventDefault();
 
-		if (
-			event.key === "ArrowUp" ||
-			(event.key === "Tab" && event.shiftKey)
-		) {
+		if (event.key === "ArrowUp" || (event.key === "Tab" && event.shiftKey)) {
 			setSelectedIndex(
 				selectedIndex === 0 || selectedIndex === -1
 					? suggestions.length - 1
 					: selectedIndex - 1
 			);
 		} else if (event.key === "ArrowDown" || event.key === "Tab") {
-			setSelectedIndex(
-				selectedIndex === suggestions.length - 1 ? 0 : selectedIndex + 1
-			);
+			setSelectedIndex(selectedIndex === suggestions.length - 1 ? 0 : selectedIndex + 1);
 		} else if (event.key === "Enter") {
 			if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
 				const albumId = suggestions[selectedIndex].id;
@@ -143,7 +125,7 @@ const Search = () => {
 			<form onSubmit={onSubmit}>
 				<Input
 					id="input"
-					type="search"
+					type="text"
 					placeholder="Поиск..."
 					autoComplete="off"
 					value={query}
@@ -164,14 +146,9 @@ const Search = () => {
 					) : (
 						<List id="search-list">
 							{suggestions.map((album, index) => (
-								<Item
-									key={album.id}
-									onClick={() => setIsAutocompleteOpen(false)}
-								>
+								<Item key={album.id} onClick={() => setIsAutocompleteOpen(false)}>
 									<Link to={`/album/${album.id}`}>
-										<ItemLink
-											isFocused={selectedIndex === index}
-										>
+										<ItemLink isFocused={selectedIndex === index}>
 											{album.title}
 										</ItemLink>
 									</Link>

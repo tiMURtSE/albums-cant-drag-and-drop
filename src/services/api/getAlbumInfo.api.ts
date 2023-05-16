@@ -1,9 +1,7 @@
-import { LASTFM_API } from "consts/api";
-import { Album } from "types";
+import { LASTFM_API } from "consts";
+import { IAlbum } from "types";
 
-const getAdditionalAlbumInfo = async (
-	album: Album
-): Promise<Record<string, any>> => {
+const getAdditionalAlbumInfo = async (album: IAlbum): Promise<Record<string, any>> => {
 	const params = new URLSearchParams({
 		method: "album.getinfo",
 		api_key: import.meta.env.VITE_LASTFM_TOKEN,

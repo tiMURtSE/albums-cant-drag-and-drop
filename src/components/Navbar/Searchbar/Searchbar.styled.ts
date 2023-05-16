@@ -22,6 +22,10 @@ const Input = styled.input`
 	&::placeholder {
 		color: ${({ theme }) => theme.colors.contrastText};
 	}
+
+	&::-ms-clear {
+		display: none;
+	}
 `;
 
 const ClearSign = styled.div<{ query?: string }>`
@@ -71,10 +75,8 @@ const ItemLink = styled.div<{ isFocused: boolean }>`
 	padding: 5px 10px;
 	cursor: pointer;
 
-	background-color: ${(props) =>
-		props.isFocused ? props.theme.colors.primary.neutral : "auto"};
-	border-radius: ${(props) =>
-		props.isFocused ? props.theme.sizes.borderRadius : "auto"};
+	background-color: ${(props) => (props.isFocused ? props.theme.colors.primary.neutral : "auto")};
+	border-radius: ${(props) => (props.isFocused ? props.theme.sizes.borderRadius : "auto")};
 `;
 
 export { Content, Input, ClearSign, Autocomplete, List, Item, ItemLink };

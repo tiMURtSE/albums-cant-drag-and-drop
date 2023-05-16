@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import normalize from "styled-normalize";
 
 const GlobalStyle = createGlobalStyle`
     @font-face { 
@@ -7,11 +8,60 @@ const GlobalStyle = createGlobalStyle`
         url("https://optimistcreativeindia.com/fonts/Ogg-Family-Web/Ogg-Roman.woff") format("woff"); 
     }
 
-    body { 
+    ${normalize}
+
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        min-height: 100vh;
+        scroll-behavior: smooth;
+        text-rendering: optimizeSpeed;
+        line-height: 1.5;
+
         font-family: 'Inter', sans-serif;
         font-weight: 500;
         background-color: ${(props) => props.theme.colors.background.default};
         color: ${(props) => props.theme.colors.contrastText};
+        letter-spacing: -0.5px;
+    }
+
+    ul,
+    ol {
+        list-style: none;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+        font: inherit;
+        border: none;
+        background-color: inherit;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
     }
 `;
 
