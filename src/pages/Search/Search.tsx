@@ -16,30 +16,23 @@ const Search = () => {
 	const { query } = useParams();
 
 	return (
-		<Paddings>
-			<Container>
-				<Content>
-					<Title>
-						Результаты поиска для: <span>{query}</span>
-					</Title>
+		<>
+			<Title>
+				Результаты поиска для: <span>{query}</span>
+			</Title>
 
-					<Wrapper>
-						{isLoading ? (
-							<Loader />
-						) : (
-							<>
-								{foundAlbums.map((album) => (
-									<CommonAlbumView
-										album={album}
-										key={album.id}
-									/>
-								))}
-							</>
-						)}
-					</Wrapper>
-				</Content>
-			</Container>
-		</Paddings>
+			<Wrapper>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<>
+						{foundAlbums.map((album) => (
+							<CommonAlbumView album={album} key={album.id} />
+						))}
+					</>
+				)}
+			</Wrapper>
+		</>
 	);
 };
 

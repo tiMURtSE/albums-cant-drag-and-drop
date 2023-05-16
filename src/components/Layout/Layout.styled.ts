@@ -11,6 +11,7 @@ const Main = styled.main`
 	flex-grow: 1;
 	flex-shrink: 0;
 	margin: 64px 0;
+	padding: 100px 0;
 `;
 
 export { Page, Main };

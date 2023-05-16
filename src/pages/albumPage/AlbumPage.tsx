@@ -10,6 +10,7 @@ import getSingleAlbum from "services/api/getSingleAlbum.api";
 import formatAlbum from "utils/formatAlbum";
 import Image from "components/Image/Image";
 import AlbumInfo from "./AlbumInfo/AlbumInfo";
+import FlexBetween from "styles/components/FlexBetween.styled";
 
 const AlbumPage = () => {
 	const id = useParams().id;
@@ -28,22 +29,18 @@ const AlbumPage = () => {
 	if (!album) return null;
 
 	return (
-		<Paddings>
-			<Container>
-				<Content>
-					<AlbumCover>
-						<Image
-							src={album.image}
-							width="450px"
-							height="450px"
-							alt={`${album.title} by ${album.artist}`}
-						/>
-					</AlbumCover>
+		<Content>
+			<AlbumCover>
+				<Image
+					src={album.image}
+					width="450px"
+					height="450px"
+					alt={`${album.title} by ${album.artist}`}
+				/>
+			</AlbumCover>
 
-					<AlbumInfo album={album} />
-				</Content>
-			</Container>
-		</Paddings>
+			<AlbumInfo album={album} />
+		</Content>
 	);
 };
 

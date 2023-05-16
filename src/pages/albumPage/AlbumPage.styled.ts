@@ -3,7 +3,6 @@ import FlexBetween from "styles/components/FlexBetween.styled";
 
 const Content = styled(FlexBetween)`
 	align-items: flex-start;
-	padding: 100px 0;
 `;
 
 const AlbumCover = styled.div`

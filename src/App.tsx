@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "pages/Home/Home";
-import AlbumList from "pages/AlbumList/AlbumList";
+import MyAlbums from "pages/MyAlbums/MyAlbums";
 import AlbumPage from "pages/AlbumPage/AlbumPage";
 import Error from "pages/Error/Error";
 import Search from "pages/Search/Search";
@@ -16,7 +16,7 @@ import { useMemo } from "react";
 import { themeSettings } from "styles/theme/theme";
 
 const routes: TypeRoutes = [
-	{ path: PagesPath.MyAlbums, element: AlbumList },
+	{ path: PagesPath.MyAlbums, element: MyAlbums },
 	{ path: PagesPath.Album, element: AlbumPage },
 	{ path: PagesPath.Search, element: Search },
 	{ path: PagesPath.Error, element: Error },

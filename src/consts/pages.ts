@@ -6,7 +6,7 @@ export enum PagesName {
 export enum PagesPath {
 	Home = "/",
 	Album = "/album/:id",
-	MyAlbums = "/my_albums",
+	MyAlbums = "/my-albums",
 	Search = "/search/:query",
 	Error = "*",
 }
