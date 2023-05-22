@@ -38,26 +38,6 @@ const Tracks = ({ tracks }: Props) => {
 					</tbody>
 				</Table>
 			</TableWrapper>
-
-			{/* <div>
-				<Table>
-					<Caption>
-						<label htmlFor="tracks">
-							Треки
-							<DropDownTriangle />
-						</label>
-					</Caption>
-
-					<tbody>
-						{tracks.map((track) => (
-							<Track key={track["@attr"].rank + track.name}>
-								<td>{track["@attr"].rank}</td>
-								<td>{track.name}</td>
-							</Track>
-						))}
-					</tbody>
-				</Table>
-			</div> */}
 		</Wrapper>
 	);
 };
