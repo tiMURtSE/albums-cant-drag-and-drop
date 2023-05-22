@@ -1,17 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Albums } from "types";
+import { IAlbum } from "types";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
-import Navbar from "components/Navbar/Navbar";
-import Container from "styles/components/Container.styled";
-import Paddings from "styles/components/Paddings.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import { Content, Loader, Subtitle, Title } from "./Search.styled";
+import { useAppSelector } from "hooks";
 
 const Search = () => {
-	const foundAlbums: Albums = useSelector(
-		(state: any) => state.albums.foundAlbums
-	);
+	const foundAlbums = useAppSelector((state) => state.albums.foundAlbums);
 	const isLoading = !foundAlbums.length;
 	const { query } = useParams();
 

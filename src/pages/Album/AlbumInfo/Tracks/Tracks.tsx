@@ -1,5 +1,5 @@
 import DropDownTriangle from "components/Icons/DropDownTriangle/DropDownTriangle";
-import { Caption, Input, Table, Track, Wrapper } from "./Tracks.styled";
+import { Caption, Input, Label, Table, TableWrapper, Track, Wrapper } from "./Tracks.styled";
 
 type Props = {
 	tracks: Array<{
@@ -19,7 +19,27 @@ const Tracks = ({ tracks }: Props) => {
 		<Wrapper>
 			<Input type="checkbox" id="tracks" />
 
-			<div>
+			<TableWrapper>
+				<Table>
+					<Caption>
+						<Label htmlFor="tracks">
+							<span>Показать треки</span>
+							<span>Скрыть треки</span>
+						</Label>
+					</Caption>
+
+					<tbody>
+						{tracks.map((track) => (
+							<Track key={track["@attr"].rank + track.name}>
+								<td>{track["@attr"].rank}</td>
+								<td>{track.name}</td>
+							</Track>
+						))}
+					</tbody>
+				</Table>
+			</TableWrapper>
+
+			{/* <div>
 				<Table>
 					<Caption>
 						<label htmlFor="tracks">
@@ -37,7 +57,7 @@ const Tracks = ({ tracks }: Props) => {
 						))}
 					</tbody>
 				</Table>
-			</div>
+			</div> */}
 		</Wrapper>
 	);
 };

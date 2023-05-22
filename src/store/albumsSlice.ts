@@ -1,27 +1,25 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Album, Albums } from "types";
+import { IAlbum } from "types";
 
 const initialState = {
-	albums: [] as Albums,
-	foundAlbums: [] as Albums,
+	albums: [] as Array<IAlbum>,
+	foundAlbums: [] as Array<IAlbum>,
 };
 
 const albumsSlice = createSlice({
 	name: "albums",
 	initialState,
 	reducers: {
-		addAlbum(state, action: PayloadAction<{ album: Album }>) {
+		addAlbum(state, action: PayloadAction<{ album: IAlbum }>) {
 			state.albums.push(action.payload.album);
 		},
-		removeAlbum(state, action: PayloadAction<{ album: Album }>) {
+		removeAlbum(state, action: PayloadAction<{ album: IAlbum }>) {
 			const removedAlbumId = action.payload.album.id;
-			const updatedAlbums = state.albums.filter(
-				(album) => album.id !== removedAlbumId
-			);
+			const updatedAlbums = state.albums.filter((album) => album.id !== removedAlbumId);
 
 			state.albums = updatedAlbums;
 		},
-		setFoundAlbums(state, action: PayloadAction<{ albums: Albums }>) {
+		setFoundAlbums(state, action: PayloadAction<{ albums: Array<IAlbum> }>) {
 			state.foundAlbums = action.payload.albums;
 		},
 		clearFoundAlbums(state) {
@@ -31,5 +29,4 @@ const albumsSlice = createSlice({
 });
 
 export default albumsSlice.reducer;
-export const { addAlbum, removeAlbum, setFoundAlbums, clearFoundAlbums } =
-	albumsSlice.actions;
+export const { addAlbum, removeAlbum, setFoundAlbums, clearFoundAlbums } = albumsSlice.actions;

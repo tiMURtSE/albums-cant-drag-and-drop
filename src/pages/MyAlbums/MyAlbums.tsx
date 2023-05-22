@@ -1,18 +1,14 @@
 import { Filter, List, Settings, SortAndSearch, Year } from "./MyAlbums.styled";
 import Wrapper from "styles/components/Wrapper.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
-import { useSelector } from "react-redux";
-import { Albums } from "types";
 import { ChangeEvent, useState } from "react";
-import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
 import AlbumView from "./components/AlbumView";
+import { useAppSelector } from "hooks";
 
 const MyAlbums = () => {
-	const albums = useSelector(
-		(state: { albums: { albums: Albums } }) => state.albums.albums
-	);
-	const [modifiedAlbums, setModifiedAlbums] = useState<Albums>(albums);
-	const [search, setSearch] = useState<string>("");
+	const albums = useAppSelector((state) => state.albums.albums);
+	const [modifiedAlbums, setModifiedAlbums] = useState(albums);
+	const [search, setSearch] = useState("");
 	const years = ["60's", "70's", "80's", "90's", "00's", "10's", "20's"];
 
 	const searchAlbums = (event: ChangeEvent<HTMLInputElement>) => {

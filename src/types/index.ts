@@ -8,7 +8,7 @@ interface IAlbum {
 	url: string;
 }
 
-interface IAdditionalInfo {
+interface IMetadata {
 	listeners: string;
 	playcount: string;
 	tags: Array<{ url: string; name: string }>;
@@ -23,4 +23,4 @@ interface IAdditionalInfo {
 	description: string;
 }
 
-export type { IAlbum, IAdditionalInfo };
+export type { IAlbum, IMetadata };

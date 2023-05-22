@@ -1,17 +1,14 @@
-import Paddings from "styles/components/Paddings.styled";
-import Container from "styles/components/Container.styled";
-import { Content, List } from "./Home.styled";
+import { List } from "./Home.styled";
+import { useAppSelector } from "hooks";
 import SpecialAlbumView from "./components/SpecialAlbumView/SpecialAlbumView";
-import { Album, Albums } from "types";
-import { useSelector } from "react-redux";
 
 const Home = () => {
-	const favoriteAlbums = useSelector((state: any) => state.albums.albums);
+	const likedAlbums = useAppSelector((state) => state.albums.albums);
 
 	return (
 		<List>
-			{favoriteAlbums.map((album: Album) => (
-				<SpecialAlbumView album={album} key={album.id} />
+			{likedAlbums.map((album, index) => (
+				<SpecialAlbumView album={album} position={index + 1} key={album.id} />
 			))}
 		</List>
 	);

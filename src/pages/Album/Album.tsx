@@ -5,10 +5,10 @@ import getSingleAlbum from "services/api/getSingleAlbum.api";
 import formatAlbum from "utils/formatAlbum";
 import { AlbumCover, Content } from "./Album.styled";
 import Image from "components/Image/Image";
-import AlbumInfo from "./AlbumInfo/AlbumInfo";
+import Description from "./AlbumInfo/Description";
 
 const Album = () => {
-	const id = useParams().id;
+	const { id } = useParams();
 	const [album, setAlbum] = useState<IAlbum | null>(null);
 
 	const getAlbum = async () => {
@@ -34,7 +34,7 @@ const Album = () => {
 				/>
 			</AlbumCover>
 
-			<AlbumInfo album={album} />
+			<Description album={album} />
 		</Content>
 	);
 };

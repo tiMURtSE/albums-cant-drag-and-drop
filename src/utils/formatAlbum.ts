@@ -1,6 +1,6 @@
-import { Album } from "types";
+import { IAlbum } from "types";
 
-const formatAlbum = (album: Record<string, any>): Album => {
+const formatAlbum = (album: Record<string, any>): IAlbum => {
 	const { id, name, artists, release_date, images, external_urls } = album;
 
 	return {

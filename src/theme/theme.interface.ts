@@ -1,4 +1,4 @@
-import { themeMods } from "consts/themeMods";
+import { themeMods } from "consts";
 
 interface ITheme {
 	mode: themeMods;
@@ -10,6 +10,7 @@ interface ITheme {
 		};
 		secondary: {
 			main: string;
+			danger: string;
 		};
 		background: {
 			default: string;

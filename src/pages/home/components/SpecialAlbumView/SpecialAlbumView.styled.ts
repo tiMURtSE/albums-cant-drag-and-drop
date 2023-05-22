@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import FlexBetween from "styles/components/FlexBetween.styled";
 
-const Content = styled(FlexBetween)<{ place: number }>`
+const Content = styled(FlexBetween)<{ position: number }>`
 	position: relative;
 	gap: 2rem;
-
 	padding: 0 40px 0 80px;
 
 	&::before {
-		content: "${(props) => props.place}";
+		content: "${({ position }) => position}";
 		position: absolute;
 		top: 50%;
 		left: 40px;
@@ -20,7 +19,7 @@ const Content = styled(FlexBetween)<{ place: number }>`
 	}
 `;
 
-const Info = styled.div`
+const Description = styled.div`
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
@@ -30,37 +29,23 @@ const Info = styled.div`
 	padding-bottom: 1rem;
 `;
 
-const Title = styled.p`
+const TitleWrapper = styled.div`
 	padding: 0 0 1rem 0.5rem;
 	border-bottom: 3px solid ${({ theme }) => theme.colors.contrastText};
-
-	font-family: "Roboto Serif", serif;
-	font-size: ${({ theme }) => theme.fonts.extraLarge};
-	font-weight: 700;
-	font-style: italic;
-	line-height: 1;
-	letter-spacing: -2.5px;
 `;
 
-const ArtistAndYear = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 2rem;
-
-	padding-left: 1rem;
+const ArtistAndYear = styled(FlexBetween)`
+	padding: 0 1rem;
 `;
 
-const Artist = styled.p`
+const Artist = styled.h3`
 	font-family: "Roboto Serif", serif;
 	font-size: ${({ theme }) => theme.fonts.large};
 	font-weight: 700;
 `;
 
 const Year = styled.p`
-	position: relative;
-
 	color: ${({ theme }) => theme.colors.primary.dark};
 `;
 
-export { Content, Info, Title, ArtistAndYear, Artist, Year };
+export { Content, Description, TitleWrapper, ArtistAndYear, Artist, Year };

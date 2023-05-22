@@ -8,26 +8,21 @@ const Content = styled.div`
 	flex-basis: 47%;
 `;
 
-const Title = styled.p`
+const TitleWrapper = styled.div`
+	display: inline-block;
 	margin-bottom: 1rem;
 
-	font-family: "Roboto Serif", serif;
-	font-size: ${({ theme }) => theme.fonts.extraLarge};
-	font-weight: 700;
-	line-height: 1;
-	letter-spacing: -2.5px;
-
-	&:hover svg:first-child {
+	& h2:hover svg:first-child {
 		display: none;
 	}
 
-	&:hover svg:last-child {
+	& h2:hover svg:last-child {
 		display: block;
 	}
+`;
 
-	& span {
-		position: relative;
-	}
+const IconWrapper = styled.span`
+	position: relative;
 
 	& svg {
 		position: absolute;
@@ -36,6 +31,7 @@ const Title = styled.p`
 		z-index: 10;
 		width: 15px;
 		height: 15px;
+		fill: ${({ theme }) => theme.colors.contrastText};
 	}
 
 	& svg:last-child {
@@ -47,7 +43,7 @@ const Title = styled.p`
 	}
 `;
 
-const Artist = styled.p`
+const Artist = styled.h3`
 	margin-bottom: 2rem;
 
 	font-family: "Roboto Serif", serif;
@@ -81,26 +77,4 @@ const LikeButton = styled.button`
 	}
 `;
 
-const AdditionalInfo = styled.div`
-	margin-bottom: 2rem;
-`;
-
-const Tag = styled.span`
-	display: inline-block;
-	margin: 3px 0;
-	padding: 0px 5px;
-
-	background-color: ${({ theme }) => theme.colors.primary.neutral};
-	border-radius: 5px;
-	word-break: break-all;
-
-	&:not(:last-child) {
-		margin-right: 5px;
-	}
-`;
-
-const SpecialFont = styled.span`
-	font-weight: 700;
-`;
-
-export { Content, Title, Artist, LikeButton, AdditionalInfo, Tag, SpecialFont };
+export { Content, TitleWrapper, IconWrapper, Artist, LikeButton };

@@ -1,16 +1,16 @@
+import { useMemo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useAppSelector } from "hooks";
+import { PagesPath } from "consts";
+import GlobalStyle from "styles/global/GlobalStyle.styled";
 import Home from "pages/Home/Home";
 import MyAlbums from "pages/MyAlbums/MyAlbums";
 import Error from "pages/Error/Error";
 import Search from "pages/Search/Search";
-import Layout from "components/Layout/Layout";
-import { ThemeProvider } from "styled-components";
-import GlobalStyle from "styles/global/GlobalStyle.styled";
-import { useMemo } from "react";
-import { themeSettings } from "styles/theme/theme";
-import { PagesPath } from "consts";
 import Album from "pages/Album/Album";
-import { useAppSelector } from "hooks";
+import Layout from "components/Layout/Layout";
+import { themeSettings } from "theme/theme";
+import { ThemeProvider } from "styled-components";
 
 function App() {
 	const mode = useAppSelector((state) => state.theme.mode);

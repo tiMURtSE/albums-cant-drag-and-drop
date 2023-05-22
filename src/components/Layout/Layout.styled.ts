@@ -7,6 +7,17 @@ const Page = styled.div`
 	min-height: 100vh;
 `;
 
+const Header = styled.header`
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: ${({ theme }) => theme.order.header};
+	width: 100%;
+
+	backdrop-filter: saturate(180%) blur(5px);
+`;
+
 const Main = styled.main`
 	flex-grow: 1;
 	flex-shrink: 0;
@@ -14,4 +25,14 @@ const Main = styled.main`
 	padding: 100px 0;
 `;
 
-export { Page, Main };
+const Paddings = styled.div`
+	padding: 0 32px;
+`;
+
+const Container = styled.div<{ header?: boolean }>`
+	max-width: ${({ theme, header }) =>
+		header ? theme.sizes.container.header : theme.sizes.container.list};
+	margin: 0 auto;
+`;
+
+export { Page, Header, Main, Paddings, Container };

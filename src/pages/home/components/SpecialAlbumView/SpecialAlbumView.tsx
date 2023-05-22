@@ -2,24 +2,26 @@ import {
 	Artist,
 	ArtistAndYear,
 	Content,
-	Info,
-	Title,
+	Description,
+	TitleWrapper,
 	Year,
 } from "./SpecialAlbumView.styled";
-import { Album } from "types";
+import { IAlbum } from "types";
 import { Link } from "react-router-dom";
 import Image from "components/Image/Image";
+import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
 
 type Props = {
-	album: Album;
+	album: IAlbum;
+	position: number;
 	key: string;
 };
 
-const SpecialAlbumView = ({ album }: Props) => {
-	if (!album.id) return null;
+const SpecialAlbumView = ({ album, position }: Props) => {
+	if (!Object.keys(album).length) return null;
 
 	return (
-		<Content place={1}>
+		<Content position={position}>
 			<Link to={`/album/${album.id}`}>
 				<Image
 					src={album.image}
@@ -29,16 +31,18 @@ const SpecialAlbumView = ({ album }: Props) => {
 				/>
 			</Link>
 
-			<Info>
-				<Link to={`/album/${album.id}`}>
-					<Title>{album.title}</Title>
-				</Link>
+			<Description>
+				<TitleWrapper>
+					<Link to={`/album/${album.id}`}>
+						<StylishAlbumTitle isExtraLarge>{album.title}</StylishAlbumTitle>
+					</Link>
+				</TitleWrapper>
 
 				<ArtistAndYear>
 					<Artist>{album.artist}</Artist>
 					<Year>{album.year}</Year>
 				</ArtistAndYear>
-			</Info>
+			</Description>
 		</Content>
 	);
 };

@@ -1,4 +1,8 @@
-const months: any = {
+interface IMonths {
+	[key: string]: string;
+}
+
+const months: IMonths = {
 	"01": "янв.",
 	"02": "фев.",
 	"03": "мар.",

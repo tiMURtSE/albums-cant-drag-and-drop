@@ -1,43 +1,35 @@
 import { NavLink } from "react-router-dom";
-import { Content, Header, Navigation, Theme, Title } from "./Navbar.styled";
-import Paddings from "styles/components/Paddings.styled";
-import Container from "styles/components/Container.styled";
-import Search from "./Searchbar/Searchbar";
 import { useDispatch } from "react-redux";
+import { Content, Navigation, Theme } from "./Navbar.styled";
+import { PagesPath, appTitle } from "consts";
+import { setMode } from "store/themeSlice";
+import Search from "./Searchbar/Searchbar";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import ThemeIcon from "components/Icons/ThemeIcon/ThemeIcon";
-import { setMode } from "store/themeSlice";
-import { PagesPath, appTitle } from "consts";
+import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<Header>
-			<Paddings>
-				<Container header>
-					<Content>
-						<FlexBetween gap="2rem">
-							<Title>
-								<NavLink to={PagesPath.Home}>{appTitle}</NavLink>
-							</Title>
+		<Content>
+			<FlexBetween gap="2rem">
+				<StylishAlbumTitle>
+					<NavLink to={PagesPath.Home}>{appTitle}</NavLink>
+				</StylishAlbumTitle>
 
-							<Navigation>
-								<NavLink to={PagesPath.Home}>Главная</NavLink>
+				<Navigation>
+					<NavLink to={PagesPath.Home}>Главная</NavLink>
+					<NavLink to={PagesPath.MyAlbums}>Мои альбомы</NavLink>
+				</Navigation>
 
-								<NavLink to={PagesPath.MyAlbums}>Мои альбомы</NavLink>
-							</Navigation>
+				<Search />
+			</FlexBetween>
 
-							<Search />
-						</FlexBetween>
-
-						<Theme onClick={() => dispatch(setMode())}>
-							<ThemeIcon />
-						</Theme>
-					</Content>
-				</Container>
-			</Paddings>
-		</Header>
+			<Theme onClick={() => dispatch(setMode())}>
+				<ThemeIcon />
+			</Theme>
+		</Content>
 	);
 };
 

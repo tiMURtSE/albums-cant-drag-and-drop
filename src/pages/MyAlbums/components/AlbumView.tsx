@@ -1,13 +1,13 @@
 import Image from "components/Image/Image";
 import AlbumWrapper from "styles/components/AlbumWrapper.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
-import { Album } from "types";
+import { IAlbum } from "types";
 import { Info } from "./AlbumView.styled";
 import formatDate from "utils/formatDate";
 import { Link } from "react-router-dom";
 
 type Props = {
-	album: Album;
+	album: IAlbum;
 	key: string;
 };
 
