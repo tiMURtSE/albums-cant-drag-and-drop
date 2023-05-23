@@ -44,7 +44,7 @@ const Search = () => {
 		setIsAutocompleteOpen(false);
 	};
 
-	const handleOutsideClick = async (event: MouseEvent) => {
+	const handleOutsideClick = (event: MouseEvent) => {
 		const target = event.target as HTMLElement;
 
 		if (!target.closest("#input") && !target.closest("#autocomplete")) {

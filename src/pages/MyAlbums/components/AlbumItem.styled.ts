@@ -43,7 +43,7 @@ const CreatedAt = styled.div`
 `;
 
 const ContextMenuIconWrapper = styled.div`
-	display: none;
+	display: block;
 
 	position: absolute;
 	top: 50%;
@@ -53,14 +53,6 @@ const ContextMenuIconWrapper = styled.div`
 
 	& svg {
 		fill: ${({ theme }) => theme.colors.contrastText};
-	}
-`;
-
-const Input = styled.input`
-	display: none;
-
-	&:checked + label div {
-		display: block;
 	}
 `;
 
@@ -97,4 +89,4 @@ const ContextMenu = styled.div`
 	}
 `;
 
-export { Item, Cover, Names, CreatedAt, ContextMenuIconWrapper, Input, ContextMenu };
+export { Item, Cover, Names, CreatedAt, ContextMenuIconWrapper, ContextMenu };
