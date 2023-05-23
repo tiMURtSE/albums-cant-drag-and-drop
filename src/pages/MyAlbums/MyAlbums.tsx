@@ -1,9 +1,10 @@
-import { Filter, List, Settings, SortAndSearch, Year } from "./MyAlbums.styled";
-import Wrapper from "styles/components/Wrapper.styled";
+import { Caption, Wrapper } from "./MyAlbums.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import { ChangeEvent, useState } from "react";
-import AlbumView from "./components/AlbumView";
+import AlbumView from "./components/AlbumItem";
 import { useAppSelector } from "hooks";
+import AlbumRow from "./components/AlbumItem";
+import AlbumItem from "./components/AlbumItem";
 
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
@@ -25,7 +26,7 @@ const MyAlbums = () => {
 
 	return (
 		<Wrapper>
-			<Settings>
+			{/* <Settings>
 				<FlexBetween>
 					<SortAndSearch>
 						<input
@@ -46,13 +47,20 @@ const MyAlbums = () => {
 						))}
 					</Filter>
 				</FlexBetween>
-			</Settings>
+			</Settings> */}
 
-			<List>
-				{modifiedAlbums.map((album) => (
-					<AlbumView album={album} key={album.id} />
+			<Caption>
+				<div>Обложка</div>
+				<div>Что и кем</div>
+				<div>Год</div>
+				<div>Дата добавления</div>
+			</Caption>
+
+			<div>
+				{albums.map((album) => (
+					<AlbumItem album={album} key={album.id} />
 				))}
-			</List>
+			</div>
 		</Wrapper>
 	);
 };

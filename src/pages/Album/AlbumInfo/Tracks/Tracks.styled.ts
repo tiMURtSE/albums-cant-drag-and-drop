@@ -4,15 +4,11 @@ const Input = styled.input`
 	display: none;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ numberOfTracks: number }>`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 
 	& input:checked + div {
-		max-height: 2000px;
-
-		& caption {
-			height: 43px;
-		}
+		max-height: ${({ numberOfTracks }) => numberOfTracks}px;
 
 		& span {
 			&:first-child {
@@ -38,16 +34,6 @@ const TableWrapper = styled.div`
 const Table = styled.table`
 	width: 100%;
 	border-collapse: collapse;
-
-	& td {
-		padding: 12px 2rem;
-
-		border-top: 2px solid ${({ theme }) => theme.colors.contrastText};
-
-		&:first-child {
-			width: 5rem;
-		}
-	}
 `;
 
 const Caption = styled.caption`
@@ -67,7 +53,7 @@ const Label = styled.label`
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		z-index: 10;
+		z-index: ${({ theme }) => theme.order.other};
 
 		transform: translate(-50%, -50%);
 		transition: transform 0.5s ease;
@@ -78,6 +64,22 @@ const Label = styled.label`
 	}
 `;
 
-const Track = styled.tr``;
+const Track = styled.tr`
+	& td {
+		padding: 12px 2rem;
+
+		border-top: 2px solid ${({ theme }) => theme.colors.contrastText};
+
+		&:first-child {
+			width: 3rem;
+
+			color: ${({ theme }) => theme.colors.primary.dark};
+		}
+
+		&:last-child {
+			font-weight: 700;
+		}
+	}
+`;
 
 export { Input, Wrapper, TableWrapper, Table, Caption, Label, Track };

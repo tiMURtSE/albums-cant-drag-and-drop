@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { IAlbum } from "types";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
 import Wrapper from "styles/components/Wrapper.styled";
-import { Content, Loader, Subtitle, Title } from "./Search.styled";
+import { Title } from "./Search.styled";
 import { useAppSelector } from "hooks";
+import { Loader } from "styles/components/Loader.styled";
 
 const Search = () => {
 	const foundAlbums = useAppSelector((state) => state.albums.foundAlbums);
@@ -19,13 +18,15 @@ const Search = () => {
 
 			<Wrapper>
 				{isLoading ? (
-					<Loader />
+					<Loader
+						width="100%"
+						height="40vh"
+						contentHeight="100px"
+						contentWidth="100px"
+						border="10px"
+					/>
 				) : (
-					<>
-						{foundAlbums.map((album) => (
-							<CommonAlbumView album={album} key={album.id} />
-						))}
-					</>
+					foundAlbums.map((album) => <CommonAlbumView album={album} key={album.id} />)
 				)}
 			</Wrapper>
 		</>
