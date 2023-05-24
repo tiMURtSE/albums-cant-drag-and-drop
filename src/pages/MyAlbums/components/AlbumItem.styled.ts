@@ -43,7 +43,7 @@ const CreatedAt = styled.div`
 `;
 
 const ContextMenuIconWrapper = styled.div`
-	display: block;
+	display: none;
 
 	position: absolute;
 	top: 50%;
@@ -58,18 +58,20 @@ const ContextMenuIconWrapper = styled.div`
 
 const ContextMenu = styled.div`
 	display: none;
+	min-width: 250px;
 
 	position: absolute;
-	width: 150px;
 	top: 30px;
 	right: 24px;
 	z-index: ${({ theme }) => theme.order.other};
 
 	background-color: ${({ theme }) => theme.colors.background.default};
-	border: 2px solid black;
+	border: 2px solid ${({ theme }) => theme.colors.contrastText};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 
 	& div {
+		width: 100%;
+		padding: 0 1rem;
 		text-align: center;
 		cursor: pointer;
 
