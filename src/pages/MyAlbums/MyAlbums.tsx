@@ -1,10 +1,11 @@
-import { Caption, Wrapper } from "./MyAlbums.styled";
+import { Caption, Settings, SortAndSearch, Wrapper } from "./MyAlbums.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import { ChangeEvent, useEffect, useState } from "react";
-import AlbumView from "./components/AlbumItem";
+import AlbumView from "./components/AlbumItem/AlbumItem";
 import { useAppSelector } from "hooks";
-import AlbumRow from "./components/AlbumItem";
-import AlbumItem from "./components/AlbumItem";
+import AlbumRow from "./components/AlbumItem/AlbumItem";
+import AlbumItem from "./components/AlbumItem/AlbumItem";
+import FilterByYear from "./components/FilterByYear/FilterByYear";
 
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
@@ -26,7 +27,7 @@ const MyAlbums = () => {
 
 	return (
 		<Wrapper>
-			{/* <Settings>
+			<Settings>
 				<FlexBetween>
 					<SortAndSearch>
 						<input
@@ -41,13 +42,12 @@ const MyAlbums = () => {
 						</select>
 					</SortAndSearch>
 
-					<Filter>
-						{years.map((year) => (
-							<Year key={year}>{year}</Year>
-						))}
-					</Filter>
+					<FilterByYear
+						modifiedAlbums={modifiedAlbums}
+						setModifiedAlbums={setModifiedAlbums}
+					/>
 				</FlexBetween>
-			</Settings> */}
+			</Settings>
 
 			<Caption>
 				<div>Обложка</div>
@@ -57,7 +57,7 @@ const MyAlbums = () => {
 			</Caption>
 
 			<div>
-				{albums.map((album) => (
+				{modifiedAlbums.map((album) => (
 					<AlbumItem album={album} key={album.id} />
 				))}
 			</div>
