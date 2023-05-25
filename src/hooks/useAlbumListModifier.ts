@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { IAlbum } from "types";
 
 type Modifiers = {
-	sort: keyof IAlbum | "";
+	sort: { column: keyof IAlbum | ""; type: string };
 	query: string;
 	flaggedYears: string[];
 };
@@ -15,13 +15,33 @@ export const useAlbumListModifier = (albums: IAlbum[], modifiers: Modifiers): IA
 	return filteredAlbums;
 };
 
-const sortAlbums = (albums: IAlbum[], sort: keyof IAlbum | "") => {
+const sortAlbums = (albums: IAlbum[], sort: { column: keyof IAlbum | ""; type: string }) => {
 	const sortedAlbums = useMemo(() => {
-		if (sort) {
-			if (sort === "year") {
-				return [...albums].sort((a: any, b: any) => a[sort] - b[sort]);
+		if (sort.column) {
+			if (sort.column === "year") {
+				if (sort.type === "asc") {
+					return [...albums].sort((a: any, b: any) => a[sort.column] - b[sort.column]);
+				}
+
+				if (sort.type === "desc") {
+					return [...albums].sort((a: any, b: any) => b[sort.column] - a[sort.column]);
+				}
+
+				return albums;
 			} else {
-				return [...albums].sort((a, b) => a[sort].localeCompare(b[sort]));
+				if (sort.type === "asc") {
+					return [...albums].sort((a: any, b: any) =>
+						a[sort.column].localeCompare(b[sort.column])
+					);
+				}
+
+				if (sort.type === "desc") {
+					return [...albums].sort((a: any, b: any) =>
+						b[sort.column].localeCompare(a[sort.column])
+					);
+				}
+
+				return albums;
 			}
 		} else {
 			return albums;

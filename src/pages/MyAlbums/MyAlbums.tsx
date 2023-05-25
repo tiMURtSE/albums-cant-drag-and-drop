@@ -10,7 +10,7 @@ import { useAlbumListModifier } from "hooks/useAlbumListModifier";
 import { IAlbum } from "types";
 
 type Modifiers = {
-	sort: keyof IAlbum | "";
+	sort: { column: keyof IAlbum | ""; type: string };
 	query: string;
 	flaggedYears: string[];
 };
@@ -18,12 +18,26 @@ type Modifiers = {
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
 	const [modifiers, setModifiers] = useState<Modifiers>({
-		sort: "",
+		sort: { column: "", type: "" },
 		query: "",
 		flaggedYears: [],
 	});
 	const modifiedAlbums = useAlbumListModifier(albums, modifiers);
-	console.log(modifiers);
+
+	const handleSortClick = (column: keyof IAlbum) => {
+		const isPreviousColumnSorting = modifiers.sort.column === column;
+
+		if (isPreviousColumnSorting) {
+			if (modifiers.sort.type === "asc") {
+				setModifiers({ ...modifiers, sort: { column, type: "desc" } });
+			} else if (modifiers.sort.type === "desc") {
+				setModifiers({ ...modifiers, sort: { column: "", type: "" } });
+			}
+		} else {
+			setModifiers({ ...modifiers, sort: { column, type: "asc" } });
+		}
+	};
+
 	return (
 		<Wrapper>
 			<Settings>
@@ -49,11 +63,9 @@ const MyAlbums = () => {
 
 			<Caption>
 				<div>Обложка</div>
-				<div onClick={() => setModifiers({ ...modifiers, sort: "title" })}>Что и кем</div>
-				<div onClick={() => setModifiers({ ...modifiers, sort: "year" })}>Год</div>
-				<div onClick={() => setModifiers({ ...modifiers, sort: "createdAt" })}>
-					Дата добавления
-				</div>
+				<div onClick={() => handleSortClick("title")}>Что и кем</div>
+				<div onClick={() => handleSortClick("year")}>Год</div>
+				<div onClick={() => handleSortClick("createdAt")}>Дата добавления</div>
 			</Caption>
 
 			<div>
