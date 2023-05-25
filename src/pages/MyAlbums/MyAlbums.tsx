@@ -6,24 +6,16 @@ import { useAppSelector } from "hooks";
 import AlbumRow from "./components/AlbumItem/AlbumItem";
 import AlbumItem from "./components/AlbumItem/AlbumItem";
 import FilterByYear from "./components/FilterByYear/FilterByYear";
+import { useAlbumListModifier } from "hooks/useAlbumListModifier";
+import { IAlbum } from "types";
 
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
-	const [modifiedAlbums, setModifiedAlbums] = useState(albums);
-	const [search, setSearch] = useState("");
-	const years = ["60's", "70's", "80's", "90's", "00's", "10's", "20's"];
-
-	const searchAlbums = (event: ChangeEvent<HTMLInputElement>) => {
-		setSearch(event.target.value);
-		setModifiedAlbums(
-			albums.filter((album) => {
-				const title = album.title.toLowerCase();
-				const value = event.target.value.toLowerCase();
-
-				return title.includes(value);
-			})
-		);
-	};
+	const [modifiers, setModifiers] = useState<{ sort: keyof IAlbum | ""; query: string }>({
+		sort: "",
+		query: "",
+	});
+	const modifiedAlbums = useAlbumListModifier(albums, modifiers);
 
 	return (
 		<Wrapper>
@@ -32,8 +24,10 @@ const MyAlbums = () => {
 					<SortAndSearch>
 						<input
 							style={{ border: "1px solid #000" }}
-							value={search}
-							onChange={searchAlbums}
+							value={modifiers.query}
+							onChange={(event) =>
+								setModifiers({ ...modifiers, query: event.target.value })
+							}
 						/>
 
 						<select>
@@ -42,18 +36,18 @@ const MyAlbums = () => {
 						</select>
 					</SortAndSearch>
 
-					<FilterByYear
-						modifiedAlbums={modifiedAlbums}
-						setModifiedAlbums={setModifiedAlbums}
-					/>
+					{/* <FilterByYear
+					/> */}
 				</FlexBetween>
 			</Settings>
 
 			<Caption>
 				<div>Обложка</div>
-				<div>Что и кем</div>
-				<div>Год</div>
-				<div>Дата добавления</div>
+				<div onClick={() => setModifiers({ ...modifiers, sort: "title" })}>Что и кем</div>
+				<div onClick={() => setModifiers({ ...modifiers, sort: "year" })}>Год</div>
+				<div onClick={() => setModifiers({ ...modifiers, sort: "createdAt" })}>
+					Дата добавления
+				</div>
 			</Caption>
 
 			<div>
