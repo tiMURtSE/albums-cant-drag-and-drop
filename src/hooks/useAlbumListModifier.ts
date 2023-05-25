@@ -4,14 +4,15 @@ import { IAlbum } from "types";
 type Modifiers = {
 	sort: keyof IAlbum | "";
 	query: string;
-	// flaggedYears
+	flaggedYears: string;
 };
 
 export const useAlbumListModifier = (albums: IAlbum[], modifiers: Modifiers): IAlbum[] => {
 	const sortedAlbums = sortAlbums(albums, modifiers.sort);
 	const searchedAlbums = searchAlbums(sortedAlbums, modifiers.query);
+	const filteredAlbums = filterAlbums(searchedAlbums, modifiers.flaggedYears);
 
-	return searchedAlbums;
+	return filteredAlbums;
 };
 
 const sortAlbums = (albums: IAlbum[], sort: keyof IAlbum | "") => {
@@ -46,4 +47,20 @@ const searchAlbums = (albums: IAlbum[], query: string) => {
 	return searchedAlbums;
 };
 
-// const filterAlbums = (albums, flaggedYears) => {};
+const filterAlbums = (albums: IAlbum[], flaggedYears: string) => {
+	const formattedFlaggedYear = flaggedYears.replaceAll("0", "");
+	// const formattedFlagedYear = flaggedYears.map((year) => year.slice(0, 1));
+	const filteredAlbums = useMemo(() => {
+		if (flaggedYears.length) {
+			return [...albums].filter((album) => {
+				const formattedYear = String(album.year).slice(2, 3);
+
+				return formattedFlaggedYear.includes(formattedYear);
+			});
+		} else {
+			return albums;
+		}
+	}, [albums, flaggedYears]);
+
+	return filteredAlbums;
+};

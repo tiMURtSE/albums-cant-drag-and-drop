@@ -9,14 +9,21 @@ import FilterByYear from "./components/FilterByYear/FilterByYear";
 import { useAlbumListModifier } from "hooks/useAlbumListModifier";
 import { IAlbum } from "types";
 
+type Modifiers = {
+	sort: keyof IAlbum | "";
+	query: string;
+	flaggedYears: string;
+};
+
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
-	const [modifiers, setModifiers] = useState<{ sort: keyof IAlbum | ""; query: string }>({
+	const [modifiers, setModifiers] = useState<Modifiers>({
 		sort: "",
 		query: "",
+		flaggedYears: "",
 	});
 	const modifiedAlbums = useAlbumListModifier(albums, modifiers);
-
+	console.log(modifiers);
 	return (
 		<Wrapper>
 			<Settings>
@@ -36,8 +43,7 @@ const MyAlbums = () => {
 						</select>
 					</SortAndSearch>
 
-					{/* <FilterByYear
-					/> */}
+					<FilterByYear modifiers={modifiers} setModifiers={setModifiers} />
 				</FlexBetween>
 			</Settings>
 
