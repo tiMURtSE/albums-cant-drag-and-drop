@@ -7,13 +7,13 @@ type Props = {
 	modifiers: {
 		sort: keyof IAlbum | "";
 		query: string;
-		flaggedYears: string;
+		flaggedYears: string[];
 	};
 	setModifiers: React.Dispatch<
 		React.SetStateAction<{
 			sort: keyof IAlbum | "";
 			query: string;
-			flaggedYears: string;
+			flaggedYears: string[];
 		}>
 	>;
 };
@@ -42,28 +42,28 @@ const FilterByYear = ({ modifiers, setModifiers }: Props) => {
 		});
 		setYears(updatedYears);
 
-		if (modifiers.flaggedYears.includes(flaggedYear)) {
-			const updatedFlaggedYears = modifiers.flaggedYears.replaceAll(flaggedYear, "");
-
-			setModifiers({ ...modifiers, flaggedYears: updatedFlaggedYears });
-		} else {
-			const updatedFlaggedYears = modifiers.flaggedYears + flaggedYear;
-
-			setModifiers({ ...modifiers, flaggedYears: updatedFlaggedYears });
-		}
-
 		// if (modifiers.flaggedYears.includes(flaggedYear)) {
-		// 	const updatedFlaggedYears = modifiers.flaggedYears.filter(
-		// 		(year) => year !== flaggedYear
-		// 	);
+		// 	const updatedFlaggedYears = modifiers.flaggedYears.replaceAll(flaggedYear, "");
 
 		// 	setModifiers({ ...modifiers, flaggedYears: updatedFlaggedYears });
 		// } else {
-		// 	const updatedFlaggedYears = modifiers.flaggedYears;
+		// 	const updatedFlaggedYears = modifiers.flaggedYears + flaggedYear;
 
-		// 	updatedFlaggedYears.push(flaggedYear);
 		// 	setModifiers({ ...modifiers, flaggedYears: updatedFlaggedYears });
 		// }
+
+		if (modifiers.flaggedYears.includes(flaggedYear)) {
+			const updatedFlaggedYears = [...modifiers.flaggedYears].filter(
+				(year) => year !== flaggedYear
+			);
+
+			setModifiers({ ...modifiers, flaggedYears: updatedFlaggedYears });
+		} else {
+			const updatedFlaggedYears = [...modifiers.flaggedYears];
+
+			updatedFlaggedYears.push(flaggedYear);
+			setModifiers({ ...modifiers, flaggedYears: updatedFlaggedYears });
+		}
 	};
 
 	// const flagYear = (event: any) => {

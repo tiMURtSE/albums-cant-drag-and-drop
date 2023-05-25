@@ -4,7 +4,7 @@ import { IAlbum } from "types";
 type Modifiers = {
 	sort: keyof IAlbum | "";
 	query: string;
-	flaggedYears: string;
+	flaggedYears: string[];
 };
 
 export const useAlbumListModifier = (albums: IAlbum[], modifiers: Modifiers): IAlbum[] => {
@@ -47,9 +47,9 @@ const searchAlbums = (albums: IAlbum[], query: string) => {
 	return searchedAlbums;
 };
 
-const filterAlbums = (albums: IAlbum[], flaggedYears: string) => {
-	const formattedFlaggedYear = flaggedYears.replaceAll("0", "");
-	// const formattedFlagedYear = flaggedYears.map((year) => year.slice(0, 1));
+const filterAlbums = (albums: IAlbum[], flaggedYears: string[]) => {
+	const formattedFlaggedYear = flaggedYears.map((year) => year.slice(0, 1));
+
 	const filteredAlbums = useMemo(() => {
 		if (flaggedYears.length) {
 			return [...albums].filter((album) => {

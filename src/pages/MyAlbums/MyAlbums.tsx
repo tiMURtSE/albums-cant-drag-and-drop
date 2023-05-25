@@ -12,7 +12,7 @@ import { IAlbum } from "types";
 type Modifiers = {
 	sort: keyof IAlbum | "";
 	query: string;
-	flaggedYears: string;
+	flaggedYears: string[];
 };
 
 const MyAlbums = () => {
@@ -20,7 +20,7 @@ const MyAlbums = () => {
 	const [modifiers, setModifiers] = useState<Modifiers>({
 		sort: "",
 		query: "",
-		flaggedYears: "",
+		flaggedYears: [],
 	});
 	const modifiedAlbums = useAlbumListModifier(albums, modifiers);
 	console.log(modifiers);
