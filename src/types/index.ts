@@ -1,3 +1,5 @@
+import { SortingTypes } from "consts";
+
 interface IAlbum {
 	id: string;
 	title: string;
@@ -23,4 +25,15 @@ interface IMetadata {
 	description: string;
 }
 
-export type { IAlbum, IMetadata };
+interface IModifiers {
+	sort: {
+		column: keyof IAlbum | "";
+		type: SortingTypes | "";
+	};
+	query: string;
+	flaggedDecades: Decades;
+}
+
+type Decades = ("50" | "60" | "70" | "80" | "90" | "00" | "10" | "20")[];
+
+export type { IAlbum, IMetadata, IModifiers, Decades };

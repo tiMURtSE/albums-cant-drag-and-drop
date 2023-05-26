@@ -9,7 +9,7 @@ type Props = {
 
 const Image = ({ src, width, height, alt }: Props) => {
 	return (
-		<Wrapper>
+		<Wrapper width={width} height={height}>
 			<img src={src} width={width} height={height} alt={alt} />
 		</Wrapper>
 	);

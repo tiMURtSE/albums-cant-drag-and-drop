@@ -1,9 +1,5 @@
 import styled from "styled-components";
-
-const Settings = styled.div`
-	margin-bottom: 20px;
-	padding: 0 40px;
-`;
+import FlexBetween from "styles/components/FlexBetween.styled";
 
 const Wrapper = styled.div`
 	padding: 1rem 0;
@@ -12,25 +8,26 @@ const Wrapper = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
-const Caption = styled.div`
-	display: flex;
+const Modifiers = styled(FlexBetween)`
+	margin: 20px 0;
 	padding: 0 1rem;
-
-	color: ${({ theme }) => theme.colors.primary.dark};
-
-	& div:nth-child(2) {
-		flex-basis: calc(100% - 17% * 3);
-	}
-
-	& div:not(:nth-child(2)) {
-		flex-basis: 17%;
-	}
 `;
 
 const SortAndSearch = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 2rem;
 `;
 
-export { Settings, Wrapper, Caption, SortAndSearch };
+const Input = styled.input`
+	padding: 0 1rem;
+
+	color: ${({ theme }) => theme.colors.contrastText};
+	border-bottom: 2px solid ${({ theme }) => theme.colors.contrastText};
+
+	&:focus {
+		outline: none;
+	}
+`;
+
+export { Modifiers, Wrapper, Input, SortAndSearch };

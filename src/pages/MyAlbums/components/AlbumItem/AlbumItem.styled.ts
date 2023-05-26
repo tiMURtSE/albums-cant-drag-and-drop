@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Item = styled.div`
+const Item = styled.li`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem 1rem;
@@ -11,20 +11,14 @@ const Item = styled.div`
 		border-bottom: 2px solid ${({ theme }) => theme.colors.contrastText};
 	}
 
-	& div:nth-child(2) {
-		flex-basis: calc(100% - 17% * 3);
-	}
-
-	& div:not(:nth-child(2)) {
-		flex-basis: 17%;
-	}
-
-	&:hover div:last-child div:first-child {
+	&:hover div:last-child div:nth-child(2) {
 		display: block;
 	}
 `;
 
-const Cover = styled.div`
+const CoverWrapper = styled.div`
+	flex-basis: 17%;
+
 	& div {
 		width: 80px;
 		height: 80px;
@@ -32,14 +26,26 @@ const Cover = styled.div`
 `;
 
 const Names = styled.div`
-	& div:first-child {
-		font-size: ${({ theme }) => theme.fonts.large};
-		line-height: 1;
-	}
+	flex-basis: calc(100% - 17% * 3);
+`;
+
+const Title = styled.div`
+	font-size: ${({ theme }) => theme.fonts.large};
+	font-weight: 500;
+	line-height: 1;
+`;
+
+const Artist = styled.div`
+	font-weight: 500;
+`;
+
+const Year = styled.div`
+	flex-basis: 17%;
 `;
 
 const CreatedAt = styled.div`
 	position: relative;
+	flex-basis: 17%;
 `;
 
 const ContextMenuIconWrapper = styled.div`
@@ -58,12 +64,13 @@ const ContextMenuIconWrapper = styled.div`
 
 const ContextMenu = styled.div`
 	display: none;
-	min-width: 250px;
+	padding: 0.5rem 0;
+	min-width: max-content;
 
 	position: absolute;
 	top: 30px;
 	right: 24px;
-	z-index: ${({ theme }) => theme.order.other};
+	z-index: 20;
 
 	background-color: ${({ theme }) => theme.colors.background.default};
 	border: 2px solid ${({ theme }) => theme.colors.contrastText};
@@ -71,18 +78,18 @@ const ContextMenu = styled.div`
 
 	& div {
 		width: 100%;
-		padding: 0 1rem;
-		text-align: center;
+		padding: 0.5rem 1rem;
+		text-align: start;
 		cursor: pointer;
 
 		&:first-child {
-			border-top-left-radius: ${({ theme }) => theme.sizes.borderRadius};
-			border-top-right-radius: ${({ theme }) => theme.sizes.borderRadius};
+			/* border-top-left-radius: ${({ theme }) => theme.sizes.borderRadius};
+			border-top-right-radius: ${({ theme }) => theme.sizes.borderRadius}; */
 		}
 
 		&:last-child {
-			border-bottom-left-radius: ${({ theme }) => theme.sizes.borderRadius};
-			border-bottom-right-radius: ${({ theme }) => theme.sizes.borderRadius};
+			/* border-bottom-left-radius: ${({ theme }) => theme.sizes.borderRadius};
+			border-bottom-right-radius: ${({ theme }) => theme.sizes.borderRadius}; */
 		}
 
 		&:hover {
@@ -91,4 +98,14 @@ const ContextMenu = styled.div`
 	}
 `;
 
-export { Item, Cover, Names, CreatedAt, ContextMenuIconWrapper, ContextMenu };
+export {
+	Item,
+	CoverWrapper,
+	Names,
+	Title,
+	Artist,
+	Year,
+	CreatedAt,
+	ContextMenuIconWrapper,
+	ContextMenu,
+};

@@ -1,19 +1,22 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { removeAlbum } from "store/albumsSlice";
 import { IAlbum } from "types";
+import formatDate from "utils/formatDate";
+import Image from "components/Image/Image";
+import ContextMenuIcon from "components/Icons/ContextMenuIcon/ContextMenuIcon";
 import {
+	Artist,
 	ContextMenu,
 	ContextMenuIconWrapper,
-	Cover,
+	CoverWrapper,
 	CreatedAt,
 	Item,
 	Names,
+	Title,
+	Year,
 } from "./AlbumItem.styled";
-import formatDate from "utils/formatDate";
-import Image from "components/Image/Image";
-import { Link } from "react-router-dom";
-import ContextMenuIcon from "components/Icons/ContextMenuIcon/ContextMenuIcon";
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "hooks";
-import { removeAlbum } from "store/albumsSlice";
 
 type Props = {
 	album: IAlbum;
@@ -69,7 +72,7 @@ const AlbumItem = ({ album }: Props) => {
 
 	return (
 		<Item>
-			<Cover>
+			<CoverWrapper>
 				<div>
 					<Link to={`/album/${album.id}`}>
 						<Image
@@ -80,28 +83,33 @@ const AlbumItem = ({ album }: Props) => {
 						/>
 					</Link>
 				</div>
-			</Cover>
+			</CoverWrapper>
 
 			<Names>
-				<div>
+				<Title>
 					<Link to={`/album/${album.id}`}>{album.title}</Link>
-				</div>
-				<div>{album.artist}</div>
+				</Title>
+
+				<Artist>{album.artist}</Artist>
 			</Names>
 
-			<div>{album.year}</div>
+			<Year>{album.year}</Year>
 
 			<CreatedAt>
-				{formatDate(album.createdAt)}
+				<span>{formatDate(album.createdAt)}</span>
+
 				<ContextMenuIconWrapper id={`click-${album.id}`} onClick={openContextMenu}>
 					<div>
 						<ContextMenuIcon />
 					</div>
 				</ContextMenuIconWrapper>
+
 				<ContextMenu id={`menu-${album.id}`}>
 					<div onClick={removeAlbumFromFavorites}>
 						{isLikedAlbum ? "Удалить из Избранного" : "Добавить в Избранное"}
 					</div>
+					<div>Добавить в Запланированное</div>
+					<div>Добавить в папку</div>
 				</ContextMenu>
 			</CreatedAt>
 		</Item>

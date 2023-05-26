@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { themeMods } from "consts";
+import { ThemeMods } from "consts";
 
 const initialState = {
-	mode: themeMods.Light,
+	mode: ThemeMods.Light,
 };
 
 const themeSlice = createSlice({
@@ -10,7 +10,7 @@ const themeSlice = createSlice({
 	initialState,
 	reducers: {
 		setMode(state) {
-			state.mode = state.mode === themeMods.Light ? themeMods.Dark : themeMods.Light;
+			state.mode = state.mode === ThemeMods.Light ? ThemeMods.Dark : ThemeMods.Light;
 		},
 	},
 });

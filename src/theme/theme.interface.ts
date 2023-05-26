@@ -1,7 +1,7 @@
-import { themeMods } from "consts";
+import { ThemeMods } from "consts";
 
 interface ITheme {
-	mode: themeMods;
+	mode: ThemeMods;
 	colors: {
 		primary: {
 			dark: string;

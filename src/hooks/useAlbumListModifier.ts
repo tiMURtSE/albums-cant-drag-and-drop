@@ -1,16 +1,10 @@
 import { useMemo } from "react";
-import { IAlbum } from "types";
+import { IAlbum, IModifiers } from "types";
 
-type Modifiers = {
-	sort: { column: keyof IAlbum | ""; type: string };
-	query: string;
-	flaggedYears: string[];
-};
-
-export const useAlbumListModifier = (albums: IAlbum[], modifiers: Modifiers): IAlbum[] => {
+export const useAlbumListModifier = (albums: IAlbum[], modifiers: IModifiers): IAlbum[] => {
 	const sortedAlbums = sortAlbums(albums, modifiers.sort);
 	const searchedAlbums = searchAlbums(sortedAlbums, modifiers.query);
-	const filteredAlbums = filterAlbums(searchedAlbums, modifiers.flaggedYears);
+	const filteredAlbums = filterAlbums(searchedAlbums, modifiers.flaggedDecades);
 
 	return filteredAlbums;
 };
@@ -67,20 +61,20 @@ const searchAlbums = (albums: IAlbum[], query: string) => {
 	return searchedAlbums;
 };
 
-const filterAlbums = (albums: IAlbum[], flaggedYears: string[]) => {
-	const formattedFlaggedYear = flaggedYears.map((year) => year.slice(0, 1));
+const filterAlbums = (albums: IAlbum[], flaggedDecades: string[]) => {
+	const formattedFlaggedDecade = flaggedDecades.map((decade) => decade.slice(0, 1));
 
 	const filteredAlbums = useMemo(() => {
-		if (flaggedYears.length) {
+		if (flaggedDecades.length) {
 			return [...albums].filter((album) => {
-				const formattedYear = String(album.year).slice(2, 3);
+				const formattedDecade = String(album.year).slice(2, 3);
 
-				return formattedFlaggedYear.includes(formattedYear);
+				return formattedFlaggedDecade.includes(formattedDecade);
 			});
 		} else {
 			return albums;
 		}
-	}, [albums, flaggedYears]);
+	}, [albums, flaggedDecades]);
 
 	return filteredAlbums;
 };

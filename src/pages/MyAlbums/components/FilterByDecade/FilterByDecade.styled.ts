@@ -7,14 +7,13 @@ const Filter = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
-const Year = styled.div<{ isFlagged: boolean }>`
+const Decade = styled.div<{ isFlagged: boolean }>`
 	flex-basis: 25%;
 	text-align: center;
 	padding: 5px 0;
 
 	background-color: ${({ isFlagged, theme }) => (isFlagged ? theme.colors.contrastText : "")};
 	color: ${({ isFlagged, theme }) => (isFlagged ? theme.colors.background.default : "")};
-	border-right: 2px solid ${({ theme }) => theme.colors.contrastText};
 	cursor: pointer;
 
 	&:hover {
@@ -47,4 +46,4 @@ const Year = styled.div<{ isFlagged: boolean }>`
 	}
 `;
 
-export { Filter, Year };
+export { Filter, Decade };
