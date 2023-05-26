@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSelector } from "hooks";
-import { useAlbumListModifier } from "hooks/useAlbumListModifier";
+import { useAlbumListModifiers } from "hooks/useAlbumListModifiers";
 import { IModifiers } from "types";
 import { Input, Modifiers, SortAndSearch, Wrapper } from "./MyAlbums.styled";
 import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
@@ -13,7 +13,7 @@ const MyAlbums = () => {
 		query: "",
 		flaggedDecades: [],
 	});
-	const modifiedAlbums = useAlbumListModifier(albums, modifiers);
+	const modifiedAlbums = useAlbumListModifiers(albums, modifiers);
 
 	return (
 		<Wrapper>

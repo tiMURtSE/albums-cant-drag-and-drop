@@ -1,15 +1,17 @@
 import { useMemo } from "react";
 import { IAlbum, IModifiers } from "types";
 
-export const useAlbumListModifier = (albums: IAlbum[], modifiers: IModifiers): IAlbum[] => {
-	const sortedAlbums = sortAlbums(albums, modifiers.sort);
-	const searchedAlbums = searchAlbums(sortedAlbums, modifiers.query);
-	const filteredAlbums = filterAlbums(searchedAlbums, modifiers.flaggedDecades);
+export const useAlbumListModifiers = (albums: IAlbum[], modifiers: IModifiers): IAlbum[] => {
+	let modifiedAlbums;
 
-	return filteredAlbums;
+	modifiedAlbums = sortAlbums(albums, modifiers.sort);
+	modifiedAlbums = searchAlbums(modifiedAlbums, modifiers.query);
+	modifiedAlbums = filterAlbums(modifiedAlbums, modifiers.flaggedDecades);
+
+	return modifiedAlbums;
 };
 
-const sortAlbums = (albums: IAlbum[], sort: { column: keyof IAlbum | ""; type: string }) => {
+const sortAlbums = (albums: IAlbum[], sort: IModifiers["sort"]) => {
 	const sortedAlbums = useMemo(() => {
 		if (sort.column) {
 			if (sort.column === "year") {

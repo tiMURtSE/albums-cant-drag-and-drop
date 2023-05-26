@@ -10,15 +10,15 @@ type Props = {
 };
 
 const ContextMenu = ({ album }: Props) => {
-	const likedAlbums = useAppSelector((state) => state.albums.albums);
-	const isLikedAlbum = likedAlbums.find((likedAlbum) => likedAlbum.id === album.id);
+	const favoriteAlbums = useAppSelector((state) => state.albums.albums);
+	const isFavoriteAlbum = favoriteAlbums.find((favoriteAlbum) => favoriteAlbum.id === album.id);
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const dispatch = useAppDispatch();
 	const removeAlbumFromFavorites = () => {
 		dispatch(removeAlbum({ album }));
 	};
 
-	const openContextMenu = (event: any) => {
+	const openContextMenu = () => {
 		const contextMenu = document.querySelector(`#menu-${album.id}`) as HTMLElement;
 		const contextMenuIcon = document.querySelector(`#click-${album.id}`) as HTMLElement;
 
@@ -63,7 +63,7 @@ const ContextMenu = ({ album }: Props) => {
 
 			<Menu id={`menu-${album.id}`}>
 				<MenuItem onClick={removeAlbumFromFavorites}>
-					{isLikedAlbum ? "Удалить из Избранного" : "Добавить в Избранное"}
+					{isFavoriteAlbum ? "Удалить из Избранного" : "Добавить в Избранное"}
 				</MenuItem>
 				<MenuItem>Добавить в Запланированное</MenuItem>
 				<MenuItem>Добавить в папку</MenuItem>
