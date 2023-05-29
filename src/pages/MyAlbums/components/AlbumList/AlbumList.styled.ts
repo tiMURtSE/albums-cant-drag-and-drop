@@ -8,12 +8,17 @@ const Caption = styled.ul`
 	color: ${({ theme }) => theme.colors.primary.dark};
 `;
 
-const CaptionItem = styled.li<{ sortState?: SortingTypes | "" }>`
+const CaptionItem = styled.li`
 	flex-basis: 17%;
 
 	&:nth-child(2) {
 		flex-basis: calc(100% - 17% * 3);
 	}
+`;
+
+const CaptionSortButton = styled.span<{ sortState?: SortingTypes | "" }>`
+	color: ${({ sortState, theme }) => (sortState ? theme.colors.contrastText : "inherit")};
+	cursor: pointer;
 
 	&::after {
 		content: "${({ sortState }) =>
@@ -23,6 +28,10 @@ const CaptionItem = styled.li<{ sortState?: SortingTypes | "" }>`
 				? "↑"
 				: ""}";
 	}
+
+	&:hover {
+		color: ${({ theme }) => theme.colors.contrastText};
+	}
 `;
 
-export { Caption, CaptionItem };
+export { Caption, CaptionItem, CaptionSortButton };

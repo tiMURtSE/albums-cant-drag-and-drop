@@ -1,18 +1,12 @@
 import { SortingTypes } from "consts";
 import { IAlbum, IModifiers } from "types";
 import AlbumItem from "../AlbumItem/AlbumItem";
-import { Caption, CaptionItem } from "./AlbumList.styled";
+import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
 
 type Props = {
 	modifiedAlbums: IAlbum[];
 	modifiers: IModifiers;
 	setModifiers: React.Dispatch<React.SetStateAction<IModifiers>>;
-};
-
-type CaptionItemType = {
-	label: string;
-	sortName: keyof IAlbum;
-	sortState: SortingTypes | "";
 };
 
 const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
@@ -35,7 +29,7 @@ const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
 		setModifiers({ ...modifiers, sort: { column: nextSortingColumn, type: nextSortingType } });
 	};
 
-	const srt = (sortState: keyof IAlbum) => {
+	const setSortingType = (sortState: keyof IAlbum) => {
 		if (sortState === modifiers.sort.column) {
 			return modifiers.sort.type;
 		}
@@ -45,26 +39,29 @@ const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
 		<div>
 			<Caption>
 				<CaptionItem>Обложка</CaptionItem>
-				<CaptionItem
-					sortState={srt("title")}
-					data-column={"title"}
-					onClick={() => handleSortClick("title")}
-				>
-					Что и кем
+				<CaptionItem>
+					<CaptionSortButton
+						sortState={setSortingType("title")}
+						onClick={() => handleSortClick("title")}
+					>
+						Что и кем
+					</CaptionSortButton>
 				</CaptionItem>
-				<CaptionItem
-					sortState={srt("year")}
-					data-column={"year"}
-					onClick={() => handleSortClick("year")}
-				>
-					Год
+				<CaptionItem>
+					<CaptionSortButton
+						sortState={setSortingType("year")}
+						onClick={() => handleSortClick("year")}
+					>
+						Год
+					</CaptionSortButton>
 				</CaptionItem>
-				<CaptionItem
-					sortState={srt("createdAt")}
-					data-column={"createdAt"}
-					onClick={() => handleSortClick("createdAt")}
-				>
-					Дата добавления
+				<CaptionItem>
+					<CaptionSortButton
+						sortState={setSortingType("createdAt")}
+						onClick={() => handleSortClick("createdAt")}
+					>
+						Дата добавления
+					</CaptionSortButton>
 				</CaptionItem>
 			</Caption>
 
