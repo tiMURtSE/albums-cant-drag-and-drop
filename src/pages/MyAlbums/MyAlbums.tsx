@@ -1,19 +1,27 @@
 import { useState } from "react";
 import { useAppSelector } from "hooks";
-import { useAlbumListModifiers } from "hooks/useAlbumListModifiers";
-import { IModifiers } from "types";
+import { useAlbumListCustomization } from "hooks/useAlbumListCustomization";
+import { Decades, Sort } from "types";
 import { Input, Modifiers, SortAndSearch, Wrapper } from "./MyAlbums.styled";
 import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 import AlbumList from "./components/AlbumList/AlbumList";
 
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
-	const [modifiers, setModifiers] = useState<IModifiers>({
-		sort: { column: "", type: "" },
-		query: "",
-		flaggedDecades: [],
+	// const [settings, setSettings] = useState<IModifiers>({
+	// 	sort: { column: "", type: "" },
+	// 	query: "",
+	// 	flaggedDecades: [],
+	// });
+	const [sort, setSort] = useState<Sort>({ sortingColumn: "", typeOfSort: "" });
+	const [searchQuery, setSearchQuery] = useState("");
+	const [filterByDecades, setFilterByDecades] = useState<Decades>([]);
+
+	const customizedAlbumList = useAlbumListCustomization(albums, {
+		sort,
+		searchQuery,
+		filterByDecades,
 	});
-	const modifiedAlbums = useAlbumListModifiers(albums, modifiers);
 
 	return (
 		<Wrapper>
@@ -21,22 +29,19 @@ const MyAlbums = () => {
 				<SortAndSearch>
 					<Input
 						type="text"
-						value={modifiers.query}
-						onChange={(event) =>
-							setModifiers({ ...modifiers, query: event.target.value })
-						}
+						value={searchQuery}
+						onChange={(event) => setSearchQuery(event.target.value)}
 						placeholder="Поиск..."
 					/>
 
-					<FilterByDecade modifiers={modifiers} setModifiers={setModifiers} />
+					<FilterByDecade
+						filterByDecades={filterByDecades}
+						setFilterByDecades={setFilterByDecades}
+					/>
 				</SortAndSearch>
 			</Modifiers>
 
-			<AlbumList
-				modifiedAlbums={modifiedAlbums}
-				modifiers={modifiers}
-				setModifiers={setModifiers}
-			/>
+			<AlbumList customizedAlbumList={customizedAlbumList} sort={sort} setSort={setSort} />
 		</Wrapper>
 	);
 };

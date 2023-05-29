@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Filter, Decade } from "./FilterByDecade.styled";
-import { IModifiers } from "types";
+import { Decades, IModifiers } from "types";
 
 type Props = {
-	modifiers: IModifiers;
-	setModifiers: React.Dispatch<IModifiers>;
+	filterByDecades: Decades;
+	setFilterByDecades: React.Dispatch<Decades>;
 };
 
-const FilterByDecade = ({ modifiers, setModifiers }: Props) => {
+const FilterByDecade = ({ filterByDecades, setFilterByDecades }: Props) => {
 	const [decades, setDecades] = useState([
 		{ decade: "50", isFlagged: false },
 		{ decade: "60", isFlagged: false },
@@ -28,19 +28,20 @@ const FilterByDecade = ({ modifiers, setModifiers }: Props) => {
 
 			return item;
 		});
+
 		setDecades(updatedDecades);
 
-		if (modifiers.flaggedDecades.includes(flaggedDecade)) {
-			const updatedFlaggedDecades = [...modifiers.flaggedDecades].filter(
+		if (filterByDecades.includes(flaggedDecade)) {
+			const updatedFlaggedDecades = [...filterByDecades].filter(
 				(decade) => decade !== flaggedDecade
 			);
 
-			setModifiers({ ...modifiers, flaggedDecades: updatedFlaggedDecades });
+			setFilterByDecades(updatedFlaggedDecades);
 		} else {
-			const updatedFlaggedDecades = [...modifiers.flaggedDecades];
+			const updatedFlaggedDecades = [...filterByDecades];
 
 			updatedFlaggedDecades.push(flaggedDecade);
-			setModifiers({ ...modifiers, flaggedDecades: updatedFlaggedDecades });
+			setFilterByDecades(updatedFlaggedDecades);
 		}
 	};
 

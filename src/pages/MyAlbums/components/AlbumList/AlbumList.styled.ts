@@ -1,4 +1,4 @@
-import { SortingTypes } from "consts";
+import { SortTypes } from "consts";
 import styled from "styled-components";
 
 const Caption = styled.ul`
@@ -16,17 +16,13 @@ const CaptionItem = styled.li`
 	}
 `;
 
-const CaptionSortButton = styled.span<{ sortState?: SortingTypes | "" }>`
-	color: ${({ sortState, theme }) => (sortState ? theme.colors.contrastText : "inherit")};
+const CaptionSortButton = styled.span<{ sortType?: SortTypes | "" }>`
+	color: ${({ sortType, theme }) => (sortType ? theme.colors.contrastText : "inherit")};
 	cursor: pointer;
 
 	&::after {
-		content: "${({ sortState }) =>
-			sortState === SortingTypes.Ascending
-				? "↓"
-				: sortState === SortingTypes.Descending
-				? "↑"
-				: ""}";
+		content: "${({ sortType }) =>
+			sortType === SortTypes.Ascending ? "↓" : sortType === SortTypes.Descending ? "↑" : ""}";
 	}
 
 	&:hover {

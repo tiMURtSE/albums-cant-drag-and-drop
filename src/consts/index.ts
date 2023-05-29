@@ -16,7 +16,7 @@ export enum ThemeMods {
 	Dark = "dark",
 }
 
-export enum SortingTypes {
+export enum SortTypes {
 	Ascending = "asc",
 	Descending = "desc",
 }

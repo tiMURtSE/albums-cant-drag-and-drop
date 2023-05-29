@@ -9,7 +9,7 @@ import { Loader } from "styles/components/Loader.styled";
 import { Autocomplete, ClearSign, Content, Input, Item, ItemLink, List } from "./Searchbar.styled";
 
 const Search = () => {
-	const [query, setQuery] = useState<string>("");
+	const [query, setQuery] = useState("");
 	const [suggestions, setSuggestions] = useState<Array<IAlbum>>([]);
 	const [isAutocompleteOpen, setIsAutocompleteOpen] = useState<boolean>(false);
 	const [selectedIndex, setSelectedIndex] = useState<number>(-1);

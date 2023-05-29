@@ -1,37 +1,39 @@
-import { SortingTypes } from "consts";
-import { IAlbum, IModifiers } from "types";
+import { SortTypes } from "consts";
+import { IAlbum, IModifiers, Sort } from "types";
 import AlbumItem from "../AlbumItem/AlbumItem";
 import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
 
 type Props = {
-	modifiedAlbums: IAlbum[];
-	modifiers: IModifiers;
-	setModifiers: React.Dispatch<React.SetStateAction<IModifiers>>;
+	customizedAlbumList: IAlbum[];
+	sort: Sort;
+	setSort: React.Dispatch<React.SetStateAction<Sort>>;
 };
 
-const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
+function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
 	const handleSortClick = (column: keyof IAlbum) => {
-		const isPreviousColumnSorting = modifiers.sort.column === column;
-		let nextSortingType: IModifiers["sort"]["type"];
-		let nextSortingColumn: keyof IAlbum | "" = column;
+		const isPreviousColumnSorting = sort.sortingColumn === column;
+		let newType: Sort["typeOfSort"];
+		let newColumn: keyof IAlbum | "" = column;
 
 		if (isPreviousColumnSorting) {
-			if (modifiers.sort.type === SortingTypes.Ascending) {
-				nextSortingType = SortingTypes.Descending;
+			if (sort.typeOfSort === SortTypes.Ascending) {
+				newType = SortTypes.Descending;
 			} else {
-				nextSortingType = "";
-				nextSortingColumn = "";
+				newType = "";
+				newColumn = "";
 			}
 		} else {
-			nextSortingType = SortingTypes.Ascending;
+			newType = SortTypes.Ascending;
 		}
 
-		setModifiers({ ...modifiers, sort: { column: nextSortingColumn, type: nextSortingType } });
+		const newSort = { sortingColumn: newColumn, typeOfSort: newType };
+
+		setSort(newSort);
 	};
 
-	const setSortingType = (sortState: keyof IAlbum) => {
-		if (sortState === modifiers.sort.column) {
-			return modifiers.sort.type;
+	const getTypeOfSort = (sortingColumn: keyof IAlbum) => {
+		if (sortingColumn === sort.sortingColumn) {
+			return sort.typeOfSort;
 		}
 	};
 
@@ -41,7 +43,7 @@ const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
 				<CaptionItem>Обложка</CaptionItem>
 				<CaptionItem>
 					<CaptionSortButton
-						sortState={setSortingType("title")}
+						sortType={getTypeOfSort("title")}
 						onClick={() => handleSortClick("title")}
 					>
 						Что и кем
@@ -49,7 +51,7 @@ const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
 				</CaptionItem>
 				<CaptionItem>
 					<CaptionSortButton
-						sortState={setSortingType("year")}
+						sortType={getTypeOfSort("year")}
 						onClick={() => handleSortClick("year")}
 					>
 						Год
@@ -57,7 +59,7 @@ const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
 				</CaptionItem>
 				<CaptionItem>
 					<CaptionSortButton
-						sortState={setSortingType("createdAt")}
+						sortType={getTypeOfSort("createdAt")}
 						onClick={() => handleSortClick("createdAt")}
 					>
 						Дата добавления
@@ -66,12 +68,12 @@ const AlbumList = ({ modifiedAlbums, modifiers, setModifiers }: Props) => {
 			</Caption>
 
 			<ul>
-				{modifiedAlbums.map((album) => (
+				{customizedAlbumList.map((album) => (
 					<AlbumItem album={album} key={album.id} />
 				))}
 			</ul>
 		</div>
 	);
-};
+}
 
 export default AlbumList;

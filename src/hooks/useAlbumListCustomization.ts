@@ -1,39 +1,52 @@
 import { useMemo } from "react";
-import { IAlbum, IModifiers } from "types";
+import { Decades, IAlbum, IModifiers, Sort } from "types";
 
-export const useAlbumListModifiers = (albums: IAlbum[], modifiers: IModifiers): IAlbum[] => {
-	let modifiedAlbums;
-
-	modifiedAlbums = sortAlbums(albums, modifiers.sort);
-	modifiedAlbums = searchAlbums(modifiedAlbums, modifiers.query);
-	modifiedAlbums = filterAlbums(modifiedAlbums, modifiers.flaggedDecades);
-
-	return modifiedAlbums;
+type Customization = {
+	sort: Sort;
+	searchQuery: string;
+	filterByDecades: Decades;
 };
 
-const sortAlbums = (albums: IAlbum[], sort: IModifiers["sort"]) => {
+export const useAlbumListCustomization = (
+	albums: IAlbum[],
+	customizations: Customization
+): IAlbum[] => {
+	let customizedAlbumList;
+
+	customizedAlbumList = sortAlbums(albums, customizations.sort);
+	customizedAlbumList = searchAlbums(customizedAlbumList, customizations.searchQuery);
+	customizedAlbumList = filterAlbums(customizedAlbumList, customizations.filterByDecades);
+
+	return customizedAlbumList;
+};
+
+const sortAlbums = (albums: IAlbum[], sort: Sort) => {
 	const sortedAlbums = useMemo(() => {
-		if (sort.column) {
-			if (sort.column === "year") {
-				if (sort.type === "asc") {
-					return [...albums].sort((a: any, b: any) => a[sort.column] - b[sort.column]);
+		if (sort.sortingColumn) {
+			if (sort.sortingColumn === "year") {
+				if (sort.typeOfSort === "asc") {
+					return [...albums].sort(
+						(a: any, b: any) => a[sort.sortingColumn] - b[sort.sortingColumn]
+					);
 				}
 
-				if (sort.type === "desc") {
-					return [...albums].sort((a: any, b: any) => b[sort.column] - a[sort.column]);
+				if (sort.typeOfSort === "desc") {
+					return [...albums].sort(
+						(a: any, b: any) => b[sort.sortingColumn] - a[sort.sortingColumn]
+					);
 				}
 
 				return albums;
 			} else {
-				if (sort.type === "asc") {
+				if (sort.typeOfSort === "asc") {
 					return [...albums].sort((a: any, b: any) =>
-						a[sort.column].localeCompare(b[sort.column])
+						a[sort.sortingColumn].localeCompare(b[sort.sortingColumn])
 					);
 				}
 
-				if (sort.type === "desc") {
+				if (sort.typeOfSort === "desc") {
 					return [...albums].sort((a: any, b: any) =>
-						b[sort.column].localeCompare(a[sort.column])
+						b[sort.sortingColumn].localeCompare(a[sort.sortingColumn])
 					);
 				}
 
