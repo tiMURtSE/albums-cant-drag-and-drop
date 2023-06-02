@@ -8,12 +8,12 @@ const Wrapper = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
-const Modifiers = styled(FlexBetween)`
+const Customizations = styled(FlexBetween)`
 	margin: 20px 0;
 	padding: 0 1rem;
 `;
 
-const SortAndSearch = styled.div`
+const SearchAndFilter = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
@@ -30,4 +30,4 @@ const Input = styled.input`
 	}
 `;
 
-export { Modifiers, Wrapper, Input, SortAndSearch };
+export { Customizations, Wrapper, Input, SearchAndFilter };

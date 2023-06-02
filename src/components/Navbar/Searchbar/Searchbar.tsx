@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
 import { IAlbum } from "types";
-import formatAlbum from "utils/formatAlbum";
-import searchAlbums from "services/api/search.api";
+import searchAlbums from "services/api/searchAlbums.api";
 import { Loader } from "styles/components/Loader.styled";
 import { Autocomplete, ClearSign, Content, Input, Item, ItemLink, List } from "./Searchbar.styled";
+import { useHandleOutsideClick } from "hooks/useHandleOutsideClick";
+import formatAlbum from "utils/formatAlbum";
 
 const Search = () => {
 	const [query, setQuery] = useState("");
@@ -17,9 +18,9 @@ const Search = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const getAlbums = async (): Promise<Array<IAlbum>> => {
-		const results = await searchAlbums(query);
-		const albums = results.albums.items as Array<IAlbum>;
+	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
+		const response = await searchAlbums(query);
+		const albums = response.albums.items;
 
 		for (let i = 0; i < albums.length; i++) {
 			albums[i] = formatAlbum(albums[i]);
@@ -37,19 +38,11 @@ const Search = () => {
 		if (event) event.preventDefault();
 		dispatch(clearFoundAlbums());
 
-		const albums = await getAlbums();
+		const albums = await fetchAndFormatAlbums();
 
 		dispatch(setFoundAlbums({ albums }));
 		navigate(`/search/${query}`);
 		setIsAutocompleteOpen(false);
-	};
-
-	const handleOutsideClick = (event: MouseEvent) => {
-		const target = event.target as HTMLElement;
-
-		if (!target.closest("#input") && !target.closest("#autocomplete")) {
-			setIsAutocompleteOpen(false);
-		}
 	};
 
 	const handleNavigation = (event: KeyboardEvent) => {
@@ -86,7 +79,7 @@ const Search = () => {
 
 		const timer = setTimeout(async () => {
 			if (query) {
-				const albums = await getAlbums();
+				const albums = await fetchAndFormatAlbums();
 
 				setSuggestions(albums);
 				setIsLoading(false);
@@ -109,16 +102,31 @@ const Search = () => {
 		};
 	}, [isAutocompleteOpen, selectedIndex, query]);
 
-	useEffect(() => {
-		if (isAutocompleteOpen) {
-			document.addEventListener("click", handleOutsideClick);
-		}
+	const insideClickSelectors = ["#input", "#autocomplete"];
 
-		return () => {
-			document.removeEventListener("click", handleOutsideClick);
-			setSelectedIndex(-1);
-		};
-	}, [isAutocompleteOpen]);
+	const closeAutocomplete = () => {
+		setIsAutocompleteOpen(false);
+	};
+
+	useHandleOutsideClick(isAutocompleteOpen, insideClickSelectors, closeAutocomplete);
+
+	// const handleOutsideClick = (event: MouseEvent) => {
+	//     const target = event.target as HTMLElement;
+
+	//     if (!target.closest("#input") && !target.closest("#autocomplete")) {
+	//         setIsAutocompleteOpen(false);
+	//     }
+	// };
+	// useEffect(() => {
+	// 	if (isAutocompleteOpen) {
+	// 		document.addEventListener("click", handleOutsideClick);
+	// 	}
+
+	// 	return () => {
+	// 		document.removeEventListener("click", handleOutsideClick);
+	// 		setSelectedIndex(-1);
+	// 	};
+	// }, [isAutocompleteOpen]);
 
 	return (
 		<Content>

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const MenuWrapper = styled.div`
+const Wrapper = styled.div`
 	position: relative;
 `;
 
-const MenuIconWrapper = styled.div`
+const IconWrapper = styled.div`
 	position: absolute;
 	top: 50%;
 	right: 12px;
@@ -33,7 +33,7 @@ const Menu = styled.ul`
 	background-color: ${({ theme }) => theme.colors.background.default};
 `;
 
-const MenuItem = styled.li`
+const Item = styled.li`
 	width: 100%;
 	padding: 0.2rem 1rem;
 
@@ -45,4 +45,4 @@ const MenuItem = styled.li`
 	}
 `;
 
-export { MenuWrapper, MenuIconWrapper, Menu, MenuItem };
+export { Wrapper, IconWrapper, Menu, Item };

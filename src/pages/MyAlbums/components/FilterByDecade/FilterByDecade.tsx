@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { Filter, Decade } from "./FilterByDecade.styled";
 import { Decades, IModifiers } from "types";
 
 type Props = {
-	filterByDecades: Decades;
+	filterByDecades: ("50" | "60" | "70" | "80" | "90" | "00" | "10" | "20")[];
 	setFilterByDecades: React.Dispatch<Decades>;
 };
 
+type Decade = {
+	decade: "50" | "60" | "70" | "80" | "90" | "00" | "10" | "20";
+	isFlagged: boolean;
+};
+
 const FilterByDecade = ({ filterByDecades, setFilterByDecades }: Props) => {
-	const [decades, setDecades] = useState([
+	const [decades, setDecades] = useState<Decade[]>([
 		{ decade: "50", isFlagged: false },
 		{ decade: "60", isFlagged: false },
 		{ decade: "70", isFlagged: false },
@@ -19,36 +24,28 @@ const FilterByDecade = ({ filterByDecades, setFilterByDecades }: Props) => {
 		{ decade: "20", isFlagged: false },
 	]);
 
-	const flagDecade = (event: any) => {
-		const flaggedDecade = event.target.textContent.slice(0, 2);
-		const updatedDecades = decades.map((item) => {
-			if (item.decade === flaggedDecade) {
-				return { ...item, isFlagged: !item.isFlagged };
-			}
-
-			return item;
-		});
+	const flagDecade = (event: MouseEvent<HTMLDivElement>) => {
+		const flaggedDecade: any = event.currentTarget.getAttribute("data-decade");
+		const updatedDecades = decades.map((item) =>
+			item.decade === flaggedDecade ? { ...item, isFlagged: !item.isFlagged } : item
+		);
+		const updatedFlaggedDecades = filterByDecades.includes(flaggedDecade)
+			? filterByDecades.filter((decade) => decade !== flaggedDecade)
+			: [...filterByDecades, flaggedDecade];
 
 		setDecades(updatedDecades);
-
-		if (filterByDecades.includes(flaggedDecade)) {
-			const updatedFlaggedDecades = [...filterByDecades].filter(
-				(decade) => decade !== flaggedDecade
-			);
-
-			setFilterByDecades(updatedFlaggedDecades);
-		} else {
-			const updatedFlaggedDecades = [...filterByDecades];
-
-			updatedFlaggedDecades.push(flaggedDecade);
-			setFilterByDecades(updatedFlaggedDecades);
-		}
+		setFilterByDecades(updatedFlaggedDecades);
 	};
 
 	return (
 		<Filter>
 			{decades.map(({ decade, isFlagged }) => (
-				<Decade onClick={flagDecade} isFlagged={isFlagged} key={decade}>
+				<Decade
+					onClick={flagDecade}
+					data-decade={decade}
+					isFlagged={isFlagged}
+					key={decade}
+				>
 					{decade}'s
 				</Decade>
 			))}

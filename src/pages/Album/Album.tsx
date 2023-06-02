@@ -11,14 +11,14 @@ const Album = () => {
 	const { id } = useParams();
 	const [album, setAlbum] = useState<IAlbum | null>(null);
 
-	const getAlbum = async () => {
+	const fetchAndFormatAlbum = async () => {
 		const album = await getSingleAlbum(id);
 
 		setAlbum(formatAlbum(album));
 	};
 
 	useEffect(() => {
-		getAlbum();
+		fetchAndFormatAlbum();
 	}, [id]);
 
 	if (!album) return null;
