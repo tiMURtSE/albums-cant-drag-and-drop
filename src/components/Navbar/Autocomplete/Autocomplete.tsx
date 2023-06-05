@@ -1,12 +1,10 @@
 import { Loader } from "styles/components/Loader.styled";
 import { Item, ItemLink, List, Wrapper } from "./Autocomplete.styled";
 import { Link } from "react-router-dom";
-import { FormEvent, useEffect, useState } from "react";
-import { IAlbum } from "types";
-import searchAlbums from "services/api/searchAlbums.api";
-import formatAlbum from "utils/formatAlbum";
+import { FormEvent } from "react";
 import { useAutocompleteNavigation } from "hooks/useAutocompleteNavigation";
 import { useAutocompleteNavigationSubmit } from "hooks/useAutocompleteNavigationSubmit";
+import { useDebounce } from "hooks/useDebounce";
 
 type Props = {
 	query: string;
@@ -23,18 +21,12 @@ const Autocomplete = ({
 }: Props) => {
 	const [suggestions, selectedIndex, setSuggestions] =
 		useAutocompleteNavigation(isAutocompleteOpen);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
-		const response = await searchAlbums(query);
-		const albums = response.albums.items;
-
-		for (let i = 0; i < albums.length; i++) {
-			albums[i] = formatAlbum(albums[i]);
-		}
-
-		return albums;
-	};
+	const isLoading = useDebounce({
+		query,
+		setSuggestions,
+		setIsAutocompleteOpen,
+	});
 
 	useAutocompleteNavigationSubmit({
 		handleSearchSubmit,
@@ -44,27 +36,7 @@ const Autocomplete = ({
 		isAutocompleteOpen,
 	});
 
-	useEffect(() => {
-		if (!query) {
-			return setIsAutocompleteOpen(false);
-		}
-
-		setIsLoading(true);
-
-		const timer = setTimeout(async () => {
-			if (query) {
-				const albums = await fetchAndFormatAlbums();
-
-				setSuggestions(albums);
-				setIsLoading(false);
-			}
-		}, 500);
-
-		return () => {
-			clearTimeout(timer);
-			setIsLoading(false);
-		};
-	}, [query]);
+	if (!isAutocompleteOpen) return null;
 
 	return (
 		<Wrapper id="autocomplete">

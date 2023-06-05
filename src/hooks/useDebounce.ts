@@ -1,38 +1,68 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import searchAlbums from "services/api/searchAlbums.api";
 import { IAlbum } from "types";
+import formatAlbum from "utils/formatAlbum";
 import formatAlbums from "utils/formatAlbum";
 
-export const useDebounce = (query: string, setIsAutocompleteOpen) => {
+type Parameters = {
+	query: string;
+	setSuggestions: React.Dispatch<SetStateAction<IAlbum[]>>;
+	setIsAutocompleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const useDebounce = ({ query, setSuggestions, setIsAutocompleteOpen }: Parameters) => {
+	const [lastCall, setLastCall] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
-	const [suggestions, setSuggestions] = useState<Array<IAlbum>>([]);
+	const [lastCallTimeOut, setLastCallTimeOut] = useState(0);
 
 	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
 		const response = await searchAlbums(query);
 		const albums = response.albums.items;
 
-		return formatAlbums(albums);
+		for (let i = 0; i < albums.length; i++) {
+			albums[i] = formatAlbum(albums[i]);
+		}
+
+		return albums;
 	};
 
-	useEffect(() => {
+	const fetchSuggestions = async () => {
 		if (!query) {
 			return setIsAutocompleteOpen(false);
 		}
 
 		setIsLoading(true);
+		setIsAutocompleteOpen(true);
 
-		const timer = setTimeout(async () => {
-			if (query) {
-				const albums = await fetchAndFormatAlbums();
+		const suggestions = await fetchAndFormatAlbums();
 
-				setSuggestions(albums);
-				setIsLoading(false);
+		setIsLoading(false);
+		setSuggestions(suggestions);
+	};
+
+	const debounce = (callee: () => Promise<void>, timeout: number) => {
+		return function perform() {
+			let previousCall = lastCall;
+
+			setLastCall(Date.now());
+
+			if (previousCall && lastCall - previousCall <= timeout) {
+				clearTimeout(lastCallTimeOut);
 			}
-		}, 500);
 
-		return () => {
-			clearTimeout(timer);
-			setIsLoading(false);
+			setLastCallTimeOut(
+				setTimeout(() => {
+					callee();
+				}, timeout)
+			);
 		};
+	};
+
+	useEffect(() => {
+		const debounceFetchSuggestions = debounce(fetchSuggestions, 1000);
+
+		debounceFetchSuggestions();
 	}, [query]);
+
+	return isLoading;
 };

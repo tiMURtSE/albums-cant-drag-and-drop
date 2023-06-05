@@ -21,7 +21,6 @@ const Search = () => {
 		const query = event.target.value;
 
 		setQuery(query);
-		setIsAutocompleteOpen(true);
 	};
 
 	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
@@ -68,14 +67,14 @@ const Search = () => {
 				/>
 			</form>
 
-			{isAutocompleteOpen && (
-				<Autocomplete
-					query={query}
-					isAutocompleteOpen={isAutocompleteOpen}
-					setIsAutocompleteOpen={setIsAutocompleteOpen}
-					handleSearchSubmit={handleSearchSubmit}
-				/>
-			)}
+			{/* {isAutocompleteOpen && ( */}
+			<Autocomplete
+				query={query}
+				isAutocompleteOpen={isAutocompleteOpen}
+				setIsAutocompleteOpen={setIsAutocompleteOpen}
+				handleSearchSubmit={handleSearchSubmit}
+			/>
+			{/* )} */}
 
 			<ClearSign query={query} onClick={() => setQuery("")}>
 				&#9587;
