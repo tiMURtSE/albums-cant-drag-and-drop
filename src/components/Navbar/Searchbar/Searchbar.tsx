@@ -5,29 +5,24 @@ import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
 import { IAlbum } from "types";
 import searchAlbums from "services/api/searchAlbums.api";
 import { Loader } from "styles/components/Loader.styled";
-import { Autocomplete, ClearSign, Content, Input, Item, ItemLink, List } from "./Searchbar.styled";
+import { ClearSign, Content, Input } from "./Searchbar.styled";
 import { useHandleOutsideClick } from "hooks/useHandleOutsideClick";
 import formatAlbum from "utils/formatAlbum";
+import { useAutocompleteNavigation } from "hooks/useAutocompleteNavigation";
+import Autocomplete from "../Autocomplete/Autocomplete";
+import { useAppDispatch } from "hooks";
 
 const Search = () => {
 	const [query, setQuery] = useState("");
-	const [suggestions, setSuggestions] = useState<Array<IAlbum>>([]);
 	const [isAutocompleteOpen, setIsAutocompleteOpen] = useState<boolean>(false);
-	const [selectedIndex, setSelectedIndex] = useState<number>(-1);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
-	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
-		const response = await searchAlbums(query);
-		const albums = response.albums.items;
+	const insideClickSelectors = ["#input", "#autocomplete"];
 
-		for (let i = 0; i < albums.length; i++) {
-			albums[i] = formatAlbum(albums[i]);
-		}
-
-		return albums;
+	const closeAutocomplete = () => {
+		setIsAutocompleteOpen(false);
 	};
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setQuery(event.target.value);
@@ -45,88 +40,18 @@ const Search = () => {
 		setIsAutocompleteOpen(false);
 	};
 
-	const handleNavigation = (event: KeyboardEvent) => {
-		if (event.key.includes("Arrow") || event.key.includes("Enter") || event.key.includes("Tab"))
-			event.preventDefault();
+	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
+		const response = await searchAlbums(query);
+		const albums = response.albums.items;
 
-		if (event.key === "ArrowUp" || (event.key === "Tab" && event.shiftKey)) {
-			setSelectedIndex(
-				selectedIndex === 0 || selectedIndex === -1
-					? suggestions.length - 1
-					: selectedIndex - 1
-			);
-		} else if (event.key === "ArrowDown" || event.key === "Tab") {
-			setSelectedIndex(selectedIndex === suggestions.length - 1 ? 0 : selectedIndex + 1);
-		} else if (event.key === "Enter") {
-			if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
-				const albumId = suggestions[selectedIndex].id;
-
-				navigate(`/album/${albumId}`);
-				setIsAutocompleteOpen(false);
-				setSelectedIndex(0);
-			} else {
-				onSubmit();
-			}
-		}
-	};
-
-	useEffect(() => {
-		if (!query) {
-			return setIsAutocompleteOpen(false);
+		for (let i = 0; i < albums.length; i++) {
+			albums[i] = formatAlbum(albums[i]);
 		}
 
-		setIsLoading(true);
-
-		const timer = setTimeout(async () => {
-			if (query) {
-				const albums = await fetchAndFormatAlbums();
-
-				setSuggestions(albums);
-				setIsLoading(false);
-			}
-		}, 500);
-
-		return () => {
-			clearTimeout(timer);
-			setIsLoading(false);
-		};
-	}, [query]);
-
-	useEffect(() => {
-		if (isAutocompleteOpen) {
-			document.addEventListener("keydown", handleNavigation);
-		}
-
-		return () => {
-			document.removeEventListener("keydown", handleNavigation);
-		};
-	}, [isAutocompleteOpen, selectedIndex, query]);
-
-	const insideClickSelectors = ["#input", "#autocomplete"];
-
-	const closeAutocomplete = () => {
-		setIsAutocompleteOpen(false);
+		return albums;
 	};
 
 	useHandleOutsideClick(isAutocompleteOpen, insideClickSelectors, closeAutocomplete);
-
-	// const handleOutsideClick = (event: MouseEvent) => {
-	//     const target = event.target as HTMLElement;
-
-	//     if (!target.closest("#input") && !target.closest("#autocomplete")) {
-	//         setIsAutocompleteOpen(false);
-	//     }
-	// };
-	// useEffect(() => {
-	// 	if (isAutocompleteOpen) {
-	// 		document.addEventListener("click", handleOutsideClick);
-	// 	}
-
-	// 	return () => {
-	// 		document.removeEventListener("click", handleOutsideClick);
-	// 		setSelectedIndex(-1);
-	// 	};
-	// }, [isAutocompleteOpen]);
 
 	return (
 		<Content>
@@ -142,29 +67,11 @@ const Search = () => {
 			</form>
 
 			{isAutocompleteOpen && (
-				<Autocomplete id="autocomplete">
-					{isLoading ? (
-						<Loader
-							width="100%"
-							height="100px"
-							contentWidth="25px"
-							contentHeight="25px"
-							border="3px"
-						/>
-					) : (
-						<List id="search-list">
-							{suggestions.map((album, index) => (
-								<Item key={album.id} onClick={() => setIsAutocompleteOpen(false)}>
-									<Link to={`/album/${album.id}`}>
-										<ItemLink isFocused={selectedIndex === index}>
-											{album.title}
-										</ItemLink>
-									</Link>
-								</Item>
-							))}
-						</List>
-					)}
-				</Autocomplete>
+				<Autocomplete
+					query={query}
+					isAutocompleteOpen={isAutocompleteOpen}
+					setIsAutocompleteOpen={setIsAutocompleteOpen}
+				/>
 			)}
 
 			<ClearSign query={query} onClick={() => setQuery("")}>
