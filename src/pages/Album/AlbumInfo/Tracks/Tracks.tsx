@@ -16,7 +16,7 @@ const Tracks = ({ tracks }: Props) => {
 	if (!Array.isArray(tracks)) return null;
 
 	return (
-		<Wrapper numberOfTracks={(tracks.length + 1) * 50}>
+		<Wrapper numberOfTracks={(tracks.length + 1) * 74}>
 			<Input type="checkbox" id="tracks" />
 
 			<TableWrapper>

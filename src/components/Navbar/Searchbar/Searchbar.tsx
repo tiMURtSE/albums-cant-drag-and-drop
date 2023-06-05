@@ -1,43 +1,27 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
 import { IAlbum } from "types";
 import searchAlbums from "services/api/searchAlbums.api";
-import { Loader } from "styles/components/Loader.styled";
 import { ClearSign, Content, Input } from "./Searchbar.styled";
 import { useHandleOutsideClick } from "hooks/useHandleOutsideClick";
 import formatAlbum from "utils/formatAlbum";
-import { useAutocompleteNavigation } from "hooks/useAutocompleteNavigation";
 import Autocomplete from "../Autocomplete/Autocomplete";
 import { useAppDispatch } from "hooks";
 
 const Search = () => {
 	const [query, setQuery] = useState("");
-	const [isAutocompleteOpen, setIsAutocompleteOpen] = useState<boolean>(false);
-
+	const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
 	const insideClickSelectors = ["#input", "#autocomplete"];
 
-	const closeAutocomplete = () => {
-		setIsAutocompleteOpen(false);
-	};
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setQuery(event.target.value);
+	const handleQuery = (event: ChangeEvent<HTMLInputElement>) => {
+		const query = event.target.value;
+
+		setQuery(query);
 		setIsAutocompleteOpen(true);
-	};
-
-	const onSubmit = async (event?: FormEvent<HTMLFormElement>) => {
-		if (event) event.preventDefault();
-		dispatch(clearFoundAlbums());
-
-		const albums = await fetchAndFormatAlbums();
-
-		dispatch(setFoundAlbums({ albums }));
-		navigate(`/search/${query}`);
-		setIsAutocompleteOpen(false);
 	};
 
 	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
@@ -51,18 +35,36 @@ const Search = () => {
 		return albums;
 	};
 
+	const handleSearchSubmit = async (event?: FormEvent<HTMLFormElement>) => {
+		if (event) event.preventDefault();
+
+		const albums = await fetchAndFormatAlbums();
+		const input = document.querySelector(insideClickSelectors[0]) as HTMLElement;
+
+		if (input) input.blur();
+
+		dispatch(clearFoundAlbums());
+		dispatch(setFoundAlbums({ albums }));
+		navigate(`/search/${query}`);
+		setIsAutocompleteOpen(false);
+	};
+
+	const closeAutocomplete = () => {
+		setIsAutocompleteOpen(false);
+	};
+
 	useHandleOutsideClick(isAutocompleteOpen, insideClickSelectors, closeAutocomplete);
 
 	return (
 		<Content>
-			<form onSubmit={onSubmit}>
+			<form onSubmit={handleSearchSubmit}>
 				<Input
 					id="input"
 					type="text"
 					placeholder="Поиск..."
 					autoComplete="off"
 					value={query}
-					onChange={onChange}
+					onChange={handleQuery}
 				/>
 			</form>
 
@@ -71,6 +73,7 @@ const Search = () => {
 					query={query}
 					isAutocompleteOpen={isAutocompleteOpen}
 					setIsAutocompleteOpen={setIsAutocompleteOpen}
+					handleSearchSubmit={handleSearchSubmit}
 				/>
 			)}
 
