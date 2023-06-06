@@ -5,13 +5,13 @@ import { setIsAutocompleteOpen } from "store/autocompleteSlice";
 import { IAlbum } from "types";
 
 type Parameters = {
-	handleSearchSubmit: (event?: FormEvent<HTMLFormElement>) => Promise<void>;
+	query: string;
 	suggestions: IAlbum[];
 	selectedIndex: number;
 };
 
 export const useAutocompleteNavigationSubmit = ({
-	handleSearchSubmit,
+	query,
 	suggestions,
 	selectedIndex,
 }: Parameters) => {
@@ -19,12 +19,17 @@ export const useAutocompleteNavigationSubmit = ({
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
+	const submit = () => {
+		navigate(`/search/${query}`);
+		dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
+	};
+
 	const handleSearch = (event: KeyboardEvent) => {
 		const key = event.key;
 
 		if (key === "Enter") {
 			if (selectedIndex === -1) {
-				handleSearchSubmit();
+				submit();
 			} else {
 				const albumId = suggestions[selectedIndex].id;
 

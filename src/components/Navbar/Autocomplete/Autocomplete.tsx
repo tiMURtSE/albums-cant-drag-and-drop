@@ -13,29 +13,27 @@ import { setIsAutocompleteOpen } from "store/autocompleteSlice";
 
 type Props = {
 	query: string;
-	handleSearchSubmit: (event?: FormEvent<HTMLFormElement>) => Promise<void>;
 };
 
-const Autocomplete = ({ query, handleSearchSubmit }: Props) => {
+const Autocomplete = ({ query }: Props) => {
 	const [suggestions, setSuggestions] = useState<IAlbum[] | []>([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
 	const debouncedValue = useDebounce(query, 1000);
 	const [selectedIndex, setSelectedIndex] = useAutocompleteNavigation(suggestions);
-	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
 	const dispatch = useAppDispatch();
-
-	useAutocompleteNavigationSubmit({
-		handleSearchSubmit,
-		suggestions,
-		selectedIndex,
-	});
 
 	const closeAutocomplete = () => {
 		dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
 	};
 
+	useAutocompleteNavigationSubmit({
+		query,
+		suggestions,
+		selectedIndex,
+	});
+
 	const fetchAndFormatAlbums = async () => {
-		console.log(debouncedValue);
 		const response = await searchAlbums(debouncedValue);
 		const albums = response.albums.items;
 
@@ -56,8 +54,6 @@ const Autocomplete = ({ query, handleSearchSubmit }: Props) => {
 			setSuggestions(suggestions);
 			setIsLoading(false);
 			setSelectedIndex(-1);
-		} else {
-			closeAutocomplete();
 		}
 	};
 
@@ -80,9 +76,9 @@ const Autocomplete = ({ query, handleSearchSubmit }: Props) => {
 			) : (
 				<List id="search-list">
 					{suggestions.map((album, index) => (
-						<Item key={album.id} onClick={closeAutocomplete}>
-							<Link to={`/album/${album.id}`}>
-								<ItemLink isFocused={selectedIndex === index}>
+						<Item key={album.id}>
+							<Link to={`/album/${album.id}`} onClick={closeAutocomplete}>
+								<ItemLink isFocused={index === selectedIndex}>
 									{album.title}
 								</ItemLink>
 							</Link>

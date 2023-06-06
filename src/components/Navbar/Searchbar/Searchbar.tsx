@@ -1,27 +1,23 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ClearSign, Content, Input } from "./Searchbar.styled";
-import { useHandleOutsideClick } from "hooks/useHandleOutsideClick";
 import Autocomplete from "../Autocomplete/Autocomplete";
+import { ClearSign, Content, Input } from "./Searchbar.styled";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { setIsAutocompleteOpen } from "store/autocompleteSlice";
+import { useHandleOutsideClick } from "hooks/useHandleOutsideClick";
 
 const Searchbar = () => {
 	const [query, setQuery] = useState("");
 	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
-	const insideClickSelectors = ["#input", "#autocomplete"];
-	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const insideClickSelectors = ["#input", "#autocomplete"];
 
-	const handleSearchSubmit = async (event?: FormEvent<HTMLFormElement>) => {
-		if (event) event.preventDefault();
+	const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
 
 		navigate(`/search/${query}`);
 		dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
-
-		const input = document.querySelector(insideClickSelectors[0]) as HTMLElement;
-
-		if (input) input.blur();
 	};
 
 	const closeAutocomplete = () => {
@@ -39,17 +35,10 @@ const Searchbar = () => {
 					placeholder="Поиск..."
 					autoComplete="off"
 					value={query}
-					onChange={(event) => {
-						setQuery(event.target.value);
-					}}
+					onChange={(event) => setQuery(event.target.value)}
 				/>
-
-				<Autocomplete query={query} handleSearchSubmit={handleSearchSubmit} />
 			</form>
-
-			{/* {isAutocompleteOpen && ( */}
-
-			{/* )} */}
+			<Autocomplete query={query} />
 
 			<ClearSign query={query} onClick={() => setQuery("")}>
 				&#9587;

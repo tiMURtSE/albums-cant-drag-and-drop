@@ -1,7 +1,9 @@
+import { useAppSelector } from "hooks";
 import { useEffect, useState } from "react";
 import { IAlbum } from "types";
 
 export const useAutocompleteNavigation = (suggestions: IAlbum[]) => {
+	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
 	const [selectedIndex, setSelectedIndex] = useState(-1);
 
 	const handleNavigation = (event: KeyboardEvent) => {
@@ -32,14 +34,16 @@ export const useAutocompleteNavigation = (suggestions: IAlbum[]) => {
 	};
 
 	useEffect(() => {
-		if (suggestions.length) {
+		if (isAutocompleteOpen) {
+			console.log("added");
 			document.addEventListener("keydown", handleNavigation);
 		}
 
 		return () => {
+			console.log("removed");
 			document.removeEventListener("keydown", handleNavigation);
 		};
-	}, [suggestions, selectedIndex]);
+	}, [isAutocompleteOpen, selectedIndex]);
 
 	return [selectedIndex, setSelectedIndex] as [
 		number,
