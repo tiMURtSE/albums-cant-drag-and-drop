@@ -22,10 +22,10 @@ const Autocomplete = ({
 	setIsAutocompleteOpen,
 	handleSearchSubmit,
 }: Props) => {
+	const [suggestions, setSuggestions] = useState<IAlbum[] | []>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const debouncedValue = useDebounce(query, 1000);
-	const [suggestions, selectedIndex, setSuggestions] =
-		useAutocompleteNavigation(isAutocompleteOpen);
+	const [selectedIndex, setSelectedIndex] = useAutocompleteNavigation(suggestions);
 
 	useAutocompleteNavigationSubmit({
 		handleSearchSubmit,
@@ -55,6 +55,7 @@ const Autocomplete = ({
 
 			setIsLoading(false);
 			setSuggestions(suggestions);
+			setSelectedIndex(-1);
 		} else {
 			setIsAutocompleteOpen(false);
 		}

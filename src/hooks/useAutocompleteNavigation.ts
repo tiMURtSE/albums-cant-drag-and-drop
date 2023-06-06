@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { IAlbum } from "types";
 
-type ReturnValue = [IAlbum[], number, React.Dispatch<React.SetStateAction<IAlbum[]>>];
-
-export const useAutocompleteNavigation = (isAutocompleteOpen: boolean) => {
-	const [suggestions, setSuggestions] = useState<Array<IAlbum>>([]);
+export const useAutocompleteNavigation = (suggestions: IAlbum[]) => {
 	const [selectedIndex, setSelectedIndex] = useState(-1);
 
 	const handleNavigation = (event: KeyboardEvent) => {
@@ -35,10 +32,15 @@ export const useAutocompleteNavigation = (isAutocompleteOpen: boolean) => {
 	};
 
 	useEffect(() => {
-		if (isAutocompleteOpen) document.addEventListener("keydown", handleNavigation);
+		if (suggestions.length) document.addEventListener("keydown", handleNavigation);
 
-		return () => document.removeEventListener("keydown", handleNavigation);
-	}, [isAutocompleteOpen, selectedIndex, suggestions]);
+		return () => {
+			document.removeEventListener("keydown", handleNavigation);
+		};
+	}, [suggestions, selectedIndex]);
 
-	return [suggestions, selectedIndex, setSuggestions] as ReturnValue;
+	return [selectedIndex, setSelectedIndex] as [
+		number,
+		React.Dispatch<React.SetStateAction<number>>
+	];
 };
