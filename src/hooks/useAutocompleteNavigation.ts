@@ -32,7 +32,9 @@ export const useAutocompleteNavigation = (suggestions: IAlbum[]) => {
 	};
 
 	useEffect(() => {
-		if (suggestions.length) document.addEventListener("keydown", handleNavigation);
+		if (suggestions.length) {
+			document.addEventListener("keydown", handleNavigation);
+		}
 
 		return () => {
 			document.removeEventListener("keydown", handleNavigation);

@@ -2,13 +2,42 @@ import { useParams } from "react-router-dom";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
 import Wrapper from "styles/components/Wrapper.styled";
 import { Title } from "./Search.styled";
-import { useAppSelector } from "hooks";
 import { Loader } from "styles/components/Loader.styled";
+import { IAlbum } from "types";
+import { useEffect, useState } from "react";
+import searchAlbums from "services/api/searchAlbums.api";
+import formatAlbum from "utils/formatAlbum";
+import { useAppDispatch } from "hooks";
 
 const Search = () => {
-	const foundAlbums = useAppSelector((state) => state.albums.foundAlbums);
-	const isLoading = !foundAlbums.length;
+	const [foundAlbums, setFoundAlbums] = useState<IAlbum[] | []>([]);
+	const [isLoading, setIsLoading] = useState(true);
 	const { query } = useParams();
+	const dispatch = useAppDispatch();
+
+	const getFoundAlbums = async () => {
+		if (!query) return;
+
+		try {
+			setIsLoading(true);
+
+			const response = await searchAlbums(query);
+			const albums = response.albums.items;
+
+			for (let i = 0; i < albums.length; i++) {
+				albums[i] = formatAlbum(albums[i]);
+			}
+
+			setIsLoading(false);
+			setFoundAlbums(albums);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	useEffect(() => {
+		getFoundAlbums();
+	}, [query]);
 
 	return (
 		<>

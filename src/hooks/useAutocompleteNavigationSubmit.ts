@@ -1,23 +1,23 @@
+import { useAppDispatch, useAppSelector } from "hooks";
 import { FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { setIsAutocompleteOpen } from "store/autocompleteSlice";
 import { IAlbum } from "types";
 
 type Parameters = {
 	handleSearchSubmit: (event?: FormEvent<HTMLFormElement>) => Promise<void>;
-	setIsAutocompleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	suggestions: IAlbum[];
 	selectedIndex: number;
-	isAutocompleteOpen: boolean;
 };
 
 export const useAutocompleteNavigationSubmit = ({
 	handleSearchSubmit,
-	setIsAutocompleteOpen,
 	suggestions,
 	selectedIndex,
-	isAutocompleteOpen,
 }: Parameters) => {
+	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const handleSearch = (event: KeyboardEvent) => {
 		const key = event.key;
@@ -29,7 +29,7 @@ export const useAutocompleteNavigationSubmit = ({
 				const albumId = suggestions[selectedIndex].id;
 
 				navigate(`/album/${albumId}`);
-				setIsAutocompleteOpen(false);
+				dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
 			}
 		}
 	};

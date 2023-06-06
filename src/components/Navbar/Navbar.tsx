@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Content, Navigation, Theme } from "./Navbar.styled";
 import { PagesPath, appTitle } from "consts";
 import { setMode } from "store/themeSlice";
-import Search from "./Searchbar/Searchbar";
+import Searchbar from "./Searchbar/Searchbar";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import ThemeIcon from "components/Icons/ThemeIcon/ThemeIcon";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
@@ -23,7 +23,7 @@ const Navbar = () => {
 					<NavLink to={PagesPath.MyAlbums}>Мои альбомы</NavLink>
 				</Navigation>
 
-				<Search />
+				<Searchbar />
 			</FlexBetween>
 
 			<Theme onClick={() => dispatch(setMode())}>

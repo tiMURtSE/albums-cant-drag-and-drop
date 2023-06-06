@@ -43,6 +43,4 @@ const ClearSign = styled.div<{ query?: string }>`
 	cursor: pointer;
 `;
 
-const Autocomplete = styled.div``;
-
-export { Content, Input, ClearSign, Autocomplete };
+export { Content, Input, ClearSign };

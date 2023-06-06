@@ -1,55 +1,31 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { clearFoundAlbums, setFoundAlbums } from "store/albumsSlice";
-import { IAlbum } from "types";
-import searchAlbums from "services/api/searchAlbums.api";
 import { ClearSign, Content, Input } from "./Searchbar.styled";
 import { useHandleOutsideClick } from "hooks/useHandleOutsideClick";
-import formatAlbum from "utils/formatAlbum";
 import Autocomplete from "../Autocomplete/Autocomplete";
-import { useAppDispatch } from "hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { setIsAutocompleteOpen } from "store/autocompleteSlice";
 
-const Search = () => {
+const Searchbar = () => {
 	const [query, setQuery] = useState("");
-	const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
+	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
 	const insideClickSelectors = ["#input", "#autocomplete"];
-
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-
-	const handleQuery = (event: ChangeEvent<HTMLInputElement>) => {
-		const query = event.target.value;
-
-		setQuery(query);
-	};
-
-	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
-		const response = await searchAlbums(query);
-		const albums = response.albums.items;
-
-		for (let i = 0; i < albums.length; i++) {
-			albums[i] = formatAlbum(albums[i]);
-		}
-
-		return albums;
-	};
 
 	const handleSearchSubmit = async (event?: FormEvent<HTMLFormElement>) => {
 		if (event) event.preventDefault();
 
-		const albums = await fetchAndFormatAlbums();
+		navigate(`/search/${query}`);
+		dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
+
 		const input = document.querySelector(insideClickSelectors[0]) as HTMLElement;
 
 		if (input) input.blur();
-
-		dispatch(clearFoundAlbums());
-		dispatch(setFoundAlbums({ albums }));
-		navigate(`/search/${query}`);
-		setIsAutocompleteOpen(false);
 	};
 
 	const closeAutocomplete = () => {
-		setIsAutocompleteOpen(false);
+		dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
 	};
 
 	useHandleOutsideClick(isAutocompleteOpen, insideClickSelectors, closeAutocomplete);
@@ -63,17 +39,16 @@ const Search = () => {
 					placeholder="Поиск..."
 					autoComplete="off"
 					value={query}
-					onChange={handleQuery}
+					onChange={(event) => {
+						setQuery(event.target.value);
+					}}
 				/>
+
+				<Autocomplete query={query} handleSearchSubmit={handleSearchSubmit} />
 			</form>
 
 			{/* {isAutocompleteOpen && ( */}
-			<Autocomplete
-				query={query}
-				isAutocompleteOpen={isAutocompleteOpen}
-				setIsAutocompleteOpen={setIsAutocompleteOpen}
-				handleSearchSubmit={handleSearchSubmit}
-			/>
+
 			{/* )} */}
 
 			<ClearSign query={query} onClick={() => setQuery("")}>
@@ -83,4 +58,4 @@ const Search = () => {
 	);
 };
 
-export default Search;
+export default Searchbar;

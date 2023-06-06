@@ -8,35 +8,35 @@ import { useDebounce } from "hooks/useDebounce";
 import { IAlbum } from "types";
 import searchAlbums from "services/api/searchAlbums.api";
 import formatAlbum from "utils/formatAlbum";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { setIsAutocompleteOpen } from "store/autocompleteSlice";
 
 type Props = {
 	query: string;
-	isAutocompleteOpen: boolean;
-	setIsAutocompleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	handleSearchSubmit: (event?: FormEvent<HTMLFormElement>) => Promise<void>;
 };
 
-const Autocomplete = ({
-	query,
-	isAutocompleteOpen,
-	setIsAutocompleteOpen,
-	handleSearchSubmit,
-}: Props) => {
+const Autocomplete = ({ query, handleSearchSubmit }: Props) => {
 	const [suggestions, setSuggestions] = useState<IAlbum[] | []>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const debouncedValue = useDebounce(query, 1000);
 	const [selectedIndex, setSelectedIndex] = useAutocompleteNavigation(suggestions);
+	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
+	const dispatch = useAppDispatch();
 
 	useAutocompleteNavigationSubmit({
 		handleSearchSubmit,
-		setIsAutocompleteOpen,
 		suggestions,
 		selectedIndex,
-		isAutocompleteOpen,
 	});
 
-	const fetchAndFormatAlbums = async (): Promise<Array<IAlbum>> => {
-		const response = await searchAlbums(query);
+	const closeAutocomplete = () => {
+		dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
+	};
+
+	const fetchAndFormatAlbums = async () => {
+		console.log(debouncedValue);
+		const response = await searchAlbums(debouncedValue);
 		const albums = response.albums.items;
 
 		for (let i = 0; i < albums.length; i++) {
@@ -49,15 +49,15 @@ const Autocomplete = ({
 	const fetchSuggestions = async () => {
 		if (debouncedValue) {
 			setIsLoading(true);
-			setIsAutocompleteOpen(true);
+			dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: true }));
 
 			const suggestions = await fetchAndFormatAlbums();
 
-			setIsLoading(false);
 			setSuggestions(suggestions);
+			setIsLoading(false);
 			setSelectedIndex(-1);
 		} else {
-			setIsAutocompleteOpen(false);
+			closeAutocomplete();
 		}
 	};
 
@@ -80,7 +80,7 @@ const Autocomplete = ({
 			) : (
 				<List id="search-list">
 					{suggestions.map((album, index) => (
-						<Item key={album.id} onClick={() => setIsAutocompleteOpen(false)}>
+						<Item key={album.id} onClick={closeAutocomplete}>
 							<Link to={`/album/${album.id}`}>
 								<ItemLink isFocused={selectedIndex === index}>
 									{album.title}
