@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from "hooks";
-import { FormEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { setIsAutocompleteOpen } from "store/autocompleteSlice";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { IAlbum } from "types";
 
 type Parameters = {
@@ -19,17 +19,13 @@ export const useAutocompleteNavigationSubmit = ({
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const submit = () => {
-		navigate(`/search/${query}`);
-		dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
-	};
-
 	const handleSearch = (event: KeyboardEvent) => {
 		const key = event.key;
 
 		if (key === "Enter") {
 			if (selectedIndex === -1) {
-				submit();
+				navigate(`/search/${query}`);
+				dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
 			} else {
 				const albumId = suggestions[selectedIndex].id;
 
@@ -43,5 +39,5 @@ export const useAutocompleteNavigationSubmit = ({
 		if (isAutocompleteOpen) document.addEventListener("keydown", handleSearch);
 
 		return () => document.removeEventListener("keydown", handleSearch);
-	}, [selectedIndex, isAutocompleteOpen]);
+	}, [isAutocompleteOpen, selectedIndex]);
 };

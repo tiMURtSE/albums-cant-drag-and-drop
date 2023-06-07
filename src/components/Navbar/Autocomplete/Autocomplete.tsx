@@ -9,7 +9,7 @@ import { useAutocompleteNavigationSubmit } from "hooks/useAutocompleteNavigation
 import { formatAlbums } from "utils/formatAlbums";
 import { IAlbum } from "types";
 import { Loader } from "styles/components/Loader.styled";
-import { Item, ItemLink, List, Wrapper } from "./Autocomplete.styled";
+import { Artist, Item, ItemLink, List, Title, Wrapper } from "./Autocomplete.styled";
 
 type Props = {
 	query: string;
@@ -20,7 +20,7 @@ const TIMEOUT = 500;
 const Autocomplete = ({ query }: Props) => {
 	const debouncedValue = useDebounce(query, TIMEOUT);
 	const [suggestions, setSuggestions] = useState<IAlbum[] | []>([]);
-	const [selectedIndex, setSelectedIndex] = useAutocompleteNavigation(suggestions);
+	const { selectedIndex, setSelectedIndex } = useAutocompleteNavigation(suggestions);
 	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
 	const [isLoading, setIsLoading] = useState(false);
 	const dispatch = useAppDispatch();
@@ -86,7 +86,8 @@ const Autocomplete = ({ query }: Props) => {
 						<Item key={album.id}>
 							<Link to={`/album/${album.id}`} onClick={closeAutocomplete}>
 								<ItemLink isFocused={index === selectedIndex}>
-									{album.title}
+									<Title>{album.title}</Title>
+									<Artist>{album.artist}</Artist>
 								</ItemLink>
 							</Link>
 						</Item>

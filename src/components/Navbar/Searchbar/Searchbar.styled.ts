@@ -3,10 +3,12 @@ import { theme } from "theme/theme";
 
 const Content = styled.div`
 	position: relative;
+	width: 350px;
 `;
 
 const Input = styled.input`
 	position: relative;
+	width: 100%;
 	padding: 5px 35px 5px 20px;
 
 	color: ${({ theme }) => theme.colors.contrastText};

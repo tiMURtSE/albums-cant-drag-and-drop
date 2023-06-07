@@ -34,17 +34,10 @@ export const useAutocompleteNavigation = (suggestions: IAlbum[]) => {
 	};
 
 	useEffect(() => {
-		if (isAutocompleteOpen) {
-			document.addEventListener("keydown", handleNavigation);
-		}
+		if (isAutocompleteOpen) document.addEventListener("keydown", handleNavigation);
 
-		return () => {
-			document.removeEventListener("keydown", handleNavigation);
-		};
+		return () => document.removeEventListener("keydown", handleNavigation);
 	}, [isAutocompleteOpen, selectedIndex]);
 
-	return [selectedIndex, setSelectedIndex] as [
-		number,
-		React.Dispatch<React.SetStateAction<number>>
-	];
+	return { selectedIndex, setSelectedIndex };
 };

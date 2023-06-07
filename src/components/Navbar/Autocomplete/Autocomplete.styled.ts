@@ -37,4 +37,12 @@ const ItemLink = styled.div<{ isFocused: boolean }>`
 	border-radius: ${(props) => (props.isFocused ? props.theme.sizes.borderRadius : "auto")};
 `;
 
-export { Wrapper, List, Item, ItemLink };
+const Title = styled.div`
+	font-weight: 700;
+`;
+
+const Artist = styled.div`
+	color: ${({ theme }) => theme.colors.primary.dark};
+`;
+
+export { Wrapper, List, Item, ItemLink, Title, Artist };
