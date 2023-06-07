@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const useHandleOutsideClick = (
-	dependecy: boolean,
-	selectors: string[],
+	dependencies: boolean,
+	innerSelectors: string[],
 	callback: () => void
 ) => {
 	const handleClick = (event: MouseEvent) => {
 		const target = event.target as HTMLElement;
+		const hasMatch = innerSelectors.some((selector) => target.closest(selector));
 
-		for (let i = 0; i < selectors.length; i++) {
-			if (target.closest(selectors[i])) return;
-		}
-
-		callback();
+		if (!hasMatch) callback();
 	};
 
 	useEffect(() => {
-		if (dependecy) {
-			document.addEventListener("click", handleClick);
-		}
+		if (dependencies) document.addEventListener("click", handleClick);
 
-		return () => {
-			document.removeEventListener("click", handleClick);
-		};
-	}, [dependecy]);
+		return () => document.removeEventListener("click", handleClick);
+	}, [dependencies]);
 };

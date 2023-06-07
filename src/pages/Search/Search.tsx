@@ -7,13 +7,12 @@ import { IAlbum } from "types";
 import { useEffect, useState } from "react";
 import searchAlbums from "services/api/searchAlbums.api";
 import formatAlbum from "utils/formatAlbum";
-import { useAppDispatch } from "hooks";
+import { formatAlbums } from "utils/formatAlbums";
 
 const Search = () => {
 	const [foundAlbums, setFoundAlbums] = useState<IAlbum[] | []>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const { query } = useParams();
-	const dispatch = useAppDispatch();
 
 	const getFoundAlbums = async () => {
 		if (!query) return;
@@ -24,12 +23,8 @@ const Search = () => {
 			const response = await searchAlbums(query);
 			const albums = response.albums.items;
 
-			for (let i = 0; i < albums.length; i++) {
-				albums[i] = formatAlbum(albums[i]);
-			}
-
 			setIsLoading(false);
-			setFoundAlbums(albums);
+			setFoundAlbums(formatAlbums(albums));
 		} catch (error) {
 			console.error(error);
 		}

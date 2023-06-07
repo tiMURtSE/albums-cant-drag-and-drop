@@ -6,7 +6,7 @@ export const useDebounce = (query: string, delay: number) => {
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			setDebouncedValue(query);
-		}, delay);
+		}, delay || 500);
 
 		return () => clearTimeout(timeoutId);
 	}, [query]);

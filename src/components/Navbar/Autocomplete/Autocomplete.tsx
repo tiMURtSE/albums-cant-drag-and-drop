@@ -1,26 +1,28 @@
-import { Loader } from "styles/components/Loader.styled";
-import { Item, ItemLink, List, Wrapper } from "./Autocomplete.styled";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FormEvent, useEffect, useState } from "react";
+import { setIsAutocompleteOpen } from "store/autocompleteSlice";
+import searchAlbums from "services/api/searchAlbums.api";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { useDebounce } from "hooks/useDebounce";
 import { useAutocompleteNavigation } from "hooks/useAutocompleteNavigation";
 import { useAutocompleteNavigationSubmit } from "hooks/useAutocompleteNavigationSubmit";
-import { useDebounce } from "hooks/useDebounce";
+import { formatAlbums } from "utils/formatAlbums";
 import { IAlbum } from "types";
-import searchAlbums from "services/api/searchAlbums.api";
-import formatAlbum from "utils/formatAlbum";
-import { useAppDispatch, useAppSelector } from "hooks";
-import { setIsAutocompleteOpen } from "store/autocompleteSlice";
+import { Loader } from "styles/components/Loader.styled";
+import { Item, ItemLink, List, Wrapper } from "./Autocomplete.styled";
 
 type Props = {
 	query: string;
 };
 
+const TIMEOUT = 500;
+
 const Autocomplete = ({ query }: Props) => {
+	const debouncedValue = useDebounce(query, TIMEOUT);
 	const [suggestions, setSuggestions] = useState<IAlbum[] | []>([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
-	const debouncedValue = useDebounce(query, 1000);
 	const [selectedIndex, setSelectedIndex] = useAutocompleteNavigation(suggestions);
+	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
+	const [isLoading, setIsLoading] = useState(false);
 	const dispatch = useAppDispatch();
 
 	const closeAutocomplete = () => {
@@ -37,28 +39,33 @@ const Autocomplete = ({ query }: Props) => {
 		const response = await searchAlbums(debouncedValue);
 		const albums = response.albums.items;
 
-		for (let i = 0; i < albums.length; i++) {
-			albums[i] = formatAlbum(albums[i]);
-		}
-
-		return albums;
+		return formatAlbums(albums);
 	};
 
-	const fetchSuggestions = async () => {
+	useEffect(() => {
+		let ignore = false;
+
 		if (debouncedValue) {
 			setIsLoading(true);
 			dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: true }));
 
-			const suggestions = await fetchAndFormatAlbums();
-
-			setSuggestions(suggestions);
-			setIsLoading(false);
-			setSelectedIndex(-1);
+			fetchAndFormatAlbums()
+				.then((suggestions) => {
+					if (!ignore) {
+						setSuggestions(suggestions);
+						setIsLoading(false);
+						setSelectedIndex(-1);
+					}
+				})
+				.catch((error) => console.error(error));
+		} else {
+			closeAutocomplete();
+			setSuggestions([]);
 		}
-	};
 
-	useEffect(() => {
-		fetchSuggestions();
+		return () => {
+			ignore = true;
+		};
 	}, [debouncedValue]);
 
 	if (!isAutocompleteOpen) return null;
@@ -68,7 +75,7 @@ const Autocomplete = ({ query }: Props) => {
 			{isLoading ? (
 				<Loader
 					width="100%"
-					height="100px"
+					height="200px"
 					contentWidth="25px"
 					contentHeight="25px"
 					border="3px"

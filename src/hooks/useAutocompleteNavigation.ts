@@ -35,12 +35,10 @@ export const useAutocompleteNavigation = (suggestions: IAlbum[]) => {
 
 	useEffect(() => {
 		if (isAutocompleteOpen) {
-			console.log("added");
 			document.addEventListener("keydown", handleNavigation);
 		}
 
 		return () => {
-			console.log("removed");
 			document.removeEventListener("keydown", handleNavigation);
 		};
 	}, [isAutocompleteOpen, selectedIndex]);

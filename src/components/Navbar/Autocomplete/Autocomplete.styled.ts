@@ -5,6 +5,7 @@ const Wrapper = styled.div`
 	top: 45px;
 	left: 0;
 	width: 100%;
+	min-height: 200px;
 
 	background-color: ${(props) => props.theme.colors.primary.light};
 	border: 1px solid ${(props) => props.theme.colors.primary.neutral};
