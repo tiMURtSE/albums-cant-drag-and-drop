@@ -8,11 +8,15 @@ const autocompleteSlice = createSlice({
 	name: "autocomplete",
 	initialState,
 	reducers: {
-		setIsAutocompleteOpen: (state, action) => {
-			state.isAutocompleteOpen = action.payload.isAutocompleteOpen;
+		openAutocomplete: (state) => {
+			state.isAutocompleteOpen = true;
+		},
+
+		closeAutocomplete: (state) => {
+			state.isAutocompleteOpen = false;
 		},
 	},
 });
 
 export default autocompleteSlice.reducer;
-export const { setIsAutocompleteOpen } = autocompleteSlice.actions;
+export const { openAutocomplete, closeAutocomplete } = autocompleteSlice.actions;

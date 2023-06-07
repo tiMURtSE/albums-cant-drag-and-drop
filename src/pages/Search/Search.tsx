@@ -6,7 +6,6 @@ import { Loader } from "styles/components/Loader.styled";
 import { IAlbum } from "types";
 import { useEffect, useState } from "react";
 import searchAlbums from "services/api/searchAlbums.api";
-import formatAlbum from "utils/formatAlbum";
 import { formatAlbums } from "utils/formatAlbums";
 
 const Search = () => {

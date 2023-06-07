@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setIsAutocompleteOpen } from "store/autocompleteSlice";
+import { closeAutocomplete } from "store/autocompleteSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { IAlbum } from "types";
 
@@ -23,14 +23,18 @@ export const useAutocompleteNavigationSubmit = ({
 		const key = event.key;
 
 		if (key === "Enter") {
+			const input = document.querySelector("#input") as HTMLElement;
+
+			if (input) input.blur();
+
 			if (selectedIndex === -1) {
 				navigate(`/search/${query}`);
-				dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
+				dispatch(closeAutocomplete());
 			} else {
 				const albumId = suggestions[selectedIndex].id;
 
 				navigate(`/album/${albumId}`);
-				dispatch(setIsAutocompleteOpen({ isAutocompleteOpen: false }));
+				dispatch(closeAutocomplete());
 			}
 		}
 	};
