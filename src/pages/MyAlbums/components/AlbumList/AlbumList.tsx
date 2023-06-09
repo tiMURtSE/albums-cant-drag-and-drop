@@ -1,7 +1,9 @@
 import { SortTypes } from "consts";
-import { IAlbum, IModifiers, Sort } from "types";
+import { IAlbum, Sort } from "types";
 import AlbumItem from "../AlbumItem/AlbumItem";
 import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
+import { useEffect, useState } from "react";
+import { getTypeOfSort } from "utils/getTypeOfSort";
 
 type Props = {
 	customizedAlbumList: IAlbum[];
@@ -10,6 +12,8 @@ type Props = {
 };
 
 function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
+	const [draggableId, setDraggableId] = useState("");
+
 	const handleSortClick = (column: keyof IAlbum) => {
 		const isPreviousColumnSorting = sort.sortingColumn === column;
 		let newType: Sort["typeOfSort"];
@@ -31,19 +35,13 @@ function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
 		setSort(newSort);
 	};
 
-	const getTypeOfSort = (sortingColumn: keyof IAlbum) => {
-		if (sortingColumn === sort.sortingColumn) {
-			return sort.typeOfSort;
-		}
-	};
-
 	return (
 		<div>
 			<Caption>
 				<CaptionItem>Обложка</CaptionItem>
 				<CaptionItem>
 					<CaptionSortButton
-						sortType={getTypeOfSort("title")}
+						sortType={getTypeOfSort(sort, "title")}
 						onClick={() => handleSortClick("title")}
 					>
 						Что и кем
@@ -51,7 +49,7 @@ function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
 				</CaptionItem>
 				<CaptionItem>
 					<CaptionSortButton
-						sortType={getTypeOfSort("year")}
+						sortType={getTypeOfSort(sort, "year")}
 						onClick={() => handleSortClick("year")}
 					>
 						Год
@@ -59,7 +57,7 @@ function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
 				</CaptionItem>
 				<CaptionItem>
 					<CaptionSortButton
-						sortType={getTypeOfSort("createdAt")}
+						sortType={getTypeOfSort(sort, "createdAt")}
 						onClick={() => handleSortClick("createdAt")}
 					>
 						Дата добавления
@@ -69,7 +67,12 @@ function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
 
 			<ul>
 				{customizedAlbumList.map((album) => (
-					<AlbumItem album={album} key={album.id} />
+					<AlbumItem
+						album={album}
+						key={album.id}
+						draggableId={draggableId}
+						setDraggableId={setDraggableId}
+					/>
 				))}
 			</ul>
 		</div>

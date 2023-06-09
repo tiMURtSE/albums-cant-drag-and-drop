@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Item = styled.li`
+const Item = styled.li<{ isDragStarted?: boolean; isDragOver?: boolean }>`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem 1rem;
@@ -11,9 +11,16 @@ const Item = styled.li`
 		border-bottom: 2px solid ${({ theme }) => theme.colors.contrastText};
 	}
 
-	&:hover div:last-child div:first-child {
-		display: block;
+	&:hover {
+		cursor: grab;
+
+		& div:last-child div:first-child {
+			display: block;
+		}
 	}
+
+	opacity: ${({ isDragStarted }) => (isDragStarted ? "0.5" : "1")};
+	box-shadow: ${({ isDragOver }) => (isDragOver ? "0px 0px 21px 0px white inset;" : "")};
 `;
 
 const CoverWrapper = styled.div`

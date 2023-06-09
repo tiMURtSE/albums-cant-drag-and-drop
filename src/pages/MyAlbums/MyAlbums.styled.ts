@@ -9,6 +9,7 @@ const Wrapper = styled.div`
 `;
 
 const Customizations = styled(FlexBetween)`
+	align-items: flex-start;
 	margin: 20px 0;
 	padding: 0 1rem;
 `;
@@ -30,4 +31,20 @@ const Input = styled.input`
 	}
 `;
 
-export { Customizations, Wrapper, Input, SearchAndFilter };
+const ChangeOrderButton = styled.button`
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	/* width: 140px; */
+	padding: 5px 10px;
+	color: rgb(238, 238, 238);
+	background-color: rgb(71, 71, 71);
+	border-radius: 12px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgb(89, 86, 61);
+	}
+`;
+
+export { Customizations, Wrapper, Input, SearchAndFilter, ChangeOrderButton };

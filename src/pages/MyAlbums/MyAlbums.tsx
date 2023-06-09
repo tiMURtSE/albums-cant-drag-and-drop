@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useAppSelector } from "hooks";
 import { useAlbumListCustomization } from "hooks/useAlbumListCustomization";
 import { Decades, Sort } from "types";
-import { Input, Customizations, SearchAndFilter, Wrapper } from "./MyAlbums.styled";
+import {
+	Input,
+	Customizations,
+	SearchAndFilter,
+	Wrapper,
+	ChangeOrderButton,
+} from "./MyAlbums.styled";
 import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 import AlbumList from "./components/AlbumList/AlbumList";
 
@@ -34,6 +40,8 @@ const MyAlbums = () => {
 						setFilterByDecades={setFilterByDecades}
 					/>
 				</SearchAndFilter>
+
+				<ChangeOrderButton>Поменять порядок альбомов</ChangeOrderButton>
 			</Customizations>
 
 			<AlbumList customizedAlbumList={customizedAlbumList} sort={sort} setSort={setSort} />
