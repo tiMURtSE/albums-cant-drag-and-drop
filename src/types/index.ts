@@ -8,6 +8,7 @@ interface IAlbum {
 	image: string;
 	createdAt: string;
 	url: string;
+	position: number;
 }
 
 interface IMetadata {

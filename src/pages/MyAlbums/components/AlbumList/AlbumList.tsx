@@ -6,13 +6,72 @@ import { useEffect, useState } from "react";
 import { getTypeOfSort } from "utils/getTypeOfSort";
 
 type Props = {
+	draggedAlbums: IAlbum[];
+	setDraggedAlbums: React.Dispatch<React.SetStateAction<IAlbum[]>>;
 	customizedAlbumList: IAlbum[];
 	sort: Sort;
 	setSort: React.Dispatch<React.SetStateAction<Sort>>;
+	isDragging: boolean;
 };
 
-function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
-	const [draggableId, setDraggableId] = useState("");
+function AlbumList({
+	customizedAlbumList,
+	draggedAlbums,
+	setDraggedAlbums,
+	sort,
+	setSort,
+	isDragging,
+}: Props) {
+	const [currentItem, setCurrentItem] = useState<IAlbum | null>(null);
+
+	const currentAlbums = isDragging ? draggedAlbums : customizedAlbumList;
+
+	const onDragStart = (e: any, item: IAlbum) => {
+		setCurrentItem(item);
+	};
+
+	const onDragEnd = (e: any) => {
+		setCurrentItem(null);
+	};
+
+	const onDragOver = (e: any) => {
+		e.preventDefault();
+		e.stopPropagation();
+	};
+
+	const onDrop = (e: any, item: IAlbum) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		if (item.position !== currentItem?.position) {
+			const updatedAlbums = draggedAlbums.map((album) => {
+				if (album.id === item.id) {
+					return { ...album, position: currentItem?.position };
+				} else if (album.id === currentItem?.id) {
+					return { ...album, position: item.position };
+				} else {
+					return album;
+				}
+			}) as IAlbum[];
+
+			setDraggedAlbums(updatedAlbums);
+		}
+	};
+
+	const dnd = (album: IAlbum) => {
+		return {
+			onDragStart: (e: any) => onDragStart(e, album),
+			onDragEnd,
+			onDragOver,
+			onDrop: (e: any) => onDrop(e, album),
+		};
+	};
+
+	const sortirovka = (a: IAlbum, b: IAlbum) => {
+		if (!isDragging) return 0;
+
+		return a.position - b.position;
+	};
 
 	const handleSortClick = (column: keyof IAlbum) => {
 		const isPreviousColumnSorting = sort.sortingColumn === column;
@@ -38,7 +97,10 @@ function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
 	return (
 		<div>
 			<Caption>
+				<CaptionItem>№</CaptionItem>
+
 				<CaptionItem>Обложка</CaptionItem>
+
 				<CaptionItem>
 					<CaptionSortButton
 						sortType={getTypeOfSort(sort, "title")}
@@ -66,14 +128,9 @@ function AlbumList({ customizedAlbumList, sort, setSort }: Props) {
 			</Caption>
 
 			<ul>
-				{customizedAlbumList.map((album) => (
-					<AlbumItem
-						album={album}
-						key={album.id}
-						draggableId={draggableId}
-						setDraggableId={setDraggableId}
-					/>
-				))}
+				{[...currentAlbums].sort(sortirovka).map((album) => {
+					return <AlbumItem album={album} key={album.id} dnd={dnd(album)} />;
+				})}
 			</ul>
 		</div>
 	);

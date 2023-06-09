@@ -11,8 +11,12 @@ const Caption = styled.ul`
 const CaptionItem = styled.li`
 	flex-basis: 17%;
 
-	&:nth-child(2) {
-		flex-basis: calc(100% - 17% * 3);
+	&:first-child {
+		flex-basis: 5%;
+	}
+
+	&:nth-child(3) {
+		flex-basis: calc(100% - 17% * 3 - 5%);
 	}
 `;
 

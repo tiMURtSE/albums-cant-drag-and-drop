@@ -7,10 +7,11 @@ const formatAlbum = (album: Record<string, any>): IAlbum => {
 		id,
 		title: name,
 		artist: artists[0].name,
-		year: release_date.split("-")[0],
+		year: Number(release_date.split("-")[0]),
 		image: images[0].url,
 		createdAt: new Date().toLocaleDateString(),
 		url: external_urls.spotify,
+		position: -1,
 	};
 };
 

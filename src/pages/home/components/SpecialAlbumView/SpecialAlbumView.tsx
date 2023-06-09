@@ -13,15 +13,13 @@ import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
 
 type Props = {
 	album: IAlbum;
-	position: number;
-	key: string;
 };
 
-const SpecialAlbumView = ({ album, position }: Props) => {
+const SpecialAlbumView = ({ album }: Props) => {
 	if (!Object.keys(album).length) return null;
 
 	return (
-		<Content position={position}>
+		<Content position={album.position}>
 			<Link to={`/album/${album.id}`}>
 				<Image
 					src={album.image}

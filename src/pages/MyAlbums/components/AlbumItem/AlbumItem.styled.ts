@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Item = styled.li<{ isDragStarted?: boolean; isDragOver?: boolean }>`
+const Item = styled.li`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem 1rem;
@@ -18,9 +18,12 @@ const Item = styled.li<{ isDragStarted?: boolean; isDragOver?: boolean }>`
 			display: block;
 		}
 	}
+`;
 
-	opacity: ${({ isDragStarted }) => (isDragStarted ? "0.5" : "1")};
-	box-shadow: ${({ isDragOver }) => (isDragOver ? "0px 0px 21px 0px white inset;" : "")};
+const Position = styled.div`
+	flex-basis: 5%;
+
+	font-size: ${({ theme }) => theme.fonts.large};
 `;
 
 const CoverWrapper = styled.div`
@@ -33,7 +36,7 @@ const CoverWrapper = styled.div`
 `;
 
 const Names = styled.div`
-	flex-basis: calc(100% - 17% * 3);
+	flex-basis: calc(100% - 17% * 3 - 5%);
 `;
 
 const Title = styled.div`
@@ -54,4 +57,4 @@ const CreatedAt = styled.div`
 	flex-basis: 17%;
 `;
 
-export { Item, CoverWrapper, Names, Title, Artist, Year, CreatedAt };
+export { Item, Position, CoverWrapper, Names, Title, Artist, Year, CreatedAt };

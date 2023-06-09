@@ -11,13 +11,21 @@ const albumsSlice = createSlice({
 	initialState,
 	reducers: {
 		addAlbum(state, action: PayloadAction<{ album: IAlbum }>) {
+			action.payload.album.position = state.albums.length + 1;
 			state.albums.push(action.payload.album);
 		},
 		removeAlbum(state, action: PayloadAction<{ album: IAlbum }>) {
 			const removedAlbumId = action.payload.album.id;
-			const updatedAlbums = state.albums.filter((album) => album.id !== removedAlbumId);
+			const updatedAlbums = state.albums
+				.filter((album) => album.id !== removedAlbumId)
+				.map((album, index) => {
+					return { ...album, position: index + 1 };
+				});
 
 			state.albums = updatedAlbums;
+		},
+		setAlbums(state, action: PayloadAction<{ albums: IAlbum[] }>) {
+			state.albums = action.payload.albums;
 		},
 		setFoundAlbums(state, action: PayloadAction<{ albums: Array<IAlbum> }>) {
 			state.foundAlbums = action.payload.albums;
@@ -29,4 +37,5 @@ const albumsSlice = createSlice({
 });
 
 export default albumsSlice.reducer;
-export const { addAlbum, removeAlbum, setFoundAlbums, clearFoundAlbums } = albumsSlice.actions;
+export const { addAlbum, removeAlbum, setAlbums, setFoundAlbums, clearFoundAlbums } =
+	albumsSlice.actions;
