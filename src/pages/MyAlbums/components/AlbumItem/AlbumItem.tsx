@@ -21,11 +21,15 @@ type Props = {
 
 const AlbumItem = ({ album, dragAndDropHandlers }: Props) => {
 	let handlers = null;
+	let isDragging = false;
 
-	if (dragAndDropHandlers) handlers = dragAndDropHandlers(album);
+	if (dragAndDropHandlers) {
+		handlers = dragAndDropHandlers(album);
+		isDragging = true;
+	}
 
 	return (
-		<Item {...handlers}>
+		<Item {...handlers} isDragging={isDragging}>
 			<Position>{album.position}</Position>
 
 			<CoverWrapper>

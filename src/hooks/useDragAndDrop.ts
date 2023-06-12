@@ -21,6 +21,13 @@ export const useDragAndDrop = () => {
 		setDraggingItem(null);
 	};
 
+	const onDragEnter = (e: any) => {
+		e.preventDefault();
+		e.stopPropagation();
+	};
+
+	const onDragLeave = (e: any) => {};
+
 	const onDragOver = (e: any) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -86,6 +93,8 @@ export const useDragAndDrop = () => {
 			draggable: true,
 			onDragStart: (e: any) => onDragStart(e, album),
 			onDragEnd,
+			onDragEnter,
+			onDragLeave,
 			onDragOver,
 			onDrop: (e: any) => onDrop(e, album),
 		};

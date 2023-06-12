@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Item = styled.li`
+const Item = styled.li<{ isDragging: boolean }>`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem 1rem;
@@ -12,7 +12,7 @@ const Item = styled.li`
 	}
 
 	&:hover {
-		cursor: grab;
+		cursor: ${({ isDragging }) => (isDragging ? "grab" : "auto")};
 
 		& div:last-child div:first-child {
 			display: block;

@@ -47,6 +47,8 @@ type DragAndDrop =
 			draggable: boolean;
 			onDragStart: (e: any) => void;
 			onDragEnd: (e: any) => void;
+			onDragEnter: (e: any) => void;
+			onDragLeave: (e: any) => void;
 			onDragOver: (e: any) => void;
 			onDrop: (e: any) => void;
 	  })
