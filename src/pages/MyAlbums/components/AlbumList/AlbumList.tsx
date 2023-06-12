@@ -4,74 +4,27 @@ import AlbumItem from "../AlbumItem/AlbumItem";
 import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
 import { useEffect, useState } from "react";
 import { getTypeOfSort } from "utils/getTypeOfSort";
+import { useDragAndDrop } from "hooks/useDragAndDrop";
+import { sortRearrangedAlbums } from "utils/sortRearrangedAlbums";
 
 type Props = {
-	draggedAlbums: IAlbum[];
-	setDraggedAlbums: React.Dispatch<React.SetStateAction<IAlbum[]>>;
+	rearrangedAlbums: IAlbum[];
+	setRearrangedAlbums: React.Dispatch<React.SetStateAction<IAlbum[]>>;
+	isDragging: boolean;
 	customizedAlbumList: IAlbum[];
 	sort: Sort;
 	setSort: React.Dispatch<React.SetStateAction<Sort>>;
-	isDragging: boolean;
 };
 
 function AlbumList({
+	rearrangedAlbums,
+	setRearrangedAlbums,
+	isDragging,
 	customizedAlbumList,
-	draggedAlbums,
-	setDraggedAlbums,
 	sort,
 	setSort,
-	isDragging,
 }: Props) {
-	const [currentItem, setCurrentItem] = useState<IAlbum | null>(null);
-
-	const currentAlbums = isDragging ? draggedAlbums : customizedAlbumList;
-
-	const onDragStart = (e: any, item: IAlbum) => {
-		setCurrentItem(item);
-	};
-
-	const onDragEnd = (e: any) => {
-		setCurrentItem(null);
-	};
-
-	const onDragOver = (e: any) => {
-		e.preventDefault();
-		e.stopPropagation();
-	};
-
-	const onDrop = (e: any, item: IAlbum) => {
-		e.preventDefault();
-		e.stopPropagation();
-
-		if (item.position !== currentItem?.position) {
-			const updatedAlbums = draggedAlbums.map((album) => {
-				if (album.id === item.id) {
-					return { ...album, position: currentItem?.position };
-				} else if (album.id === currentItem?.id) {
-					return { ...album, position: item.position };
-				} else {
-					return album;
-				}
-			}) as IAlbum[];
-
-			setDraggedAlbums(updatedAlbums);
-		}
-	};
-
-	const dnd = (album: IAlbum) => {
-		return {
-			onDragStart: (e: any) => onDragStart(e, album),
-			onDragEnd,
-			onDragOver,
-			onDrop: (e: any) => onDrop(e, album),
-		};
-	};
-
-	const sortirovka = (a: IAlbum, b: IAlbum) => {
-		if (!isDragging) return 0;
-
-		return a.position - b.position;
-	};
+	const dragAndDropHandlers = useDragAndDrop({ rearrangedAlbums, setRearrangedAlbums });
 
 	const handleSortClick = (column: keyof IAlbum) => {
 		const isPreviousColumnSorting = sort.sortingColumn === column;
@@ -128,9 +81,19 @@ function AlbumList({
 			</Caption>
 
 			<ul>
-				{[...currentAlbums].sort(sortirovka).map((album) => {
-					return <AlbumItem album={album} key={album.id} dnd={dnd(album)} />;
-				})}
+				{isDragging
+					? [...rearrangedAlbums]
+							.sort(sortRearrangedAlbums)
+							.map((album) => (
+								<AlbumItem
+									album={album}
+									key={album.id}
+									dragAndDropHandlers={dragAndDropHandlers}
+								/>
+							))
+					: customizedAlbumList.map((album) => (
+							<AlbumItem album={album} key={album.id} />
+					  ))}
 			</ul>
 		</div>
 	);

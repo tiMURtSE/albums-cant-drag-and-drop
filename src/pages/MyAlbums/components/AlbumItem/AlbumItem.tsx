@@ -13,16 +13,25 @@ import {
 	Year,
 } from "./AlbumItem.styled";
 import ContextMenu from "../ContextMenu/ContextMenu";
-import { useState } from "react";
 
 type Props = {
 	album: IAlbum;
-	dnd: object;
+	dragAndDropHandlers?: (album: IAlbum) => {
+		draggable: boolean;
+		onDragStart: (e: any) => void;
+		onDragEnd: (e: any) => void;
+		onDragOver: (e: any) => void;
+		onDrop: (e: any) => void;
+	};
 };
 
-const AlbumItem = ({ album, dnd }: Props) => {
+const AlbumItem = ({ album, dragAndDropHandlers }: Props) => {
+	let handlers = null;
+
+	if (dragAndDropHandlers) handlers = dragAndDropHandlers(album);
+
 	return (
-		<Item draggable {...dnd}>
+		<Item {...handlers}>
 			<Position>{album.position}</Position>
 
 			<CoverWrapper>
