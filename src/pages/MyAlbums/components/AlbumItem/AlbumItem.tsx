@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IAlbum } from "types";
+import { DragAndDrop, IAlbum } from "types";
 import formatDate from "utils/formatDate";
 import Image from "components/Image/Image";
 import {
@@ -16,13 +16,7 @@ import ContextMenu from "../ContextMenu/ContextMenu";
 
 type Props = {
 	album: IAlbum;
-	dragAndDropHandlers?: (album: IAlbum) => {
-		draggable: boolean;
-		onDragStart: (e: any) => void;
-		onDragEnd: (e: any) => void;
-		onDragOver: (e: any) => void;
-		onDrop: (e: any) => void;
-	};
+	dragAndDropHandlers: DragAndDrop;
 };
 
 const AlbumItem = ({ album, dragAndDropHandlers }: Props) => {

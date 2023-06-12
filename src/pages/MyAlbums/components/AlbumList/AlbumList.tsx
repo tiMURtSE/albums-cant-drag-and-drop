@@ -1,31 +1,17 @@
 import { SortTypes } from "consts";
-import { IAlbum, Sort } from "types";
+import { DragAndDrop, IAlbum, Sort } from "types";
 import AlbumItem from "../AlbumItem/AlbumItem";
 import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
-import { useEffect, useState } from "react";
 import { getTypeOfSort } from "utils/getTypeOfSort";
-import { useDragAndDrop } from "hooks/useDragAndDrop";
-import { sortRearrangedAlbums } from "utils/sortRearrangedAlbums";
 
 type Props = {
-	rearrangedAlbums: IAlbum[];
-	setRearrangedAlbums: React.Dispatch<React.SetStateAction<IAlbum[]>>;
-	isDragging: boolean;
-	customizedAlbumList: IAlbum[];
+	dragAndDropHandlers: DragAndDrop;
+	albums: IAlbum[];
 	sort: Sort;
 	setSort: React.Dispatch<React.SetStateAction<Sort>>;
 };
 
-function AlbumList({
-	rearrangedAlbums,
-	setRearrangedAlbums,
-	isDragging,
-	customizedAlbumList,
-	sort,
-	setSort,
-}: Props) {
-	const dragAndDropHandlers = useDragAndDrop({ rearrangedAlbums, setRearrangedAlbums });
-
+function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 	const handleSortClick = (column: keyof IAlbum) => {
 		const isPreviousColumnSorting = sort.sortingColumn === column;
 		let newType: Sort["typeOfSort"];
@@ -81,19 +67,13 @@ function AlbumList({
 			</Caption>
 
 			<ul>
-				{isDragging
-					? [...rearrangedAlbums]
-							.sort(sortRearrangedAlbums)
-							.map((album) => (
-								<AlbumItem
-									album={album}
-									key={album.id}
-									dragAndDropHandlers={dragAndDropHandlers}
-								/>
-							))
-					: customizedAlbumList.map((album) => (
-							<AlbumItem album={album} key={album.id} />
-					  ))}
+				{albums.map((album) => (
+					<AlbumItem
+						album={album}
+						key={album.id}
+						dragAndDropHandlers={dragAndDropHandlers}
+					/>
+				))}
 			</ul>
 		</div>
 	);

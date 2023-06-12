@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAlbumListCustomization } from "hooks/useAlbumListCustomization";
-import { Decades, IAlbum, Sort } from "types";
+import { Decades, Sort } from "types";
 import {
 	Input,
 	Customizations,
@@ -12,7 +12,7 @@ import {
 import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 import AlbumList from "./components/AlbumList/AlbumList";
 import { setAlbums } from "store/albumsSlice";
-import { sortRearrangedAlbums } from "utils/sortRearrangedAlbums";
+import { useDragAndDrop } from "hooks/useDragAndDrop";
 
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
@@ -28,13 +28,11 @@ const MyAlbums = () => {
 		filterByDecades,
 	});
 
-	const [rearrangedAlbums, setRearrangedAlbums] = useState(customizedAlbumList);
+	const { rearrangedAlbums, dragAndDropHandlers } = useDragAndDrop();
 
 	const changeAlbumPositions = () => {
 		if (isDragging) {
-			const albums = [...rearrangedAlbums].sort(sortRearrangedAlbums);
-
-			dispatch(setAlbums({ albums }));
+			dispatch(setAlbums({ albums: rearrangedAlbums }));
 			setIsDragging(false);
 		} else {
 			setIsDragging(true);
@@ -64,12 +62,10 @@ const MyAlbums = () => {
 			</Customizations>
 
 			<AlbumList
-				rearrangedAlbums={rearrangedAlbums}
-				setRearrangedAlbums={setRearrangedAlbums}
-				customizedAlbumList={customizedAlbumList}
+				dragAndDropHandlers={isDragging ? dragAndDropHandlers : null}
+				albums={isDragging ? rearrangedAlbums : customizedAlbumList}
 				sort={sort}
 				setSort={setSort}
-				isDragging={isDragging}
 			/>
 		</Wrapper>
 	);

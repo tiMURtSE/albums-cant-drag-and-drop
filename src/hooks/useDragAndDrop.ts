@@ -1,12 +1,16 @@
+import { useAppSelector } from "hooks";
 import { useState } from "react";
 import { IAlbum } from "types";
+import { sortRearrangedAlbums } from "utils/sortRearrangedAlbums";
 
 type Params = {
 	rearrangedAlbums: IAlbum[];
 	setRearrangedAlbums: React.Dispatch<React.SetStateAction<IAlbum[]>>;
 };
 
-export const useDragAndDrop = ({ rearrangedAlbums, setRearrangedAlbums }: Params) => {
+export const useDragAndDrop = () => {
+	const favoriteAlbums = useAppSelector((state) => state.albums.albums);
+	const [rearrangedAlbums, setRearrangedAlbums] = useState(favoriteAlbums);
 	const [draggingItem, setDraggingItem] = useState<IAlbum | null>(null);
 
 	const onDragStart = (e: any, target: IAlbum) => {
@@ -73,7 +77,7 @@ export const useDragAndDrop = ({ rearrangedAlbums, setRearrangedAlbums }: Params
 				}
 			}
 
-			setRearrangedAlbums(updatedAlbums);
+			setRearrangedAlbums(updatedAlbums.sort(sortRearrangedAlbums));
 		}
 	};
 
@@ -87,5 +91,5 @@ export const useDragAndDrop = ({ rearrangedAlbums, setRearrangedAlbums }: Params
 		};
 	};
 
-	return dragAndDropHandlers;
+	return { rearrangedAlbums, dragAndDropHandlers };
 };

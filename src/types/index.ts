@@ -42,4 +42,14 @@ interface Sort {
 
 type Decades = ("50" | "60" | "70" | "80" | "90" | "00" | "10" | "20")[];
 
-export type { IAlbum, IMetadata, IModifiers, Decades, Sort };
+type DragAndDrop =
+	| ((album: IAlbum) => {
+			draggable: boolean;
+			onDragStart: (e: any) => void;
+			onDragEnd: (e: any) => void;
+			onDragOver: (e: any) => void;
+			onDrop: (e: any) => void;
+	  })
+	| null;
+
+export type { IAlbum, IMetadata, IModifiers, Decades, Sort, DragAndDrop };
