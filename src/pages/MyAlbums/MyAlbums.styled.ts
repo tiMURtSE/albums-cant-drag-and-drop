@@ -29,6 +29,10 @@ const Input = styled.input`
 	&:focus {
 		outline: none;
 	}
+
+	&:disabled {
+		cursor: not-allowed;
+	}
 `;
 
 const ChangeOrderButton = styled.button`

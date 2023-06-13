@@ -7,9 +7,12 @@ import { IAlbum } from "types";
 import { useEffect, useState } from "react";
 import searchAlbums from "services/api/searchAlbums.api";
 import { formatAlbums } from "utils/formatAlbums";
+import Pagination from "./components/Pagination";
 
 const Search = () => {
 	const [foundAlbums, setFoundAlbums] = useState<IAlbum[] | []>([]);
+	const [page, setPage] = useState(1);
+	const [total, setTotal] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
 	const { query } = useParams();
 
@@ -18,12 +21,13 @@ const Search = () => {
 
 		try {
 			setIsLoading(true);
+			const response = await searchAlbums(query, page);
 
-			const response = await searchAlbums(query);
 			const albums = response.albums.items;
-
+			const total = response.albums.total;
 			setIsLoading(false);
 			setFoundAlbums(formatAlbums(albums));
+			setTotal(total);
 		} catch (error) {
 			console.error(error);
 		}
@@ -31,7 +35,7 @@ const Search = () => {
 
 	useEffect(() => {
 		getFoundAlbums();
-	}, [query]);
+	}, [query, page]);
 
 	return (
 		<>
@@ -49,7 +53,13 @@ const Search = () => {
 						border="10px"
 					/>
 				) : (
-					foundAlbums.map((album) => <CommonAlbumView album={album} key={album.id} />)
+					<>
+						{foundAlbums.map((album) => (
+							<CommonAlbumView album={album} key={album.id} />
+						))}
+
+						<Pagination page={page} setPage={setPage} total={total} />
+					</>
 				)}
 			</Wrapper>
 		</>

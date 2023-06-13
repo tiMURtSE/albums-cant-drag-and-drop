@@ -20,7 +20,7 @@ const CaptionItem = styled.li`
 	}
 `;
 
-const CaptionSortButton = styled.span<{ sortType?: SortTypes | "" }>`
+const CaptionSortButton = styled.span<{ sortType?: SortTypes | ""; isDragging: boolean }>`
 	color: ${({ sortType, theme }) => (sortType ? theme.colors.contrastText : "inherit")};
 	cursor: pointer;
 
@@ -30,7 +30,7 @@ const CaptionSortButton = styled.span<{ sortType?: SortTypes | "" }>`
 	}
 
 	&:hover {
-		color: ${({ theme }) => theme.colors.contrastText};
+		color: ${({ isDragging, theme }) => (isDragging ? "" : theme.colors.contrastText)};
 	}
 `;
 

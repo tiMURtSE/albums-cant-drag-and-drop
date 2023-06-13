@@ -36,6 +36,10 @@ const MyAlbums = () => {
 			setIsDragging(false);
 		} else {
 			setIsDragging(true);
+
+			setSort({ sortingColumn: "", typeOfSort: "" });
+			setSearchQuery("");
+			setFilterByDecades([]);
 		}
 	};
 
@@ -48,11 +52,13 @@ const MyAlbums = () => {
 						value={searchQuery}
 						onChange={(event) => setSearchQuery(event.target.value)}
 						placeholder="Поиск..."
+						disabled={isDragging}
 					/>
 
 					<FilterByDecade
 						filterByDecades={filterByDecades}
 						setFilterByDecades={setFilterByDecades}
+						isDragging={isDragging}
 					/>
 				</SearchAndFilter>
 

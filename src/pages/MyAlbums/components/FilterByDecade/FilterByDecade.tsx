@@ -1,10 +1,11 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { Filter, Decade } from "./FilterByDecade.styled";
-import { Decades, IModifiers } from "types";
+import { Decades } from "types";
 
 type Props = {
 	filterByDecades: ("50" | "60" | "70" | "80" | "90" | "00" | "10" | "20")[];
 	setFilterByDecades: React.Dispatch<Decades>;
+	isDragging: boolean;
 };
 
 type Decade = {
@@ -12,7 +13,7 @@ type Decade = {
 	isFlagged: boolean;
 };
 
-const FilterByDecade = ({ filterByDecades, setFilterByDecades }: Props) => {
+const FilterByDecade = ({ filterByDecades, setFilterByDecades, isDragging }: Props) => {
 	const [decades, setDecades] = useState<Decade[]>([
 		{ decade: "50", isFlagged: false },
 		{ decade: "60", isFlagged: false },
@@ -25,6 +26,8 @@ const FilterByDecade = ({ filterByDecades, setFilterByDecades }: Props) => {
 	]);
 
 	const flagDecade = (event: MouseEvent<HTMLDivElement>) => {
+		if (isDragging) return;
+
 		const flaggedDecade: any = event.currentTarget.getAttribute("data-decade");
 		const updatedDecades = decades.map((item) =>
 			item.decade === flaggedDecade ? { ...item, isFlagged: !item.isFlagged } : item
@@ -37,6 +40,20 @@ const FilterByDecade = ({ filterByDecades, setFilterByDecades }: Props) => {
 		setFilterByDecades(updatedFlaggedDecades);
 	};
 
+	useEffect(() => {
+		if (isDragging)
+			setDecades([
+				{ decade: "50", isFlagged: false },
+				{ decade: "60", isFlagged: false },
+				{ decade: "70", isFlagged: false },
+				{ decade: "80", isFlagged: false },
+				{ decade: "90", isFlagged: false },
+				{ decade: "00", isFlagged: false },
+				{ decade: "10", isFlagged: false },
+				{ decade: "20", isFlagged: false },
+			]);
+	}, [isDragging]);
+
 	return (
 		<Filter>
 			{decades.map(({ decade, isFlagged }) => (
@@ -45,6 +62,7 @@ const FilterByDecade = ({ filterByDecades, setFilterByDecades }: Props) => {
 					data-decade={decade}
 					isFlagged={isFlagged}
 					key={decade}
+					isDragging={isDragging}
 				>
 					{decade}'s
 				</Decade>

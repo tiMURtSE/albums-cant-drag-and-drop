@@ -7,18 +7,18 @@ const Filter = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
-const Decade = styled.div<{ isFlagged: boolean }>`
+const Decade = styled.div<{ isFlagged: boolean; isDragging: boolean }>`
 	flex-basis: 25%;
 	text-align: center;
 	padding: 5px 0;
-
 	background-color: ${({ isFlagged, theme }) => (isFlagged ? theme.colors.contrastText : "")};
 	color: ${({ isFlagged, theme }) => (isFlagged ? theme.colors.background.default : "")};
 	cursor: pointer;
 
 	&:hover {
-		color: ${({ theme }) => theme.colors.background.default};
-		background-color: ${({ theme }) => theme.colors.contrastText};
+		color: ${({ isDragging, theme }) => (isDragging ? "" : theme.colors.background.default)};
+		background-color: ${({ isDragging, theme }) =>
+			isDragging ? "" : theme.colors.contrastText};
 	}
 
 	&:nth-child(-n + 4) {

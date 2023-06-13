@@ -12,7 +12,11 @@ type Props = {
 };
 
 function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
+	const isDragging = Boolean(dragAndDropHandlers);
+
 	const handleSortClick = (column: keyof IAlbum) => {
+		if (isDragging) return;
+
 		const isPreviousColumnSorting = sort.sortingColumn === column;
 		let newType: Sort["typeOfSort"];
 		let newColumn: keyof IAlbum | "" = column;
@@ -44,6 +48,7 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 					<CaptionSortButton
 						sortType={getTypeOfSort(sort, "title")}
 						onClick={() => handleSortClick("title")}
+						isDragging={isDragging}
 					>
 						Что и кем
 					</CaptionSortButton>
@@ -52,6 +57,7 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 					<CaptionSortButton
 						sortType={getTypeOfSort(sort, "year")}
 						onClick={() => handleSortClick("year")}
+						isDragging={isDragging}
 					>
 						Год
 					</CaptionSortButton>
@@ -60,6 +66,7 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 					<CaptionSortButton
 						sortType={getTypeOfSort(sort, "createdAt")}
 						onClick={() => handleSortClick("createdAt")}
+						isDragging={isDragging}
 					>
 						Дата добавления
 					</CaptionSortButton>

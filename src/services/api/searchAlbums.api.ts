@@ -1,14 +1,17 @@
 import { SPOTIFY_API } from "consts";
 import getAccessToken from "./getAccessToken";
 
-const searchAlbums = async (query: string): Promise<Record<string, any>> => {
+const searchAlbums = async (query: string, page?: number): Promise<Record<string, any>> => {
 	const { access_token } = await getAccessToken();
 	const endpoint = SPOTIFY_API + "search?";
+	const limit = 5;
+	const offset = page ? page * limit - limit : 0;
 
 	const params = new URLSearchParams({
 		q: query,
 		type: "album",
-		limit: "5",
+		limit: String(limit),
+		offset: String(offset),
 	}).toString();
 
 	const response = await fetch(endpoint + params, {
