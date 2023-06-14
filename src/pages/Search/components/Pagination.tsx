@@ -1,6 +1,7 @@
-import { ArrowWrapper, Content, Item, Wrapper } from "./Pagination.styled";
+import { ArrowButton, Content, Item, Wrapper } from "./Pagination.styled";
 import ChevronLeftArrow from "components/Icons/ChevronArrow/ChevronLeftArrow";
 import ChevronRightArrow from "components/Icons/ChevronArrow/ChavronRightArrow";
+import { ALBUMS_PER_PAGE } from "consts";
 
 type Props = {
 	page: number;
@@ -9,27 +10,32 @@ type Props = {
 };
 
 const Pagination = ({ page, setPage, total }: Props) => {
-	let totalPages = Math.ceil(total / 5);
+	const totalPages = Math.ceil(total / ALBUMS_PER_PAGE);
 
-	const onPrevious = () => {
+	const disabledButtons = {
+		left: page === 1,
+		right: page === totalPages,
+	};
+
+	const onPreviousPageClick = () => {
 		setPage(page - 1);
 	};
-	const onNext = () => {
+	const onNextPageClick = () => {
 		setPage(page + 1);
 	};
 
 	return (
 		<Wrapper>
 			<Content>
-				<ArrowWrapper isHidden={page === 1} onClick={onPrevious}>
+				<ArrowButton disabled={disabledButtons.left} onClick={onPreviousPageClick}>
 					<ChevronLeftArrow />
-				</ArrowWrapper>
+				</ArrowButton>
 
 				<Item>{page}</Item>
 
-				<ArrowWrapper isHidden={page === totalPages} onClick={onNext}>
+				<ArrowButton disabled={disabledButtons.right} onClick={onNextPageClick}>
 					<ChevronRightArrow />
-				</ArrowWrapper>
+				</ArrowButton>
 			</Content>
 		</Wrapper>
 	);

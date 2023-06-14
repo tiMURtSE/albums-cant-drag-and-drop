@@ -3,6 +3,8 @@ export const LASTFM_API = "http://ws.audioscrobbler.com/2.0/";
 
 export const appTitle = "SCARINGTHEHOOKS";
 
+export const ALBUMS_PER_PAGE = 5;
+
 export enum PagesPath {
 	Home = "/",
 	Album = "/album/:id",

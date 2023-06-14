@@ -23,8 +23,9 @@ const Search = () => {
 			setIsLoading(true);
 			const response = await searchAlbums(query, page);
 
-			const albums = response.albums.items;
-			const total = response.albums.total;
+			const albums = response.albums.items as IAlbum[];
+			const total = response.albums.total as number;
+
 			setIsLoading(false);
 			setFoundAlbums(formatAlbums(albums));
 			setTotal(total);
@@ -58,7 +59,9 @@ const Search = () => {
 							<CommonAlbumView album={album} key={album.id} />
 						))}
 
-						<Pagination page={page} setPage={setPage} total={total} />
+						{!!foundAlbums.length && (
+							<Pagination page={page} setPage={setPage} total={total} />
+						)}
 					</>
 				)}
 			</Wrapper>

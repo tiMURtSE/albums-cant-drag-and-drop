@@ -25,10 +25,11 @@ const Item = styled.div`
 	color: ${({ theme }) => theme.colors.contrastText};
 `;
 
-const ArrowWrapper = styled.span<{ isHidden: boolean }>`
+const ArrowButton = styled.button`
 	& svg {
-		fill: ${({ isHidden, theme }) => (isHidden ? theme.colors.primary.neutral : "")};
+		fill: ${({ theme, disabled }) =>
+			disabled ? theme.colors.primary.neutral : theme.colors.primary.dark};
 	}
 `;
 
-export { Wrapper, Content, Item, ArrowWrapper };
+export { Wrapper, Content, Item, ArrowButton };

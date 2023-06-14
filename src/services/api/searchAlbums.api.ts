@@ -1,10 +1,10 @@
-import { SPOTIFY_API } from "consts";
+import { ALBUMS_PER_PAGE, SPOTIFY_API } from "consts";
 import getAccessToken from "./getAccessToken";
 
 const searchAlbums = async (query: string, page?: number): Promise<Record<string, any>> => {
 	const { access_token } = await getAccessToken();
 	const endpoint = SPOTIFY_API + "search?";
-	const limit = 5;
+	const limit = ALBUMS_PER_PAGE;
 	const offset = page ? page * limit - limit : 0;
 
 	const params = new URLSearchParams({
