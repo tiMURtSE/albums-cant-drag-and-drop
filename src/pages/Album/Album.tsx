@@ -6,36 +6,65 @@ import formatAlbum from "utils/formatAlbum";
 import { AlbumCover, Content } from "./Album.styled";
 import Image from "components/Image/Image";
 import Description from "./AlbumInfo/Description";
+import { Loader } from "styles/components/Loader.styled";
 
 const Album = () => {
 	const { id } = useParams();
 	const [album, setAlbum] = useState<IAlbum | null>(null);
-
-	const fetchAndFormatAlbum = async () => {
-		const album = await getSingleAlbum(id);
-
-		setAlbum(formatAlbum(album));
-	};
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		fetchAndFormatAlbum();
+		let ignore = false;
+
+		try {
+			const fetchAndFormatAlbum = async () => {
+				setIsLoading(true);
+
+				const album = await getSingleAlbum(id);
+
+				if (!ignore) {
+					setAlbum(formatAlbum(album));
+					setIsLoading(false);
+				}
+			};
+
+			fetchAndFormatAlbum();
+		} catch (error) {
+			console.log(error);
+		}
+
+		() => {
+			ignore = true;
+		};
 	}, [id]);
 
-	if (!album) return null;
-
 	return (
-		<Content>
-			<AlbumCover>
-				<Image
-					src={album.image}
-					width="450px"
-					height="450px"
-					alt={`${album.title} by ${album.artist}`}
+		<>
+			{isLoading ? (
+				<Loader
+					width="100%"
+					height="calc(100vh - 164px * 2)"
+					contentWidth="100px"
+					contentHeight="100px"
+					border="10px"
 				/>
-			</AlbumCover>
+			) : album ? (
+				<Content>
+					<AlbumCover>
+						<Image
+							src={album.image}
+							width="450px"
+							height="450px"
+							alt={`${album.title} by ${album.artist}`}
+						/>
+					</AlbumCover>
 
-			<Description album={album} />
-		</Content>
+					<Description album={album} />
+				</Content>
+			) : (
+				<div>Альбом не найден</div>
+			)}
+		</>
 	);
 };
 
