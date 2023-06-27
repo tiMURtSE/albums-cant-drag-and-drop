@@ -1,15 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Content, Navigation, Theme } from "./Navbar.styled";
 import { PagesPath, appTitle } from "consts";
 import { setMode } from "store/themeSlice";
 import Searchbar from "./Searchbar/Searchbar";
 import FlexBetween from "styles/components/FlexBetween.styled";
-import ThemeIcon from "components/Icons/ThemeIcon/ThemeIcon";
+import ThemeIcon from "components/Icons/ThemeIcon";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
+import AuthIcon from "components/Icons/AuthIcon";
+import { useAppDispatch } from "hooks";
 
 const Navbar = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	return (
 		<Content>
@@ -26,9 +29,11 @@ const Navbar = () => {
 				<Searchbar />
 			</FlexBetween>
 
-			<Theme onClick={() => dispatch(setMode())}>
-				<ThemeIcon />
-			</Theme>
+			<FlexBetween gap="2rem">
+				<ThemeIcon onClick={() => dispatch(setMode())} />
+
+				<AuthIcon onClick={() => navigate(PagesPath.Auth)} />
+			</FlexBetween>
 		</Content>
 	);
 };

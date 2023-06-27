@@ -11,6 +11,7 @@ import Album from "pages/Album/Album";
 import Layout from "components/Layout/Layout";
 import { themeSettings } from "theme/theme";
 import { ThemeProvider } from "styled-components";
+import Auth from "pages/Auth/Auth";
 
 function App() {
 	const mode = useAppSelector((state) => state.theme.mode);
@@ -26,6 +27,7 @@ function App() {
 						<Route path={PagesPath.Home} element={<Layout />}>
 							<Route index element={<Home />} />
 							<Route path={PagesPath.Album} element={<Album />} />
+							<Route path={PagesPath.Auth} element={<Auth />} />
 							<Route path={PagesPath.MyAlbums} element={<MyAlbums />} />
 							<Route path={PagesPath.Search} element={<Search />} />
 							<Route path={PagesPath.Error} element={<Error />} />

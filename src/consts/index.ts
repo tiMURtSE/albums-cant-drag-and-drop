@@ -6,8 +6,9 @@ export const appTitle = "SCARINGTHEHOOKS";
 export const ALBUMS_PER_PAGE = 5;
 
 export enum PagesPath {
-	Home = "/",
 	Album = "/album/:id",
+	Auth = "/auth",
+	Home = "/",
 	MyAlbums = "/my-albums",
 	Search = "/search/:query",
 	Error = "*",

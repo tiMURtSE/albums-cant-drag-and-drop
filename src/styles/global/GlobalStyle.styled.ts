@@ -10,6 +10,11 @@ const GlobalStyle = createGlobalStyle`
 
     ${normalize}
 
+    :root {
+        --color-light: #EEEEEE;
+        --color-dark: #121214;
+    }
+
     *,
     ::before,
     ::after {
