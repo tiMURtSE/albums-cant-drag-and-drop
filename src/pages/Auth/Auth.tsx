@@ -1,33 +1,24 @@
-import Button from "components/UI/Button/Button";
-import { AuthWrapper, Form } from "./Auth.styled";
-import AuthInput from "components/UI/AuthInput/AuthInput";
+import { useState } from "react";
+import { AuthWrapper } from "./Auth.styled";
+import Authorization from "./components/Login/Login";
+import Registration from "./components/SignUp/SignUp";
 
 type Props = {};
 
 function Auth(props: Props) {
+	const [isLogin, setIsLogin] = useState(true);
+
+	const handleSwitchForm = () => {
+		setIsLogin(!isLogin);
+	};
+
 	return (
 		<AuthWrapper>
-			<Form action="">
-				<AuthInput
-					type="email"
-					label="Логин"
-					tip=""
-					placeholder="Введите свой логин"
-					autoComplete="email"
-					autoFocus
-				/>
-
-				<AuthInput
-					type="password"
-					label="Пароль"
-					tip=""
-					placeholder="Введите свой пароль"
-					autoComplete="off"
-					autoFocus
-				/>
-
-				<Button type="button">Войти</Button>
-			</Form>
+			{isLogin ? (
+				<Authorization switchToSignUp={handleSwitchForm} />
+			) : (
+				<Registration switchToLogin={handleSwitchForm} />
+			)}
 		</AuthWrapper>
 	);
 }
