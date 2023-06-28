@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { IconWrapper } from "../../styles/components/IconWrapper.styles";
+import { IconWrapper } from "../../styles/components/IconWrapper.styled";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 

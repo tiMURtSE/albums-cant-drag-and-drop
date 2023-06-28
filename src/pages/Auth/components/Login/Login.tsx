@@ -1,6 +1,8 @@
 import AuthInput from "components/UI/AuthInput/AuthInput";
-import { Form, SignUpSuggestion } from "./Login.styled";
 import Button from "components/UI/Button/Button";
+import { AuthSwitch } from "styles/components/AuthSwitch.styled";
+import { AuthTitle } from "styles/components/AuthTitle.styled";
+import FlexColumn from "styles/components/FlexColumn.styled";
 
 type Props = {
 	switchToSignUp: () => void;
@@ -8,30 +10,41 @@ type Props = {
 
 function Login({ switchToSignUp }: Props) {
 	return (
-		<Form action="">
-			<AuthInput
-				type="email"
-				label="Имейл"
-				tip=""
-				placeholder="Введите свой имейл"
-				autoComplete="email"
-				autoFocus
-			/>
+		<>
+			<AuthTitle>Вход в аккаунт</AuthTitle>
 
-			<AuthInput
-				type="password"
-				label="Пароль"
-				tip=""
-				placeholder="Введите свой пароль"
-				autoComplete="off"
-			/>
+			<form action="">
+				<FlexColumn gap="4rem">
+					<FlexColumn gap="2.5rem">
+						<AuthInput
+							type="email"
+							label="Имейл"
+							tip=""
+							placeholder="Имейл"
+							autoComplete="email"
+							autoFocus
+						/>
 
-			<Button type="button">Войти</Button>
+						<AuthInput
+							type="password"
+							label="Пароль"
+							tip=""
+							placeholder="Пароль"
+							autoComplete="off"
+						/>
+					</FlexColumn>
 
-			<SignUpSuggestion>
-				Don't have an account? <span onClick={switchToSignUp}>Sign Up</span>
-			</SignUpSuggestion>
-		</Form>
+					<FlexColumn gap="1rem">
+						<Button type="button">Войти</Button>
+
+						<AuthSwitch>
+							Еще нет аккаунта?{" "}
+							<button onClick={switchToSignUp}>Зарегестрироваться</button>
+						</AuthSwitch>
+					</FlexColumn>
+				</FlexColumn>
+			</form>
+		</>
 	);
 }
 

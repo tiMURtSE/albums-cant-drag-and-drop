@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, useState } from "react";
-import { Label, Input } from "./AuthInput.styles";
+import { Label, Input, LabelCaption, Tip } from "./AuthInput.styled";
 import { useInputAndLabelInteraction } from "hooks/useInputAndLabelInteraction";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -15,9 +15,16 @@ function AuthInput({ label, tip, ...props }: Props) {
 	};
 
 	return (
-		<Label label={label} isShown={isFocused}>
-			<Input type="text" {...focusEventHandlers} {...props} />
-			{tip && <span>{tip}</span>}
+		<Label>
+			<LabelCaption isShown={isFocused}>{label}</LabelCaption>
+
+			<Input
+				type="text"
+				{...focusEventHandlers}
+				{...props}
+			/>
+
+			{tip && <Tip>{tip}</Tip>}
 		</Label>
 	);
 }
