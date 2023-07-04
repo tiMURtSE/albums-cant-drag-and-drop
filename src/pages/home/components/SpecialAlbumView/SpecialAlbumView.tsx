@@ -2,6 +2,7 @@ import {
 	Artist,
 	ArtistAndYear,
 	Content,
+	CrownIconWrapper,
 	Description,
 	TitleWrapper,
 	Year,
@@ -10,6 +11,7 @@ import { IAlbum } from "types";
 import { Link } from "react-router-dom";
 import Image from "components/Image/Image";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
+import { ReactComponent as CrownIcon } from "/public/crown.svg";
 
 type Props = {
 	album: IAlbum;
@@ -20,6 +22,12 @@ const SpecialAlbumView = ({ album }: Props) => {
 
 	return (
 		<Content position={album.position}>
+			{album.position <= 3 && (
+				<CrownIconWrapper position={album.position}>
+					<CrownIcon />
+				</CrownIconWrapper>
+			)}
+
 			<Link to={`/album/${album.id}`}>
 				<Image
 					src={album.image}

@@ -34,7 +34,6 @@ function SignUp({ switchToLogin }: Props) {
 							label="Никнейм"
 							placeholder="Никнейм"
 							autoComplete="off"
-							autoFocus
 							{...register("nickname")}
 							tip={errors.nickname?.message}
 						/>

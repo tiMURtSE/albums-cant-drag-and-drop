@@ -6,7 +6,7 @@ const Content = styled(FlexBetween)<{ position: number }>`
 	gap: 2rem;
 	padding: 0 40px 0 80px;
 
-	&::before {
+	&::after {
 		content: "${({ position }) => position}";
 		position: absolute;
 		top: 50%;
@@ -16,6 +16,20 @@ const Content = styled(FlexBetween)<{ position: number }>`
 
 		font-size: ${({ theme }) => theme.fonts.large};
 		font-weight: 700;
+	}
+`;
+
+const CrownIconWrapper = styled.div<{ position: number }>`
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	z-index: ${({ theme }) => theme.order.other};
+	transform: translate(-50%, -50%);
+	width: 24px;
+	height: 22px;
+
+	& svg {
+		fill: ${({ position }) => ["gold", "silver", "sienna"][position - 1]};
 	}
 `;
 
@@ -48,4 +62,4 @@ const Year = styled.p`
 	color: ${({ theme }) => theme.colors.primary.dark};
 `;
 
-export { Content, Description, TitleWrapper, ArtistAndYear, Artist, Year };
+export { Content, CrownIconWrapper, Description, TitleWrapper, ArtistAndYear, Artist, Year };

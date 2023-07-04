@@ -34,7 +34,6 @@ function Login({ switchToSignUp }: Props) {
 							label="Имейл"
 							placeholder="Имейл"
 							autoComplete="email"
-							autoFocus
 							{...register("email")}
 							tip={errors.email?.message}
 						/>
