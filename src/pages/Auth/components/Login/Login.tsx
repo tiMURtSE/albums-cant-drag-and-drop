@@ -3,39 +3,53 @@ import Button from "components/UI/Button/Button";
 import { AuthSwitch } from "styles/components/AuthSwitch.styled";
 import { AuthTitle } from "styles/components/AuthTitle.styled";
 import FlexColumn from "styles/components/FlexColumn.styled";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { LoginFormData, loginSchema } from "validations/loginSchema";
 
 type Props = {
 	switchToSignUp: () => void;
 };
 
 function Login({ switchToSignUp }: Props) {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({ resolver: yupResolver(loginSchema), mode: "onBlur" });
+
+	const onSubmit = (data: LoginFormData) => {
+		console.log(data);
+	};
+
 	return (
 		<>
 			<AuthTitle>Вход в аккаунт</AuthTitle>
 
-			<form action="">
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<FlexColumn gap="4rem">
 					<FlexColumn gap="2.5rem">
 						<AuthInput
 							type="email"
 							label="Имейл"
-							tip=""
 							placeholder="Имейл"
 							autoComplete="email"
 							autoFocus
+							{...register("email")}
+							tip={errors.email?.message}
 						/>
 
 						<AuthInput
 							type="password"
 							label="Пароль"
-							tip=""
 							placeholder="Пароль"
-							autoComplete="off"
+							{...register("password")}
+							tip={errors.password?.message}
 						/>
 					</FlexColumn>
 
 					<FlexColumn gap="1rem">
-						<Button type="button">Войти</Button>
+						<Button type="submit">Войти</Button>
 
 						<AuthSwitch>
 							Еще нет аккаунта?{" "}

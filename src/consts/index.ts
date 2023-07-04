@@ -23,3 +23,10 @@ export enum SortTypes {
 	Ascending = "asc",
 	Descending = "desc",
 }
+
+export enum ValidationMessages {
+	Required = "Это поле обязательно для заполнения",
+	Email = "Введите корректный адрес электронной почты",
+	Min = "Это поле должно содержать хотя бы ",
+	SpecialCharsAndDigits = "Это поле должно содержать хотя бы 1 спец. символ и 1 цифру",
+}
