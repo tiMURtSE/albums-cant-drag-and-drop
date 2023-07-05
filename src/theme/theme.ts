@@ -3,7 +3,7 @@ import { ITheme } from "./theme.interface";
 
 const theme = {
 	media: {
-		extraLarge: "(max-width: 1140px)",
+		extraLarge: "(max-width: 1024px)",
 		large: "(max-width: 960px)",
 		medium: "(max-width: 720px)",
 		small: "(max-width: 540px)",

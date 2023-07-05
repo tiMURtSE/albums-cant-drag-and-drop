@@ -30,3 +30,8 @@ export enum ValidationMessages {
 	Min = "Это поле должно содержать хотя бы ",
 	SpecialCharsAndDigits = "Это поле должно содержать хотя бы 1 спец. символ и 1 цифру",
 }
+
+export enum ELementIds {
+	Dialog = "side-navbar",
+	CloseButton = "close-button",
+}

@@ -10,6 +10,10 @@ const Navigation = styled.nav`
 	gap: 2rem;
 
 	font-size: ${({ theme }) => theme.fonts.regular};
+
+	@media (${({ theme }) => theme.media.extraLarge}) {
+		display: none;
+	}
 `;
 
 const Theme = styled.div`
