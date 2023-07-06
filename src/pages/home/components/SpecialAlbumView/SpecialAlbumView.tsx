@@ -11,7 +11,7 @@ import { IAlbum } from "types";
 import { Link } from "react-router-dom";
 import Image from "components/Image/Image";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
-import { ReactComponent as CrownIcon } from "/public/crown.svg";
+import { ReactComponent as CrownIcon } from "assets/icons/crown.svg";
 
 type Props = {
 	album: IAlbum;

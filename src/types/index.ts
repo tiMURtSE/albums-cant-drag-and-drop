@@ -1,4 +1,4 @@
-import { SortTypes } from "consts";
+import { PageTitles, PagesPath, SortTypes } from "consts";
 
 interface IAlbum {
 	id: string;
@@ -25,6 +25,8 @@ interface IMetadata {
 	}>;
 	description: string;
 }
+
+type Navigation = { path: PagesPath; title: PageTitles }[];
 
 interface IModifiers {
 	sort: {
@@ -54,4 +56,4 @@ type DragAndDrop =
 	  })
 	| null;
 
-export type { IAlbum, IMetadata, IModifiers, Decades, Sort, DragAndDrop };
+export type { IAlbum, IMetadata, IModifiers, Navigation, Decades, Sort, DragAndDrop };

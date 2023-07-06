@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Content, Navigation, Theme } from "./Navbar.styled";
-import { ELementIds, PagesPath, appTitle } from "consts";
+import { NavigationItems, PagesPath, appTitle } from "consts";
 import { setMode } from "store/themeSlice";
 import Searchbar from "./components/Searchbar/Searchbar";
 import FlexBetween from "styles/components/FlexBetween.styled";
@@ -9,19 +9,18 @@ import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
 import AuthIcon from "components/Icons/AuthIcon";
 import { useAppDispatch } from "hooks";
 import { IconWrapper } from "styles/components/IconWrapper.styled";
-import { ReactComponent as BurgerIcon } from "/public/burger.svg";
-import { ReactComponent as SearchIcon } from "/public/search.svg";
+import { ReactComponent as BurgerIcon } from "assets/icons/burger.svg";
+import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import SideNavbar from "./components/SideNavbar/SideNavbar";
 import { openSideNavbar } from "utils/openSideNavbar";
 import { theme } from "theme/theme";
 
 const Navbar = () => {
-	const dialogId = ELementIds.Dialog;
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const mediaQuery = theme.media.extraLarge;
 
+	const mediaQuery = theme.media.extraLarge;
 	const isBelowAverageScreens = useMediaQuery(mediaQuery);
 
 	return (
@@ -32,8 +31,14 @@ const Navbar = () => {
 				</StylishAlbumTitle>
 
 				<Navigation>
-					<NavLink to={PagesPath.Home}>Главная</NavLink>
-					<NavLink to={PagesPath.MyAlbums}>Мои альбомы</NavLink>
+					{NavigationItems.map((item) => (
+						<NavLink
+							to={item.path}
+							key={item.path}
+						>
+							{item.title}
+						</NavLink>
+					))}
 				</Navigation>
 
 				{!isBelowAverageScreens && <Searchbar />}
@@ -57,14 +62,14 @@ const Navbar = () => {
 					<IconWrapper
 						width="25px"
 						height="25px"
-						onClick={() => openSideNavbar(dialogId)}
+						onClick={() => openSideNavbar("side-navbar")}
 					>
 						<BurgerIcon />
 					</IconWrapper>
 				)}
 			</FlexBetween>
 
-			{isBelowAverageScreens && <SideNavbar id={dialogId} />}
+			{isBelowAverageScreens && <SideNavbar id="side-navbar" />}
 		</Content>
 	);
 };

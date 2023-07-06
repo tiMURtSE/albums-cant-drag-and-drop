@@ -1,3 +1,5 @@
+import { Navigation } from "types";
+
 export const SPOTIFY_API = "https://api.spotify.com/v1/";
 export const LASTFM_API = "http://ws.audioscrobbler.com/2.0/";
 
@@ -12,6 +14,11 @@ export enum PagesPath {
 	MyAlbums = "/my-albums",
 	Search = "/search/:query",
 	Error = "*",
+}
+
+export enum PageTitles {
+	Home = "Главная",
+	MyAlbums = "Мои альбомы",
 }
 
 export enum ThemeMods {
@@ -31,7 +38,7 @@ export enum ValidationMessages {
 	SpecialCharsAndDigits = "Это поле должно содержать хотя бы 1 спец. символ и 1 цифру",
 }
 
-export enum ELementIds {
-	Dialog = "side-navbar",
-	CloseButton = "close-button",
-}
+export const NavigationItems: Navigation = [
+	{ path: PagesPath.Home, title: PageTitles.Home },
+	{ path: PagesPath.MyAlbums, title: PageTitles.MyAlbums },
+];
