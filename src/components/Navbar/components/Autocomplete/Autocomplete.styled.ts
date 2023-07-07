@@ -39,6 +39,7 @@ const ItemLink = styled.div<{ isFocused: boolean }>`
 
 const Title = styled.div`
 	font-weight: 700;
+	color: ${({ theme }) => theme.colors.contrastText};
 `;
 
 const Artist = styled.div`

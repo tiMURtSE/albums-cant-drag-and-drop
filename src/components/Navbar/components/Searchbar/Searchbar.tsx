@@ -41,7 +41,10 @@ const Searchbar = () => {
 
 			<Autocomplete query={query} />
 
-			<ClearSign query={query} onClick={() => setQuery("")}>
+			<ClearSign
+				query={query}
+				onClick={() => setQuery("")}
+			>
 				&#9587;
 			</ClearSign>
 		</Content>

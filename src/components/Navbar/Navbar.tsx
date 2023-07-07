@@ -15,6 +15,8 @@ import { useMediaQuery } from "hooks/useMediaQuery";
 import SideNavbar from "./components/SideNavbar/SideNavbar";
 import { openSideNavbar } from "utils/openSideNavbar";
 import { theme } from "theme/theme";
+import ModalWindow from "components/ModalWindow/ModalWindow";
+import SearchbarModal from "./components/SearchbarModal/SearchbarModal";
 
 const Navbar = () => {
 	const dispatch = useAppDispatch();
@@ -49,6 +51,7 @@ const Navbar = () => {
 					<IconWrapper
 						width="20px"
 						height="20px"
+						onClick={() => openSideNavbar("searchbar-modal")}
 					>
 						<SearchIcon />
 					</IconWrapper>
@@ -70,6 +73,8 @@ const Navbar = () => {
 			</FlexBetween>
 
 			{isBelowAverageScreens && <SideNavbar id="side-navbar" />}
+
+			{isBelowAverageScreens && <SearchbarModal id="searchbar-modal" />}
 		</Content>
 	);
 };

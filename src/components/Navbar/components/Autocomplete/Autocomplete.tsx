@@ -43,6 +43,7 @@ const Autocomplete = ({ query }: Props) => {
 						<Item key={album.id}>
 							<Link
 								to={`/album/${album.id}`}
+								className="search-list__item"
 								onClick={() => dispatch(closeAutocomplete())}
 							>
 								<ItemLink isFocused={index === selectedIndex}>

@@ -1,18 +1,16 @@
 import { HTMLAttributes, MouseEvent, useEffect } from "react";
-import { IconWrapper } from "styles/components/IconWrapper.styled";
 import {
 	SideNavbarHeader,
 	SideNavbarContent,
-	SideNavbarWrapper,
 	SideNavbarNavigation,
 	SideNavbarNavigationItem,
-	SideNavbarCloseButton,
 } from "./SideNavbar.styled";
-import { ReactComponent as XMarkIcon } from "assets/icons/close-button.svg";
 import { Paddings } from "components/Layout/Layout.styled";
 import { closeSideNavbar } from "utils/closeSideNavbar";
 import { NavigationItems } from "consts";
 import { NavLink } from "react-router-dom";
+import ModalWindow from "components/ModalWindow/ModalWindow";
+import CloseButton from "components/UI/CloseButton/CloseButton";
 
 interface Props extends HTMLAttributes<HTMLDialogElement> {
 	id: string;
@@ -22,24 +20,16 @@ function SideNavbar({ ...props }: Props) {
 	const dialogId = props.id;
 
 	return (
-		<SideNavbarWrapper
-			onClick={(event) => closeSideNavbar(event, dialogId, "#close-button")}
+		<ModalWindow
+			onClick={(event) =>
+				closeSideNavbar(event, dialogId, ["#close-button", ".navigation-item"])
+			}
 			{...props}
 		>
 			<SideNavbarContent>
 				<Paddings>
 					<SideNavbarHeader>
-						<SideNavbarCloseButton
-							type="button"
-							id="close-button"
-						>
-							<IconWrapper
-								width="25px"
-								height="25px"
-							>
-								<XMarkIcon />
-							</IconWrapper>
-						</SideNavbarCloseButton>
+						<CloseButton />
 					</SideNavbarHeader>
 
 					<nav>
@@ -49,9 +39,6 @@ function SideNavbar({ ...props }: Props) {
 									<NavLink
 										className={`navigation-item`}
 										to={item.path}
-										onClick={(event) =>
-											closeSideNavbar(event, dialogId, ".navigation-item")
-										}
 									>
 										{item.title}
 									</NavLink>
@@ -61,7 +48,7 @@ function SideNavbar({ ...props }: Props) {
 					</nav>
 				</Paddings>
 			</SideNavbarContent>
-		</SideNavbarWrapper>
+		</ModalWindow>
 	);
 }
 
