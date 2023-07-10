@@ -3,8 +3,6 @@ import Searchbar from "../Searchbar/Searchbar";
 import { closeSideNavbar } from "utils/closeSideNavbar";
 import { HTMLAttributes } from "react";
 import { SearchbarModalContent, SearchbarModalHeader } from "./SearchbarModal.styled";
-import { SideNavbarCloseButton } from "../SideNavbar/SideNavbar.styled";
-import CloseButton from "components/UI/CloseButton/CloseButton";
 import { Paddings } from "components/Layout/Layout.styled";
 
 interface Props extends HTMLAttributes<HTMLDialogElement> {

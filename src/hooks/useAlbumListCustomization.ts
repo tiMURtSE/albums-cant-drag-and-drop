@@ -25,28 +25,32 @@ const sortAlbums = (albums: IAlbum[], sort: Sort) => {
 		if (sort.sortingColumn) {
 			if (sort.sortingColumn === "year") {
 				if (sort.typeOfSort === "asc") {
-					return [...albums].sort(
-						(a: any, b: any) => a[sort.sortingColumn] - b[sort.sortingColumn]
-					);
+					const column = sort.sortingColumn;
+
+					return [...albums].sort((a: IAlbum, b: IAlbum) => a[column] - b[column]);
 				}
 
 				if (sort.typeOfSort === "desc") {
-					return [...albums].sort(
-						(a: any, b: any) => b[sort.sortingColumn] - a[sort.sortingColumn]
-					);
+					const column = sort.sortingColumn;
+
+					return [...albums].sort((a: IAlbum, b: IAlbum) => b[column] - a[column]);
 				}
 
 				return albums;
 			} else {
-				if (sort.typeOfSort === "asc") {
-					return [...albums].sort((a: any, b: any) =>
-						a[sort.sortingColumn].localeCompare(b[sort.sortingColumn])
+				if (sort.typeOfSort === "asc" && sort.sortingColumn !== "position") {
+					const column = sort.sortingColumn;
+
+					return [...albums].sort((a: IAlbum, b: any) =>
+						a[column].localeCompare(b[column])
 					);
 				}
 
-				if (sort.typeOfSort === "desc") {
-					return [...albums].sort((a: any, b: any) =>
-						b[sort.sortingColumn].localeCompare(a[sort.sortingColumn])
+				if (sort.typeOfSort === "desc" && sort.sortingColumn !== "position") {
+					const column = sort.sortingColumn;
+
+					return [...albums].sort((a: IAlbum, b: IAlbum) =>
+						b[column].localeCompare(a[column])
 					);
 				}
 
