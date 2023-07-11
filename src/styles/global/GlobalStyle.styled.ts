@@ -48,6 +48,11 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: inherit;
+
+        &:focus-visible {
+            border-radius: 1px;
+            outline: 2px solid blue;
+        }
     }
 
     input,

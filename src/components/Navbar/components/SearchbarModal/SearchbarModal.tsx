@@ -3,7 +3,7 @@ import Searchbar from "../Searchbar/Searchbar";
 import { closeSideNavbar } from "utils/closeSideNavbar";
 import { HTMLAttributes } from "react";
 import { SearchbarModalContent, SearchbarModalHeader } from "./SearchbarModal.styled";
-import { Paddings } from "components/Layout/Layout.styled";
+import { Paddings } from "styles/components/Paddings.styled";
 
 interface Props extends HTMLAttributes<HTMLDialogElement> {
 	id: string;

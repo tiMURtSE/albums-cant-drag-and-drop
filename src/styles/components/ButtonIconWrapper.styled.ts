@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
-const IconWrapper = styled.div<{ width: string; height: string }>`
+const ButtonIconWrapper = styled.button<{ width: string; height: string }>`
 	display: inline-block;
-	padding: 5px;
+	width: 44px;
+	height: 44px;
 
 	font-size: 0;
 	cursor: pointer;
 
-	& button {
-		cursor: pointer;
+	&:focus-visible {
+		border-radius: 1px;
+		outline: 2px solid blue;
 	}
 
 	& svg {
@@ -19,4 +21,4 @@ const IconWrapper = styled.div<{ width: string; height: string }>`
 	}
 `;
 
-export { IconWrapper };
+export { ButtonIconWrapper };

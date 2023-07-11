@@ -24,23 +24,9 @@ const Navigation = styled.nav`
 
 	font-size: ${({ theme }) => theme.fonts.regular};
 
-	@media (${({ theme }) => theme.media.extraLarge}) {
+	@media ${({ theme }) => theme.media.extraLarge} {
 		display: none;
 	}
 `;
 
-const Theme = styled.div`
-	width: 20px;
-	height: 20px;
-
-	cursor: pointer;
-
-	& svg {
-		width: 100%;
-		height: 100%;
-
-		fill: ${({ theme }) => theme.colors.contrastText};
-	}
-`;
-
-export { Content, NavbarTitle, Navigation, Theme };
+export { Content, NavbarTitle, Navigation };

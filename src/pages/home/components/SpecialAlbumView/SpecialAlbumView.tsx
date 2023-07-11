@@ -39,9 +39,9 @@ const SpecialAlbumView = ({ album }: Props) => {
 
 			<Description>
 				<TitleWrapper>
-					<Link to={`/album/${album.id}`}>
-						<StylishAlbumTitle isExtraLarge>{album.title}</StylishAlbumTitle>
-					</Link>
+					<StylishAlbumTitle isExtraLarge>
+						<Link to={`/album/${album.id}`}>{album.title}</Link>
+					</StylishAlbumTitle>
 				</TitleWrapper>
 
 				<ArtistAndYear>

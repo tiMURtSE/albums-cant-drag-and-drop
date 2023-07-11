@@ -21,7 +21,9 @@ const SideNavbarHeader = styled(FlexBetween)`
 	height: ${({ theme }) => theme.sizes.header.height};
 `;
 
-const SideNavbarNavigation = styled.ul`
+const SideNavbarNavigation = styled.ul``;
+
+const SideNavbarNavigationItem = styled.li`
 	& a {
 		display: block;
 		padding: 0.5rem 2rem;
@@ -29,8 +31,7 @@ const SideNavbarNavigation = styled.ul`
 		color: ${({ theme }) => theme.colors.contrastText};
 		border-radius: ${({ theme }) => theme.sizes.borderRadius};
 
-		&:focus {
-			outline: none;
+		&:focus-visible {
 			background-color: ${({ theme }) => theme.colors.primary.light};
 		}
 
@@ -40,6 +41,27 @@ const SideNavbarNavigation = styled.ul`
 	}
 `;
 
-const SideNavbarNavigationItem = styled.li``;
+const ThemeWrapper = styled.div`
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid ${({ theme }) => theme.colors.primary.neutral};
 
-export { SideNavbarContent, SideNavbarHeader, SideNavbarNavigation, SideNavbarNavigationItem };
+	& > div {
+		border-radius: ${({ theme }) => theme.sizes.borderRadius};
+		padding: 0.5rem 2rem;
+
+		color: ${({ theme }) => theme.colors.contrastText};
+	}
+
+	& button {
+		border-bottom: 2px solid ${({ theme }) => theme.colors.contrastText};
+	}
+`;
+
+export {
+	SideNavbarContent,
+	SideNavbarHeader,
+	SideNavbarNavigation,
+	SideNavbarNavigationItem,
+	ThemeWrapper,
+};

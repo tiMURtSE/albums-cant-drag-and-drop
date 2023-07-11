@@ -25,14 +25,10 @@ const Main = styled.main`
 	padding: 100px 0;
 `;
 
-const Paddings = styled.div`
-	padding: 0 32px;
-`;
-
 const Container = styled.div<{ header?: boolean }>`
 	max-width: ${({ theme, header }) =>
 		header ? theme.sizes.container.header : theme.sizes.container.list};
 	margin: 0 auto;
 `;
 
-export { Page, Header, Main, Paddings, Container };
+export { Page, Header, Main, Container };

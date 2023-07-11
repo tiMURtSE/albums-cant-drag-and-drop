@@ -4,6 +4,10 @@ import { theme } from "theme/theme";
 const Content = styled.div`
 	position: relative;
 	width: 350px;
+
+	@media ${({ theme }) => theme.media.small} {
+		width: 300px;
+	}
 `;
 
 const Input = styled.input`
