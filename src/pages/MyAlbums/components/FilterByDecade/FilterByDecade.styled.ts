@@ -7,12 +7,14 @@ const Filter = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
-const Decade = styled.div<{ isFlagged: boolean; isDragging: boolean }>`
+const Decade = styled.button<{ isFlagged: boolean; isDragging: boolean }>`
 	flex-basis: 25%;
 	text-align: center;
 	padding: 5px 0;
+
 	background-color: ${({ isFlagged, theme }) => (isFlagged ? theme.colors.contrastText : "")};
-	color: ${({ isFlagged, theme }) => (isFlagged ? theme.colors.background.default : "")};
+	color: ${({ isFlagged, theme }) =>
+		isFlagged ? theme.colors.background.default : theme.colors.contrastText};
 	cursor: pointer;
 
 	&:hover {
@@ -41,8 +43,17 @@ const Decade = styled.div<{ isFlagged: boolean; isDragging: boolean }>`
 	&:nth-child(4) {
 		border-top-right-radius: ${({ theme }) => theme.sizes.borderRadius};
 	}
+
 	&:nth-child(5) {
 		border-bottom-left-radius: ${({ theme }) => theme.sizes.borderRadius};
+	}
+
+	&:focus-visible {
+		outline: 2px solid blue;
+	}
+
+	@media ${({ theme }) => theme.media.medium} {
+		padding: 10px 0;
 	}
 `;
 

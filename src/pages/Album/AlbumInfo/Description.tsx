@@ -5,13 +5,14 @@ import { IAlbum, IMetadata } from "types";
 import getAlbumMetadata from "services/api/getAlbumMetadata.api";
 import formatMetadata from "utils/formatMetadata";
 import { Artist, Content, TitleWrapper, IconWrapper, LikeButton } from "./Description.styled";
-import SolidLike from "components/Icons/Like/SolidLike";
 import RegularLike from "components/Icons/Like/RegularLike";
 import ExternalLink from "components/Icons/ExternalLink/ExternalLink";
 import Spotify from "components/Icons/Spotify/Spotify";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
 import Metadata from "./Metadata/Metadata";
 import Tracks from "./Tracks/Tracks";
+import Button from "components/UI/Button/Button";
+import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
 
 type Props = {
 	album: IAlbum;
@@ -44,24 +45,27 @@ const Description = ({ album }: Props) => {
 	return (
 		<Content>
 			<TitleWrapper>
-				<a href={album.url} target="_blank">
-					<StylishAlbumTitle isExtraLarge>
+				<StylishAlbumTitle isExtraLarge>
+					<a
+						href={album.url}
+						target="_blank"
+					>
 						{album.title}
 						<IconWrapper>
 							<ExternalLink />
 							<Spotify />
 						</IconWrapper>
-					</StylishAlbumTitle>
-				</a>
+					</a>
+				</StylishAlbumTitle>
 			</TitleWrapper>
 
 			<Artist>{album.artist}</Artist>
 
 			{isAlbumLiked ? (
-				<LikeButton onClick={likeAlbum}>
-					<SolidLike />
+				<Button onClick={likeAlbum}>
+					<FilledLikeIcon />
 					<span>Удалить</span>
-				</LikeButton>
+				</Button>
 			) : (
 				<LikeButton onClick={likeAlbum}>
 					<RegularLike />
@@ -71,7 +75,10 @@ const Description = ({ album }: Props) => {
 
 			{metadata && (
 				<>
-					<Metadata album={album} metadata={metadata} />
+					<Metadata
+						album={album}
+						metadata={metadata}
+					/>
 
 					<Tracks tracks={metadata.tracks} />
 				</>

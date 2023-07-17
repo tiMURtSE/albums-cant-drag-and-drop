@@ -33,6 +33,11 @@ const theme = {
 		modal: 100,
 		other: 10,
 	},
+
+	radius: {
+		regular: "12px",
+		large: "24px",
+	},
 };
 
 const colorTokens = {

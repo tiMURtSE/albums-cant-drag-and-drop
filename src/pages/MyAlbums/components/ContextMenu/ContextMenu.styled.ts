@@ -1,18 +1,23 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-	position: relative;
-`;
-
-const IconWrapper = styled.div`
 	position: absolute;
 	top: 50%;
-	right: 12px;
+	right: 16px;
 	z-index: ${({ theme }) => theme.order.other};
 	transform: translateY(-50%);
 
+	@media ${({ theme }) => theme.media.small} {
+		right: 0;
+	}
+`;
+
+const IconWrapper = styled.div`
 	display: none;
 
+	@media ${({ theme }) => theme.media.extraLarge} {
+		display: block;
+	}
 	& svg {
 		fill: ${({ theme }) => theme.colors.contrastText};
 	}

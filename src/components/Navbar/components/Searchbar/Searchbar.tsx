@@ -16,6 +16,8 @@ const Searchbar = () => {
 	const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
+		if (!query) return;
+
 		navigate(`/search/${query}`);
 		dispatch(closeAutocomplete());
 

@@ -50,6 +50,11 @@ interface ITheme {
 		modal: number;
 		other: number;
 	};
+
+	radius: {
+		regular: string;
+		large: string;
+	};
 }
 
 export type { ITheme };

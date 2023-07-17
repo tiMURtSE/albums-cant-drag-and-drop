@@ -3,7 +3,7 @@ import { Navigation } from "types";
 export const SPOTIFY_API = "https://api.spotify.com/v1/";
 export const LASTFM_API = "http://ws.audioscrobbler.com/2.0/";
 
-export const appTitle = "SCARINGTHEHOOKS";
+export const APP_TITLE = "SCARINGTHEHOOKS";
 
 export const ALBUMS_PER_PAGE = 5;
 
@@ -38,7 +38,7 @@ export enum ValidationMessages {
 	SpecialCharsAndDigits = "Это поле должно содержать хотя бы 1 спец. символ и 1 цифру",
 }
 
-export const NavigationItems: Navigation = [
+export const navigationItems: Navigation = [
 	{ path: PagesPath.Home, title: PageTitles.Home },
 	{ path: PagesPath.MyAlbums, title: PageTitles.MyAlbums },
 ];

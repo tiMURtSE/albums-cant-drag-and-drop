@@ -29,7 +29,10 @@ const AlbumItem = ({ album, dragAndDropHandlers }: Props) => {
 	}
 
 	return (
-		<Item {...handlers} isDragging={isDragging}>
+		<Item
+			{...handlers}
+			isDragging={isDragging}
+		>
 			<Position>{album.position}</Position>
 
 			<CoverWrapper>

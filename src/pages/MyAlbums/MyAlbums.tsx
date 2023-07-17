@@ -6,13 +6,14 @@ import {
 	Input,
 	Customizations,
 	SearchAndFilter,
-	Wrapper,
+	AlbumCollectionWrapper,
 	ChangeOrderButton,
 } from "./MyAlbums.styled";
 import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 import AlbumList from "./components/AlbumList/AlbumList";
 import { setAlbums } from "store/albumsSlice";
 import { useDragAndDrop } from "hooks/useDragAndDrop";
+import Button from "components/UI/Button/Button";
 
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
@@ -44,7 +45,7 @@ const MyAlbums = () => {
 	};
 
 	return (
-		<Wrapper>
+		<AlbumCollectionWrapper>
 			<Customizations>
 				<SearchAndFilter>
 					<Input
@@ -62,9 +63,9 @@ const MyAlbums = () => {
 					/>
 				</SearchAndFilter>
 
-				<ChangeOrderButton onClick={changeAlbumPositions}>
+				<Button onClick={changeAlbumPositions}>
 					{isDragging ? "Готово" : "Поменять порядок альбомов"}
-				</ChangeOrderButton>
+				</Button>
 			</Customizations>
 
 			<AlbumList
@@ -73,7 +74,7 @@ const MyAlbums = () => {
 				sort={sort}
 				setSort={setSort}
 			/>
-		</Wrapper>
+		</AlbumCollectionWrapper>
 	);
 };
 

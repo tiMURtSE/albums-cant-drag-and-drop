@@ -8,7 +8,7 @@ import {
 } from "./SideNavbar.styled";
 // import { Paddings } from "components/Layout/Layout.styled";
 import { closeSideNavbar } from "utils/closeSideNavbar";
-import { NavigationItems } from "consts";
+import { navigationItems } from "consts";
 import { NavLink } from "react-router-dom";
 import ModalWindow from "components/ModalWindow/ModalWindow";
 import { ButtonIconWrapper } from "styles/components/ButtonIconWrapper.styled";
@@ -49,7 +49,7 @@ function SideNavbar({ ...props }: Props) {
 
 					<nav>
 						<SideNavbarNavigation>
-							{NavigationItems.map((item) => (
+							{navigationItems.map((item) => (
 								<SideNavbarNavigationItem key={item.path}>
 									<NavLink
 										className={`navigation-item`}

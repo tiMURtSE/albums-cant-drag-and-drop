@@ -3,6 +3,8 @@ import { DragAndDrop, IAlbum, Sort } from "types";
 import AlbumItem from "../AlbumItem/AlbumItem";
 import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
 import { getTypeOfSort } from "utils/getTypeOfSort";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { theme } from "theme/theme";
 
 type Props = {
 	dragAndDropHandlers: DragAndDrop;
@@ -13,6 +15,10 @@ type Props = {
 
 function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 	const isDragging = Boolean(dragAndDropHandlers);
+	const largeScreenSize = theme.media.extraLarge;
+	const mediumScreenSize = theme.media.medium;
+	const isBelowLargeScreens = useMediaQuery(largeScreenSize);
+	const isBelowMediumScreens = useMediaQuery(mediumScreenSize);
 
 	const handleSortClick = (column: keyof IAlbum) => {
 		if (isDragging) return;
@@ -53,24 +59,30 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 						Что и кем
 					</CaptionSortButton>
 				</CaptionItem>
-				<CaptionItem>
-					<CaptionSortButton
-						sortType={getTypeOfSort(sort, "year")}
-						onClick={() => handleSortClick("year")}
-						isDragging={isDragging}
-					>
-						Год
-					</CaptionSortButton>
-				</CaptionItem>
-				<CaptionItem>
-					<CaptionSortButton
-						sortType={getTypeOfSort(sort, "createdAt")}
-						onClick={() => handleSortClick("createdAt")}
-						isDragging={isDragging}
-					>
-						Дата добавления
-					</CaptionSortButton>
-				</CaptionItem>
+
+				{isBelowMediumScreens || (
+					<CaptionItem>
+						<CaptionSortButton
+							sortType={getTypeOfSort(sort, "year")}
+							onClick={() => handleSortClick("year")}
+							isDragging={isDragging}
+						>
+							Год
+						</CaptionSortButton>
+					</CaptionItem>
+				)}
+
+				{isBelowLargeScreens || (
+					<CaptionItem>
+						<CaptionSortButton
+							sortType={getTypeOfSort(sort, "createdAt")}
+							onClick={() => handleSortClick("createdAt")}
+							isDragging={isDragging}
+						>
+							Дата добавления
+						</CaptionSortButton>
+					</CaptionItem>
+				)}
 			</Caption>
 
 			<ul>

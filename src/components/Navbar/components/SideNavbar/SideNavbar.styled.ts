@@ -26,7 +26,7 @@ const SideNavbarNavigation = styled.ul``;
 const SideNavbarNavigationItem = styled.li`
 	& a {
 		display: block;
-		padding: 0.5rem 2rem;
+		padding: 10px 2rem;
 
 		color: ${({ theme }) => theme.colors.contrastText};
 		border-radius: ${({ theme }) => theme.sizes.borderRadius};

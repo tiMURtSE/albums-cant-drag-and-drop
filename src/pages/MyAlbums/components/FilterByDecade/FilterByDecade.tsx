@@ -25,7 +25,7 @@ const FilterByDecade = ({ filterByDecades, setFilterByDecades, isDragging }: Pro
 		{ decade: "20", isFlagged: false },
 	]);
 
-	const flagDecade = (event: MouseEvent<HTMLDivElement>) => {
+	const flagDecade = (event: MouseEvent<HTMLButtonElement>) => {
 		if (isDragging) return;
 
 		const flaggedDecade: any = event.currentTarget.getAttribute("data-decade");

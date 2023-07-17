@@ -1,11 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Content, NavbarTitle, Navigation } from "./Navbar.styled";
-import { NavigationItems, PagesPath, appTitle } from "consts";
+import { APP_TITLE, navigationItems, PagesPath } from "consts";
 import { setMode } from "store/themeSlice";
 import Searchbar from "./components/Searchbar/Searchbar";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import { useAppDispatch } from "hooks";
-import { IconWrapper } from "styles/components/IconWrapper.styled";
 import { ReactComponent as BurgerIcon } from "assets/icons/burger.svg";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import { ReactComponent as ThemeIcon } from "assets/icons/theme.svg";
@@ -40,11 +39,11 @@ const Navbar = () => {
 				)}
 
 				<NavbarTitle>
-					<NavLink to={PagesPath.Home}>{appTitle}</NavLink>
+					<NavLink to={PagesPath.Home}>{APP_TITLE}</NavLink>
 				</NavbarTitle>
 
 				<Navigation>
-					{NavigationItems.map((item) => (
+					{navigationItems.map((item) => (
 						<NavLink
 							to={item.path}
 							key={item.path}
