@@ -77,8 +77,8 @@ const AlbumCoverWrapper = styled.div`
 	}
 
 	@media ${({ theme }) => theme.media.small} {
-		width: 80px;
-		height: 80px;
+		width: 100px;
+		height: 100px;
 	}
 `;
 
@@ -95,7 +95,7 @@ const Description = styled.div`
 	}
 
 	@media ${({ theme }) => theme.media.small} {
-		height: 80px;
+		height: 100px;
 		padding-bottom: 0;
 	}
 `;

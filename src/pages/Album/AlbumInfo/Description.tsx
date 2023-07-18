@@ -13,6 +13,7 @@ import Metadata from "./Metadata/Metadata";
 import Tracks from "./Tracks/Tracks";
 import Button from "components/UI/Button/Button";
 import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
+import FlexColumn from "styles/components/FlexColumn.styled";
 
 type Props = {
 	album: IAlbum;
@@ -44,22 +45,24 @@ const Description = ({ album }: Props) => {
 
 	return (
 		<Content>
-			<TitleWrapper>
-				<StylishAlbumTitle isExtraLarge>
-					<a
-						href={album.url}
-						target="_blank"
-					>
-						{album.title}
-						<IconWrapper>
-							<ExternalLink />
-							<Spotify />
-						</IconWrapper>
-					</a>
-				</StylishAlbumTitle>
-			</TitleWrapper>
+			<FlexColumn gap="0.5rem">
+				<TitleWrapper>
+					<StylishAlbumTitle isExtraLarge>
+						<a
+							href={album.url}
+							target="_blank"
+						>
+							{album.title}
+							<IconWrapper>
+								<ExternalLink />
+								<Spotify />
+							</IconWrapper>
+						</a>
+					</StylishAlbumTitle>
+				</TitleWrapper>
 
-			<Artist>{album.artist}</Artist>
+				<Artist>{album.artist}</Artist>
+			</FlexColumn>
 
 			{isAlbumLiked ? (
 				<Button onClick={likeAlbum}>

@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
 const Table = styled.table`
-	margin-bottom: 2rem;
-
 	border-collapse: collapse;
+
+	@media ${({ theme }) => theme.media.extraLarge} {
+		font-size: 14px;
+	}
+
+	@media ${({ theme }) => theme.media.small} {
+		font-size: 12px;
+	}
 `;
 
 const TableRow = styled.tr`
@@ -18,12 +24,18 @@ const FirstTableData = styled.td`
 
 	color: ${({ theme }) => theme.colors.primary.dark};
 	border-bottom: 1px solid ${({ theme }) => theme.colors.primary.neutral};
+	@media ${({ theme }) => theme.media.small} {
+		padding: 0.5rem 0;
+	}
 `;
 
 const SecondTableData = styled.td`
 	padding: 1rem 0;
 
 	border-bottom: 1px solid ${({ theme }) => theme.colors.primary.neutral};
+	@media ${({ theme }) => theme.media.small} {
+		padding: 0.5rem 0;
+	}
 `;
 
 const Tag = styled.span`

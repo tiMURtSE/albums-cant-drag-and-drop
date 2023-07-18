@@ -4,13 +4,21 @@ const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	gap: 2rem;
 
 	flex-basis: 47%;
 `;
 
 const TitleWrapper = styled.div`
 	display: inline-block;
-	margin-bottom: 1rem;
+
+	& h2 {
+		font-size: 24px;
+	}
+
+	& h2 a {
+		padding: 8px 0;
+	}
 
 	& h2:hover svg:first-child {
 		display: none;
@@ -44,11 +52,17 @@ const IconWrapper = styled.span`
 `;
 
 const Artist = styled.h3`
-	margin-bottom: 2rem;
-
 	font-family: "Roboto Serif", serif;
 	font-size: ${({ theme }) => theme.fonts.large};
 	font-weight: 700;
+
+	@media ${({ theme }) => theme.media.extraLarge} {
+		font-size: 18px;
+	}
+
+	@media ${({ theme }) => theme.media.medium} {
+		font-size: 14px;
+	}
 `;
 
 const LikeButton = styled.button`
