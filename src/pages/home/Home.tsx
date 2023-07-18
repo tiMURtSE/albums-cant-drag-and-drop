@@ -8,7 +8,10 @@ const Home = () => {
 	return (
 		<List>
 			{likedAlbums.map((album) => (
-				<SpecialAlbumView album={album} key={album.id} />
+				<SpecialAlbumView
+					album={album}
+					key={album.id}
+				/>
 			))}
 		</List>
 	);

@@ -70,7 +70,8 @@ const Artist = styled.div`
 `;
 
 const Year = styled.div`
-	flex-basis: 12%;
+	flex-basis: 10%;
+	flex-shrink: 0;
 
 	@media ${({ theme }) => theme.media.medium} {
 		display: none;
@@ -78,7 +79,8 @@ const Year = styled.div`
 `;
 
 const CreatedAt = styled.div`
-	flex-basis: 12%;
+	flex-basis: 16%;
+	flex-shrink: 0;
 
 	@media ${({ theme }) => theme.media.extraLarge} {
 		display: none;

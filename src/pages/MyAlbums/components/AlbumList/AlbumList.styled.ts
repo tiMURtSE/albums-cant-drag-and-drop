@@ -34,9 +34,12 @@ const CaptionItem = styled.li`
 		flex-grow: 1;
 	}
 
-	&:nth-child(4),
+	&:nth-child(4) {
+		flex-basis: 10%;
+	}
+
 	&:nth-child(5) {
-		flex-basis: 12%;
+		flex-basis: 16%;
 	}
 `;
 

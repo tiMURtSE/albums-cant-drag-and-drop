@@ -2,13 +2,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAlbumListCustomization } from "hooks/useAlbumListCustomization";
 import { Decades, Sort } from "types";
-import {
-	Input,
-	Customizations,
-	SearchAndFilter,
-	AlbumCollectionWrapper,
-	ChangeOrderButton,
-} from "./MyAlbums.styled";
+import { Input, Customizations, SearchAndFilter, AlbumCollectionWrapper } from "./MyAlbums.styled";
 import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 import AlbumList from "./components/AlbumList/AlbumList";
 import { setAlbums } from "store/albumsSlice";
