@@ -6,12 +6,17 @@ import FlexColumn from "styles/components/FlexColumn.styled";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginFormData, loginSchema } from "validations/loginSchema";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { theme } from "theme/theme";
 
 type Props = {
 	switchToSignUp: () => void;
 };
 
 function Login({ switchToSignUp }: Props) {
+	const smallMediaQuery = theme.media.small;
+	const isBelowSmallScreens = useMediaQuery(smallMediaQuery);
+
 	const {
 		register,
 		handleSubmit,
@@ -28,7 +33,7 @@ function Login({ switchToSignUp }: Props) {
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<FlexColumn gap="4rem">
-					<FlexColumn gap="2.5rem">
+					<FlexColumn gap="3rem">
 						<AuthInput
 							type="email"
 							label="Имейл"

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 const Info = styled.div`
+	& h3 {
+		line-height: 1;
+	}
+
 	& a {
 		display: block;
 	}

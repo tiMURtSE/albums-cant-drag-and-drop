@@ -27,13 +27,19 @@ const Pagination = ({ page, setPage, total }: Props) => {
 	return (
 		<Wrapper>
 			<Content>
-				<ArrowButton disabled={disabledButtons.left} onClick={onPreviousPageClick}>
+				<ArrowButton
+					disabled={disabledButtons.left}
+					onClick={onPreviousPageClick}
+				>
 					<ChevronLeftArrow />
 				</ArrowButton>
 
 				<Item>{page}</Item>
 
-				<ArrowButton disabled={disabledButtons.right} onClick={onNextPageClick}>
+				<ArrowButton
+					disabled={disabledButtons.right}
+					onClick={onNextPageClick}
+				>
 					<ChevronRightArrow />
 				</ArrowButton>
 			</Content>

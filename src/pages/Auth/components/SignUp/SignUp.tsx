@@ -6,12 +6,17 @@ import { AuthTitle } from "styles/components/AuthTitle.styled";
 import FlexColumn from "styles/components/FlexColumn.styled";
 import { SignUpFormData, signUpSchema } from "validations/signUpSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { theme } from "theme/theme";
+import { useMediaQuery } from "hooks/useMediaQuery";
 
 type Props = {
 	switchToLogin: () => void;
 };
 
 function SignUp({ switchToLogin }: Props) {
+	const smallMediaQuery = theme.media.small;
+	const isBelowSmallScreens = useMediaQuery(smallMediaQuery);
+
 	const {
 		register,
 		handleSubmit,
@@ -28,7 +33,7 @@ function SignUp({ switchToLogin }: Props) {
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<FlexColumn gap="4rem">
-					<FlexColumn gap="2.5rem">
+					<FlexColumn gap={isBelowSmallScreens ? "2rem" : "2.5rem"}>
 						<AuthInput
 							type="text"
 							label="Никнейм"

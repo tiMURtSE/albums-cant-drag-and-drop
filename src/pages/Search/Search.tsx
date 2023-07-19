@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import searchAlbums from "services/api/searchAlbums.api";
 import { formatAlbums } from "utils/formatAlbums";
 import Pagination from "./components/Pagination";
+import FlexColumn from "styles/components/FlexColumn.styled";
 
 const Search = () => {
 	const [foundAlbums, setFoundAlbums] = useState<IAlbum[] | []>([]);
@@ -39,33 +40,40 @@ const Search = () => {
 	}, [query, page]);
 
 	return (
-		<>
+		<FlexColumn gap="1rem">
 			<Title>
 				Результаты поиска для: <span>{query}</span>
 			</Title>
 
-			<Wrapper>
-				{isLoading ? (
-					<Loader
-						width="100%"
-						height="40vh"
-						contentHeight="100px"
-						contentWidth="100px"
-						border="10px"
-					/>
-				) : (
-					<>
+			{isLoading ? (
+				<Loader
+					width="100%"
+					height="40vh"
+					contentHeight="100px"
+					contentWidth="100px"
+					border="10px"
+				/>
+			) : (
+				<>
+					<FlexColumn gap="1rem">
 						{foundAlbums.map((album) => (
-							<CommonAlbumView album={album} key={album.id} />
+							<CommonAlbumView
+								album={album}
+								key={album.id}
+							/>
 						))}
+					</FlexColumn>
 
-						{!!foundAlbums.length && (
-							<Pagination page={page} setPage={setPage} total={total} />
-						)}
-					</>
-				)}
-			</Wrapper>
-		</>
+					{!!foundAlbums.length && (
+						<Pagination
+							page={page}
+							setPage={setPage}
+							total={total}
+						/>
+					)}
+				</>
+			)}
+		</FlexColumn>
 	);
 };
 

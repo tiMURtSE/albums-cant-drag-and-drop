@@ -11,8 +11,9 @@ const albumsSlice = createSlice({
 	initialState,
 	reducers: {
 		addAlbum(state, action: PayloadAction<{ album: IAlbum }>) {
-			action.payload.album.position = state.albums.length + 1;
-			state.albums.push(action.payload.album);
+			const position = state.albums.length + 1;
+			const newAlbum = { ...action.payload.album, position };
+			state.albums.push(newAlbum);
 		},
 		removeAlbum(state, action: PayloadAction<{ album: IAlbum }>) {
 			const removedAlbumId = action.payload.album.id;

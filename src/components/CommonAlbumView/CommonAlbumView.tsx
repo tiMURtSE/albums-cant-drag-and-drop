@@ -7,8 +7,11 @@ import { removeAlbum } from "store/albumsSlice";
 import { addAlbum } from "store/albumsSlice";
 import { Link } from "react-router-dom";
 import Image from "components/Image/Image";
-import SolidLike from "components/Icons/Like/SolidLike";
-import RegularLike from "components/Icons/Like/RegularLike";
+import { theme } from "theme/theme";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { ButtonIconWrapper } from "styles/components/ButtonIconWrapper.styled";
+import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
+import { ReactComponent as EmptyLikeIcon } from "assets/icons/empty-like.svg";
 
 type Props = {
 	album: IAlbum;
@@ -19,6 +22,9 @@ const CommonAlbumView = ({ album }: Props) => {
 	const favoriteAlbums = useSelector((state: any) => state.albums.albums);
 	const isAlbumLiked = favoriteAlbums.find((favAlbum: any) => favAlbum.id === album.id);
 	const dispatch = useDispatch();
+
+	const smallMediaQuery = theme.media.small;
+	const isBelowSmallScreens = useMediaQuery(smallMediaQuery);
 
 	const like = () => {
 		if (isAlbumLiked) {
@@ -31,7 +37,7 @@ const CommonAlbumView = ({ album }: Props) => {
 	return (
 		<AlbumWrapper>
 			<FlexBetween>
-				<FlexBetween gap="2rem">
+				<FlexBetween gap={isBelowSmallScreens ? "0.5rem" : "2rem"}>
 					<Link to={`/album/${album.id}`}>
 						<Image
 							src={album.image}
@@ -49,7 +55,13 @@ const CommonAlbumView = ({ album }: Props) => {
 					</Link>
 				</FlexBetween>
 
-				<Like onClick={like}>{isAlbumLiked ? <SolidLike /> : <RegularLike />}</Like>
+				<ButtonIconWrapper
+					width="20px"
+					height="20px"
+					onClick={like}
+				>
+					{isAlbumLiked ? <FilledLikeIcon /> : <EmptyLikeIcon />}
+				</ButtonIconWrapper>
 			</FlexBetween>
 		</AlbumWrapper>
 	);

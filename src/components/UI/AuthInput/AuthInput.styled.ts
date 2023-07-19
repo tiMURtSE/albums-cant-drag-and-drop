@@ -39,8 +39,15 @@ const Tip = styled.span`
 	left: 0;
 	z-index: 10;
 
+	padding: 5px 0;
+
 	color: ${({ theme }) => theme.colors.secondary.danger};
 	font-size: ${({ theme }) => theme.fonts.small};
+	line-height: 1;
+
+	@media ${({ theme }) => theme.media.small} {
+		max-width: 320px;
+	}
 `;
 
 export { Label, LabelCaption, Input, Tip };
