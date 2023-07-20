@@ -11,6 +11,7 @@ interface ITheme {
 		secondary: {
 			main: string;
 			danger: string;
+			blue: string;
 		};
 		background: {
 			default: string;

@@ -1,8 +1,8 @@
-import Navbar from "components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
-import { Container, Header, Main, Page } from "./Layout.styled";
 import Footer from "components/Footer/Footer";
+import Navbar from "components/Navbar/Navbar";
 import { Paddings } from "styles/components/Paddings.styled";
+import { Container, Header, Main, Page } from "./Layout.styled";
 
 const Layout = () => {
 	return (

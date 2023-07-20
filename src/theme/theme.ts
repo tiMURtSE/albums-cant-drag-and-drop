@@ -55,6 +55,7 @@ const colorTokens = {
 		10: "#F9E9BC",
 		20: "#59563d",
 		30: "#ff4545",
+		blue: "#0040FF",
 	},
 };
 
@@ -73,6 +74,7 @@ const themeSettings = (mode: ThemeMods): ITheme => {
 						secondary: {
 							main: colorTokens.secondary[10],
 							danger: colorTokens.secondary[30],
+							blue: colorTokens.secondary.blue,
 						},
 						background: {
 							default: colorTokens.primary[0],
@@ -92,6 +94,7 @@ const themeSettings = (mode: ThemeMods): ITheme => {
 						secondary: {
 							main: colorTokens.secondary[20],
 							danger: colorTokens.secondary[30],
+							blue: colorTokens.secondary.blue,
 						},
 						background: {
 							default: colorTokens.primary[900],

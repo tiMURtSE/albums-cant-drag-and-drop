@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import FlexBetween from "styles/components/FlexBetween.styled";
 
-const Content = styled(FlexBetween)`
+const Container = styled(FlexBetween)`
 	height: ${({ theme }) => theme.sizes.header.height};
 `;
 
-const NavbarTitle = styled.h1`
+const Title = styled.h1`
 	font-family: "Roboto Serif", "Rubik", sans-serif;
 	font-size: ${({ theme }) => theme.fonts.large};
 	font-weight: 700;
@@ -29,4 +29,4 @@ const Navigation = styled.nav`
 	}
 `;
 
-export { Content, NavbarTitle, Navigation };
+export { Container, Title, Navigation };

@@ -12,10 +12,6 @@ const Content = styled.div`
 const TitleWrapper = styled.div`
 	display: inline-block;
 
-	& h2 {
-		font-size: 24px;
-	}
-
 	& h2 a {
 		padding: 8px 0;
 	}
@@ -26,6 +22,12 @@ const TitleWrapper = styled.div`
 
 	& h2:hover svg:last-child {
 		display: block;
+	}
+
+	@media ${({ theme }) => theme.media.small} {
+		& h2 {
+			font-size: 24px;
+		}
 	}
 `;
 

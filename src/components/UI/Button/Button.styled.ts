@@ -43,8 +43,8 @@ const StyledButton = styled.button`
 		}
 	}
 
-	&:focus {
-		outline: 2px solid blue;
+	&:focus-visible {
+		outline: 2px solid ${({ theme }) => theme.colors.contrastText};
 	}
 
 	& svg {
