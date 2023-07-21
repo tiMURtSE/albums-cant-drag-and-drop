@@ -1,5 +1,3 @@
-// import { CLIENT_ID, CLIENT_SECRET } from "consts/api";
-
 const getAccessToken = async () => {
 	const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 	const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
