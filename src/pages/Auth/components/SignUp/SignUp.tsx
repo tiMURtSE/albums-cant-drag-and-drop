@@ -1,13 +1,13 @@
+import { useForm } from "react-hook-form";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { yupResolver } from "@hookform/resolvers/yup";
 import AuthInput from "components/UI/AuthInput/AuthInput";
 import Button from "components/UI/Button/Button";
-import { useForm } from "react-hook-form";
+import { SignUpFormData, signUpSchema } from "pages/Auth/validations/signUpSchema";
 import { AuthSwitch } from "styles/components/AuthSwitch.styled";
 import { AuthTitle } from "styles/components/AuthTitle.styled";
 import FlexColumn from "styles/components/FlexColumn.styled";
-import { SignUpFormData, signUpSchema } from "validations/signUpSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { theme } from "theme/theme";
-import { useMediaQuery } from "hooks/useMediaQuery";
 
 type Props = {
 	switchToLogin: () => void;
@@ -33,7 +33,7 @@ function SignUp({ switchToLogin }: Props) {
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<FlexColumn gap="4rem">
-					<FlexColumn gap={isBelowSmallScreens ? "2rem" : "2.5rem"}>
+					<FlexColumn gap="3rem">
 						<AuthInput
 							type="text"
 							label="Никнейм"

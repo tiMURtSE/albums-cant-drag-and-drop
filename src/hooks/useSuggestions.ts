@@ -1,11 +1,11 @@
-import { useAppDispatch } from "hooks";
 import { useEffect, useState } from "react";
-import searchAlbums from "services/api/searchAlbums.api";
+import { useLocation } from "react-router-dom";
 import { closeAutocomplete, openAutocomplete } from "store/autocompleteSlice";
+import { useAppDispatch } from "hooks";
+import searchAlbums from "services/api/searchAlbums.api";
 import { IAlbum } from "types";
 import { formatAlbums } from "utils/formatAlbums";
 import { useAutocompleteNavigation } from "./useAutocompleteNavigation";
-import { useLocation } from "react-router-dom";
 
 export const useSuggestions = (debouncedValue: string) => {
 	const [suggestions, setSuggestions] = useState<IAlbum[] | []>([]);
@@ -23,7 +23,6 @@ export const useSuggestions = (debouncedValue: string) => {
 
 	useEffect(() => {
 		const isSearchPageOpen = pathname.includes("/search");
-		let ignore = false;
 
 		if (debouncedValue && !isSearchPageOpen) {
 			dispatch(openAutocomplete());
@@ -31,21 +30,15 @@ export const useSuggestions = (debouncedValue: string) => {
 
 			fetchAndFormatAlbums()
 				.then((suggestions) => {
-					if (!ignore) {
-						setSuggestions(suggestions);
-						setIsLoading(false);
-						setSelectedIndex(-1);
-					}
+					setSuggestions(suggestions);
+					setIsLoading(false);
+					setSelectedIndex(-1);
 				})
 				.catch((error) => console.error(error));
 		} else {
 			dispatch(closeAutocomplete());
 			setSuggestions([]);
 		}
-
-		return () => {
-			ignore = true;
-		};
 	}, [debouncedValue]);
 
 	return { suggestions, selectedIndex, isLoading };

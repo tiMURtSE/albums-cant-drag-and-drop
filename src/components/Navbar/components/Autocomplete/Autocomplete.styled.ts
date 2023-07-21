@@ -5,7 +5,7 @@ const Wrapper = styled.div`
 	top: 45px;
 	left: 0;
 	width: 100%;
-	min-height: 200px;
+	min-height: 310px;
 
 	background-color: ${(props) => props.theme.colors.primary.light};
 	border: 1px solid ${(props) => props.theme.colors.primary.neutral};
@@ -15,10 +15,6 @@ const Wrapper = styled.div`
 
 const List = styled.ul`
 	padding: 10px;
-
-	& span {
-		padding: 5px 10px;
-	}
 `;
 
 const Item = styled.li`
@@ -31,10 +27,10 @@ const Item = styled.li`
 const ItemLink = styled.div<{ isFocused: boolean }>`
 	width: 100%;
 	padding: 5px 10px;
-	cursor: pointer;
 
-	background-color: ${(props) => (props.isFocused ? props.theme.colors.primary.neutral : "auto")};
-	border-radius: ${(props) => (props.isFocused ? props.theme.sizes.borderRadius : "auto")};
+	background-color: ${({ isFocused, theme }) =>
+		isFocused ? theme.colors.primary.neutral : "auto"};
+	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
 const Title = styled.div`

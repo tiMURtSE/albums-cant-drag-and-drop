@@ -1,5 +1,5 @@
-import { useAppSelector } from "hooks";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "hooks";
 import { IAlbum } from "types";
 
 export const useAutocompleteNavigation = (suggestions: IAlbum[]) => {

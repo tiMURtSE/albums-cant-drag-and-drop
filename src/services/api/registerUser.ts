@@ -1,4 +1,4 @@
-import { RegistrationFormData } from "validations/signUpSchema";
+import { RegistrationFormData } from "pages/Auth/validations/signUpSchema";
 
 const REGISTER_API_URL = "http://localhost:3000/auth/register";
 

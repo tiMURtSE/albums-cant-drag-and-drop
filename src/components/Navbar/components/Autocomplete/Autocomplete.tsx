@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import { closeAutocomplete } from "store/autocompleteSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
-import { useDebounce } from "hooks/useDebounce";
 import { useAutocompleteNavigationSubmit } from "hooks/useAutocompleteNavigationSubmit";
+import { useDebounce } from "hooks/useDebounce";
+import { useSuggestions } from "hooks/useSuggestions";
 import { Loader } from "styles/components/Loader.styled";
 import { Artist, Item, ItemLink, List, Title, Wrapper } from "./Autocomplete.styled";
-import { closeAutocomplete } from "store/autocompleteSlice";
-import { useSuggestions } from "hooks/useSuggestions";
+import * as Styled from "./Autocomplete.styled";
 
 type Props = {
 	query: string;
@@ -28,7 +29,7 @@ const Autocomplete = ({ query }: Props) => {
 	if (!isAutocompleteOpen) return null;
 
 	return (
-		<Wrapper id="autocomplete">
+		<Styled.Wrapper id="autocomplete">
 			{isLoading ? (
 				<Loader
 					width="100%"
@@ -38,24 +39,24 @@ const Autocomplete = ({ query }: Props) => {
 					border="3px"
 				/>
 			) : (
-				<List id="search-list">
+				<Styled.List id="search-list">
 					{suggestions.map((album, index) => (
-						<Item key={album.id}>
+						<Styled.Item key={album.id}>
 							<Link
 								to={`/album/${album.id}`}
 								className="search-list__item"
 								onClick={() => dispatch(closeAutocomplete())}
 							>
-								<ItemLink isFocused={index === selectedIndex}>
-									<Title>{album.title}</Title>
-									<Artist>{album.artist}</Artist>
-								</ItemLink>
+								<Styled.ItemLink isFocused={index === selectedIndex}>
+									<Styled.Title>{album.title}</Styled.Title>
+									<Styled.Artist>{album.artist}</Styled.Artist>
+								</Styled.ItemLink>
 							</Link>
-						</Item>
+						</Styled.Item>
 					))}
-				</List>
+				</Styled.List>
 			)}
-		</Wrapper>
+		</Styled.Wrapper>
 	);
 };
 

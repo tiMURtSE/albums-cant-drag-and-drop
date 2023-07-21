@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { theme } from "theme/theme";
 
-const Content = styled.div`
+const Container = styled.div`
 	position: relative;
 	width: 350px;
 
@@ -16,9 +16,8 @@ const Input = styled.input`
 	padding: 5px 35px 5px 20px;
 
 	color: ${({ theme }) => theme.colors.contrastText};
-	border: 0;
 	border: 1px solid ${({ theme }) => theme.colors.primary.dark};
-	border-radius: 10rem;
+	border-radius: 9999px;
 
 	&:focus {
 		outline: none;
@@ -34,19 +33,18 @@ const Input = styled.input`
 	}
 `;
 
-const ClearSign = styled.div<{ query?: string }>`
-	display: ${(props) => (props.query ? "block" : "none")};
-	padding: 10px;
-
+const ClearSign = styled.div`
 	position: absolute;
 	top: 50%;
 	right: 5px;
 	z-index: ${theme.order.other};
-	transform: translateY(-53%);
+	transform: translateY(-50%);
+
+	padding: 10px;
 
 	color: ${({ theme }) => theme.colors.contrastText};
 	font-size: ${theme.fonts.small};
 	cursor: pointer;
 `;
 
-export { Content, Input, ClearSign };
+export { Container, Input, ClearSign };

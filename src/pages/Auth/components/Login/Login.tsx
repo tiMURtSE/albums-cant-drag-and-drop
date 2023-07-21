@@ -1,12 +1,12 @@
+import { useForm } from "react-hook-form";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { yupResolver } from "@hookform/resolvers/yup";
 import AuthInput from "components/UI/AuthInput/AuthInput";
 import Button from "components/UI/Button/Button";
+import { LoginFormData, loginSchema } from "pages/Auth/validations/loginSchema";
 import { AuthSwitch } from "styles/components/AuthSwitch.styled";
 import { AuthTitle } from "styles/components/AuthTitle.styled";
 import FlexColumn from "styles/components/FlexColumn.styled";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { LoginFormData, loginSchema } from "validations/loginSchema";
-import { useMediaQuery } from "hooks/useMediaQuery";
 import { theme } from "theme/theme";
 
 type Props = {
@@ -15,7 +15,6 @@ type Props = {
 
 function Login({ switchToSignUp }: Props) {
 	const smallMediaQuery = theme.media.small;
-	const isBelowSmallScreens = useMediaQuery(smallMediaQuery);
 
 	const {
 		register,

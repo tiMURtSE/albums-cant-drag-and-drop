@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 export const useHandleOutsideClick = (
-	dependencies: boolean,
+	dependency: boolean,
 	innerSelectors: string[],
 	callback: () => void
 ) => {
@@ -13,8 +13,8 @@ export const useHandleOutsideClick = (
 	};
 
 	useEffect(() => {
-		if (dependencies) document.addEventListener("click", handleClick);
+		if (dependency) document.addEventListener("click", handleClick);
 
 		return () => document.removeEventListener("click", handleClick);
-	}, [dependencies]);
+	}, [dependency]);
 };

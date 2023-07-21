@@ -1,9 +1,9 @@
-import ModalWindow from "components/ModalWindow/ModalWindow";
-import Searchbar from "../Searchbar/Searchbar";
-import { closeSideNavbar } from "utils/closeSideNavbar";
 import { HTMLAttributes } from "react";
-import { SearchbarModalContent, SearchbarModalHeader } from "./SearchbarModal.styled";
+import ModalWindow from "components/ModalWindow/ModalWindow";
 import { Paddings } from "styles/components/Paddings.styled";
+import { closeSideNavbar } from "utils/closeSideNavbar";
+import Searchbar from "../Searchbar/Searchbar";
+import { SearchbarModalContent, SearchbarModalHeader } from "./SearchbarModal.styled";
 
 interface Props extends HTMLAttributes<HTMLDialogElement> {
 	id: string;
