@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IAlbum } from "types";
 import getSingleAlbum from "services/api/getSingleAlbum.api";
+import { Loader } from "styles/components/Loader.styled";
+import { IAlbum } from "types";
 import formatAlbum from "utils/formatAlbum";
 import { AlbumCover, Content } from "./Album.styled";
-import Image from "components/Image/Image";
 import Description from "./AlbumInfo/Description";
-import { Loader } from "styles/components/Loader.styled";
 
 const Album = () => {
 	const { id } = useParams();
