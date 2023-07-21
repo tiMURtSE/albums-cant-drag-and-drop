@@ -2,6 +2,7 @@ import { ThemeMods } from "consts";
 
 interface ITheme {
 	mode: ThemeMods;
+
 	colors: {
 		primary: {
 			dark: string;
