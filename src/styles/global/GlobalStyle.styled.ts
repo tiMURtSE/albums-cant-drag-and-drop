@@ -31,8 +31,8 @@ const GlobalStyle = createGlobalStyle`
 
         font-family: 'Inter', sans-serif;
         font-weight: 500;
-        background-color: ${(props) => props.theme.colors.background.default};
-        color: ${(props) => props.theme.colors.contrastText};
+        background-color: ${({ theme }) => theme.colors.background.default};
+        color: ${({ theme }) => theme.colors.contrastText};
         letter-spacing: -0.5px;
     }
 

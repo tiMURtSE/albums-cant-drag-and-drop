@@ -1,8 +1,8 @@
-import { RegistrationFormData } from "pages/Auth/validations/signUpSchema";
+import { SignUpFormData } from "pages/Auth/validations/signUpSchema";
 
 const REGISTER_API_URL = "http://localhost:3000/auth/register";
 
-export const registerUser = async (formData: RegistrationFormData) => {
+export const registerUser = async (formData: SignUpFormData) => {
 	try {
 		const response = await fetch(REGISTER_API_URL, {
 			method: "POST",
