@@ -17,7 +17,10 @@ const Tracks = ({ tracks }: Props) => {
 
 	return (
 		<Wrapper numberOfTracks={(tracks.length + 1) * 74}>
-			<Input type="checkbox" id="tracks" />
+			<Input
+				type="checkbox"
+				id="tracks"
+			/>
 
 			<TableWrapper>
 				<Table>

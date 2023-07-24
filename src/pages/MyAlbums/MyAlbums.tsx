@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { setAlbums } from "store/albumsSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAlbumListCustomization } from "hooks/useAlbumListCustomization";
+import { useDragAndDrop } from "hooks/useDragAndDrop";
+import AnimatedButton from "components/UI/AnimatedButton/AnimatedButton";
 import { Decades, Sort } from "types";
 import { Input, Customizations, SearchAndFilter, AlbumCollectionWrapper } from "./MyAlbums.styled";
-import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 import AlbumList from "./components/AlbumList/AlbumList";
-import { setAlbums } from "store/albumsSlice";
-import { useDragAndDrop } from "hooks/useDragAndDrop";
-import Button from "components/UI/Button/Button";
+import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 
 const MyAlbums = () => {
 	const albums = useAppSelector((state) => state.albums.albums);
@@ -57,9 +57,9 @@ const MyAlbums = () => {
 					/>
 				</SearchAndFilter>
 
-				<Button onClick={changeAlbumPositions}>
+				<AnimatedButton onClick={changeAlbumPositions}>
 					{isDragging ? "Готово" : "Поменять порядок альбомов"}
-				</Button>
+				</AnimatedButton>
 			</Customizations>
 
 			<AlbumList

@@ -8,7 +8,7 @@ const Button = styled.button<{ width: string; height: string }>`
 	font-size: 0;
 	cursor: pointer;
 
-	&:focus-visible {
+	&&:focus-visible {
 		border-radius: 1px;
 		outline: 2px solid ${({ theme }) => theme.colors.secondary.blue};
 	}

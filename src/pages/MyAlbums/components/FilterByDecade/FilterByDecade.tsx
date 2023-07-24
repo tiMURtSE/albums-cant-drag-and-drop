@@ -1,6 +1,6 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { Filter, Decade } from "./FilterByDecade.styled";
 import { Decades } from "types";
+import { Filter, Decade } from "./FilterByDecade.styled";
 
 type Props = {
 	filterByDecades: ("50" | "60" | "70" | "80" | "90" | "00" | "10" | "20")[];

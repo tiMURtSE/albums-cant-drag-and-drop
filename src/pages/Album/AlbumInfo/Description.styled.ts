@@ -12,15 +12,11 @@ const Content = styled.div`
 const TitleWrapper = styled.div`
 	display: inline-block;
 
-	& h2 a {
-		padding: 8px 0;
-	}
-
-	& h2:hover svg:first-child {
+	& a:hover ~ span svg:first-child {
 		display: none;
 	}
 
-	& h2:hover svg:last-child {
+	& a:hover ~ span svg:last-child {
 		display: block;
 	}
 
@@ -36,7 +32,7 @@ const IconWrapper = styled.span`
 
 	& svg {
 		position: absolute;
-		top: 10%;
+		top: 22%;
 		right: -2rem;
 		z-index: 10;
 		width: 15px;
@@ -46,7 +42,7 @@ const IconWrapper = styled.span`
 
 	& svg:last-child {
 		display: none;
-		top: 7%;
+		top: 19%;
 		right: -2.1rem;
 		width: 20px;
 		height: 20px;

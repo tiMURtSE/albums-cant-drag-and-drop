@@ -17,10 +17,13 @@ const Decade = styled.button<{ isFlagged: boolean; isDragging: boolean }>`
 		isFlagged ? theme.colors.background.default : theme.colors.contrastText};
 	cursor: pointer;
 
-	&:hover {
-		color: ${({ isDragging, theme }) => (isDragging ? "" : theme.colors.background.default)};
-		background-color: ${({ isDragging, theme }) =>
-			isDragging ? "" : theme.colors.contrastText};
+	@media (min-width: 960px) {
+		&:hover {
+			color: ${({ isDragging, theme }) =>
+				isDragging ? "" : theme.colors.background.default};
+			background-color: ${({ isDragging, theme }) =>
+				isDragging ? "" : theme.colors.contrastText};
+		}
 	}
 
 	&:nth-child(-n + 4) {
@@ -53,7 +56,7 @@ const Decade = styled.button<{ isFlagged: boolean; isDragging: boolean }>`
 	}
 
 	@media ${({ theme }) => theme.media.medium} {
-		padding: 10px 0;
+		padding: 8px 0;
 	}
 `;
 

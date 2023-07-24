@@ -67,7 +67,8 @@ const Label = styled.label`
 		transition: transform 0.5s ease;
 
 		&:last-child {
-			transform: translate(-50%, -200%);
+			transform: translate(-50%, -250%);
+			transition: transform 0.2s ease;
 		}
 	}
 `;

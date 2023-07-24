@@ -3,7 +3,7 @@ import ModalWindow from "components/ModalWindow/ModalWindow";
 import { Paddings } from "styles/components/Paddings.styled";
 import { closeSideNavbar } from "utils/closeSideNavbar";
 import Searchbar from "../Searchbar/Searchbar";
-import { SearchbarModalContent, SearchbarModalHeader } from "./SearchbarModal.styled";
+import { SearchbarModalContent } from "./SearchbarModal.styled";
 
 interface Props extends HTMLAttributes<HTMLDialogElement> {
 	id: string;
@@ -17,6 +17,8 @@ function SearchbarModal({ ...props }: Props) {
 		>
 			<SearchbarModalContent>
 				<Paddings>
+					<h2>Поиск:</h2>
+					<br />
 					<Searchbar />
 				</Paddings>
 			</SearchbarModalContent>

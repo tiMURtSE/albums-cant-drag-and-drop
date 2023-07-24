@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { addAlbum, removeAlbum } from "store/albumsSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
-import { IAlbum, IMetadata } from "types";
-import getAlbumMetadata from "services/api/getAlbumMetadata.api";
-import formatMetadata from "utils/formatMetadata";
-import { Artist, Content, TitleWrapper, IconWrapper, LikeButton } from "./Description.styled";
-import RegularLike from "components/Icons/Like/RegularLike";
 import ExternalLink from "components/Icons/ExternalLink/ExternalLink";
+import RegularLike from "components/Icons/Like/RegularLike";
 import Spotify from "components/Icons/Spotify/Spotify";
+import AnimatedButton from "components/UI/AnimatedButton/AnimatedButton";
+import getAlbumMetadata from "services/api/getAlbumMetadata.api";
+import FlexColumn from "styles/components/FlexColumn.styled";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
+import { IAlbum, IMetadata } from "types";
+import formatMetadata from "utils/formatMetadata";
+import { ReactComponent as EmptyLikeIcon } from "assets/icons/empty-like.svg";
+import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
+import { Artist, Content, TitleWrapper, IconWrapper } from "./Description.styled";
 import Metadata from "./Metadata/Metadata";
 import Tracks from "./Tracks/Tracks";
-import Button from "components/UI/Button/Button";
-import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
-import FlexColumn from "styles/components/FlexColumn.styled";
 
 type Props = {
 	album: IAlbum;
@@ -53,11 +54,12 @@ const Description = ({ album }: Props) => {
 							target="_blank"
 						>
 							{album.title}
-							<IconWrapper>
-								<ExternalLink />
-								<Spotify />
-							</IconWrapper>
 						</a>
+
+						<IconWrapper>
+							<ExternalLink />
+							<Spotify />
+						</IconWrapper>
 					</StylishAlbumTitle>
 				</TitleWrapper>
 
@@ -65,15 +67,15 @@ const Description = ({ album }: Props) => {
 			</FlexColumn>
 
 			{isAlbumLiked ? (
-				<Button onClick={likeAlbum}>
+				<AnimatedButton onClick={likeAlbum}>
 					<FilledLikeIcon />
 					<span>Удалить</span>
-				</Button>
+				</AnimatedButton>
 			) : (
-				<LikeButton onClick={likeAlbum}>
-					<RegularLike />
+				<AnimatedButton onClick={likeAlbum}>
+					<EmptyLikeIcon />
 					<span>Добавить</span>
-				</LikeButton>
+				</AnimatedButton>
 			)}
 
 			{metadata && (

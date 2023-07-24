@@ -5,7 +5,6 @@ const Label = styled.label`
 
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
 `;
 
 const LabelCaption = styled.span<{ isShown: boolean }>`
@@ -18,6 +17,8 @@ const LabelCaption = styled.span<{ isShown: boolean }>`
 
 	padding: 0 5px;
 	background-color: ${({ theme }) => theme.colors.background.default};
+
+	font-style: italic;
 `;
 
 const Input = styled.input`
@@ -34,11 +35,6 @@ const Input = styled.input`
 `;
 
 const Tip = styled.span`
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 10;
-
 	padding: 5px 0;
 
 	color: ${({ theme }) => theme.colors.secondary.danger};

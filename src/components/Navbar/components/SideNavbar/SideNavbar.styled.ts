@@ -31,10 +31,6 @@ const SideNavbarNavigationItem = styled.li`
 		color: ${({ theme }) => theme.colors.contrastText};
 		border-radius: ${({ theme }) => theme.sizes.borderRadius};
 
-		&:focus-visible {
-			background-color: ${({ theme }) => theme.colors.primary.light};
-		}
-
 		&:hover {
 			background-color: ${({ theme }) => theme.colors.primary.light};
 		}

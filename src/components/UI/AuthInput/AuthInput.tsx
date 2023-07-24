@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, useState } from "react";
-import { Label, Input, LabelCaption, Tip } from "./AuthInput.styled";
 import { useInputAndLabelInteraction } from "hooks/useInputAndLabelInteraction";
+import { Label, Input, LabelCaption, Tip } from "./AuthInput.styled";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	label: string;

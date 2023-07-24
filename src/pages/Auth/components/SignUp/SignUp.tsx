@@ -33,7 +33,7 @@ function SignUp({ switchToLogin }: Props) {
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<FlexColumn gap="4rem">
-					<FlexColumn gap="3rem">
+					<FlexColumn gap="2rem">
 						<AuthInput
 							type="text"
 							label="Никнейм"
