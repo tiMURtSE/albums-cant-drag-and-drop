@@ -1,3 +1,7 @@
+import { Link } from "react-router-dom";
+import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
+import { IAlbum } from "types";
+import { ReactComponent as CrownIcon } from "assets/icons/crown.svg";
 import {
 	AlbumCoverWrapper,
 	Artist,
@@ -8,10 +12,6 @@ import {
 	TitleWrapper,
 	Year,
 } from "./SpecialAlbumView.styled";
-import { IAlbum } from "types";
-import { Link } from "react-router-dom";
-import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
-import { ReactComponent as CrownIcon } from "assets/icons/crown.svg";
 
 type Props = {
 	album: IAlbum;
@@ -31,7 +31,7 @@ const SpecialAlbumView = ({ album }: Props) => {
 			<Link to={`/album/${album.id}`}>
 				<AlbumCoverWrapper>
 					<img
-						src={album.image}
+						src={album.images[1].url}
 						alt={`${album.title} by ${album.artist}`}
 					/>
 				</AlbumCoverWrapper>

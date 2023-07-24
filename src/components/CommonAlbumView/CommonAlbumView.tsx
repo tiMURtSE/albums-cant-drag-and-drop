@@ -1,17 +1,17 @@
-import AlbumWrapper from "styles/components/AlbumWrapper.styled";
-import FlexBetween from "styles/components/FlexBetween.styled";
-import { Like, Info } from "./CommonAlbumView.styled";
-import { IAlbum } from "types";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeAlbum } from "store/albumsSlice";
 import { addAlbum } from "store/albumsSlice";
-import { Link } from "react-router-dom";
-import Image from "components/Image/Image";
-import { theme } from "theme/theme";
 import { useMediaQuery } from "hooks/useMediaQuery";
+import Image from "components/Image/Image";
+import AlbumWrapper from "styles/components/AlbumWrapper.styled";
 import { ButtonIconWrapper } from "styles/components/ButtonIconWrapper.styled";
-import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
+import FlexBetween from "styles/components/FlexBetween.styled";
+import { theme } from "theme/theme";
+import { IAlbum } from "types";
 import { ReactComponent as EmptyLikeIcon } from "assets/icons/empty-like.svg";
+import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
+import { Like, Info } from "./CommonAlbumView.styled";
 
 type Props = {
 	album: IAlbum;
@@ -40,7 +40,7 @@ const CommonAlbumView = ({ album }: Props) => {
 				<FlexBetween gap={isBelowSmallScreens ? "0.5rem" : "2rem"}>
 					<Link to={`/album/${album.id}`}>
 						<Image
-							src={album.image}
+							src={album.images[1].url}
 							width="80"
 							height="80"
 							alt={`${album.title} by ${album.artist}`}

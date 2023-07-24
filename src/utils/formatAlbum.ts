@@ -8,7 +8,16 @@ const formatAlbum = (album: Record<string, any>): IAlbum => {
 		title: name,
 		artist: artists[0].name,
 		year: Number(release_date.split("-")[0]),
-		image: images[0].url,
+		images: [
+			{
+				size: 640,
+				url: images[0].url,
+			},
+			{
+				size: 300,
+				url: images[1].url,
+			},
+		],
 		createdAt: new Date().toLocaleDateString(),
 		url: external_urls.spotify,
 		position: -1,

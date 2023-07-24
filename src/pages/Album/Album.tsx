@@ -51,7 +51,7 @@ const Album = () => {
 				<Content>
 					<AlbumCover>
 						<img
-							src={album.image}
+							src={album.images[0].url}
 							alt={`${album.title} by ${album.artist}`}
 						/>
 					</AlbumCover>

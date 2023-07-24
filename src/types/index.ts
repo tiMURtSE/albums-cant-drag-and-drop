@@ -5,7 +5,10 @@ interface IAlbum {
 	title: string;
 	artist: string;
 	year: number;
-	image: string;
+	images: {
+		size: number;
+		url: string;
+	}[];
 	createdAt: string;
 	url: string;
 	position: number;

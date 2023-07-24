@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import Image from "components/Image/Image";
 import { DragAndDrop, IAlbum } from "types";
 import formatDate from "utils/formatDate";
-import Image from "components/Image/Image";
+import ContextMenu from "../ContextMenu/ContextMenu";
 import {
 	Artist,
 	CoverWrapper,
@@ -12,7 +13,6 @@ import {
 	Title,
 	Year,
 } from "./AlbumItem.styled";
-import ContextMenu from "../ContextMenu/ContextMenu";
 
 type Props = {
 	album: IAlbum;
@@ -39,7 +39,7 @@ const AlbumItem = ({ album, dragAndDropHandlers }: Props) => {
 				<div>
 					<Link to={`/album/${album.id}`}>
 						<Image
-							src={album.image}
+							src={album.images[1].url}
 							width="80px"
 							height="80px"
 							alt={`${album.title} by ${album.artist}`}
