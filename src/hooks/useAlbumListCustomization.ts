@@ -38,15 +38,23 @@ const sortAlbums = (albums: IAlbum[], sort: Sort) => {
 
 				return albums;
 			} else {
-				if (sort.typeOfSort === "asc" && sort.sortingColumn !== "position") {
+				if (
+					sort.typeOfSort === "asc" &&
+					sort.sortingColumn !== "position" &&
+					sort.sortingColumn !== "images"
+				) {
 					const column = sort.sortingColumn;
 
-					return [...albums].sort((a: IAlbum, b: any) =>
+					return [...albums].sort((a: IAlbum, b: IAlbum) =>
 						a[column].localeCompare(b[column])
 					);
 				}
 
-				if (sort.typeOfSort === "desc" && sort.sortingColumn !== "position") {
+				if (
+					sort.typeOfSort === "desc" &&
+					sort.sortingColumn !== "position" &&
+					sort.sortingColumn !== "images"
+				) {
 					const column = sort.sortingColumn;
 
 					return [...albums].sort((a: IAlbum, b: IAlbum) =>
