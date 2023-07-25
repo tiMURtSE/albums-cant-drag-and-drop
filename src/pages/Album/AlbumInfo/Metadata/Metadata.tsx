@@ -1,4 +1,5 @@
 import { IAlbum, IMetadata } from "types";
+import formatLargeNumber from "utils/formatLargeNumber";
 import {
 	Table,
 	SpecialFont,
@@ -7,7 +8,6 @@ import {
 	SecondTableData,
 	TableRow,
 } from "./Metadata.styled";
-import formatLargeNumber from "utils/formatLargeNumber";
 
 type Props = {
 	album: IAlbum;
@@ -40,11 +40,16 @@ const Metadata = ({ album, metadata }: Props) => {
 				</TableRow>
 
 				<TableRow>
-					<FirstTableData>Теги</FirstTableData>
-					<SecondTableData>
-						{metadata.tags &&
-							metadata.tags.map((tag) => <Tag key={tag.name}>{tag.name}</Tag>)}
-					</SecondTableData>
+					{metadata.tags && Array.isArray(metadata.tags) && (
+						<>
+							<FirstTableData>Теги</FirstTableData>
+							<SecondTableData>
+								{metadata.tags.map((tag) => (
+									<Tag key={tag.name}>{tag.name}</Tag>
+								))}
+							</SecondTableData>
+						</>
+					)}
 				</TableRow>
 			</tbody>
 		</Table>

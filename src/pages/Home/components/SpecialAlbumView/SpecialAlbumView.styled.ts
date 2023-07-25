@@ -123,13 +123,14 @@ const Artist = styled.h3`
 	font-family: "Roboto Serif", serif;
 	font-size: ${({ theme }) => theme.fonts.large};
 	font-weight: 700;
+	line-height: 1;
 
 	@media ${({ theme }) => theme.media.extraLarge} {
 		font-size: 18px;
 	}
 
 	@media ${({ theme }) => theme.media.small} {
-		font-size: 14px;
+		font-size: 16px;
 	}
 `;
 

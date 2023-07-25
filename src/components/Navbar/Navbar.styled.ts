@@ -13,8 +13,12 @@ const Title = styled.h1`
 	letter-spacing: -2.5px;
 	line-height: 1;
 
+	& a {
+		padding: 10px 0;
+	}
+
 	@media ${({ theme }) => theme.media.medium} {
-		font-size: ${({ theme }) => theme.fonts.regular};
+		font-size: 18px;
 	}
 `;
 

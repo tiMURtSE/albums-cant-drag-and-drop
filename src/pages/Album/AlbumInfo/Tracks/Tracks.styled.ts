@@ -20,14 +20,6 @@ const Wrapper = styled.div<{ numberOfTracks: number }>`
 			}
 		}
 	}
-
-	@media ${({ theme }) => theme.media.extraLarge} {
-		font-size: 14px;
-	}
-
-	@media ${({ theme }) => theme.media.small} {
-		font-size: 12px;
-	}
 `;
 
 const TableWrapper = styled.div`
@@ -74,6 +66,8 @@ const Label = styled.label`
 `;
 
 const Track = styled.tr`
+	line-height: 1;
+
 	& td {
 		padding: 12px 2rem;
 
@@ -85,7 +79,6 @@ const Track = styled.tr`
 			color: ${({ theme }) => theme.colors.primary.dark};
 
 			@media ${({ theme }) => theme.media.extraLarge} {
-				width: max-content;
 				padding-right: 0;
 			}
 		}
@@ -96,6 +89,10 @@ const Track = styled.tr`
 
 		@media ${({ theme }) => theme.media.extraLarge} {
 			padding: 10px 1rem;
+		}
+
+		@media ${({ theme }) => theme.media.small} {
+			padding: 8px 1rem;
 		}
 	}
 `;

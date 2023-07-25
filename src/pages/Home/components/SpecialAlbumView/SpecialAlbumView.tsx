@@ -1,6 +1,8 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
 import { IAlbum } from "types";
+import { adjustAlbumTitleFontSize } from "utils/adjustAlbumTitleFontSize";
 import { ReactComponent as CrownIcon } from "assets/icons/crown.svg";
 import {
 	AlbumCoverWrapper,
@@ -18,7 +20,13 @@ type Props = {
 };
 
 const SpecialAlbumView = ({ album }: Props) => {
+	const AlbumTitleRef = useRef<HTMLHeadingElement>(null);
+
 	if (!Object.keys(album).length) return null;
+
+	useEffect(() => {
+		adjustAlbumTitleFontSize(AlbumTitleRef);
+	}, []);
 
 	return (
 		<Content position={album.position}>
@@ -39,7 +47,10 @@ const SpecialAlbumView = ({ album }: Props) => {
 
 			<Description>
 				<TitleWrapper>
-					<StylishAlbumTitle isExtraLarge>
+					<StylishAlbumTitle
+						isExtraLarge
+						ref={AlbumTitleRef}
+					>
 						<Link to={`/album/${album.id}`}>{album.title}</Link>
 					</StylishAlbumTitle>
 				</TitleWrapper>

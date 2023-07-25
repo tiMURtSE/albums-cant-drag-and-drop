@@ -15,7 +15,7 @@ const StylishAlbumTitle = styled.h2<{ isExtraLarge?: boolean }>`
 	}
 
 	@media ${({ theme }) => theme.media.small} {
-		font-size: 18px;
+		font-size: 22px;
 		letter-spacing: -1px;
 	}
 `;

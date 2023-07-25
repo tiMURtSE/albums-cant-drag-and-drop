@@ -38,6 +38,10 @@ const IconWrapper = styled.span`
 		width: 15px;
 		height: 15px;
 		fill: ${({ theme }) => theme.colors.contrastText};
+
+		@media ${({ theme }) => theme.media.small} {
+			right: -22px;
+		}
 	}
 
 	& svg:last-child {
@@ -46,6 +50,10 @@ const IconWrapper = styled.span`
 		right: -2.1rem;
 		width: 20px;
 		height: 20px;
+
+		@media ${({ theme }) => theme.media.small} {
+			right: -25px;
+		}
 	}
 `;
 
@@ -56,10 +64,6 @@ const Artist = styled.h3`
 
 	@media ${({ theme }) => theme.media.extraLarge} {
 		font-size: 18px;
-	}
-
-	@media ${({ theme }) => theme.media.medium} {
-		font-size: 14px;
 	}
 `;
 

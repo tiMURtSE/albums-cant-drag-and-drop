@@ -3,13 +3,13 @@ import styled from "styled-components";
 const Table = styled.table`
 	border-collapse: collapse;
 
-	@media ${({ theme }) => theme.media.extraLarge} {
+	/* @media ${({ theme }) => theme.media.extraLarge} {
 		font-size: 14px;
 	}
 
 	@media ${({ theme }) => theme.media.small} {
 		font-size: 12px;
-	}
+	} */
 `;
 
 const TableRow = styled.tr`
@@ -33,6 +33,7 @@ const SecondTableData = styled.td`
 	padding: 1rem 0;
 
 	border-bottom: 1px solid ${({ theme }) => theme.colors.primary.neutral};
+
 	@media ${({ theme }) => theme.media.small} {
 		padding: 0.5rem 0;
 	}
@@ -49,6 +50,10 @@ const Tag = styled.span`
 
 	&:not(:last-child) {
 		margin-right: 5px;
+	}
+
+	@media ${({ theme }) => theme.media.small} {
+		font-size: 14px;
 	}
 `;
 
