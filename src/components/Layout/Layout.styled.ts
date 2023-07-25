@@ -18,11 +18,15 @@ const Header = styled.header`
 	backdrop-filter: saturate(180%) blur(5px);
 `;
 
-const Main = styled.main`
+const Main = styled.main<{ isCurrentPageAlbum: boolean }>`
+	flex-basis: calc(100vh - 0px);
 	flex-grow: 1;
 	flex-shrink: 0;
-	margin: 64px 0;
-	padding: 100px 0 0;
+	padding: 164px 0 64px;
+
+	@media ${({ theme }) => theme.media.large} {
+		padding-top: ${({ isCurrentPageAlbum }) => (isCurrentPageAlbum ? "64px" : "164px")};
+	}
 `;
 
 const Container = styled.div<{ header?: boolean }>`
