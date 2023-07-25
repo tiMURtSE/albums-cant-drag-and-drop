@@ -34,6 +34,8 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${({ theme }) => theme.colors.background.default};
         color: ${({ theme }) => theme.colors.contrastText};
         letter-spacing: -0.5px;
+
+        transition: background-color 0.2s ease;
     }
 
     ul {

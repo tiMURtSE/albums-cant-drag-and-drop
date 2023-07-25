@@ -55,7 +55,7 @@ const Searchbar = () => {
 
 			{query && <Styled.ClearSign onClick={() => setQuery("")}>&#9587;</Styled.ClearSign>}
 
-			{!isBelowExtraLargeScreenSize && !isInputFocused && (
+			{!isBelowExtraLargeScreenSize && !isInputFocused && !query && (
 				<Styled.KbdWrapper>
 					<kbd>
 						<kbd>Ctrl K</kbd>

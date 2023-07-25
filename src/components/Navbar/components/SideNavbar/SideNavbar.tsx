@@ -34,7 +34,7 @@ function SideNavbar({ ...props }: Props) {
 			}
 			{...props}
 		>
-			<SideNavbarContent>
+			<SideNavbarContent id="side-navbar-for-animation">
 				<Paddings>
 					<SideNavbarHeader>
 						<IconButton

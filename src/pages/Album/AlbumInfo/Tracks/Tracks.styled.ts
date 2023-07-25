@@ -63,6 +63,10 @@ const Label = styled.label`
 			transition: transform 0.2s ease;
 		}
 	}
+
+	&:focus {
+		outline: 10px solid;
+	}
 `;
 
 const Track = styled.tr`

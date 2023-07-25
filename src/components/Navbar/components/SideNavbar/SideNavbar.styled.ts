@@ -6,14 +6,18 @@ const SideNavbarContent = styled.div`
 	top: 0;
 	right: 0;
 	z-index: 20;
+	transform: translate(100%, 0%);
 
 	width: 320px;
 	height: 100vh;
+	border: 1px solid ${({ theme }) => theme.colors.primary.light};
+	border-top-left-radius: ${({ theme }) => theme.sizes.borderRadius};
+	border-bottom-left-radius: ${({ theme }) => theme.sizes.borderRadius};
 
 	background-color: ${({ theme }) => theme.colors.background.default};
-	border: 1px solid ${({ theme }) => theme.colors.primary.light};
-	border-radius: ${({ theme }) => theme.sizes.borderRadius};
-	box-shadow: 0 0 30px 0 ${({ theme }) => theme.colors.primary.light};
+	box-shadow: 0 0 20px -10px #333;
+
+	transition: all ease 0.2s;
 `;
 
 const SideNavbarHeader = styled(FlexBetween)`

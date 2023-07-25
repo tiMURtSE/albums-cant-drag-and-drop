@@ -1,4 +1,3 @@
-import DropDownTriangle from "components/Icons/DropDownTriangle/DropDownTriangle";
 import { Caption, Input, Label, Table, TableWrapper, Track, Wrapper } from "./Tracks.styled";
 
 type Props = {

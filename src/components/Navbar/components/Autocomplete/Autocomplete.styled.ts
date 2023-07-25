@@ -11,6 +11,10 @@ const Wrapper = styled.div`
 	border: 1px solid ${(props) => props.theme.colors.primary.neutral};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.colors.primary.neutral};
+
+	@media ${({ theme }) => theme.media.extraLarge} {
+		top: 80px;
+	}
 `;
 
 const List = styled.ul`

@@ -4,8 +4,9 @@ export const useSearchHotKey = (inputRef: React.RefObject<HTMLInputElement>) => 
 	const handleKeyboardPress = (event: KeyboardEvent) => {
 		const code = event.code;
 		const isCtrlKey = event.ctrlKey;
+		const isShiftKey = event.shiftKey;
 
-		if (isCtrlKey && code === "KeyK") {
+		if (isCtrlKey && !isShiftKey && code === "KeyK") {
 			event.preventDefault();
 			const inputElement = inputRef.current;
 

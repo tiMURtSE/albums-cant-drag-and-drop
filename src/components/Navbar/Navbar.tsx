@@ -22,20 +22,10 @@ const Navbar = () => {
 
 	const extraLargeScreenQuery = theme.media.extraLarge;
 	const isBelowExtraLargeScreens = useMediaQuery(extraLargeScreenQuery);
-	console.log("render");
+
 	return (
 		<Styled.Container>
 			<FlexBetween gap={isBelowExtraLargeScreens ? "1rem" : "2rem"}>
-				{isBelowExtraLargeScreens && (
-					<IconButton
-						width="25px"
-						height="25px"
-						onClick={() => openSideNavbar("side-navbar")}
-					>
-						<BurgerIcon />
-					</IconButton>
-				)}
-
 				<Styled.Title>
 					<NavLink to={PagesPath.Home}>{APP_TITLE}</NavLink>
 				</Styled.Title>
@@ -56,18 +46,34 @@ const Navbar = () => {
 
 			<FlexBetween gap="0.5rem">
 				{isBelowExtraLargeScreens ? (
-					<IconButton onClick={() => openSideNavbar("searchbar-modal")}>
-						<SearchIcon />
-					</IconButton>
-				) : (
-					<IconButton onClick={() => dispatch(setMode())}>
-						<ThemeIcon />
-					</IconButton>
-				)}
+					<>
+						<IconButton onClick={() => openSideNavbar("searchbar-modal")}>
+							<SearchIcon />
+						</IconButton>
 
-				<IconButton onClick={() => navigate(PagesPath.Auth)}>
-					<ProfileIcon />
-				</IconButton>
+						<IconButton onClick={() => navigate(PagesPath.Auth)}>
+							<ProfileIcon />
+						</IconButton>
+
+						<IconButton
+							width="25px"
+							height="25px"
+							onClick={() => openSideNavbar("side-navbar")}
+						>
+							<BurgerIcon />
+						</IconButton>
+					</>
+				) : (
+					<>
+						<IconButton onClick={() => dispatch(setMode())}>
+							<ThemeIcon />
+						</IconButton>
+
+						<IconButton onClick={() => navigate(PagesPath.Auth)}>
+							<ProfileIcon />
+						</IconButton>
+					</>
+				)}
 			</FlexBetween>
 
 			{isBelowExtraLargeScreens && (
