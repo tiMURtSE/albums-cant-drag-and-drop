@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
-import Wrapper from "styles/components/Wrapper.styled";
-import { Title } from "./Search.styled";
-import { Loader } from "styles/components/Loader.styled";
-import { IAlbum } from "types";
-import { useEffect, useState } from "react";
 import searchAlbums from "services/api/searchAlbums.api";
-import { formatAlbums } from "utils/formatAlbums";
-import Pagination from "./components/Pagination";
 import FlexColumn from "styles/components/FlexColumn.styled";
+import { Loader } from "styles/components/Loader.styled";
+import Wrapper from "styles/components/Wrapper.styled";
+import { IAlbum } from "types";
+import { formatAlbums } from "utils/formatAlbums";
+import { Title } from "./Search.styled";
+import Pagination from "./components/Pagination";
 
 const Search = () => {
 	const [foundAlbums, setFoundAlbums] = useState<IAlbum[] | []>([]);

@@ -22,7 +22,7 @@ const Navbar = () => {
 
 	const extraLargeScreenQuery = theme.media.extraLarge;
 	const isBelowExtraLargeScreens = useMediaQuery(extraLargeScreenQuery);
-
+	console.log("render");
 	return (
 		<Styled.Container>
 			<FlexBetween gap={isBelowExtraLargeScreens ? "1rem" : "2rem"}>

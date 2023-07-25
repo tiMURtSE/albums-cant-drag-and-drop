@@ -1,10 +1,10 @@
+import { useMediaQuery } from "hooks/useMediaQuery";
 import { SortTypes } from "consts";
+import { theme } from "theme/theme";
 import { DragAndDrop, IAlbum, Sort } from "types";
+import { getTypeOfSort } from "utils/getTypeOfSort";
 import AlbumItem from "../AlbumItem/AlbumItem";
 import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
-import { getTypeOfSort } from "utils/getTypeOfSort";
-import { useMediaQuery } from "hooks/useMediaQuery";
-import { theme } from "theme/theme";
 
 type Props = {
 	dragAndDropHandlers: DragAndDrop;

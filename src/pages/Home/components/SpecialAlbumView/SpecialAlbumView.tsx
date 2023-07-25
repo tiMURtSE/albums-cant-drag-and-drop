@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "hooks/useMediaQuery";
 import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
+import { theme } from "theme/theme";
 import { IAlbum } from "types";
 import { adjustAlbumTitleFontSize } from "utils/adjustAlbumTitleFontSize";
 import { ReactComponent as CrownIcon } from "assets/icons/crown.svg";
@@ -21,11 +23,15 @@ type Props = {
 
 const SpecialAlbumView = ({ album }: Props) => {
 	const AlbumTitleRef = useRef<HTMLHeadingElement>(null);
+	const smallScreenSize = theme.media.small;
+	const isBelowSmallScreenSize = useMediaQuery(smallScreenSize);
 
 	if (!Object.keys(album).length) return null;
 
 	useEffect(() => {
-		adjustAlbumTitleFontSize(AlbumTitleRef);
+		if (isBelowSmallScreenSize) {
+			adjustAlbumTitleFontSize(AlbumTitleRef);
+		}
 	}, []);
 
 	return (
