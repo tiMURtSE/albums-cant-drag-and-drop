@@ -1,4 +1,5 @@
 import { useMediaQuery } from "hooks/useMediaQuery";
+import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlaceholder";
 import { SortTypes } from "consts";
 import { theme } from "theme/theme";
 import { DragAndDrop, IAlbum, Sort } from "types";
@@ -94,6 +95,8 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 					/>
 				))}
 			</ul>
+
+			{!albums.length && <NoContentPlaceholder />}
 		</div>
 	);
 }

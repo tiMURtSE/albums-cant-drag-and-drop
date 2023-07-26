@@ -30,9 +30,16 @@ export const useSuggestions = (debouncedValue: string) => {
 
 			fetchAndFormatAlbums()
 				.then((suggestions) => {
-					setSuggestions(suggestions);
-					setIsLoading(false);
-					setSelectedIndex(-1);
+					if (suggestions.length) {
+						setSuggestions(suggestions);
+						setIsLoading(false);
+						setSelectedIndex(-1);
+					} else {
+						dispatch(closeAutocomplete());
+						setSuggestions([]);
+						setIsLoading(false);
+						setSelectedIndex(-1);
+					}
 				})
 				.catch((error) => console.error(error));
 		} else {

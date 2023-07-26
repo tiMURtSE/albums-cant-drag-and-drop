@@ -1,6 +1,6 @@
 import { useAppSelector } from "hooks";
-import { ReactComponent as SadEmojiIcon } from "assets/icons/sad-emoji.svg";
-import { List, NoContentPlaceholder } from "./Home.styled";
+import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlaceholder";
+import { List } from "./Home.styled";
 import SpecialAlbumView from "./components/SpecialAlbumView/SpecialAlbumView";
 
 const Home = () => {
@@ -17,13 +17,7 @@ const Home = () => {
 				))}
 			</List>
 
-			{!likedAlbums.length && (
-				<NoContentPlaceholder>
-					<span>Альбомы пока не добавлены</span>
-
-					<SadEmojiIcon />
-				</NoContentPlaceholder>
-			)}
+			{!likedAlbums.length && <NoContentPlaceholder isLargeSize={true} />}
 		</>
 	);
 };

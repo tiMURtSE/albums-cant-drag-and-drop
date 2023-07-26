@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CommonAlbumView from "components/CommonAlbumView/CommonAlbumView";
+import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlaceholder";
 import searchAlbums from "services/api/searchAlbums.api";
 import FlexColumn from "styles/components/FlexColumn.styled";
 import { Loader } from "styles/components/Loader.styled";
@@ -56,12 +57,19 @@ const Search = () => {
 			) : (
 				<>
 					<FlexColumn gap="1rem">
-						{foundAlbums.map((album) => (
-							<CommonAlbumView
-								album={album}
-								key={album.id}
+						{foundAlbums.length ? (
+							foundAlbums.map((album) => (
+								<CommonAlbumView
+									album={album}
+									key={album.id}
+								/>
+							))
+						) : (
+							<NoContentPlaceholder
+								isLargeSize
+								isSearchPage
 							/>
-						))}
+						)}
 					</FlexColumn>
 
 					{!!foundAlbums.length && (
