@@ -16,8 +16,9 @@ const Item = styled.li<{ isDragging: boolean }>`
 	&:hover {
 		cursor: ${({ isDragging }) => (isDragging ? "grab" : "auto")};
 
-		& div:last-child div:first-child {
-			display: block;
+		& div:last-child div:first-child button {
+			/* display: block; */
+			opacity: 1;
 		}
 	}
 
@@ -52,7 +53,10 @@ const CoverWrapper = styled.div`
 
 const Names = styled.div`
 	flex-grow: 1;
-	/* flex-basis: calc(100% - 17% * 3 - 5%); */
+
+	& a > div {
+		display: inline-block;
+	}
 `;
 
 const Title = styled.div`
@@ -79,7 +83,7 @@ const Year = styled.div`
 `;
 
 const CreatedAt = styled.div`
-	flex-basis: 16%;
+	flex-basis: 17%;
 	flex-shrink: 0;
 
 	@media ${({ theme }) => theme.media.extraLarge} {

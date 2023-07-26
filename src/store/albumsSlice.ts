@@ -13,6 +13,7 @@ const albumsSlice = createSlice({
 		addAlbum(state, action: PayloadAction<{ album: IAlbum }>) {
 			const position = state.albums.length + 1;
 			const newAlbum = { ...action.payload.album, position };
+
 			state.albums.push(newAlbum);
 		},
 		removeAlbum(state, action: PayloadAction<{ album: IAlbum }>) {

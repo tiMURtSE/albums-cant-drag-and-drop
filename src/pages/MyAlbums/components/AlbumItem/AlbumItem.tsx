@@ -49,11 +49,13 @@ const AlbumItem = ({ album, dragAndDropHandlers }: Props) => {
 			</CoverWrapper>
 
 			<Names>
-				<Title>
-					<Link to={`/album/${album.id}`}>{album.title}</Link>
-				</Title>
+				<Link to={`/album/${album.id}`}>
+					<div>
+						<Title>{album.title}</Title>
 
-				<Artist>{album.artist}</Artist>
+						<Artist>{album.artist}</Artist>
+					</div>
+				</Link>
 			</Names>
 
 			<Year>{album.year}</Year>

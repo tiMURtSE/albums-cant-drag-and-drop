@@ -13,10 +13,19 @@ const Wrapper = styled.div`
 `;
 
 const IconWrapper = styled.div`
-	display: none;
+	/* display: none; */
+
+	& button {
+		opacity: 0;
+
+		&:focus {
+			opacity: 1;
+		}
+	}
 
 	@media ${({ theme }) => theme.media.extraLarge} {
-		display: block;
+		/* display: block; */
+		opacity: 1;
 	}
 	& svg {
 		fill: ${({ theme }) => theme.colors.contrastText};

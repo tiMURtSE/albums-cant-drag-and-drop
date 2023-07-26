@@ -16,7 +16,7 @@ const SearchbarModalContent = styled.div`
 	background-color: ${({ theme }) => theme.colors.background.default};
 	box-shadow: 0 0 20px -10px #333;
 
-	transition: all 0.1s ease;
+	transition: transform 0.1s ease;
 `;
 
 const SearchbarModalHeader = styled(FlexBetween)`

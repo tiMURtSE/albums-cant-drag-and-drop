@@ -1,29 +1,13 @@
-interface IMonths {
-	[key: string]: string;
-}
-
-const months: IMonths = {
-	"01": "янв.",
-	"02": "фев.",
-	"03": "мар.",
-	"04": "апр.",
-	"05": "мая",
-	"06": "июн.",
-	"07": "июл.",
-	"08": "авг.",
-	"09": "сен.",
-	"10": "окт.",
-	"11": "ноя.",
-	"12": "дек.",
-};
-
 const formatDate = (date: string) => {
-	const splittedDate = date.split(".");
-	const day = splittedDate[0];
-	const month = months[splittedDate[1]].slice(0, 4);
-	const year = splittedDate[2];
+	let formattedDate = new Date(date).toLocaleDateString("ru-RU", {
+		day: "numeric",
+		month: "short",
+		year: "numeric",
+	});
 
-	return `${day} ${month} ${year}`;
+	formattedDate = formattedDate.replace(" г.", "");
+
+	return formattedDate;
 };
 
 export default formatDate;

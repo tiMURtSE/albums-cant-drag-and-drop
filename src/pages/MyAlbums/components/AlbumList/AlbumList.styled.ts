@@ -39,7 +39,7 @@ const CaptionItem = styled.li`
 	}
 
 	&:nth-child(5) {
-		flex-basis: 16%;
+		flex-basis: 17%;
 	}
 `;
 
@@ -49,7 +49,11 @@ const CaptionSortButton = styled.span<{ sortType?: SortTypes | ""; isDragging: b
 
 	&::after {
 		content: "${({ sortType }) =>
-			sortType === SortTypes.Ascending ? "↓" : sortType === SortTypes.Descending ? "↑" : ""}";
+			sortType === SortTypes.Ascending
+				? " ↑"
+				: sortType === SortTypes.Descending
+				? " ↓"
+				: " ⮃"}";
 	}
 
 	&:hover {

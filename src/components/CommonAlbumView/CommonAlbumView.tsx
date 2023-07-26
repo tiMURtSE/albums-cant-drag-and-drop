@@ -4,6 +4,7 @@ import { removeAlbum } from "store/albumsSlice";
 import { addAlbum } from "store/albumsSlice";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import Image from "components/Image/Image";
+import IconButton from "components/UI/IconButton/IconButton";
 import AlbumWrapper from "styles/components/AlbumWrapper.styled";
 import { ButtonIconWrapper } from "styles/components/ButtonIconWrapper.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
@@ -55,13 +56,11 @@ const CommonAlbumView = ({ album }: Props) => {
 					</Link>
 				</FlexBetween>
 
-				<ButtonIconWrapper
-					width="20px"
-					height="20px"
-					onClick={like}
-				>
-					{isAlbumLiked ? <FilledLikeIcon /> : <EmptyLikeIcon />}
-				</ButtonIconWrapper>
+				<div>
+					<IconButton onClick={like}>
+						{isAlbumLiked ? <FilledLikeIcon /> : <EmptyLikeIcon />}
+					</IconButton>
+				</div>
 			</FlexBetween>
 		</AlbumWrapper>
 	);

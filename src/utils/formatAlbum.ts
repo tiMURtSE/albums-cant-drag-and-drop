@@ -18,7 +18,7 @@ const formatAlbum = (album: Record<string, any>): IAlbum => {
 				url: images[1].url,
 			},
 		],
-		createdAt: new Date().toLocaleDateString(),
+		createdAt: new Date().toISOString(),
 		url: external_urls.spotify,
 		position: -1,
 	};

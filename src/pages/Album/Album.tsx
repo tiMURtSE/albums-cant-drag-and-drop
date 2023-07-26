@@ -13,6 +13,10 @@ const Album = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	useEffect(() => {
 		let ignore = false;
 
 		try {
