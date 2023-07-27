@@ -22,6 +22,7 @@ const TitleWrapper = styled.div`
 
 	@media ${({ theme }) => theme.media.small} {
 		& h2 {
+			padding-right: 15px;
 			font-size: 24px;
 		}
 	}

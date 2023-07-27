@@ -1,9 +1,10 @@
+import { SPOTIFY_TOKEN } from "consts";
+
 const getAccessToken = async () => {
 	const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 	const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
-	const url = "https://accounts.spotify.com/api/token";
 
-	const response = await fetch(url, {
+	const response = await fetch(SPOTIFY_TOKEN, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",

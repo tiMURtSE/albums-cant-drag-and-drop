@@ -6,7 +6,6 @@ import { useMediaQuery } from "hooks/useMediaQuery";
 import Image from "components/Image/Image";
 import IconButton from "components/UI/IconButton/IconButton";
 import AlbumWrapper from "styles/components/AlbumWrapper.styled";
-import { ButtonIconWrapper } from "styles/components/ButtonIconWrapper.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import { theme } from "theme/theme";
 import { IAlbum } from "types";

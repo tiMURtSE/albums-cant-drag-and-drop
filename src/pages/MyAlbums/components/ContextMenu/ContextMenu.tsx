@@ -3,7 +3,6 @@ import { removeAlbum } from "store/albumsSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useContextMenuHandler } from "hooks/useContextMenuHandler";
 import IconButton from "components/UI/IconButton/IconButton";
-import { ButtonIconWrapper } from "styles/components/ButtonIconWrapper.styled";
 import { IAlbum } from "types";
 import { ReactComponent as ContextMenuIcon } from "assets/icons/context-menu.svg";
 import { Menu, IconWrapper, Item, Wrapper } from "./ContextMenu.styled";

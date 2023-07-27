@@ -5,7 +5,6 @@ import { useAppDispatch } from "hooks";
 import ModalWindow from "components/ModalWindow/ModalWindow";
 import IconButton from "components/UI/IconButton/IconButton";
 import { navigationItems } from "consts";
-import { ButtonIconWrapper } from "styles/components/ButtonIconWrapper.styled";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import { Paddings } from "styles/components/Paddings.styled";
 import { closeSideNavbar } from "utils/closeSideNavbar";

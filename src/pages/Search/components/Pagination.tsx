@@ -1,7 +1,7 @@
-import { ArrowButton, Content, Item, Wrapper } from "./Pagination.styled";
-import ChevronLeftArrow from "components/Icons/ChevronArrow/ChevronLeftArrow";
 import ChevronRightArrow from "components/Icons/ChevronArrow/ChavronRightArrow";
+import ChevronLeftArrow from "components/Icons/ChevronArrow/ChevronLeftArrow";
 import { ALBUMS_PER_PAGE } from "consts";
+import { ArrowButton, Content, Item, Wrapper } from "./Pagination.styled";
 
 type Props = {
 	page: number;

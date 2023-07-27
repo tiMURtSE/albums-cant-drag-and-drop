@@ -5,7 +5,6 @@ import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlace
 import searchAlbums from "services/api/searchAlbums.api";
 import FlexColumn from "styles/components/FlexColumn.styled";
 import { Loader } from "styles/components/Loader.styled";
-import Wrapper from "styles/components/Wrapper.styled";
 import { IAlbum } from "types";
 import { formatAlbums } from "utils/formatAlbums";
 import { Title } from "./Search.styled";
@@ -18,12 +17,12 @@ const Search = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const { query } = useParams();
 
-	const getFoundAlbums = async () => {
+	const getFoundAlbums = async (isNewRequest?: boolean) => {
 		if (!query) return;
 
 		try {
 			setIsLoading(true);
-			const response = await searchAlbums(query, page);
+			const response = await searchAlbums(query, isNewRequest ? 1 : page);
 
 			const albums = response.albums.items as IAlbum[];
 			const total = response.albums.total as number;
@@ -37,8 +36,13 @@ const Search = () => {
 	};
 
 	useEffect(() => {
-		getFoundAlbums();
-	}, [query, page]);
+		setPage(1);
+		getFoundAlbums(true);
+	}, [query]);
+
+	useEffect(() => {
+		if (page !== 1) getFoundAlbums();
+	}, [page]);
 
 	return (
 		<FlexColumn gap="1rem">

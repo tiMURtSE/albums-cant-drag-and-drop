@@ -1,3 +1,4 @@
+import { useAppSelector } from "hooks";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlaceholder";
 import { SortTypes } from "consts";
@@ -15,6 +16,7 @@ type Props = {
 };
 
 function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
+	const albumsFromStore = useAppSelector((state) => state.albums.albums);
 	const isDragging = Boolean(dragAndDropHandlers);
 	const largeScreenSize = theme.media.extraLarge;
 	const mediumScreenSize = theme.media.medium;
@@ -96,7 +98,7 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 				))}
 			</ul>
 
-			{!albums.length && <NoContentPlaceholder />}
+			{!albumsFromStore.length && <NoContentPlaceholder />}
 		</div>
 	);
 }

@@ -15,10 +15,14 @@ export const useSuggestions = (debouncedValue: string) => {
 	const { pathname } = useLocation();
 
 	const fetchAndFormatAlbums = async () => {
-		const response = await searchAlbums(debouncedValue);
-		const albums = response.albums.items;
+		try {
+			const response = await searchAlbums(debouncedValue);
+			const albums = response.albums.items;
 
-		return formatAlbums(albums);
+			return formatAlbums(albums);
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	useEffect(() => {
@@ -30,7 +34,7 @@ export const useSuggestions = (debouncedValue: string) => {
 
 			fetchAndFormatAlbums()
 				.then((suggestions) => {
-					if (suggestions.length) {
+					if (suggestions?.length) {
 						setSuggestions(suggestions);
 						setIsLoading(false);
 						setSelectedIndex(-1);

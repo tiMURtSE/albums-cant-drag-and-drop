@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { addAlbum, removeAlbum } from "store/albumsSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
-import ExternalLink from "components/Icons/ExternalLink/ExternalLink";
-import RegularLike from "components/Icons/Like/RegularLike";
-import Spotify from "components/Icons/Spotify/Spotify";
 import AnimatedButton from "components/UI/AnimatedButton/AnimatedButton";
 import getAlbumMetadata from "services/api/getAlbumMetadata.api";
 import FlexColumn from "styles/components/FlexColumn.styled";
@@ -11,7 +8,9 @@ import StylishAlbumTitle from "styles/components/StylishAlbumTitle.styled";
 import { IAlbum, IMetadata } from "types";
 import formatMetadata from "utils/formatMetadata";
 import { ReactComponent as EmptyLikeIcon } from "assets/icons/empty-like.svg";
+import { ReactComponent as ExternalLinkIcon } from "assets/icons/external-link.svg";
 import { ReactComponent as FilledLikeIcon } from "assets/icons/filled-like.svg";
+import { ReactComponent as SpotifyIcon } from "assets/icons/spotify.svg";
 import { Artist, Content, TitleWrapper, IconWrapper } from "./Description.styled";
 import Metadata from "./Metadata/Metadata";
 import Tracks from "./Tracks/Tracks";
@@ -35,9 +34,13 @@ const Description = ({ album }: Props) => {
 	};
 
 	const getMetadata = async () => {
-		const metadata = await getAlbumMetadata(album);
+		try {
+			const metadata = await getAlbumMetadata(album);
 
-		setMetadata(formatMetadata(metadata));
+			setMetadata(formatMetadata(metadata));
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	useEffect(() => {
@@ -57,8 +60,8 @@ const Description = ({ album }: Props) => {
 						</a>
 
 						<IconWrapper>
-							<ExternalLink />
-							<Spotify />
+							<ExternalLinkIcon />
+							<SpotifyIcon />
 						</IconWrapper>
 					</StylishAlbumTitle>
 				</TitleWrapper>
