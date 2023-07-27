@@ -1,6 +1,6 @@
-import { IconWrapper } from "styles/components/IconWrapper.styled";
-import { SideNavbarCloseButton } from "./CloseButton.styled";
 import { ReactComponent as XMarkIcon } from "assets/icons/close-button.svg";
+import IconButton from "../IconButton/IconButton";
+import { SideNavbarCloseButton } from "./CloseButton.styled";
 
 type Props = {};
 
@@ -10,12 +10,12 @@ function CloseButton(props: Props) {
 			type="button"
 			id="close-button"
 		>
-			<IconWrapper
+			<IconButton
 				width="25px"
 				height="25px"
 			>
 				<XMarkIcon />
-			</IconWrapper>
+			</IconButton>
 		</SideNavbarCloseButton>
 	);
 }
