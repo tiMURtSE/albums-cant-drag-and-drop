@@ -6,16 +6,7 @@ import { theme } from "theme/theme";
 import { IAlbum } from "types";
 import { adjustAlbumTitleFontSize } from "utils/adjustAlbumTitleFontSize";
 import { ReactComponent as CrownIcon } from "assets/icons/crown.svg";
-import {
-	AlbumCoverWrapper,
-	Artist,
-	ArtistAndYear,
-	Content,
-	CrownIconWrapper,
-	Description,
-	TitleWrapper,
-	Year,
-} from "./SpecialAlbumView.styled";
+import * as Styled from "./SpecialAlbumView.styled";
 
 type Props = {
 	album: IAlbum;
@@ -24,49 +15,50 @@ type Props = {
 const SpecialAlbumView = ({ album }: Props) => {
 	const AlbumTitleRef = useRef<HTMLHeadingElement>(null);
 	const smallScreenSize = theme.media.small;
-	const isBelowSmallScreenSize = useMediaQuery(smallScreenSize);
-
-	if (!Object.keys(album).length) return null;
+	const isBelowSmallScreensSize = useMediaQuery(smallScreenSize);
 
 	useEffect(() => {
-		if (isBelowSmallScreenSize) {
+		if (isBelowSmallScreensSize) {
 			adjustAlbumTitleFontSize(AlbumTitleRef);
 		}
 	}, []);
 
+	if (!Object.keys(album).length) return null;
+
 	return (
-		<Content position={album.position}>
+		<Styled.Wrapper position={album.position}>
 			{album.position <= 3 && (
-				<CrownIconWrapper position={album.position}>
+				<Styled.CrownIcon position={album.position}>
 					<CrownIcon />
-				</CrownIconWrapper>
+				</Styled.CrownIcon>
 			)}
 
 			<Link to={`/album/${album.id}`}>
-				<AlbumCoverWrapper>
+				<Styled.AlbumCover>
 					<img
 						src={album.images[1].url}
 						alt={`${album.title} by ${album.artist}`}
 					/>
-				</AlbumCoverWrapper>
+				</Styled.AlbumCover>
 			</Link>
 
-			<Description>
-				<TitleWrapper>
+			<Styled.Description>
+				<Styled.Title>
 					<StylishAlbumTitle
 						isExtraLarge
 						ref={AlbumTitleRef}
 					>
 						<Link to={`/album/${album.id}`}>{album.title}</Link>
 					</StylishAlbumTitle>
-				</TitleWrapper>
+				</Styled.Title>
 
-				<ArtistAndYear>
-					<Artist>{album.artist}</Artist>
-					<Year>{album.year}</Year>
-				</ArtistAndYear>
-			</Description>
-		</Content>
+				<Styled.ArtistAndYear>
+					<Styled.Artist>{album.artist}</Styled.Artist>
+
+					<Styled.Year>{album.year}</Styled.Year>
+				</Styled.ArtistAndYear>
+			</Styled.Description>
+		</Styled.Wrapper>
 	);
 };
 

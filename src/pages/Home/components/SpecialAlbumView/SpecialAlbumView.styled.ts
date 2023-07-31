@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import FlexBetween from "styles/components/FlexBetween.styled";
 
-const Content = styled(FlexBetween)<{ position: number }>`
+const Wrapper = styled(FlexBetween)<{ position: number }>`
 	position: relative;
 	gap: 2rem;
 
@@ -33,7 +33,7 @@ const Content = styled(FlexBetween)<{ position: number }>`
 	}
 `;
 
-const CrownIconWrapper = styled.div<{ position: number }>`
+const CrownIcon = styled.div<{ position: number }>`
 	position: absolute;
 	top: 50%;
 	left: -70px;
@@ -67,7 +67,7 @@ const CrownIconWrapper = styled.div<{ position: number }>`
 	}
 `;
 
-const AlbumCoverWrapper = styled.div`
+const AlbumCover = styled.div`
 	width: 200px;
 	height: 200px;
 
@@ -100,7 +100,7 @@ const Description = styled.div`
 	}
 `;
 
-const TitleWrapper = styled.div`
+const Title = styled.div`
 	overflow: hidden;
 	padding: 0 0 1rem 0.5rem;
 	border-bottom: 3px solid ${({ theme }) => theme.colors.contrastText};
@@ -146,13 +146,4 @@ const Year = styled.p`
 	}
 `;
 
-export {
-	Content,
-	CrownIconWrapper,
-	AlbumCoverWrapper,
-	Description,
-	TitleWrapper,
-	ArtistAndYear,
-	Artist,
-	Year,
-};
+export { Wrapper, CrownIcon, AlbumCover, Description, Title, ArtistAndYear, Artist, Year };

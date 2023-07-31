@@ -7,9 +7,10 @@ type Props = {
 	page: number;
 	setPage: React.Dispatch<React.SetStateAction<number>>;
 	total: number;
+	getFoundAlbums: (newPage?: number) => Promise<void>;
 };
 
-const Pagination = ({ page, setPage, total }: Props) => {
+const Pagination = ({ page, setPage, total, getFoundAlbums }: Props) => {
 	const totalPages = Math.ceil(total / ALBUMS_PER_PAGE);
 
 	const disabledButtons = {
@@ -19,9 +20,13 @@ const Pagination = ({ page, setPage, total }: Props) => {
 
 	const onPreviousPageClick = () => {
 		setPage(page - 1);
+		getFoundAlbums(page - 1);
+		console.log("page");
 	};
 	const onNextPageClick = () => {
 		setPage(page + 1);
+		getFoundAlbums(page + 1);
+		console.log("page");
 	};
 
 	return (

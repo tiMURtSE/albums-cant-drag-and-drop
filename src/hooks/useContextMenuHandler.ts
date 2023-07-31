@@ -1,6 +1,6 @@
-import { useAppDispatch } from "hooks";
 import { useEffect, useState } from "react";
-import { removeAlbum } from "store/albumsSlice";
+import { removeAlbum } from "store/reducers/albumsSlice";
+import { useAppDispatch } from "hooks";
 import { IAlbum } from "types";
 import { useHandleOutsideClick } from "./useHandleOutsideClick";
 

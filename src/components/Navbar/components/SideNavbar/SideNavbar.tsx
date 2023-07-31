@@ -1,6 +1,6 @@
 import { HTMLAttributes, MouseEvent, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { setMode } from "store/themeSlice";
+import { setMode } from "store/reducers/themeSlice";
 import { useAppDispatch } from "hooks";
 import ModalWindow from "components/ModalWindow/ModalWindow";
 import IconButton from "components/UI/IconButton/IconButton";

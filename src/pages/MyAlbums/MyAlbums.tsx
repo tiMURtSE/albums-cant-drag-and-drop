@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { setAlbums } from "store/albumsSlice";
+import { setAlbums } from "store/reducers/albumsSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAlbumListCustomization } from "hooks/useAlbumListCustomization";
 import { useDragAndDrop } from "hooks/useDragAndDrop";

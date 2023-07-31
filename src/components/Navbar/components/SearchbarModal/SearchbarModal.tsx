@@ -18,6 +18,7 @@ function SearchbarModal({ ...props }: Props) {
 			<Styled.SearchbarModalContent id="search">
 				<Paddings>
 					<Styled.Title>Поиск:</Styled.Title>
+
 					<Searchbar />
 				</Paddings>
 			</Styled.SearchbarModalContent>

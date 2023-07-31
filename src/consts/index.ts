@@ -32,6 +32,12 @@ export enum SortTypes {
 	Descending = "desc",
 }
 
+export enum SortableColumns {
+	Title = "title",
+	Year = "year",
+	CreatedAt = "createdAt",
+}
+
 export enum ValidationMessages {
 	Required = "Это поле обязательно для заполнения",
 	Email = "Введите корректный адрес электронной почты",

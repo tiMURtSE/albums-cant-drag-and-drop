@@ -1,10 +1,12 @@
+import { albumsSelector } from "store/selectors/albumsSelector";
 import { useAppSelector } from "hooks";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlaceholder";
-import { SortTypes } from "consts";
+import { SortableColumns } from "consts";
 import { theme } from "theme/theme";
 import { DragAndDrop, IAlbum, Sort } from "types";
 import { getTypeOfSort } from "utils/getTypeOfSort";
+import { updateSortSettings } from "utils/updateSortSettings";
 import AlbumItem from "../AlbumItem/AlbumItem";
 import { Caption, CaptionItem, CaptionSortButton } from "./AlbumList.styled";
 
@@ -16,32 +18,17 @@ type Props = {
 };
 
 function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
-	const albumsFromStore = useAppSelector((state) => state.albums.albums);
+	const albumsFromStore = useAppSelector(albumsSelector);
 	const isDragging = Boolean(dragAndDropHandlers);
 	const largeScreenSize = theme.media.extraLarge;
 	const mediumScreenSize = theme.media.medium;
 	const isBelowLargeScreens = useMediaQuery(largeScreenSize);
 	const isBelowMediumScreens = useMediaQuery(mediumScreenSize);
 
-	const handleSortClick = (column: keyof IAlbum) => {
+	const handleSortClick = (column: SortableColumns) => {
 		if (isDragging) return;
 
-		const isPreviousColumnSorting = sort.sortingColumn === column;
-		let newType: Sort["typeOfSort"];
-		let newColumn: keyof IAlbum | "" = column;
-
-		if (isPreviousColumnSorting) {
-			if (sort.typeOfSort === SortTypes.Ascending) {
-				newType = SortTypes.Descending;
-			} else {
-				newType = "";
-				newColumn = "";
-			}
-		} else {
-			newType = SortTypes.Ascending;
-		}
-
-		const newSort = { sortingColumn: newColumn, typeOfSort: newType };
+		const newSort = updateSortSettings(sort, column);
 
 		setSort(newSort);
 	};
@@ -55,19 +42,19 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 
 				<CaptionItem>
 					<CaptionSortButton
-						sortType={getTypeOfSort(sort, "title")}
-						onClick={() => handleSortClick("title")}
+						sortType={getTypeOfSort(sort, SortableColumns.Title)}
+						onClick={() => handleSortClick(SortableColumns.Title)}
 						isDragging={isDragging}
 					>
 						Что и кем
 					</CaptionSortButton>
 				</CaptionItem>
 
-				{isBelowMediumScreens || (
+				{!isBelowMediumScreens && (
 					<CaptionItem>
 						<CaptionSortButton
-							sortType={getTypeOfSort(sort, "year")}
-							onClick={() => handleSortClick("year")}
+							sortType={getTypeOfSort(sort, SortableColumns.Year)}
+							onClick={() => handleSortClick(SortableColumns.Year)}
 							isDragging={isDragging}
 						>
 							Год
@@ -75,11 +62,11 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 					</CaptionItem>
 				)}
 
-				{isBelowLargeScreens || (
+				{!isBelowLargeScreens && (
 					<CaptionItem>
 						<CaptionSortButton
-							sortType={getTypeOfSort(sort, "createdAt")}
-							onClick={() => handleSortClick("createdAt")}
+							sortType={getTypeOfSort(sort, SortableColumns.CreatedAt)}
+							onClick={() => handleSortClick(SortableColumns.CreatedAt)}
 							isDragging={isDragging}
 						>
 							Дата добавления
@@ -88,17 +75,19 @@ function AlbumList({ dragAndDropHandlers, albums, sort, setSort }: Props) {
 				)}
 			</Caption>
 
-			<ul>
-				{albums.map((album) => (
-					<AlbumItem
-						album={album}
-						key={album.id}
-						dragAndDropHandlers={dragAndDropHandlers}
-					/>
-				))}
-			</ul>
-
-			{!albumsFromStore.length && <NoContentPlaceholder />}
+			{albumsFromStore.length ? (
+				<ul>
+					{albums.map((album) => (
+						<AlbumItem
+							album={album}
+							key={album.id}
+							dragAndDropHandlers={dragAndDropHandlers}
+						/>
+					))}
+				</ul>
+			) : (
+				<NoContentPlaceholder />
+			)}
 		</div>
 	);
 }

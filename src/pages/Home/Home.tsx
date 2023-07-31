@@ -1,24 +1,25 @@
+import { albumsSelector } from "store/selectors/albumsSelector";
 import { useAppSelector } from "hooks";
 import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlaceholder";
-import { List } from "./Home.styled";
+import * as Styled from "./Home.styled";
 import SpecialAlbumView from "./components/SpecialAlbumView/SpecialAlbumView";
 
 const Home = () => {
-	const likedAlbums = useAppSelector((state) => state.albums.albums);
+	const likedAlbums = useAppSelector(albumsSelector);
 
 	return (
-		<>
-			<List>
-				{likedAlbums.map((album) => (
+		<Styled.Container>
+			{likedAlbums.length ? (
+				likedAlbums.map((album) => (
 					<SpecialAlbumView
 						album={album}
 						key={album.id}
 					/>
-				))}
-			</List>
-
-			{!likedAlbums.length && <NoContentPlaceholder isLargeSize={true} />}
-		</>
+				))
+			) : (
+				<NoContentPlaceholder isLargeSize={true} />
+			)}
+		</Styled.Container>
 	);
 };
 

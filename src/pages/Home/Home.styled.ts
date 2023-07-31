@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const List = styled.div`
+const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
@@ -16,4 +16,4 @@ const List = styled.div`
 	}
 `;
 
-export { List };
+export { Container };

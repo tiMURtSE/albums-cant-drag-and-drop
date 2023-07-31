@@ -1,4 +1,4 @@
-import { PageTitles, PagesPath, SortTypes } from "consts";
+import { PageTitles, PagesPath, SortTypes, SortableColumns } from "consts";
 
 interface IAlbum {
 	id: string;
@@ -41,7 +41,7 @@ interface IModifiers {
 }
 
 interface Sort {
-	sortingColumn: keyof IAlbum | "";
+	sortingColumn: SortableColumns | "";
 	typeOfSort: SortTypes | "";
 }
 

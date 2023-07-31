@@ -17,17 +17,13 @@ const Album = () => {
 	}, []);
 
 	useEffect(() => {
-		let ignore = false;
-
 		const fetchAndFormatAlbum = async () => {
 			setIsLoading(true);
 
 			const album = await getSingleAlbum(id);
 
-			if (!ignore) {
-				setAlbum(formatAlbum(album));
-				setIsLoading(false);
-			}
+			setAlbum(formatAlbum(album));
+			setIsLoading(false);
 		};
 
 		try {
@@ -35,10 +31,6 @@ const Album = () => {
 		} catch (error) {
 			console.error(error);
 		}
-
-		() => {
-			ignore = true;
-		};
 	}, [id]);
 
 	return (

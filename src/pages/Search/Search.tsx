@@ -17,13 +17,13 @@ const Search = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const { query } = useParams();
 
-	const getFoundAlbums = async (isNewRequest?: boolean) => {
+	const getFoundAlbums = async (newPage?: number) => {
 		if (!query) return;
 
 		try {
 			setIsLoading(true);
-			const response = await searchAlbums(query, isNewRequest ? 1 : page);
 
+			const response = await searchAlbums(query, newPage ? newPage : 1);
 			const albums = response.albums.items as IAlbum[];
 			const total = response.albums.total as number;
 
@@ -37,12 +37,8 @@ const Search = () => {
 
 	useEffect(() => {
 		setPage(1);
-		getFoundAlbums(true);
+		getFoundAlbums();
 	}, [query]);
-
-	useEffect(() => {
-		if (page !== 1) getFoundAlbums();
-	}, [page]);
 
 	return (
 		<FlexColumn gap="1rem">
@@ -81,6 +77,7 @@ const Search = () => {
 							page={page}
 							setPage={setPage}
 							total={total}
+							getFoundAlbums={getFoundAlbums}
 						/>
 					)}
 				</>

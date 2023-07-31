@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeAlbum } from "store/albumsSlice";
-import { addAlbum } from "store/albumsSlice";
+import { removeAlbum } from "store/reducers/albumsSlice";
+import { addAlbum } from "store/reducers/albumsSlice";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import Image from "components/Image/Image";
 import IconButton from "components/UI/IconButton/IconButton";

@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
-import { closeAutocomplete } from "store/autocompleteSlice";
+import { closeAutocomplete } from "store/reducers/autocompleteSlice";
+import { isAutocompleteOpenSelector } from "store/selectors/isAutocompleteOpenSelector";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAutocompleteNavigationSubmit } from "hooks/useAutocompleteNavigationSubmit";
 import { useDebounce } from "hooks/useDebounce";
 import { useSuggestions } from "hooks/useSuggestions";
 import { Loader } from "styles/components/Loader.styled";
-import { Artist, Item, ItemLink, List, Title, Wrapper } from "./Autocomplete.styled";
 import * as Styled from "./Autocomplete.styled";
 
 type Props = {
 	query: string;
 };
 
-const TIMEOUT = 500;
+const DEBOUNCE_DELAY = 500;
 
 const Autocomplete = ({ query }: Props) => {
-	const debouncedValue = useDebounce(query, TIMEOUT);
+	const debouncedValue = useDebounce(query, DEBOUNCE_DELAY);
 	const { suggestions, selectedIndex, isLoading } = useSuggestions(debouncedValue);
-	const isAutocompleteOpen = useAppSelector((state) => state.autocomplete.isAutocompleteOpen);
+	const isAutocompleteOpen = useAppSelector(isAutocompleteOpenSelector);
 	const dispatch = useAppDispatch();
 
 	useAutocompleteNavigationSubmit({
@@ -49,6 +49,7 @@ const Autocomplete = ({ query }: Props) => {
 							>
 								<Styled.ItemLink isFocused={index === selectedIndex}>
 									<Styled.Title>{album.title}</Styled.Title>
+
 									<Styled.Artist>{album.artist}</Styled.Artist>
 								</Styled.ItemLink>
 							</Link>

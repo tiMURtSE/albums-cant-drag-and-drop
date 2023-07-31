@@ -1,5 +1,5 @@
-// import ContextMenuIcon from "components/Icons/ContextMenuIcon/ContextMenuIcon";
-import { removeAlbum } from "store/albumsSlice";
+import { removeAlbum } from "store/reducers/albumsSlice";
+import { albumsSelector } from "store/selectors/albumsSelector";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useContextMenuHandler } from "hooks/useContextMenuHandler";
 import IconButton from "components/UI/IconButton/IconButton";
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const ContextMenu = ({ album }: Props) => {
-	const favoriteAlbums = useAppSelector((state) => state.albums.albums);
+	const favoriteAlbums = useAppSelector(albumsSelector);
 	const isFavoriteAlbum = favoriteAlbums.find((favoriteAlbum) => favoriteAlbum.id === album.id);
 	const openContextMenu = useContextMenuHandler(album);
 	const dispatch = useAppDispatch();

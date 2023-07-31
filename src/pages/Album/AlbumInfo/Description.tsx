@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addAlbum, removeAlbum } from "store/albumsSlice";
+import { addAlbum, removeAlbum } from "store/reducers/albumsSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import AnimatedButton from "components/UI/AnimatedButton/AnimatedButton";
 import getAlbumMetadata from "services/api/getAlbumMetadata.api";

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { setMode } from "store/themeSlice";
+import { setMode } from "store/reducers/themeSlice";
 import { useAppDispatch } from "hooks";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import IconButton from "components/UI/IconButton/IconButton";
@@ -20,8 +20,8 @@ const Navbar = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const extraLargeScreenQuery = theme.media.extraLarge;
-	const isBelowExtraLargeScreens = useMediaQuery(extraLargeScreenQuery);
+	const extraLargeScreenSize = theme.media.extraLarge;
+	const isBelowExtraLargeScreens = useMediaQuery(extraLargeScreenSize);
 
 	return (
 		<Styled.Container>
