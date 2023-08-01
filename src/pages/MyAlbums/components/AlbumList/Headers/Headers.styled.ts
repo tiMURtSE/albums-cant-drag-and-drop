@@ -1,7 +1,7 @@
 import { SortingTypes } from "consts/sorting";
 import styled from "styled-components";
 
-const Caption = styled.ul`
+const Container = styled.div`
 	display: flex;
 	gap: 2rem;
 	padding: 0 3.5rem 0 1rem;
@@ -15,7 +15,9 @@ const Caption = styled.ul`
 	}
 `;
 
-const CaptionItem = styled.li`
+const Header = styled.div`
+	user-select: none;
+
 	&:first-child {
 		text-align: center;
 		flex-basis: 30px;
@@ -30,7 +32,6 @@ const CaptionItem = styled.li`
 	}
 
 	&:nth-child(3) {
-		/* flex-basis: calc(100% - 17% * 3 - 5%); */
 		flex-grow: 1;
 	}
 
@@ -45,6 +46,7 @@ const CaptionItem = styled.li`
 
 const SortingButton = styled.span<{ type?: SortingTypes | ""; isDragging: boolean }>`
 	color: ${({ type, theme }) => (type ? theme.colors.contrastText : "inherit")};
+	font-weight: ${({ type }) => (type ? 700 : 500)};
 	cursor: pointer;
 
 	&::after {
@@ -61,4 +63,4 @@ const SortingButton = styled.span<{ type?: SortingTypes | ""; isDragging: boolea
 	}
 `;
 
-export { Caption, CaptionItem, SortingButton };
+export { Container, Header, SortingButton };

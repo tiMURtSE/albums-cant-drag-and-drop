@@ -17,7 +17,6 @@ const Item = styled.li<{ isDragging: boolean }>`
 		cursor: ${({ isDragging }) => (isDragging ? "grab" : "auto")};
 
 		& div:last-child div:first-child button {
-			/* display: block; */
 			opacity: 1;
 		}
 	}
@@ -43,8 +42,6 @@ const Position = styled.div`
 `;
 
 const CoverWrapper = styled.div`
-	/* flex-basis: 17%; */
-
 	& div {
 		width: 80px;
 		height: 80px;
@@ -53,6 +50,10 @@ const CoverWrapper = styled.div`
 
 const Names = styled.div`
 	flex-grow: 1;
+
+	a {
+		display: inline-block;
+	}
 
 	& a > div {
 		display: inline-block;
@@ -71,6 +72,7 @@ const Title = styled.div`
 
 const Artist = styled.div`
 	font-weight: 500;
+	line-height: 1;
 `;
 
 const Year = styled.div`

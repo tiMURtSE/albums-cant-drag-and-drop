@@ -27,12 +27,12 @@ function TableHeader({ sorting, setSorting, isDragging }: Props) {
 	};
 
 	return (
-		<Styled.Caption>
-			<Styled.CaptionItem>№</Styled.CaptionItem>
+		<Styled.Container>
+			<Styled.Header>№</Styled.Header>
 
-			<Styled.CaptionItem>Обложка</Styled.CaptionItem>
+			<Styled.Header>Обложка</Styled.Header>
 
-			<Styled.CaptionItem>
+			<Styled.Header>
 				<Styled.SortingButton
 					type={getTypeOfSorting(sorting, SortableColumns.TITLE)}
 					onClick={() => handleSortingClick(SortableColumns.TITLE)}
@@ -40,10 +40,10 @@ function TableHeader({ sorting, setSorting, isDragging }: Props) {
 				>
 					Что и кем
 				</Styled.SortingButton>
-			</Styled.CaptionItem>
+			</Styled.Header>
 
 			{!isBelowMediumScreens && (
-				<Styled.CaptionItem>
+				<Styled.Header>
 					<Styled.SortingButton
 						type={getTypeOfSorting(sorting, SortableColumns.YEAR)}
 						onClick={() => handleSortingClick(SortableColumns.YEAR)}
@@ -51,11 +51,11 @@ function TableHeader({ sorting, setSorting, isDragging }: Props) {
 					>
 						Год
 					</Styled.SortingButton>
-				</Styled.CaptionItem>
+				</Styled.Header>
 			)}
 
 			{!isBelowLargeScreens && (
-				<Styled.CaptionItem>
+				<Styled.Header>
 					<Styled.SortingButton
 						type={getTypeOfSorting(sorting, SortableColumns.CREATED_AT)}
 						onClick={() => handleSortingClick(SortableColumns.CREATED_AT)}
@@ -63,9 +63,9 @@ function TableHeader({ sorting, setSorting, isDragging }: Props) {
 					>
 						Дата добавления
 					</Styled.SortingButton>
-				</Styled.CaptionItem>
+				</Styled.Header>
 			)}
-		</Styled.Caption>
+		</Styled.Container>
 	);
 }
 
