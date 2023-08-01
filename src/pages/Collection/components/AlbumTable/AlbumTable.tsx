@@ -1,15 +1,10 @@
 import { albumsSelector } from "store/selectors/albumsSelector";
 import { useAppSelector } from "hooks";
-import { useMediaQuery } from "hooks/useMediaQuery";
 import NoContentPlaceholder from "components/NoContentPlaceholder/NoContentPlaceholder";
-import { SortableColumns } from "consts/sorting";
-import { theme } from "theme/theme";
 import { DragAndDrop, IAlbum, Sorting } from "types";
-import { getTypeOfSorting } from "utils/getTypeOfSorting";
-import { updateSortSettings } from "utils/updateSortingSettings";
 import AlbumItem from "../AlbumItem/AlbumItem";
-import * as Styled from "./AlbumTable.styled";
-import TableHeader from "./TableHeader/TableHeader";
+// import * as Styled from "./AlbumList.styled";
+import Headers from "./Headers/Headers";
 
 type Props = {
 	albums: IAlbum[];
@@ -23,15 +18,15 @@ function AlbumTable({ albums, dragAndDropHandlers, sorting, setSorting }: Props)
 	const isDragging = Boolean(dragAndDropHandlers);
 
 	return (
-		<Styled.Table>
-			<TableHeader
+		<>
+			<Headers
 				sorting={sorting}
 				setSorting={setSorting}
 				isDragging={isDragging}
 			/>
 
 			{albumsFromStore.length ? (
-				<tbody>
+				<ul>
 					{albums.map((album) => (
 						<AlbumItem
 							album={album}
@@ -39,11 +34,11 @@ function AlbumTable({ albums, dragAndDropHandlers, sorting, setSorting }: Props)
 							dragAndDropHandlers={dragAndDropHandlers}
 						/>
 					))}
-				</tbody>
+				</ul>
 			) : (
 				<NoContentPlaceholder />
 			)}
-		</Styled.Table>
+		</>
 	);
 }
 

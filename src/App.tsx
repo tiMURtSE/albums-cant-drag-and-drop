@@ -12,7 +12,6 @@ import GlobalStyle from "styles/global/GlobalStyle.styled";
 import { themeSettings } from "theme/theme";
 import { AppRoutes } from "consts/app-routes";
 import Collection from "pages/Collection/Collection";
-import MyAlbums from "pages/MyAlbums/MyAlbums";
 
 function App() {
 	const mode = useAppSelector((state) => state.theme.mode);
@@ -29,7 +28,7 @@ function App() {
 							<Route index element={<Home />}/>
 							<Route path={AppRoutes.ALBUM} element={<Album />}/>
 							<Route path={AppRoutes.AUTH} element={<Auth />}/>
-							<Route path={AppRoutes.COLLECTION} element={<MyAlbums />}/>
+							<Route path={AppRoutes.COLLECTION} element={<Collection />}/>
 							<Route path={AppRoutes.SEARCH_RESULTS} element={<Search />}/>
 							<Route path={AppRoutes.ERROR} element={<Error />}/>
 						</Route>

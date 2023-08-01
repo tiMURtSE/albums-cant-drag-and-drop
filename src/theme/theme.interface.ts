@@ -1,4 +1,4 @@
-import { ThemeMods } from "consts";
+import { ThemeMods } from "consts/constants";
 
 interface ITheme {
 	mode: ThemeMods;
