@@ -1,4 +1,5 @@
-import { ALBUMS_PER_PAGE, SPOTIFY_API } from "consts";
+import { SPOTIFY_API } from "consts/api";
+import { ALBUMS_PER_PAGE } from "consts/constants";
 import getAccessToken from "./getAccessToken";
 
 const searchAlbums = async (query: string, page?: number): Promise<Record<string, any>> => {

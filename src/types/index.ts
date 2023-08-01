@@ -1,4 +1,4 @@
-import { PageTitles, PagesPath, SortTypes, SortableColumns } from "consts";
+import { SortableColumns, SortingTypes } from "consts/sorting";
 
 interface IAlbum {
 	id: string;
@@ -29,20 +29,15 @@ interface IMetadata {
 	description: string;
 }
 
-type Navigation = { path: PagesPath; title: PageTitles }[];
-
-interface IModifiers {
-	sort: {
-		column: keyof IAlbum | "";
-		type: SortTypes | "";
-	};
-	query: string;
-	flaggedDecades: Decades;
+export interface Sorting {
+	column: SortableColumns | "";
+	type: SortingTypes | "";
 }
 
-interface Sort {
-	sortingColumn: SortableColumns | "";
-	typeOfSort: SortTypes | "";
+interface IModifiers {
+	sorting: Sorting;
+	query: string;
+	flaggedDecades: Decades;
 }
 
 type Decades = ("50" | "60" | "70" | "80" | "90" | "00" | "10" | "20")[];
@@ -59,4 +54,4 @@ type DragAndDrop =
 	  })
 	| null;
 
-export type { IAlbum, IMetadata, IModifiers, Navigation, Decades, Sort, DragAndDrop };
+export type { IAlbum, IMetadata, IModifiers, Decades, DragAndDrop };

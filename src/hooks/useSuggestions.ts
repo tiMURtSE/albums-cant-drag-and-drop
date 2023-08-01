@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { closeAutocomplete, openAutocomplete } from "store/autocompleteSlice";
+import { closeAutocomplete, openAutocomplete } from "store/reducers/autocompleteSlice";
 import { useAppDispatch } from "hooks";
 import searchAlbums from "services/api/searchAlbums.api";
 import { IAlbum } from "types";

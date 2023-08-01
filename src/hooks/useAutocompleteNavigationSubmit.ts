@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { closeAutocomplete } from "store/autocompleteSlice";
+import { closeAutocomplete } from "store/reducers/autocompleteSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { IAlbum } from "types";
 

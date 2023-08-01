@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { SortTypes } from "consts";
-import { Decades, IAlbum, Sort } from "types";
+import { SortingTypes } from "consts/sorting";
+import { Decades, IAlbum, Sorting } from "types";
 
 type Customization = {
-	sort: Sort;
+	sorting: Sorting;
 	searchQuery: string;
 	filterByDecades: Decades;
 };
@@ -14,33 +14,33 @@ export const useAlbumListCustomization = (
 ): IAlbum[] => {
 	let customizedAlbumList;
 
-	customizedAlbumList = sortAlbums(albums, customizations.sort);
+	customizedAlbumList = sortAlbums(albums, customizations.sorting);
 	customizedAlbumList = searchAlbums(customizedAlbumList, customizations.searchQuery);
 	customizedAlbumList = filterAlbums(customizedAlbumList, customizations.filterByDecades);
 
 	return customizedAlbumList;
 };
 
-const sortAlbums = (albums: IAlbum[], sort: Sort) => {
+const sortAlbums = (albums: IAlbum[], sorting: Sorting) => {
 	const sortedAlbums = useMemo(() => {
-		if (sort.sortingColumn) {
-			if (sort.sortingColumn === "year") {
-				if (sort.typeOfSort === SortTypes.Ascending) {
-					const column = sort.sortingColumn;
+		if (sorting.column) {
+			if (sorting.column === "year") {
+				if (sorting.type === SortingTypes.ASCENDING) {
+					const column = sorting.column;
 
 					return [...albums].sort((a: IAlbum, b: IAlbum) => a[column] - b[column]);
 				}
 
-				if (sort.typeOfSort === SortTypes.Descending) {
-					const column = sort.sortingColumn;
+				if (sorting.type === SortingTypes.DESCENDING) {
+					const column = sorting.column;
 
 					return [...albums].sort((a: IAlbum, b: IAlbum) => b[column] - a[column]);
 				}
 
 				return albums;
-			} else if (sort.sortingColumn === "createdAt") {
-				if (sort.typeOfSort === SortTypes.Ascending) {
-					const column = sort.sortingColumn;
+			} else if (sorting.column === "createdAt") {
+				if (sorting.type === SortingTypes.ASCENDING) {
+					const column = sorting.column;
 
 					return [...albums].sort(
 						(a: IAlbum, b: IAlbum) =>
@@ -48,8 +48,8 @@ const sortAlbums = (albums: IAlbum[], sort: Sort) => {
 					);
 				}
 
-				if (sort.typeOfSort === SortTypes.Descending) {
-					const column = sort.sortingColumn;
+				if (sorting.type === SortingTypes.DESCENDING) {
+					const column = sorting.column;
 
 					return [...albums].sort(
 						(a: IAlbum, b: IAlbum) =>
@@ -59,24 +59,16 @@ const sortAlbums = (albums: IAlbum[], sort: Sort) => {
 
 				return albums;
 			} else {
-				if (
-					sort.typeOfSort === SortTypes.Ascending &&
-					sort.sortingColumn !== "position" &&
-					sort.sortingColumn !== "images"
-				) {
-					const column = sort.sortingColumn;
+				if (sorting.type === SortingTypes.ASCENDING) {
+					const column = sorting.column;
 
 					return [...albums].sort((a: IAlbum, b: IAlbum) =>
 						a[column].localeCompare(b[column])
 					);
 				}
 
-				if (
-					sort.typeOfSort === SortTypes.Descending &&
-					sort.sortingColumn !== "position" &&
-					sort.sortingColumn !== "images"
-				) {
-					const column = sort.sortingColumn;
+				if (sorting.type === SortingTypes.DESCENDING) {
+					const column = sorting.column;
 
 					return [...albums].sort((a: IAlbum, b: IAlbum) =>
 						b[column].localeCompare(a[column])
@@ -88,7 +80,7 @@ const sortAlbums = (albums: IAlbum[], sort: Sort) => {
 		} else {
 			return albums;
 		}
-	}, [albums, sort]);
+	}, [albums, sorting]);
 
 	return sortedAlbums;
 };

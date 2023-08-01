@@ -1,4 +1,4 @@
-import { SPOTIFY_TOKEN } from "consts";
+import { SPOTIFY_TOKEN } from "consts/api";
 
 const getAccessToken = async () => {
 	const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;

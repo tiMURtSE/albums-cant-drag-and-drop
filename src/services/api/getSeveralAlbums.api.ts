@@ -1,4 +1,4 @@
-import { SPOTIFY_API } from "consts";
+import { SPOTIFY_API } from "consts/api";
 import getAccessToken from "./getAccessToken";
 
 const getSeveralAlbums = async (favoriteAlbumsId: Array<string>) => {

@@ -1,4 +1,4 @@
-import { ThemeMods } from "consts";
+import { ThemeMods } from "consts/constants";
 import { ITheme } from "./theme.interface";
 
 const theme = {
@@ -62,7 +62,7 @@ const colorTokens = {
 const themeSettings = (mode: ThemeMods): ITheme => {
 	return {
 		mode: mode,
-		...(mode === ThemeMods.Light
+		...(mode === ThemeMods.LIGHT
 			? {
 					...theme,
 					colors: {

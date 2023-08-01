@@ -1,7 +1,7 @@
 import { SortableColumns } from "consts/sorting";
 import { Sorting } from "types";
 import { getTypeOfSorting } from "utils/getTypeOfSorting";
-import { updateSortSettings } from "utils/updateSortSettings";
+import { updateSortSettings } from "utils/updateSortingSettings";
 import * as Styled from "./TableHeader.styled";
 
 type Props = {

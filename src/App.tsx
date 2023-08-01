@@ -2,16 +2,17 @@ import { useMemo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useAppSelector } from "hooks";
 import Layout from "components/Layout/Layout";
-import { PagesPath } from "consts";
 import Album from "pages/Album/Album";
 import Auth from "pages/Auth/Auth";
 import Error from "pages/Error/Error";
 import Home from "pages/Home/Home";
-import MyAlbums from "pages/MyAlbums/MyAlbums";
 import Search from "pages/Search/Search";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/global/GlobalStyle.styled";
 import { themeSettings } from "theme/theme";
+import { AppRoutes } from "consts/app-routes";
+import Collection from "pages/Collection/Collection";
+import MyAlbums from "pages/MyAlbums/MyAlbums";
 
 function App() {
 	const mode = useAppSelector((state) => state.theme.mode);
@@ -24,34 +25,13 @@ function App() {
 					<GlobalStyle />
 
 					<Routes>
-						<Route
-							path={PagesPath.Home}
-							element={<Layout />}
-						>
-							<Route
-								index
-								element={<Home />}
-							/>
-							<Route
-								path={PagesPath.Album}
-								element={<Album />}
-							/>
-							<Route
-								path={PagesPath.Auth}
-								element={<Auth />}
-							/>
-							<Route
-								path={PagesPath.MyAlbums}
-								element={<MyAlbums />}
-							/>
-							<Route
-								path={PagesPath.Search}
-								element={<Search />}
-							/>
-							<Route
-								path={PagesPath.Error}
-								element={<Error />}
-							/>
+						<Route path={AppRoutes.HOME} element={<Layout />}>
+							<Route index element={<Home />}/>
+							<Route path={AppRoutes.ALBUM} element={<Album />}/>
+							<Route path={AppRoutes.AUTH} element={<Auth />}/>
+							<Route path={AppRoutes.COLLECTION} element={<MyAlbums />}/>
+							<Route path={AppRoutes.SEARCH_RESULTS} element={<Search />}/>
+							<Route path={AppRoutes.ERROR} element={<Error />}/>
 						</Route>
 					</Routes>
 				</ThemeProvider>

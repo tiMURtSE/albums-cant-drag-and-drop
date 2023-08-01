@@ -6,7 +6,7 @@ import { SortableColumns } from "consts/sorting";
 import { theme } from "theme/theme";
 import { DragAndDrop, IAlbum, Sorting } from "types";
 import { getTypeOfSorting } from "utils/getTypeOfSorting";
-import { updateSortSettings } from "utils/updateSortSettings";
+import { updateSortSettings } from "utils/updateSortingSettings";
 import AlbumItem from "../AlbumItem/AlbumItem";
 import * as Styled from "./AlbumTable.styled";
 import TableHeader from "./TableHeader/TableHeader";

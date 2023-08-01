@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import FlexBetween from "styles/components/FlexBetween.styled";
 
-const AlbumCollectionWrapper = styled.div`
+const Wrapper = styled.div`
 	padding: 1rem 0;
 
 	border: 2px solid ${({ theme }) => theme.colors.contrastText};
@@ -37,20 +37,4 @@ const Input = styled.input`
 	}
 `;
 
-const ChangeOrderButton = styled.button`
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	/* width: 140px; */
-	padding: 5px 10px;
-	color: rgb(238, 238, 238);
-	background-color: rgb(71, 71, 71);
-	border-radius: 12px;
-	cursor: pointer;
-
-	&:hover {
-		background-color: rgb(89, 86, 61);
-	}
-`;
-
-export { Customizations, AlbumCollectionWrapper, Input, SearchAndFilter, ChangeOrderButton };
+export { Wrapper, Customizations, Input, SearchAndFilter };

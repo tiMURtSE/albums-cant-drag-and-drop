@@ -1,4 +1,4 @@
-import { LASTFM_API } from "consts";
+import { LASTFM_API } from "consts/api";
 import { IAlbum } from "types";
 
 const getAlbumMetadata = async (album: IAlbum): Promise<Record<string, any>> => {

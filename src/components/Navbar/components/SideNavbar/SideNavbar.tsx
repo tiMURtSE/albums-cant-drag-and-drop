@@ -4,7 +4,7 @@ import { setMode } from "store/reducers/themeSlice";
 import { useAppDispatch } from "hooks";
 import ModalWindow from "components/ModalWindow/ModalWindow";
 import IconButton from "components/UI/IconButton/IconButton";
-import { navigationItems } from "consts";
+import { NAVIGATION } from "consts/constants";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import { Paddings } from "styles/components/Paddings.styled";
 import { closeSideNavbar } from "utils/closeSideNavbar";
@@ -47,7 +47,7 @@ function SideNavbar({ ...props }: Props) {
 
 					<nav>
 						<SideNavbarNavigation>
-							{navigationItems.map((item) => (
+							{NAVIGATION.map((item) => (
 								<SideNavbarNavigationItem key={item.path}>
 									<NavLink
 										className={`navigation-item`}

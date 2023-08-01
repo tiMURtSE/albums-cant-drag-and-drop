@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { setAlbums } from "store/reducers/albumsSlice";
+import { albumsSelector } from "store/selectors/albumsSelector";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAlbumListCustomization } from "hooks/useAlbumListCustomization";
 import { useDragAndDrop } from "hooks/useDragAndDrop";
 import AnimatedButton from "components/UI/AnimatedButton/AnimatedButton";
-import { Decades, Sort } from "types";
-import { Input, Customizations, SearchAndFilter, AlbumCollectionWrapper } from "./MyAlbums.styled";
+import { Decades, Sorting } from "types";
+import * as Styled from "./MyAlbums.styled";
 import AlbumList from "./components/AlbumList/AlbumList";
 import FilterByDecade from "./components/FilterByDecade/FilterByDecade";
 
 const MyAlbums = () => {
-	const albums = useAppSelector((state) => state.albums.albums);
-	const [sort, setSort] = useState<Sort>({ sortingColumn: "", typeOfSort: "" });
+	const albums = useAppSelector(albumsSelector);
+	const [sorting, setSorting] = useState<Sorting>({ column: "", type: "" });
 	const [searchQuery, setSearchQuery] = useState("");
 	const [filterByDecades, setFilterByDecades] = useState<Decades>([]);
 	const [isDragging, setIsDragging] = useState(false);
+
 	const dispatch = useAppDispatch();
 
 	const customizedAlbumList = useAlbumListCustomization(albums, {
-		sort,
+		sorting,
 		searchQuery,
 		filterByDecades,
 	});
@@ -27,22 +29,21 @@ const MyAlbums = () => {
 
 	const changeAlbumPositions = () => {
 		if (isDragging) {
-			dispatch(setAlbums({ albums: rearrangedAlbums }));
 			setIsDragging(false);
+			dispatch(setAlbums({ albums: rearrangedAlbums }));
 		} else {
 			setIsDragging(true);
-
-			setSort({ sortingColumn: "", typeOfSort: "" });
+			setSorting({ column: "", type: "" });
 			setSearchQuery("");
 			setFilterByDecades([]);
 		}
 	};
 
 	return (
-		<AlbumCollectionWrapper>
-			<Customizations>
-				<SearchAndFilter>
-					<Input
+		<Styled.Wrapper>
+			<Styled.Customizations>
+				<Styled.SearchAndFilter>
+					<Styled.Input
 						type="text"
 						value={searchQuery}
 						onChange={(event) => setSearchQuery(event.target.value)}
@@ -55,20 +56,20 @@ const MyAlbums = () => {
 						setFilterByDecades={setFilterByDecades}
 						isDragging={isDragging}
 					/>
-				</SearchAndFilter>
+				</Styled.SearchAndFilter>
 
 				<AnimatedButton onClick={changeAlbumPositions}>
 					{isDragging ? "Готово" : "Поменять порядок альбомов"}
 				</AnimatedButton>
-			</Customizations>
+			</Styled.Customizations>
 
 			<AlbumList
-				dragAndDropHandlers={isDragging ? dragAndDropHandlers : null}
 				albums={isDragging ? rearrangedAlbums : customizedAlbumList}
-				sort={sort}
-				setSort={setSort}
+				dragAndDropHandlers={isDragging ? dragAndDropHandlers : null}
+				sorting={sorting}
+				setSorting={setSorting}
 			/>
-		</AlbumCollectionWrapper>
+		</Styled.Wrapper>
 	);
 };
 

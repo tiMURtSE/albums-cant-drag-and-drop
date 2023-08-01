@@ -3,7 +3,8 @@ import { setMode } from "store/reducers/themeSlice";
 import { useAppDispatch } from "hooks";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import IconButton from "components/UI/IconButton/IconButton";
-import { APP_TITLE, navigationItems, PagesPath } from "consts";
+import { AppRoutes } from "consts/app-routes";
+import { NAVIGATION } from "consts/constants";
 import FlexBetween from "styles/components/FlexBetween.styled";
 import { theme } from "theme/theme";
 import { openSideNavbar } from "utils/openSideNavbar";
@@ -16,6 +17,8 @@ import Searchbar from "./components/Searchbar/Searchbar";
 import SearchbarModal from "./components/SearchbarModal/SearchbarModal";
 import SideNavbar from "./components/SideNavbar/SideNavbar";
 
+export const APP_TITLE = "SCARINGTHEHOOKS";
+
 const Navbar = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -27,11 +30,11 @@ const Navbar = () => {
 		<Styled.Container>
 			<FlexBetween gap={isBelowExtraLargeScreens ? "1rem" : "2rem"}>
 				<Styled.Title>
-					<NavLink to={PagesPath.Home}>{APP_TITLE}</NavLink>
+					<NavLink to={AppRoutes.HOME}>{APP_TITLE}</NavLink>
 				</Styled.Title>
 
 				<Styled.Navigation>
-					{navigationItems.map((item) => (
+					{NAVIGATION.map((item) => (
 						<NavLink
 							to={item.path}
 							key={item.path}
@@ -51,7 +54,7 @@ const Navbar = () => {
 							<SearchIcon />
 						</IconButton>
 
-						<IconButton onClick={() => navigate(PagesPath.Auth)}>
+						<IconButton onClick={() => navigate(AppRoutes.AUTH)}>
 							<ProfileIcon />
 						</IconButton>
 
@@ -69,7 +72,7 @@ const Navbar = () => {
 							<ThemeIcon />
 						</IconButton>
 
-						<IconButton onClick={() => navigate(PagesPath.Auth)}>
+						<IconButton onClick={() => navigate(AppRoutes.AUTH)}>
 							<ProfileIcon />
 						</IconButton>
 					</>
